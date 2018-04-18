@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("hellospringboot")
 public class HelloWord{
 	
 	@Autowired
 	private EnvValue envValue;
 	
 	@ResponseBody
-	@RequestMapping("/*")
+	@RequestMapping("/index")
 	public String index() throws ParseException {
 		
 		Object enva = System.getenv("env-a");

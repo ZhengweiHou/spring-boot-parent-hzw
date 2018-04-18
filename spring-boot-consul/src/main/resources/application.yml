@@ -1,9 +1,30 @@
 server:
   port: 10001
+  application:
+   name: spring-boot-consul-demo
 
-#env:
-#  envmaps: 
-#    env1: h
-#    env2: z
-#    env3: w
-#    env-a: ${env-a} #获取环境变量env-a
+spring:
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
+  cloud:
+    consul:
+#      host: 127.0.0.1
+      host: 192.168.32.201
+      port: 8500
+      discovery:
+        enabled: true
+        service-name: ${server.application.name}
+        health-check-interval: 10s
+        register: true
+        tags: foo=bar, baz
+#        health-check-path: /hellospringboot/index
+        hostname: 10.252.12.16
+
+env:
+  envmaps: 
+    env1: h
+    env2: z
+    env3: w
+    env-a: ${env-a} #获取环境变量env-a
