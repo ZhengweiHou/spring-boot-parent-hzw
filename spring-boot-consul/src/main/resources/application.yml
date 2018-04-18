@@ -1,0 +1,9 @@
+server:
+  port: 10001
+
+#env:
+#  envmaps: 
+#    env1: h
+#    env2: z
+#    env3: w
+#    env-a: ${env-a} #获取环境变量env-a

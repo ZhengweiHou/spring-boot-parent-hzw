@@ -7,20 +7,30 @@
     <artifactId>spring-boot-parent-hzw</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>com.hzw.learn</groupId>
   <artifactId>spring-boot-mybatis</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>spring-boot-mybatis</name>
-  <url>http://maven.apache.org</url>
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <docker.image.prefix>springio</docker.image.prefix>
+    <docker.version>0.3.8</docker.version>
+    <java.version>1.8</java.version>
   </properties>
+
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
   </dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin> 
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>
