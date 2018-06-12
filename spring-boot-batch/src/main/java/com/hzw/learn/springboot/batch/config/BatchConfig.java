@@ -1,6 +1,9 @@
 package com.hzw.learn.springboot.batch.config;
 
+import javax.sql.DataSource;
+
 import org.springframework.batch.core.configuration.JobRegistry;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.support.MapJobRegistry;
 import org.springframework.batch.core.explore.JobExplorer;
 import org.springframework.batch.core.explore.support.MapJobExplorerFactoryBean;
@@ -14,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-//@EnableBatchProcessing
+@EnableBatchProcessing
 public class BatchConfig {
 	
 	/**
