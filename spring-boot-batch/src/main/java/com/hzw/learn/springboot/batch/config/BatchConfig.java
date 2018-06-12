@@ -1,7 +1,5 @@
 package com.hzw.learn.springboot.batch.config;
 
-import javax.sql.DataSource;
-
 import org.springframework.batch.core.configuration.JobRegistry;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.support.MapJobRegistry;
@@ -35,12 +33,12 @@ public class BatchConfig {
 	/**
 	 * MapJobExplorer - using in-memory DAO implementations
 	 */
-	@Bean
-	public JobExplorer jobExplorer() throws Exception{
-		MapJobExplorerFactoryBean mapJobExplorerFactory = new MapJobExplorerFactoryBean();
-		mapJobExplorerFactory.setRepositoryFactory(new MapJobRepositoryFactoryBean());
-		return mapJobExplorerFactory.getObject();
-	}
+//	@Bean
+//	public JobExplorer jobExplorer() throws Exception{
+//		MapJobExplorerFactoryBean mapJobExplorerFactory = new MapJobExplorerFactoryBean();
+//		mapJobExplorerFactory.setRepositoryFactory(new MapJobRepositoryFactoryBean());
+//		return mapJobExplorerFactory.getObject();
+//	}
 	
 	/**
 	 * MapJobRepository - 基于内存存储的JobRepository
