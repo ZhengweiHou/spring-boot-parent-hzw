@@ -2,6 +2,7 @@ package com.hzw.learn.springboot.batch.config;
 
 import org.springframework.batch.core.configuration.JobRegistry;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
+import org.springframework.batch.core.configuration.support.JobRegistryBeanPostProcessor;
 import org.springframework.batch.core.configuration.support.MapJobRegistry;
 import org.springframework.batch.core.explore.JobExplorer;
 import org.springframework.batch.core.launch.JobLauncher;
@@ -56,6 +57,17 @@ public class BatchConfig {
 	public JobRegistry jobRegistry(){
 		MapJobRegistry jobRegistry = new MapJobRegistry();
 		return jobRegistry;
+	}
+	
+	/**
+	 * 注入job注册表，Springboot没有自动注入，如果不手动注入，jobOperator将无法使用
+	 * @return
+	 */
+	@Bean
+	public JobRegistryBeanPostProcessor jobRegistryBeanPostProcessor(){
+		JobRegistryBeanPostProcessor processor = new JobRegistryBeanPostProcessor();
+		processor.setJobRegistry(jobRegistry());
+		return processor;
 	}
 	
 	@Bean

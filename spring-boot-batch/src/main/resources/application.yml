@@ -10,6 +10,6 @@ spring:
     url: jdbc:mysql://192.168.32.131:3306/springbatch?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8
     username: root
     password: root
-#  batch:
-#    job:
-#      enabled: false
+  batch:
+    job:
+      enabled: false
