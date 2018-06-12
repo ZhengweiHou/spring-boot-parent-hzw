@@ -32,5 +32,6 @@
   <modules>
     <module>spring-boot-mybatis</module>
     <module>spring-boot-consul</module>
+    <module>spring-boot-batch</module>
   </modules>
 </project>

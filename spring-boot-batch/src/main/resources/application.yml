@@ -1,0 +1,12 @@
+server:
+  port: 10000
+  application:
+   name: spring-boot-batch-demo
+
+spring: 
+  datasource: 
+    type: ${jdbcType} 
+    driver-class-name: ${jdbcDriver}
+    url: ${jdbcUrl}
+    username: ${jdbcUsername}
+    password: ${jdbcPassword}
