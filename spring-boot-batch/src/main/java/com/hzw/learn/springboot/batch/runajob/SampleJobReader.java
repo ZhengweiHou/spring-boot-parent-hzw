@@ -1,7 +1,6 @@
 package com.hzw.learn.springboot.batch.runajob;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.NonTransientResourceException;
@@ -9,7 +8,7 @@ import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
 import org.springframework.stereotype.Component;
 @Component
-public class JobReader implements ItemReader<String>{
+public class SampleJobReader implements ItemReader<String>{
 	
 	int index = 0;
 	ArrayList<String> list = new ArrayList<String>();

@@ -4,7 +4,7 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JobProcess implements ItemProcessor<String, String>{
+public class SampleJobProcess implements ItemProcessor<String, String>{
 
 	@Override
 	public String process(String item) throws Exception {
