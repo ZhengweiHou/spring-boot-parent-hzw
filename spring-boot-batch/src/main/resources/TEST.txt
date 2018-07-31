@@ -1,0 +1,7 @@
+TWer1,1  
+TWer2,21  
+TWer3,13  
+TWer4,16  
+TWer5,2 
+TWer6,45  
+TWer7,16

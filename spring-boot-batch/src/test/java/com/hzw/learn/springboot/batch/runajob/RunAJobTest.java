@@ -1,5 +1,7 @@
 package com.hzw.learn.springboot.batch.runajob;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.JobParametersInvalidException;
