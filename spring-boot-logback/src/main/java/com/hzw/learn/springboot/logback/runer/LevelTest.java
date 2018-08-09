@@ -14,7 +14,7 @@ public class LevelTest implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		while(true){
-			Thread.sleep(10 * 1000);
+			Thread.sleep(5 * 1000);
 			logger.trace("trace message.....");
 			logger.debug("debug message.....");
 			logger.info("info message.....");
