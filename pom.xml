@@ -33,5 +33,6 @@
     <module>spring-boot-mybatis</module>
     <module>spring-boot-consul</module>
     <module>spring-boot-batch</module>
+    <module>spring-boot-logback</module>
   </modules>
 </project>
