@@ -49,6 +49,14 @@
 			<onMatch>ACCEPT</onMatch> <!-- 设置命中的为接受 -->
 			<onMismatch>DENY</onMismatch> <!-- 设置未命中的为拒绝 -->
 		</filter>
+		<!-- 
+		拒绝ERROR日志
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+            <onMisMatch>NEUTRAL</onMisMatch>
+        </filter> 
+        -->
 		
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<FileNamePattern>${LOG_PATH}/${projectName}-%d{yyyy-MM-dd}-%i.err.gz</FileNamePattern>
