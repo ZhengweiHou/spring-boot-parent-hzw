@@ -29,9 +29,11 @@
     </typeAliases>  
     
     <plugins>    
-    	<plugin interceptor="com.hzw.learn.springboot.mybatis.plugins.QueryInterceptor" />
+    	<plugin interceptor="com.hzw.learn.springboot.mybatis.plugins.QueryInterceptor">
+    	</plugin>
     	
-    	<plugin interceptor="com.hzw.learn.springboot.mybatis.plugins.UpdateInterceptor" />
+    	<plugin interceptor="com.hzw.learn.springboot.mybatis.plugins.UpdateInterceptor">
+    	</plugin>
     	
     </plugins>
 

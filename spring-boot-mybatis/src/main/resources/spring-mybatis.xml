@@ -16,6 +16,13 @@
 		<property name="dataSource" ref="dataSource" />
 		<!-- mybatis配置文件路径 -->
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		
+		<property name="plugins">  
+			<array>
+				<ref bean="auditLogInterceptor"/>
+			</array>
+		</property>
+		
 		<!-- 实体类映射文件路径 -->
 		<property name="mapperLocations" value="classpath*:mybatis-mapping/**/*.xml" />
 	</bean>
@@ -32,7 +39,25 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<!-- 事务切面的执行次序要小于RestExceptionInterceptorAspect切面 -->
-	<!-- <tx:annotation-driven transaction-manager="myBatisTransactionManager"
-		mode="aspectj" order="10" /> -->
+	<bean id="auditEntitys" class="com.hzw.learn.springboot.mybatis.plugins.AuditEntitys">
+		<property name="auditEntitys">
+			<map>
+				<entry key="TmCustomer">
+					<map>
+						<entry key="insertDeny">
+							<value>all</value>
+						</entry>
+						<entry key="updateAllow">
+							<value>all</value>
+						</entry>
+						<entry key="deleteAllow">
+							<value>all</value>
+						</entry>
+					</map>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	
 </beans>

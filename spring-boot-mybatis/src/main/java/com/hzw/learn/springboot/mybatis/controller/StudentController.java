@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,8 +21,8 @@ public class StudentController {
 	private StudentDao studentDao;
 	
 	@ResponseBody
-	@RequestMapping("addRandowStudent")
-	public String addRandowStudent(){
+	@RequestMapping("addRandow")
+	public Student addRandowStudent(){
 		String studentId = String.valueOf(UUID.randomUUID().hashCode());
 		
 		String name = "RandowStudent" + new Random().nextInt();
@@ -29,13 +30,31 @@ public class StudentController {
 		Student student = new Student();
 		student.setStudentId(studentId);
 		student.setName(name);
-		Integer result = studentDao.addStudent(student);
+		Student result = studentDao.addStudent(student);
 		
-		return result.toString();
+		return result;
 	}
 	
 	@ResponseBody
-	@RequestMapping("getAllStudent")
+	@RequestMapping("delete/{id}")
+	public String delStudent(@PathVariable("id") Integer id){
+		String result = studentDao.delStudent(id);
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("update/{id}/{name}")
+	public Student updateStudent(@PathVariable("id") Integer id, @PathVariable("name") String name){
+		Student student = new Student();
+		student.setId(id);
+		student.setName(name);
+		Student result = studentDao.updateStudent(student);
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("getAll")
 	public List<Student> getAllStudent(){
 		List<Student> studentList = studentDao.quetyStudentList(new Student());
 		return studentList;

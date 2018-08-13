@@ -6,7 +6,11 @@ import com.hzw.learn.springboot.mybatis.model.Student;
 
 public interface StudentDao {
 	
-	Integer addStudent(Student student);
+	Student addStudent(Student student);
+	
+	String delStudent(Integer id);
+	
+	Student updateStudent(Student student);
 	
 	List<Student> quetyStudentList(Student student);
 }
