@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzw.learn.springboot.mybatis.dao.student">
+	<resultMap id="BaseResultMap" type="com.hzw.learn.springboot.mybatis.model.Student" >
+		<id column="ID" property="id" jdbcType="INTEGER"/>
+		<result column="STUDENTID" property="studentId" jdbcType="VARCHAR" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="STUDENT_TABLE_FIELD">ID,STUDENTID,NAME</sql>
+	<sql id="STUDENT_INSERT_FIELD">STUDENTID,NAME</sql>
+	
+	<delete id="deleteByPrimaryKey" parameterType="map" >
+		delete from student
+		where 
+			ID = #{id, jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.hzw.learn.springboot.mybatis.model.Student" useGeneratedKeys="true" keyProperty="id" >
+		insert into student ( <include refid="STUDENT_INSERT_FIELD" /> )
+		values ( #{studentId,jdbcType=VARCHAR }, #{name,jdbcType=VARCHAR } )
+	</insert>
+	
+	<update id="updateNotNullByPrimaryKey" parameterType="com.hzw.learn.springboot.mybatis.model.Student">
+		update student 
+		<trim prefix="set" suffixOverrides=","> 
+			<if test="studentId != null and studentId != ''  " >
+				STUDENTID =#{studentId,jdbcType=VARCHAR },
+			</if>
+			<if test="name != null and name != ''  " >
+				NAME =#{name,jdbcType=VARCHAR },
+			</if>
+		</trim>
+		where 
+		ID = #{id, jdbcType=INTEGER}
+	</update>
+	
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="com.hzw.learn.springboot.mybatis.model.Student" >
+		select <include refid="STUDENT_TABLE_FIELD" />		
+ 		from student
+		where 1=1 
+		<if test="id != null and id != ''  " >
+			and ID = #{id,jdbcType=INTEGER }
+		</if>
+		<if test="studentId != null and studentId != ''  " >
+			and STUDENTID = #{studentId,jdbcType=VARCHAR }
+		</if>
+		<if test="name != null and name != ''  " >
+			and NAME = #{name,jdbcType=VARCHAR }
+		</if>
+
+	</select>	
+</mapper>
