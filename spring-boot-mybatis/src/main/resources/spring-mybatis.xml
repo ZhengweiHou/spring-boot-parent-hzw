@@ -29,11 +29,11 @@
 	</bean> -->
 
 	<!-- 配置sqlsession 产生这个实例就是通过 sqlsessionTemplate来实现的 -->
-	<!-- <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0">
 			<ref bean="sqlSessionFactory" />
 		</constructor-arg>
-	</bean> -->
+	</bean>
 
 	<bean id="myBatisTransactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

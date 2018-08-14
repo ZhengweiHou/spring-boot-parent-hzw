@@ -22,19 +22,6 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 @Configuration
 @ImportResource(locations={"classpath:spring-mybatis.xml"})
 public class DaoConfig{
-	
-//	@Bean
-//	@ConditionalOnBean(AuditLogInterceptor.class)
-//	public SqlSessionFactoryBean auditLogInterceptorConfg(SqlSessionFactoryBean sqlSessionFactory, AuditLogInterceptor auditLogInterceptor){
-//		System.out.println("=====================");
-//		Interceptor[] plugins = {auditLogInterceptor};
-//		sqlSessionFactory.setPlugins(plugins);
-//		sqlSessionFactory.getObject()
-//		return sqlSessionFactory;
-//	}
-	
-	
-	
 //	<!-- SqlSessionFactory -->
 //	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 //		<property name="dataSource" ref="dataSource" />
@@ -50,10 +37,9 @@ public class DaoConfig{
 //		<!-- 实体类映射文件路径 -->
 //		<property name="mapperLocations" value="classpath*:mybatis-mapping/**/*.xml" />
 //	</bean>
-	@Bean
+	@Bean("sqlSessionFactory")
 	@ConditionalOnClass({ DataSource.class})
-//	@ConditionalOnBean(DataSource.class)
-	public SqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource, ApplicationContext applicationContext) throws Exception{
+	public SqlSessionFactory sqlSessionFactory(DataSource dataSource, ApplicationContext applicationContext) throws Exception{
 		
 		String configLocationSource = "classpath:mybatis-config.xml";
 		String mapperLocations = "classpath*:mybatis-mapping/**/*.xml";
@@ -82,19 +68,7 @@ public class DaoConfig{
 			sqlSessionFactoryBean.setPlugins(interceptors.values().toArray(interceptorsArr));
 //		}
 		
-		return sqlSessionFactoryBean;
-	}
-	
-	
-//	<!-- 配置sqlsession 产生这个实例就是通过 sqlsessionTemplate来实现的 -->
-//	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-//		<constructor-arg index="0">
-//			<ref bean="sqlSessionFactory" />
-//		</constructor-arg>
-//	</bean>
-	@Bean
-	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactoryBean sqlSessionFactoryBean) throws Exception{
-		return new SqlSessionTemplate(sqlSessionFactoryBean.getObject());
+		return sqlSessionFactoryBean.getObject();
 	}
 	
 }

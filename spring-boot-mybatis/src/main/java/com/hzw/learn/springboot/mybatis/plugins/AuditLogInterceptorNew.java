@@ -13,8 +13,10 @@ import org.apache.ibatis.plugin.Signature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
 @Component
+@ConditionalOnBean(AuditEntitys.class)
 @Intercepts(@Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class}))
 public class AuditLogInterceptorNew implements Interceptor {
 
