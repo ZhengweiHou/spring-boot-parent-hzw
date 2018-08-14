@@ -60,18 +60,19 @@ public class DaoConfig{
 		
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		
+		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		
 		/*===1. 指定DateSource===*/
 		sqlSessionFactoryBean.setDataSource(dataSource);
 		
 		/*===2. 指定configLocation配置文件===*/
-		ResourcePatternResolver resolver1 = (ResourcePatternResolver) new PathMatchingResourcePatternResolver();
-		sqlSessionFactoryBean.setConfigLocation(resolver1.getResource(configLocationSource));
+//		ResourcePatternResolver resolver1 = (ResourcePatternResolver) new PathMatchingResourcePatternResolver();
+		sqlSessionFactoryBean.setConfigLocation(resolver.getResource(configLocationSource));
 		
 		/*===3. 指定实体类映射文件===*/
 //		resolver.getResources(mapperLocations); // throws IOException
-		ResourcePatternResolver resolver2 = (ResourcePatternResolver) new PathMatchingResourcePatternResolver();
-		Resource[] mapperResources = resolver2.getResources(mapperLocations);
+//		ResourcePatternResolver resolver2 = (ResourcePatternResolver) new PathMatchingResourcePatternResolver();
+		Resource[] mapperResources = resolver.getResources(mapperLocations);
 		sqlSessionFactoryBean.setMapperLocations(mapperResources);
 		
 		/*===4. Interceptor的动态注入===*/
@@ -80,7 +81,6 @@ public class DaoConfig{
 			Interceptor[] interceptorsArr = new Interceptor[interceptors.size()];
 			sqlSessionFactoryBean.setPlugins(interceptors.values().toArray(interceptorsArr));
 //		}
-		sqlSessionFactoryBean.afterPropertiesSet();
 		
 		return sqlSessionFactoryBean;
 	}
