@@ -74,7 +74,7 @@ public class DaoConfig{
 		Resource[] mapperResources = resolver2.getResources(mapperLocations);
 		sqlSessionFactoryBean.setMapperLocations(mapperResources);
 		
-		/*===4. 指定实体类映射文件===*/
+		/*===4. Interceptor的动态注入===*/
 		Map<String, Interceptor> interceptors = BeanFactoryUtils.beansOfTypeIncludingAncestors(applicationContext, Interceptor.class, false, false);
 //		if(interceptors.size()>0){
 			Interceptor[] interceptorsArr = new Interceptor[interceptors.size()];
