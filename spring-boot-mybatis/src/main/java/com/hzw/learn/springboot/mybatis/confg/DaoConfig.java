@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
-import com.hzw.learn.springboot.mybatis.plugins.AuditLogInterceptor;
+//import com.hzw.learn.springboot.mybatis.plugins.AuditLogInterceptor;
 
 @Configuration
 @ImportResource(locations={"classpath:spring-mybatis.xml"})
@@ -19,6 +19,7 @@ public class DaoConfig{
 //		System.out.println("=====================");
 //		Interceptor[] plugins = {auditLogInterceptor};
 //		sqlSessionFactory.setPlugins(plugins);
+//		sqlSessionFactory.getObject()
 //		return sqlSessionFactory;
 //	}
 }
