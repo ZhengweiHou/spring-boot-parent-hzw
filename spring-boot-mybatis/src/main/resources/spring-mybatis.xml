@@ -39,8 +39,31 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<!-- 配置拦截器处理目录 -->
+	<bean id="auditEntitys" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="TmCustomer">
+					 <map>
+				 		<entry key="insertDeny">
+								<value>all</value>
+				 		</entry>
+				 		<entry key="updateAllow">
+								<value>all</value>
+				 		</entry>
+				 		<entry key="deleteAllow">
+								<value>all</value>
+				 		</entry>
+				 	</map>					
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
 
-	<bean id="auditEntitys" class="com.hzw.learn.springboot.mybatis.plugins.AuditEntitys">
+
+
+	<!-- <bean id="auditEntitys" class="com.hzw.learn.springboot.mybatis.plugins.AuditEntitys">
 		<property name="auditEntitys">
 			<map>
 				<entry key="TmCustomer">
@@ -58,7 +81,7 @@
 				</entry>
 			</map>
 		</property>
-	</bean>
+	</bean> -->
 	
 	
 </beans>
