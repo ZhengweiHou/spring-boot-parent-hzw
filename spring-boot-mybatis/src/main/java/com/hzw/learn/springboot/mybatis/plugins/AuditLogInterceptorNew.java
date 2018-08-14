@@ -49,14 +49,15 @@ public class AuditLogInterceptorNew implements Interceptor {
 			if(methodName.startsWith("get") == false){
 				continue;
 			}
-			System.out.println(method.invoke(obj));
+			String methodTemp = method.getName() + "=" + method.invoke(obj);
+			System.out.println(methodTemp);
 		}
 		
 		Field[] fields = clazz.getFields();
 		
 		for (Field field : fields) {
-			String fieldTem = field.getName() + "=" + field.get(obj);
-			System.out.println(fieldTem);
+			String fieldTemp = field.getName() + "=" + field.get(obj);
+			System.out.println(fieldTemp);
 		}
 		
 		
