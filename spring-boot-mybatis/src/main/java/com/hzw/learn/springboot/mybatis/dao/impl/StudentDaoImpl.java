@@ -37,10 +37,19 @@ public class StudentDaoImpl implements StudentDao{
 	}
 	
 	@Override
+	public String delStudentForId1() {
+		logger.info("delStudent id=1");
+		String delSqlId = "com.hzw.learn.springboot.mybatis.dao.student.deleteForId1";
+		Integer result = sqlSession.delete(delSqlId);
+		return result.toString();
+	}
+	
+	@Override
 	public Student updateStudent(Student student) {
 		logger.info("updateStudent student:【{}】", student);
 		String delSqlId = "com.hzw.learn.springboot.mybatis.dao.student.updateNotNullByPrimaryKey";
 		int result = sqlSession.update(delSqlId, student);
+		System.out.println(result);
 		return student;
 	}
 
@@ -51,6 +60,8 @@ public class StudentDaoImpl implements StudentDao{
 		List<Student> result = sqlSession.selectList(queryAllSqlId, student);
 		return result;
 	}
+
+
 
 
 

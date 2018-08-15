@@ -15,6 +15,13 @@
 		where 
 			ID = #{id, jdbcType=INTEGER}
 	</delete>
+	
+	<delete id="deleteForId1" >
+		delete from student
+		where 
+			ID = 1
+	</delete>
+	
 	<insert id="insert" parameterType="com.hzw.learn.springboot.mybatis.model.Student" useGeneratedKeys="true" keyProperty="id" >
 		insert into student ( <include refid="STUDENT_INSERT_FIELD" /> )
 		values ( #{studentId,jdbcType=VARCHAR }, #{name,jdbcType=VARCHAR } )

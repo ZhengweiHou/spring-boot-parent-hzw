@@ -44,7 +44,7 @@
 	<bean id="auditEntitys" class="java.util.HashMap">
 		<constructor-arg>
 			<map>
-				<entry key="TmCustomer">
+				<entry key="Student">
 					 <map>
 				 		<entry key="insertDeny">
 								<value>all</value>

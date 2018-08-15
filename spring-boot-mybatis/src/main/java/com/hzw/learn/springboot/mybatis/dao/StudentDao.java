@@ -10,6 +10,8 @@ public interface StudentDao {
 	
 	String delStudent(Integer id);
 	
+	String delStudentForId1();
+	
 	Student updateStudent(Student student);
 	
 	List<Student> quetyStudentList(Student student);

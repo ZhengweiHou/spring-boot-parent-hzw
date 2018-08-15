@@ -15,9 +15,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Intercepts(@Signature(type = Executor.class, method = "query", args = {
-		MappedStatement.class, Object.class, RowBounds.class,
-		ResultHandler.class }))
+@Intercepts(@Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class,ResultHandler.class }))
 public class QueryInterceptor implements Interceptor {
 
 	private static final Logger logger = LoggerFactory.getLogger(QueryInterceptor.class);

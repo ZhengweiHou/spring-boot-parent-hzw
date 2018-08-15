@@ -44,6 +44,13 @@ public class StudentController {
 	}
 	
 	@ResponseBody
+	@RequestMapping("deleteid1")
+	public String delStudentid1(){
+		String result = studentDao.delStudentForId1();
+		return result;
+	}
+	
+	@ResponseBody
 	@RequestMapping("update/{id}/{name}")
 	public Student updateStudent(@PathVariable("id") Integer id, @PathVariable("name") String name){
 		Student student = new Student();
