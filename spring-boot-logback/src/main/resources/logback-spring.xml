@@ -21,10 +21,14 @@
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_PATH}/${projectName}.log</file>
 		
+		
+		<!-- 根据时间来制定滚动策略 -->
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<FileNamePattern>${LOG_PATH}/${projectName}-%d{yyyy-MM-dd}-%i.log.gz</FileNamePattern>
+			<!-- 多久后自动清楚旧的日志文件,单位:月 -->
 			<MaxHistory>90</MaxHistory>
 			<TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- 默认值是 10MB,文档最大值 -->
 				<MaxFileSize>1MB</MaxFileSize>
 			</TimeBasedFileNamingAndTriggeringPolicy>
 		</rollingPolicy>
@@ -45,22 +49,6 @@
 			<onMatch>ACCEPT</onMatch> <!-- 设置命中的为接受 -->
 			<onMismatch>DENY</onMismatch> <!-- 设置未命中的为拒绝 -->
 		</filter>
-		<!-- 
-		拒绝ERROR日志
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>ERROR</level>
-            <onMatch>DENY</onMatch>
-            <onMisMatch>NEUTRAL</onMisMatch>
-        </filter> 
-        -->
-		
-		<!-- <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>${LOG_PATH}/${projectName}-%d{yyyy-MM-dd}-%i.err.gz</FileNamePattern>
-			<MaxHistory>90</MaxHistory>
-			<TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-				<MaxFileSize>1MB</MaxFileSize>
-			</TimeBasedFileNamingAndTriggeringPolicy>
-		</rollingPolicy> -->
 		
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] %logger{36} [%file:%line] - %msg%n </pattern>
@@ -71,17 +59,9 @@
 	
 	
 	<!-- 抽取输出指定logger名（HHH）的日志 -->
-	<appender name="FILE-HHH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="FILE-HHH" class="ch.qos.logback.core.FileAppender">
 		<file>${LOG_PATH}/${projectName}-HHH.log</file>
-
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>${LOG_PATH}/${projectName}-HHH-%d{yyyy-MM-dd}-%i.log.gz</FileNamePattern>
-			<MaxHistory>90</MaxHistory>
-			<TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-				<MaxFileSize>1MB</MaxFileSize>
-			</TimeBasedFileNamingAndTriggeringPolicy>
-		</rollingPolicy>
-
+		
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] %logger{36} [%file:%line] - %msg%n</pattern>
 		</encoder>
@@ -96,6 +76,8 @@
 		<file>${LOG_PATH}/${projectName}-ZZZ.log</file>
 		
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!-- 设置编码 -->
+			<charset>UTF-8</charset>
 			<pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] %logger{36} [%file:%line] - %msg%n </pattern>
 		</encoder>
 	</appender>

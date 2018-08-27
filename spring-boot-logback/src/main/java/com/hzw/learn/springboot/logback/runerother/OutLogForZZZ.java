@@ -14,11 +14,11 @@ public class OutLogForZZZ implements Runnable {
 		long sleep = 5*1000;
 		
 		while(true){
-			logger.trace("message.....TRACE ZZZ");
-			logger.debug("message.....DEBUG ZZZ");
-			logger.info("message.....INFO  ZZZ");
-			logger.warn("message.....WARN  ZZZ");
-			logger.error("message.....ERROR ZZZ");
+			logger.trace("message.....TRACE ZZZ侯");
+			logger.debug("message.....DEBUG ZZZ正");
+			logger.info("message.....INFO  ZZZ伟");
+			logger.warn("message.....WARN  ZZZ帅");
+			logger.error("message.....ERROR ZZZ锅");
 			
 			try {
 				Thread.sleep(sleep);
