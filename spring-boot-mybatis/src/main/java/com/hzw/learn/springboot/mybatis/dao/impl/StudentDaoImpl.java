@@ -45,12 +45,11 @@ public class StudentDaoImpl implements StudentDao{
 	}
 	
 	@Override
-	public Student updateStudent(Student student) {
+	public String updateStudent(Student student) {
 		logger.info("updateStudent student:【{}】", student);
 		String delSqlId = "com.hzw.learn.springboot.mybatis.dao.student.updateNotNullByPrimaryKey";
-		int result = sqlSession.update(delSqlId, student);
-		System.out.println(result);
-		return student;
+		Integer result = sqlSession.update(delSqlId, student);
+		return result.toString();
 	}
 
 	@Override

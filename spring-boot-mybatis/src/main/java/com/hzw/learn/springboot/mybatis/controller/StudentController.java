@@ -52,11 +52,11 @@ public class StudentController {
 	
 	@ResponseBody
 	@RequestMapping("update/{id}/{name}")
-	public Student updateStudent(@PathVariable("id") Integer id, @PathVariable("name") String name){
+	public String updateStudent(@PathVariable("id") Integer id, @PathVariable("name") String name){
 		Student student = new Student();
 		student.setId(id);
 		student.setName(name);
-		Student result = studentDao.updateStudent(student);
+		String result = studentDao.updateStudent(student);
 		return result;
 	}
 	

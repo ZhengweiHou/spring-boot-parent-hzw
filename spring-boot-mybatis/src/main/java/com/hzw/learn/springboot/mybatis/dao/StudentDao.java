@@ -12,7 +12,7 @@ public interface StudentDao {
 	
 	String delStudentForId1();
 	
-	Student updateStudent(Student student);
+	String updateStudent(Student student);
 	
 	List<Student> quetyStudentList(Student student);
 }

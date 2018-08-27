@@ -3,12 +3,12 @@
 <mapper namespace="com.hzw.learn.springboot.mybatis.dao.student">
 	<resultMap id="BaseResultMap" type="com.hzw.learn.springboot.mybatis.model.Student" >
 		<id column="ID" property="id" jdbcType="INTEGER"/>
-		<result column="STUDENTID" property="studentId" jdbcType="VARCHAR" />
+		<result column="STUDENT_ID" property="studentId" jdbcType="VARCHAR" />
 		<result column="NAME" property="name" jdbcType="VARCHAR" />
 	</resultMap>
 	
-	<sql id="STUDENT_TABLE_FIELD">ID,STUDENTID,NAME</sql>
-	<sql id="STUDENT_INSERT_FIELD">STUDENTID,NAME</sql>
+	<sql id="STUDENT_TABLE_FIELD">ID,STUDENT_ID,NAME</sql>
+	<sql id="STUDENT_INSERT_FIELD">STUDENT_ID,NAME</sql>
 	
 	<delete id="deleteByPrimaryKey" parameterType="map" >
 		delete from student
@@ -31,7 +31,7 @@
 		update student 
 		<trim prefix="set" suffixOverrides=","> 
 			<if test="studentId != null and studentId != ''  " >
-				STUDENTID =#{studentId,jdbcType=VARCHAR },
+				STUDENT_ID =#{studentId,jdbcType=VARCHAR },
 			</if>
 			<if test="name != null and name != ''  " >
 				NAME =#{name,jdbcType=VARCHAR },
@@ -49,7 +49,7 @@
 			and ID = #{id,jdbcType=INTEGER }
 		</if>
 		<if test="studentId != null and studentId != ''  " >
-			and STUDENTID = #{studentId,jdbcType=VARCHAR }
+			and STUDENT_ID = #{studentId,jdbcType=VARCHAR }
 		</if>
 		<if test="name != null and name != ''  " >
 			and NAME = #{name,jdbcType=VARCHAR }
