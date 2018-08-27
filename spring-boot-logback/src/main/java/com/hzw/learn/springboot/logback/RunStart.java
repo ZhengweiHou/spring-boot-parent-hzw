@@ -21,7 +21,7 @@ public class RunStart implements CommandLineRunner{
 //		new Thread(new ExceptionTest()).start();
 		new Thread(new OutLogForHHH()).start();
 		new Thread(new OutLogForZZZ()).start();
-		new Thread(new OutLogForWWW()).start();
+//		new Thread(new OutLogForWWW()).start();
 		
 	}
 
