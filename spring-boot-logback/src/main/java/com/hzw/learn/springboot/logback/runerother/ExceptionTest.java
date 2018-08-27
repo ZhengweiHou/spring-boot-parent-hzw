@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.logback.runer3;
+package com.hzw.learn.springboot.logback.runerother;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ public class ExceptionTest implements Runnable {
 				this.createException();
 			} catch (ArithmeticException e) {
 				e.printStackTrace(); // 此处日志不能输出到日志文件中
-				logger.error("",e); // 这样才能将异常输出到日志文件中
+				logger.error("ExceptionTest错误日志：",e); // 这样才能将异常输出到日志文件中
 			}
 			try {
 				Thread.sleep(sleep);
