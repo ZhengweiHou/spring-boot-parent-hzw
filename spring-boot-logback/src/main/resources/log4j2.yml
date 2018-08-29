@@ -1,0 +1,84 @@
+Configuration:  
+  status: warn  
+  
+  Properties: 
+    Property: 
+      - name: LOG_PATH  
+        value: h:/logs  
+      - name: projectName
+        value: my-log4j2-test
+    
+  Appenders:  
+    Console: 
+      name: STDOUT  
+#      target: SYSTEM_OUT  
+#      ThresholdFilter:  
+#        level: ${env:log_level_console}
+#        onMatch: ACCEPT  
+#        onMismatch: DENY  
+      PatternLayout:  
+#        pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p %c:%L - %m%n"
+        pattern: "[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] %logger{36} [%file:%line] - %msg%n"
+
+    RollingFile: 
+      - name: FILE  
+        ignoreExceptions: false
+#        ThresholdFilter:
+#          level: ${env:log_level_file}
+#          onMatch: ACCEPT
+#          onMismatch: NEUTRAL  
+        fileName: ${LOG_PATH}/${projectName}.log
+        filePattern: "${LOG_PATH}/${projectName}-%d{yyyy-MM-dd}-%i.log.gz"  
+        PatternLayout:  
+          pattern: "[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] %logger{36} [%file:%line] - %msg%n"  
+        Policies:  
+          #OnStartupTriggeringPolicy: 
+            #minSize: 0
+          SizeBasedTriggeringPolicy:  
+            size: "1M"  
+          TimeBasedTriggeringPolicy: 
+            modulate: true
+            interval: 1
+        DefaultRolloverStrategy:  
+          max: 90 
+
+    File: 
+      - name: FILE_ERROR  
+        ignoreExceptions: false  
+        ThresholdFilter:
+          level: ERROR
+          onMatch: ACCEPT
+          onMismatch: DENY  
+        fileName: ${LOG_PATH}/${projectName}.err 
+        PatternLayout:  
+          pattern: "[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] %logger{36} [%file:%line] - %msg%n" 
+          
+  Loggers:  
+    Root:  
+      level: INFO
+      AppenderRef:  
+        - ref: STDOUT  
+        - ref: FILE  
+        - ref: FILE_ERROR 
+    Logger: 
+      - name: com.hzw.learn.springboot.logback.runer1
+        additivity: false  
+        level: DEBUG
+        AppenderRef:  
+          - ref: STDOUT  
+          - ref: FILE  
+          - ref: FILE_ERROR 
+      - name: com.hzw.learn.springboot.logback.runer2
+        additivity: false 
+        level: INFO
+        AppenderRef: 
+          - ref: STDOUT 
+          - ref: FILE 
+          - ref: FILE_ERROR 
+      - name: com.hzw.learn.springboot.logback.runer3
+        additivity: false
+        level: DEBUG
+        AppenderRef: 
+          - ref: STDOUT
+          - ref: FILE
+          - ref: FILE_ERROR
