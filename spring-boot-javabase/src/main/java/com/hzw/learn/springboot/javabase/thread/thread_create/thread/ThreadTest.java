@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.javabase.thread.thread;
+package com.hzw.learn.springboot.javabase.thread.thread_create.thread;
 
 
 public class ThreadTest extends Thread{

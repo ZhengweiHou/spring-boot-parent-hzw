@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.javabase.thread.callable;
+package com.hzw.learn.springboot.javabase.thread.thread_create.callable;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;

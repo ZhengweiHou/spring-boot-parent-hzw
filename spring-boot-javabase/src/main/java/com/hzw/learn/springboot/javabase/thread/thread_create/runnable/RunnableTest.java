@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.javabase.thread.runnable;
+package com.hzw.learn.springboot.javabase.thread.thread_create.runnable;
 
 
 public class RunnableTest implements Runnable{
