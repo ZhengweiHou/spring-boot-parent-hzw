@@ -19,8 +19,14 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
-		<!-- 1. 掏空spring-boot默认的日志依赖 -->
 		<dependency> 
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+		</dependency>
+		
+	<!-- log4j2 -->
+	<!-- 
+	<dependency> 
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-logging</artifactId>
 			<exclusions>
@@ -31,17 +37,15 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- 引入log4j2依赖 -->
 		<dependency> 
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
 		
-		<!-- 加上这个才能辨认到log4j2.yml文件 -->
 		<dependency> 
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-yaml</artifactId>
-		</dependency>
+		</dependency> -->
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

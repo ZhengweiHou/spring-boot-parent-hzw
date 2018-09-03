@@ -33,7 +33,6 @@ public class HelloConsul {
     @RequestMapping("client")
     public String client(){
     	ServiceInstance serviceInstance = loadBalancer.choose("spring-boot-consul-demo");
-    	
     	RestTemplate rest = new RestTemplate();
 //    	String uri = "http://" + serviceInstance.getHost() + "/helloconsul/server";
     	String uri = serviceInstance.getUri().toString();

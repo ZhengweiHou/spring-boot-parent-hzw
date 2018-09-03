@@ -1,5 +1,5 @@
 server:
-  port: 10001
+  port: 8080
   application:
    name: spring-boot-consul-demo
 
@@ -11,7 +11,7 @@ spring:
   cloud:
     consul:
 #      host: 127.0.0.1
-      host: 192.168.32.201
+      host: 192.168.32.131
       port: 8500
       discovery:
         enabled: true
