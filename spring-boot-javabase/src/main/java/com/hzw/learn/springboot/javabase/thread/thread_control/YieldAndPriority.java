@@ -1,5 +1,10 @@
 package com.hzw.learn.springboot.javabase.thread.thread_control;
 
+/**
+ * 线程让步和优先级
+ * @author houzw
+ *
+ */
 public class YieldAndPriority extends Thread{
 
 	public YieldAndPriority(String name) {

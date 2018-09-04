@@ -1,5 +1,10 @@
 package com.hzw.learn.springboot.javabase.thread.thread_control;
 
+/**
+ * 线程等待
+ * @author houzw
+ *
+ */
 public class JoinThread extends Thread{
 	public JoinThread(String name){
 		super(name);
@@ -26,7 +31,7 @@ public class JoinThread extends Thread{
 			if(i == 5){
 				JoinThread joinThread = new JoinThread("被主线程join的线程");
 				joinThread.start();
-				joinThread.join(); // main线程须等待joinThread线程执行完才会继续执行
+				joinThread.join(); // 当前线程等待joinThread线程执行完才会继续执行
 			}
 			
 			System.out.println(Thread.currentThread().getName() + ":" + i);
