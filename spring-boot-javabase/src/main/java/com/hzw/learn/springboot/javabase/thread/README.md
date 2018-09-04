@@ -2,11 +2,11 @@
 ## 线程通信
 ### 传统线程通信
 	Object类提供的wait()、notify()、notifyAll()的三个方法必须由同步监视器对象类调用。
-	#### wait() 
+#### wait() 
 		使当前线程等待；
-	#### notify()
+#### notify()
 		唤醒在当前同步监视器上等待的单个线程（多个线程，只会唤醒其中一个）;
-	#### notifyAll()
+#### notifyAll()
 		唤醒在当前同步监视器上等待的所有线程
 ### 使用Condition控制线程通信
 	若程序中不使用synchronized关键字来保证同步，而是使用Lock对象来保证同步
