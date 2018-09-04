@@ -15,6 +15,7 @@ public class AccountDDD {
 	
 	// 账户类提供一个线程安全的取钱方法
 	public synchronized void draw(double drawAmount){
+		
 		if(balance < drawAmount){
 			System.out.println(Thread.currentThread().getName() + "取钱【" + drawAmount + "】,余额不足！");
 			return;
