@@ -25,6 +25,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
+
+import com.hzw.learn.springboot.mybatis.dao.StudentDao;
+import com.hzw.learn.springboot.mybatis.model.Student;
 @Component
 @ConditionalOnBean(name="auditEntitys")
 @Intercepts({
@@ -50,11 +53,6 @@ public class AuditLogInterceptorNew implements Interceptor {
 		}
 		
 		MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[0];
-//		reflectObj(mappedStatement);
-//		
-//		BoundSql boundSql = mappedStatement.getBoundSql(obj);
-		
-//		this.showBoundSql(mappedStatement.getBoundSql(obj));
 		
 		List<ParameterMapping> parameterMappings = mappedStatement.getBoundSql(obj).getParameterMappings();
 		

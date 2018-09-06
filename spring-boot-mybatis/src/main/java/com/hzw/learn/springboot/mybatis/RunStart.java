@@ -16,7 +16,7 @@ public class RunStart implements CommandLineRunner{
 	@Override
 	public void run(String... arg0) throws Exception {
 		System.out.println("run start ...");
-		studentDao.quetyStudentList(new Student());
+//		studentDao.quetyStudentList(new Student());
 		
 	}
 

@@ -1,5 +1,6 @@
 package com.hzw.learn.springboot.mybatis.confg;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -9,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.BeanFactoryUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.ApplicationContext;
@@ -19,6 +21,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
+
+import com.hzw.learn.springboot.mybatis.plugins.AuditLogInterceptorNew;
 
 @Configuration
 @ImportResource(locations={"classpath:spring-mybatis.xml"})
@@ -38,9 +42,18 @@ public class DaoConfig{
 //		<!-- 实体类映射文件路径 -->
 //		<property name="mapperLocations" value="classpath*:mybatis-mapping/**/*.xml" />
 //	</bean>
+	
+	@Autowired		// 这样也能注入拦截器
+	List<Interceptor> interceptors;
+	
+	@Autowired
+	AuditLogInterceptorNew auditLogInterceptorNew;
+	
 	@Bean("sqlSessionFactory")
 	@ConditionalOnClass({ DataSource.class})
 	public SqlSessionFactory sqlSessionFactory(DataSource dataSource, ApplicationContext applicationContext) throws Exception{
+		System.out.println(interceptors.size());
+		System.out.println(auditLogInterceptorNew.getClass());
 		
 		String configLocationSource = "classpath:mybatis-config.xml";
 		String mapperLocations = "classpath*:mybatis-mapping/**/*.xml";
