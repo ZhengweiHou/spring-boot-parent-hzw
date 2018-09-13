@@ -25,6 +25,7 @@ BlockQueue提供了两个支持阻塞的方法
 	尝试把E元素放入BlockQueue中，如果该队列的元素已满，则阻塞该线程。
 + ```take()```
 	尝试从BlockeQueue的头部取出元素，如果该队列的元素已空，则阻塞该线程。
+	
 **实现类**
 - ArrayBlockingQueue
 - LinkedBlockingQueue
