@@ -26,11 +26,11 @@ BlockQueue提供了两个支持阻塞的方法
 + ```take()```
 	尝试从BlockeQueue的头部取出元素，如果该队列的元素已空，则阻塞该线程。
 **实现类**
-+ ArrayBlockingQueue
-+ LinkedBlockingQueue
-+ PriorityBlockingQueue
-+ SyschronousQueue
-+ DelayQueue
+- ArrayBlockingQueue
+- LinkedBlockingQueue
+- PriorityBlockingQueue
+- SyschronousQueue
+- DelayQueue
 
 
 
