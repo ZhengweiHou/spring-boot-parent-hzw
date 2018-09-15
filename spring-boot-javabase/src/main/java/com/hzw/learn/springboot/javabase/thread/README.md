@@ -32,9 +32,20 @@ BlockQueue提供了两个支持阻塞的方法
 - PriorityBlockingQueue
 - SyschronousQueue
 - DelayQueue
+	
+**方法性质梳理**
+	
+返回值和性质|阻塞|false|异常
+:-:|:-|:-|:-
+队列尾部插入元素|1|1|1
+队列头部删除并返回删除的元素|1|1|1
+队列头部取出但不删除元素|1|1|1
 
 
 
 
+123
+	
+123
 
 
