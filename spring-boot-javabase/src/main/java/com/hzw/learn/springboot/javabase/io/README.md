@@ -26,6 +26,25 @@ Buffer像一个数组，它可以保存多个类型相同的数据。Buffer是�
 ```0 <= mark <= position <= limit <= capacity```
 	
 **常用方法**
-- ```int capacity``` 返回Buffer的capacity大小
-
+- ```int capacity()```
+	<br/>返回capacity大小;
+- ```int limit()```
+	<br/>返回limit位置;
+- ```int position()```
+	<br/>返回position位置;
+- ```Buffer limit(int newLt)```
+	<br/>重新设置limit值，返回具有新limit的Buffer对象;
+- ```Buffer position(int newPs)```
+	<br/>重新设置position，返回position被修改的Buffer对象;
+- ```Buffer mark()```
+	<br/>设置标记，标记位置为当前position位置;
+- ```boolean hasRemaining()```
+	<br/>position和limit之间是否有可处理元素;
+- ```int remaining()```
+	<br/>position和limit之间元素个数;
+- ```Buffer reset()```
+	<br/>设置position为mark;
+- ```Buffer rewind()```
+	<br/>设置position=0，mark会被取消;
+	
 
