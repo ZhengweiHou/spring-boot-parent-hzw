@@ -12,6 +12,16 @@ Buffer像一个数组，它可以保存多个类型相同的数据。Buffer是�
 ```static XxxBuffer allocate(int capacity)```
 	创建一个容量为capacity的XxxBuffer对象;
 	
-**Buffer中三个重要概念**
+**Buffer中重要概念**
 - 容量(capacity)
+	缓冲区的容量表示该Buffer的最大数据容量。不可能为负值，创建后不能改变。
+- 界限(limit)
+	第一个不应该被读出或者写入的缓冲区位置索引。位于limit后(包括limit位置)的数据不可以被读写。
+- 位置(position)
+	下一个可以被读或写的缓冲区位置索引。初始值为0(第一个位置的索引)。
+- 标记(mark)
+	类似于传统IO流中的mark，Buffer可以直接将position定位到mark处。
+
+	
+	
 	
