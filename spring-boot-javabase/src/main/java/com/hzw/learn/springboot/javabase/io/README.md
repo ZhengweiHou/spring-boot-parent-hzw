@@ -22,7 +22,10 @@ Buffer像一个数组，它可以保存多个类型相同的数据。Buffer是�
 - 标记(mark)
 	<br/>类似于传统IO流中的mark，Buffer可以直接将position定位到mark处。
 	
-> asdfasf
+> 上述值满足如下关系<br/>
+```0 <= mark <= position <= limit <= capacity```
 	
+**常用方法**
+- ```int capacity``` 返回Buffer的capacity大小
 
-	
+
