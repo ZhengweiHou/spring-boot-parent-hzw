@@ -26,7 +26,7 @@ Buffer像一个数组，它可以保存多个类型相同的数据。Buffer是�
 ```0 <= mark <= position <= limit <= capacity```
 	
 #### put()/get()
-	put()和get()方法，用于向Buffer中放入/取出数据，Buffer支持单个数据访问和批量数据访问（以数组为参数）;
+put()和get()方法，用于向Buffer中放入/取出数据，Buffer支持单个数据访问和批量数据访问（以数组为参数）;
 
 - 相对（Relative）：从Buffer的当前position处开始读取或写入数据，然后将position按处理元素个数增加；
 - 绝对（Absolute）：直接根据索引处理数据就，position不会被影响；
