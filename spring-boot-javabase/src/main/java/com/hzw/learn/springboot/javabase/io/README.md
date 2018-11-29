@@ -1,18 +1,18 @@
 # 输入/输出
 ## Nio
 ### Buffer
-#### 概述**
+#### 概述
 
 Buffer像一个数组，它可以保存多个类型相同的数据。Buffer是一个抽象类，其最常用的子类是ByteBuffer，它可以在底层字节数组上进行get/set操作。除了ButeBuffer之外，对应于其他基本数据类型（boolean除外）都有对应的Buffer类：```CharBuffer```、```ShortBuffer```、```IntBuffer```、```LongBuffer```、```FloatBuffer```、```DoubleBuffer```;
 
 上面这些Buffer类，除了ByteBuffer之外，它们都采用相同或相似的方法来管理数据;
 
-#### 创建**
+#### 创建
 
 ```static XxxBuffer allocate(int capacity)```
 	创建一个容量为capacity的XxxBuffer对象;
 	
-#### Buffer中重要概念**
+#### Buffer中重要概念
 - 容量(capacity)
 	<br/>缓冲区的容量表示该Buffer的最大数据容量。不可能为负值，创建后不能改变。
 - 界限(limit)
@@ -25,12 +25,13 @@ Buffer像一个数组，它可以保存多个类型相同的数据。Buffer是�
 > 上述值满足如下关系<br/>
 ```0 <= mark <= position <= limit <= capacity```
 	
-#### put()/get()**<br/>
+#### put()/get()
 	put()和get()方法，用于向Buffer中放入/取出数据，Buffer支持单个数据访问和批量数据访问（以数组为参数）;
+
 - 相对（Relative）：从Buffer的当前position处开始读取或写入数据，然后将position按处理元素个数增加；
 - 绝对（Absolute）：直接根据索引处理数据就，position不会被影响；
 
-#### 其他常用方法**
+#### 其他常用方法
 - ```int capacity()```
 	<br/>返回capacity大小;
 - ```int limit()```
