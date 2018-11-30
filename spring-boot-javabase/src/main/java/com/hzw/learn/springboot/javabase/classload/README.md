@@ -35,8 +35,33 @@
 > // 获取类加载起所加载的全部URL数组<br/>
 > URL[] urls = sun.misc.Launcher.getBootstrapClassPath().getURLs();
 
-- 扩展类加载器 Extension ClassLoader
+- 扩展类加载器 Extension ClassLoader 
+
+    扩展类加载器，负责加载JRE的扩展目录（%JAVA_HOME%/jre/lib/ext
+    或者由java.ext.dirs系统属性制定的目录）中JAR包的类；
+
 - 系统类加载器 System ClassLoader
+
+    系统（应用）类加载器，它负责在JVM启动时加载来自java命令-classpath选项、java.class.path系统属性，
+    或CLASSPATH环境变量所制定的JAR包和类路径。<br/>
+    程序可以通过`ClassLoader`的静态方法`getSystemClassLoader()`来获取系统类加载器。
+    
+### 类加载机制
+1. 阿斯蒂芬
+    1. 地方哈士大夫
+2. 阿斯蒂芬
+
+
+#12. 流程图
+```flow
+st=>start: 开始
+op=>operation: My Operation
+cond=>condition: Yes or No?
+e=>end
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
 
 
 
