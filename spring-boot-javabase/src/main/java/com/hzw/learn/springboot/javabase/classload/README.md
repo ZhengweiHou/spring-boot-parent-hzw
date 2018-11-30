@@ -29,40 +29,40 @@
 
 ## 类加载器
 ### 分类
-- 根类加载器 Bootstrap ClassLoacer
+1. 根类加载器 Bootstrap ClassLoacer
 
     引导（原始或根）类加载器，负责加载Java的核心类。
 > // 获取类加载起所加载的全部URL数组<br/>
 > URL[] urls = sun.misc.Launcher.getBootstrapClassPath().getURLs();
 
-- 扩展类加载器 Extension ClassLoader 
+2. 扩展类加载器 Extension ClassLoader 
 
     扩展类加载器，负责加载JRE的扩展目录（%JAVA_HOME%/jre/lib/ext
     或者由java.ext.dirs系统属性制定的目录）中JAR包的类；
 
-- 系统类加载器 System ClassLoader
+3. 系统类加载器 System ClassLoader
 
     系统（应用）类加载器，它负责在JVM启动时加载来自java命令-classpath选项、java.class.path系统属性，
     或CLASSPATH环境变量所制定的JAR包和类路径。<br/>
     程序可以通过`ClassLoader`的静态方法`getSystemClassLoader()`来获取系统类加载器。
-    
+
+4. 用户类加载器
+
+    **4中类加载器的层次结构**<br/>
+    根类加载器 <- 扩展类加载器 <- 系统类加载器 <- 用户类加载器
+
+ 
 ### 类加载机制
-1. 阿斯蒂芬
-    1. 地方哈士大夫
-2. 阿斯蒂芬
+1. 全盘负责
+    
+2. 父类委托
+    
+    先让父类加载器试图加载该Class，只有在父类加载器无法加载该类时才尝试从自己的类路径中加载该类。
+    
+3. 缓存机制
 
-
-#12. 流程图
-```flow
-st=>start: 开始
-op=>operation: My Operation
-cond=>condition: Yes or No?
-e=>end
-st->op->cond
-cond(yes)->e
-cond(no)->op
-```
-
+    缓存机制会缓存所有加载过的Class，程序需要使用某个Class时，类加载器先从缓存中寻找，
+    若未找到才会读取对应类的二进制数据，转换成Class对象并存入缓存区。
 
 
 
