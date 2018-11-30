@@ -15,16 +15,17 @@ import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Intercepts(@Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class,ResultHandler.class }))
+@Intercepts(@Signature(type = Executor.class, method = "query", args = { MappedStatement.class, Object.class,
+		RowBounds.class, ResultHandler.class }))
 public class QueryInterceptor implements Interceptor {
 
 	private static final Logger logger = LoggerFactory.getLogger(QueryInterceptor.class);
-	
+
 	@Override
 	public Object intercept(Invocation invocation) throws Throwable {
 		MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[0];
 		SqlCommandType commandType = mappedStatement.getSqlCommandType();
-		logger.info("queryInterceptor:操作类型【{}】............",commandType);
+		logger.info("queryInterceptor:操作类型【{}】............", commandType);
 		return invocation.proceed();
 	}
 
@@ -39,7 +40,7 @@ public class QueryInterceptor implements Interceptor {
 
 	@Override
 	public void setProperties(Properties properties) {
-		logger.info("properties【{}】",properties);
+		logger.info("properties【{}】", properties);
 	}
 
 }

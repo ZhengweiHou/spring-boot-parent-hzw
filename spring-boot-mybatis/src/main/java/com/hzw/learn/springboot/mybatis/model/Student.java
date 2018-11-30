@@ -37,12 +37,7 @@ public class Student implements Serializable {
 
 	@Override
 	public String toString() {
-		return getClass().getName() + "@" + Integer.toHexString(hashCode())
-				+ "[" + 
-				"serialVersionUID=" + serialVersionUID + 
-				",id=" + id + 
-				",studentId=" + studentId + 
-				",name=" + name + 
-				"]";
+		return getClass().getName() + "@" + Integer.toHexString(hashCode()) + "[" + "serialVersionUID="
+				+ serialVersionUID + ",id=" + id + ",studentId=" + studentId + ",name=" + name + "]";
 	}
 }

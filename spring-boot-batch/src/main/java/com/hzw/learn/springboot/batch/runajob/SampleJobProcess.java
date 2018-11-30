@@ -4,13 +4,12 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SampleJobProcess implements ItemProcessor<String, String>{
+public class SampleJobProcess implements ItemProcessor<String, String> {
 
 	@Override
 	public String process(String item) throws Exception {
 		System.out.println("proc: " + item);
-		return "P"+item;
+		return "P" + item;
 	}
-
 
 }

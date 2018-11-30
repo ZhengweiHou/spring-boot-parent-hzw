@@ -9,13 +9,13 @@ public class ExceptionTest implements Runnable {
 	private static final Logger logger = LoggerFactory.getLogger(ExceptionTest.class);
 
 	@Override
-	public void run(){
-		
-		long sleep = 5*1000;
-		
-		while(true){
+	public void run() {
+
+		long sleep = 5 * 1000;
+
+		while (true) {
 			createException();
-			
+
 			try {
 				logger.info("创建错误。。。");
 				this.createException();
@@ -31,11 +31,11 @@ public class ExceptionTest implements Runnable {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
-	
-	public static void createException() throws ArithmeticException{
-		int a = 1/0;
+
+	public static void createException() throws ArithmeticException {
+		int a = 1 / 0;
 	}
 
 }

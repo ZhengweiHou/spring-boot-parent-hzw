@@ -21,29 +21,28 @@ import com.hzw.learn.springboot.batch.Application;
 //@ContextConfiguration(classes={BatchConfig.class,JobConf.class})
 //
 //@ComponentScan(basePackages={"com.hzw.learn.springboot"}) 
-@SpringBootTest(classes=Application.class)
+@SpringBootTest(classes = Application.class)
 public class RunAJobTest {
-	
+
 	@Autowired
 	JobOperator jobOperator;
-	
+
 	@Autowired
 	JobLauncher jobLauncher;
-	
+
 	@Autowired
 	JobRegistry jobRegistry;
-	
+
 	@Test
-	public void test(){
-		
+	public void test() {
+
 		System.out.println(jobRegistry.getJobNames());
-		
+
 		try {
 			jobOperator.start("sampleJob", String.valueOf(Math.random()));
-		} catch (NoSuchJobException | JobInstanceAlreadyExistsException
-				| JobParametersInvalidException e) {
+		} catch (NoSuchJobException | JobInstanceAlreadyExistsException | JobParametersInvalidException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

@@ -20,22 +20,14 @@ public class SampleJobConf {
 
 	@Bean
 	public Job sampleJob(JobRepository jobRepository, Step sampleStep) {
-		return this.jobBuilderFactory.get("sampleJob")
-				.repository(jobRepository)
-				.start(sampleStep)
-				.build();
+		return this.jobBuilderFactory.get("sampleJob").repository(jobRepository).start(sampleStep).build();
 	}
 
 	@Bean
-	public Step sampleStep(PlatformTransactionManager transactionManager, SampleJobReader read, SampleJobProcess proc, SampleJobWriter writer) {
-	return this.stepBuilderFactory.get("sampleStep")
-				.transactionManager(transactionManager)
-				.<String, String>chunk(5)
-				.reader(read)
-				.processor(proc)
-				.writer(writer)
-				.build();
+	public Step sampleStep(PlatformTransactionManager transactionManager, SampleJobReader read, SampleJobProcess proc,
+			SampleJobWriter writer) {
+		return this.stepBuilderFactory.get("sampleStep").transactionManager(transactionManager).<String, String>chunk(5)
+				.reader(read).processor(proc).writer(writer).build();
 	}
-	
 
 }

@@ -13,11 +13,11 @@ public class 传统线程通信 {
 }
 
 // 债主
-class Drawer extends Thread{
+class Drawer extends Thread {
 	private Account account;
 	private double amount;
-	
-	public Drawer(String name,  Account account, double amount){
+
+	public Drawer(String name, Account account, double amount) {
 		super(name);
 		this.account = account;
 		this.amount = amount;
@@ -30,11 +30,11 @@ class Drawer extends Thread{
 }
 
 // 借钱的
-class Depositer extends Thread{
+class Depositer extends Thread {
 	private Account account;
 	private double amount;
-	
-	public Depositer(String name,  Account account, double amount){
+
+	public Depositer(String name, Account account, double amount) {
 		super(name);
 		this.account = account;
 		this.amount = amount;
@@ -42,7 +42,7 @@ class Depositer extends Thread{
 
 	@Override
 	public void run() {
-		for(int i=0 ; i <= 100 ; i++){
+		for (int i = 0; i <= 100; i++) {
 			account.deposit(amount);
 		}
 	}
@@ -72,69 +72,66 @@ class Account {
 				System.out.println("\t取钱【" + drawAmount + "】,余额不足,等待其他人操作！");
 				this.notify();
 				this.wait(); // 当前account对象为同步监视器，使用同步监视器调用wait()方法
-				
+
 				this.draw(drawAmount, ++time);
 			} else {
 				balance -= drawAmount;
 				System.out.println("\t取钱成功！取出金额：" + drawAmount + "余额：" + balance);
-				
+
 				this.notify(); // 唤醒其他进程操作当前对象
 			}
-		}catch (InterruptedException e) {
+		} catch (InterruptedException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
-	
-	public synchronized void deposit(double drawAmount){
+
+	public synchronized void deposit(double drawAmount) {
 		try {
 			System.out.println(Thread.currentThread().getName() + "准备存入金额...");
-			if(!flag){
+			if (!flag) {
 				System.out.println("未存入");
 				this.wait();
 			}
-			
-			
+
 			balance += drawAmount;
 			System.out.println("\t存入金额：" + drawAmount + "余额：" + balance);
 			flag = false;
-			
+
 			notify();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-			
+
 	}
-	
-	
-	
 
 	// 重写hashCode和equals方法，由accountNo来确定账户是否为同一对象
 	@Override
 	public int hashCode() {
 		return this.accountNo.hashCode();
 	}
+
 	@Override
 	public boolean equals(Object obj) {
-		if(this == obj){
+		if (this == obj) {
 			return true;
 		}
-		if(null != obj && obj.getClass() == this.getClass()){
-			return this.getAccountNo().equals(((AccountDDD)obj).getAccountNo());
-		} 
+		if (null != obj && obj.getClass() == this.getClass()) {
+			return this.getAccountNo().equals(((AccountDDD) obj).getAccountNo());
+		}
 		return false;
 	}
-	
+
 	public String getAccountNo() {
 		return accountNo;
 	}
+
 	public void setAccountNo(String accountNo) {
 		this.accountNo = accountNo;
 	}
+
 	public double getBalance() {
 		return balance;
 	}
-
-
 
 	public void setBalance(double balance) {
 		this.balance = balance;

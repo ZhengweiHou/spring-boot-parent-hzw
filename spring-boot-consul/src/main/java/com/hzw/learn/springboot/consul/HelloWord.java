@@ -10,22 +10,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("hellospringboot")
-public class HelloWord{
-	
+public class HelloWord {
+
 	@Autowired
 	private EnvValue envValue;
-	
+
 	@ResponseBody
 	@RequestMapping("/index")
 	public String index() throws ParseException {
-		
+
 		Object enva = System.getenv("env-a");
 		Map<String, String> envMaps = envValue.getEnvmaps();
 		System.out.println("get value from systemenv whith 'env-a':" + enva);
 		System.out.println("envMaps:" + envMaps);
-		
+
 		return envMaps.toString();
 	}
-	
-	
+
 }

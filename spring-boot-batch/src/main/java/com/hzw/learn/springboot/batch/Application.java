@@ -5,13 +5,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-
 @SpringBootApplication
 //@EnableBatchProcessing
-@ComponentScan(basePackages={"com.hzw.learn.springboot"}) 
+@ComponentScan(basePackages = { "com.hzw.learn.springboot" })
 public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args); 
+		SpringApplication.run(Application.class, args);
 	}
 }

@@ -16,53 +16,53 @@ import com.hzw.learn.springboot.mybatis.model.Student;
 @Controller
 @RequestMapping("student")
 public class StudentController {
-	
+
 	@Autowired
 	private StudentDao studentDao;
-	
+
 	@ResponseBody
 	@RequestMapping("addRandow")
-	public Student addRandowStudent(){
+	public Student addRandowStudent() {
 		String studentId = String.valueOf(UUID.randomUUID().hashCode());
-		
+
 		String name = "RandowStudent" + new Random().nextInt();
-		
+
 		Student student = new Student();
 		student.setStudentId(studentId);
 		student.setName(name);
 		Student result = studentDao.addStudent(student);
-		
+
 		return result;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("delete/{id}")
-	public String delStudent(@PathVariable("id") Integer id){
+	public String delStudent(@PathVariable("id") Integer id) {
 		String result = studentDao.delStudent(id);
-		
+
 		return result;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("deleteid1")
-	public String delStudentid1(){
+	public String delStudentid1() {
 		String result = studentDao.delStudentForId1();
 		return result;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("update/{id}/{name}")
-	public String updateStudent(@PathVariable("id") Integer id, @PathVariable("name") String name){
+	public String updateStudent(@PathVariable("id") Integer id, @PathVariable("name") String name) {
 		Student student = new Student();
 		student.setId(id);
 		student.setName(name);
 		String result = studentDao.updateStudent(student);
 		return result;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("getAll")
-	public List<Student> getAllStudent(){
+	public List<Student> getAllStudent() {
 		List<Student> studentList = studentDao.quetyStudentList(new Student());
 		return studentList;
 	}

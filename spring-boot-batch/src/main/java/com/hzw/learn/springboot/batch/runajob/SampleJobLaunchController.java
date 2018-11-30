@@ -20,54 +20,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(value="/sampleJob")
+@RequestMapping(value = "/sampleJob")
 public class SampleJobLaunchController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired
 	JobOperator jobOperator;
-	
+
 	@Autowired
 	JobLauncher jobLauncher;
-	
+
 	@Autowired
 	JobRegistry jobRegistry;
-	
+
 	@Autowired
 	Job sampleJob;
-	
+
 	@RequestMapping("start")
 	@ResponseBody
-	public String startJob(){
+	public String startJob() {
 		long executionId;
 		try {
 			executionId = jobOperator.start("sampleJob", String.valueOf(Math.random()));
-			logger.info("批量Job启动成功,执行Job的id为{}",executionId);
+			logger.info("批量Job启动成功,执行Job的id为{}", executionId);
 			return String.valueOf(executionId);
-		} catch (NoSuchJobException | JobInstanceAlreadyExistsException
-				| JobParametersInvalidException e) {
+		} catch (NoSuchJobException | JobInstanceAlreadyExistsException | JobParametersInvalidException e) {
 			e.printStackTrace();
 			return e.getStackTrace().toString();
 		}
 	}
-	
+
 	@RequestMapping("launch")
 	@ResponseBody
-	public String launchJob(){
+	public String launchJob() {
 		try {
 			System.out.println(jobRegistry.getJobNames());
-			
-			
+
 			JobExecution jobExecution = jobLauncher.run(sampleJob, new JobParameters());
 			logger.info(jobExecution.toString());
 			return jobExecution.getExitStatus().getExitCode();
-		} catch (JobExecutionAlreadyRunningException | JobRestartException
-				| JobInstanceAlreadyCompleteException
+		} catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException
 				| JobParametersInvalidException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return e.getMessage();
 		}
 	}
-	
+
 }

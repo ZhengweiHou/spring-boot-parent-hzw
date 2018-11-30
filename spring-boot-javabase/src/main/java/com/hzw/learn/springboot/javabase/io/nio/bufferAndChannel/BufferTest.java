@@ -8,7 +8,6 @@ public class BufferTest {
 		System.out.println(buffer.capacity());
 		System.out.println(buffer.limit());
 		System.out.println(buffer.position());
-		
-		
+
 	}
 }

@@ -25,8 +25,8 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import com.hzw.learn.springboot.mybatis.plugins.AuditLogInterceptorNew;
 
 @Configuration
-@ImportResource(locations={"classpath:spring-mybatis.xml"})
-public class DaoConfig{
+@ImportResource(locations = { "classpath:spring-mybatis.xml" })
+public class DaoConfig {
 //	<!-- SqlSessionFactory -->
 //	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 //		<property name="dataSource" ref="dataSource" />
@@ -42,47 +42,49 @@ public class DaoConfig{
 //		<!-- 实体类映射文件路径 -->
 //		<property name="mapperLocations" value="classpath*:mybatis-mapping/**/*.xml" />
 //	</bean>
-	
-	@Autowired		// 这样也能注入拦截器
+
+	@Autowired // 这样也能注入拦截器
 	List<Interceptor> interceptors;
-	
+
 	@Autowired
 	AuditLogInterceptorNew auditLogInterceptorNew;
-	
+
 	@Bean("sqlSessionFactory")
-	@ConditionalOnClass({ DataSource.class})
-	public SqlSessionFactory sqlSessionFactory(DataSource dataSource, ApplicationContext applicationContext) throws Exception{
+	@ConditionalOnClass({ DataSource.class })
+	public SqlSessionFactory sqlSessionFactory(DataSource dataSource, ApplicationContext applicationContext)
+			throws Exception {
 		System.out.println(interceptors.size());
 		System.out.println(auditLogInterceptorNew.getClass());
-		
+
 		String configLocationSource = "classpath:mybatis-config.xml";
 		String mapperLocations = "classpath*:mybatis-mapping/**/*.xml";
-		
+
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-		
+
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		
-		/*===1. 指定DateSource===*/
+
+		/* ===1. 指定DateSource=== */
 		sqlSessionFactoryBean.setDataSource(dataSource);
-		
-		/*===2. 指定configLocation配置文件===*/
+
+		/* ===2. 指定configLocation配置文件=== */
 //		ResourcePatternResolver resolver1 = (ResourcePatternResolver) new PathMatchingResourcePatternResolver();
 		sqlSessionFactoryBean.setConfigLocation(resolver.getResource(configLocationSource));
-		
-		/*===3. 指定实体类映射文件===*/
+
+		/* ===3. 指定实体类映射文件=== */
 //		resolver.getResources(mapperLocations); // throws IOException
 //		ResourcePatternResolver resolver2 = (ResourcePatternResolver) new PathMatchingResourcePatternResolver();
 		Resource[] mapperResources = resolver.getResources(mapperLocations);
 		sqlSessionFactoryBean.setMapperLocations(mapperResources);
-		
-		/*===4. Interceptor的动态注入===*/
-		Map<String, Interceptor> interceptors = BeanFactoryUtils.beansOfTypeIncludingAncestors(applicationContext, Interceptor.class, false, false);
+
+		/* ===4. Interceptor的动态注入=== */
+		Map<String, Interceptor> interceptors = BeanFactoryUtils.beansOfTypeIncludingAncestors(applicationContext,
+				Interceptor.class, false, false);
 //		if(interceptors.size()>0){
-			Interceptor[] interceptorsArr = new Interceptor[interceptors.size()];
-			sqlSessionFactoryBean.setPlugins(interceptors.values().toArray(interceptorsArr));
+		Interceptor[] interceptorsArr = new Interceptor[interceptors.size()];
+		sqlSessionFactoryBean.setPlugins(interceptors.values().toArray(interceptorsArr));
 //		}
-		
+
 		return sqlSessionFactoryBean.getObject();
 	}
-	
+
 }
