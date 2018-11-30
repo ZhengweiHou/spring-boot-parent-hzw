@@ -32,10 +32,8 @@
 - 根类加载器 Bootstrap ClassLoacer
 
     引导（原始或根）类加载器，负责加载Java的核心类。
-```
-// 获取类加载起所加载的全部URL数组
-URL[] urls = sun.misc.Launcher.getBootstrapClassPath().getURLs();
-```
+> // 获取类加载起所加载的全部URL数组<br/>
+> URL[] urls = sun.misc.Launcher.getBootstrapClassPath().getURLs();
 
 - 扩展类加载器 Extension ClassLoader
 - 系统类加载器 System ClassLoader
