@@ -1,5 +1,7 @@
 package com.hzw.learn.springboot.javabase.classload;
 
+import java.net.URL;
+
 public class ClassLoaderTest {
 	public static void main(String[] args) throws ClassNotFoundException {
 		
@@ -11,6 +13,9 @@ public class ClassLoaderTest {
 		System.out.println("Class.forName");
 		// 加载并初始化类
 		Class.forName("com.hzw.learn.springboot.javabase.classload.HZWTest_1");
+		
+		// 获取类加载起所加载的全部URL数组
+		URL[] urls = sun.misc.Launcher.getBootstrapClassPath().getURLs();
 	}
 }
 
