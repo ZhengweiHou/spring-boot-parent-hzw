@@ -64,6 +64,27 @@
     缓存机制会缓存所有加载过的Class，程序需要使用某个Class时，类加载器先从缓存中寻找，
     若未找到才会读取对应类的二进制数据，转换成Class对象并存入缓存区。
 
+### 自定义类加载器
+```
+
+    synchronized (getClassLoadingLock(name)) {
+        // First, check if the class has already been loaded
+        Class<?> c = findLoadedClass(name);
+        if (c == null) {
+            if (parent != null) {
+                c = parent.loadClass(name, false);
+            } else {
+                c = findBootstrapClassOrNull(name);
+        }
+        if (c == null) {
+            // If still not found, then invoke findClass in order
+            // to find the class.
+            c = findClass(name);
+        }
+    }
+
+```
+
 
 
 
