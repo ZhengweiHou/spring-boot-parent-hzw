@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
   application:
    name: spring-boot-consul-demo
 
@@ -11,7 +11,7 @@ spring:
   cloud:
     consul:
 #      host: 127.0.0.1
-      host: 192.168.32.131
+      host: 10.252.12.32
       port: 8500
       discovery:
         enabled: true
@@ -20,7 +20,7 @@ spring:
         register: true
         tags: foo=bar, baz
 #        health-check-path: /hellospringboot/index
-        hostname: 10.252.12.16
+        hostname: 10.252.12.28
 
 env:
   envmaps: 

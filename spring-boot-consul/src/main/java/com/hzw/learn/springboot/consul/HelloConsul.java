@@ -69,6 +69,6 @@ public class HelloConsul {
 	@RequestMapping(value = "/geturl/{serviceName}", method = RequestMethod.GET)
 	public String getUrl(@PathVariable String serviceName) {
 
-		return loadBalancer.choose("consul-server").getUri().toString();
+		return loadBalancer.choose(serviceName).getUri().toString();
 	}
 }
