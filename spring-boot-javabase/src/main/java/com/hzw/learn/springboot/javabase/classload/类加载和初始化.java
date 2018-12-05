@@ -2,7 +2,7 @@ package com.hzw.learn.springboot.javabase.classload;
 
 import java.net.URL;
 
-public class ClassLoaderTest {
+public class 类加载和初始化 {
 	public static void main(String[] args) throws ClassNotFoundException {
 		
 		System.out.println("loader.loaderClass");

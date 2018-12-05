@@ -9,7 +9,7 @@ package com.hzw.learn.springboot.javabase.classload;
  *         bbb 
  *         1543549242091ccc
  */
-public class CompileConstantTest {
+public class final修饰且确定值变量引用不会加载类 {
 	public static void main(String[] args) {
 
 		System.out.println(HZWTest.a); // 不会初始化HZWTest
@@ -31,7 +31,7 @@ class HZWTest {
 		System.out.println("静态初始化块");
 	}
 
-	static final String a = "aaa";
+	static final String a = "aaa";	// final修饰且编译时能确定的变量其被引用处会直接被替换成常量 
 
 	static String b = "bbb";
 

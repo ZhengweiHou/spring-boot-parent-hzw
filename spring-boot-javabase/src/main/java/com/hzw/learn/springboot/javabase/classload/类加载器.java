@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
 
-public class ClassLoaderPropTest {
+public class 类加载器 {
 	public static void main(String[] args) throws IOException {
 		
 		/* 系统类加载器 */
@@ -21,7 +21,6 @@ public class ClassLoaderPropTest {
 		System.out.println("扩展类加载器：" + extensionLader);
 		System.out.println("扩展类加载器的加载路径：" + System.getProperty("java.ext.dirs"));
 		System.out.println("扩展类加载器的parent：" + extensionLader.getParent());
-		
-		
+
 	}
 }

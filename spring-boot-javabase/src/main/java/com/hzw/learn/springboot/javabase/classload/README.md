@@ -65,6 +65,8 @@
     若未找到才会读取对应类的二进制数据，转换成Class对象并存入缓存区。
 
 ### 自定义类加载器
+
+
 ```
 
     synchronized (getClassLoadingLock(name)) {
@@ -72,14 +74,16 @@
         Class<?> c = findLoadedClass(name);
         if (c == null) {
             if (parent != null) {
+                // 使用父类加载器加载类
                 c = parent.loadClass(name, false);
             } else {
+                // 父加载器为空则使用根类加载器加载类
                 c = findBootstrapClassOrNull(name);
         }
         if (c == null) {
             // If still not found, then invoke findClass in order
             // to find the class.
-            c = findClass(name);
+            c = findClass(name); // 该方法会throw ClassNotFoundException
         }
     }
 
