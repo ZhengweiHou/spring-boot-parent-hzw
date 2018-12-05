@@ -32,6 +32,7 @@
 1. 根类加载器 Bootstrap ClassLoacer
 
     引导（原始或根）类加载器，负责加载Java的核心类。
+    根加载器并不是`java.lang.ClassLoader`的子类，而是有JVM自己实现的
 > // 获取类加载起所加载的全部URL数组<br/>
 > URL[] urls = sun.misc.Launcher.getBootstrapClassPath().getURLs();
 
@@ -66,9 +67,11 @@
 
 ### 自定义类加载器
 
+由一下ClassLoader中
 
 ```
 
+    loadClass（）：
     synchronized (getClassLoadingLock(name)) {
         // First, check if the class has already been loaded
         Class<?> c = findLoadedClass(name);
@@ -83,7 +86,9 @@
         if (c == null) {
             // If still not found, then invoke findClass in order
             // to find the class.
-            c = findClass(name); // 该方法会throw ClassNotFoundException
+            c = findClass(name); 
+            // findClass方法默认会throw ClassNotFoundException
+            // 自定类加载器一般只重写该方法
         }
     }
 
