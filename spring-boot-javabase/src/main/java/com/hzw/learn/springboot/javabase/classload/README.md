@@ -104,8 +104,16 @@ URLClassLoader是ClassLoader的一个实现类，其也是系统类加载器和�
 
 URLClassLoader可以从本地文件系统中获取二进制文件来加载类，也可以从远程主机上获取二进制文件来加载类；
 
-
-
-
+```
+public static void main(String[] args) {
+    URL[] urls = {
+            // 使用网络文件
+            new URL("https://github.com/ZhengweiHou/TankRun/raw/master/TankRun.jar")
+        };
+    URLClassLoader urlLoader = new URLClassLoader(urls);
+    // 运行TankRun.jar中的坦克游戏
+    urlLoader.loadClass("MyTankGame1_12.MyTankGameFrame").newInstance();
+}
+```
 
 
