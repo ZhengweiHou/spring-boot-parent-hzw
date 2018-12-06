@@ -67,11 +67,15 @@
 
 ### 自定义类加载器
 
-由一下ClassLoader中
+下为ClassLoader中loadClass()方法部分代码截取，该方法为ClassLoader的入口点，根据指定名称来加载类。
+
+ClassLoader中的findClass()方法是protected修饰的，一般其自定义的子类只建议重写findClass()方法，loadClass()方法复用父类的逻辑，当缓存机制和父类加载都无效时再会调用findClass()方法；
+
 
 ```
 
-    loadClass（）：
+    源码摘选：
+    loadClass（String name, boolean resolve）：
     synchronized (getClassLoadingLock(name)) {
         // First, check if the class has already been loaded
         Class<?> c = findLoadedClass(name);
@@ -93,6 +97,13 @@
     }
 
 ```
+
+### URLClassLoader 类
+
+URLClassLoader是ClassLoader的一个实现类，其也是系统类加载器和扩展类加载器的父类；
+
+URLClassLoader可以从本地文件系统中获取二进制文件来加载类，也可以从远程主机上获取二进制文件来加载类；
+
 
 
 
