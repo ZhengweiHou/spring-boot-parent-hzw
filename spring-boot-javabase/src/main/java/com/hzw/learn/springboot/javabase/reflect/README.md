@@ -36,7 +36,12 @@ Executable提供了如下两个方法获取方法的参数信息：
 > 2) Parameter[] getParameters():获取方法的所有形参。
 
 Parameter:代表方法或构造器的一个参数。
-> getModifiers()
+> parameter.getModifiers(); 修饰符<br/>
+> parameter.getName(); 形参名<br/>
+> parameter.getParameterizedType(); 获取带泛型的形参类型<br/>
+> parameter.getType(); 获取形参类型<br/>
+> parameter.isNamePresent(); 返回类的class文件中是否包含了方法的形参名信息<br/>
+> parameter.isVarArgs(); 判断该参数是否为可变参数
 
 
 

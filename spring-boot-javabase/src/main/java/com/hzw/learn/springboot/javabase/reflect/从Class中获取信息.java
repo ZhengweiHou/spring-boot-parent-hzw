@@ -61,6 +61,13 @@ public class 从Class中获取信息 {
 		Parameter[] ps = cons.getParameters();		// 方法形参数组
 		
 		// 参数对象
+		Parameter parameter = ps[0];
+		parameter.getModifiers();
+		parameter.getName();
+		parameter.getParameterizedType();
+		parameter.getType();
+		parameter.isNamePresent();
+		parameter.isVarArgs();
 		
 	}
 }
