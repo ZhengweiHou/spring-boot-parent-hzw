@@ -20,8 +20,9 @@ Class类中的getxxx()和getDeclaredxxx()方法区别：
 例如getFields()和getDeclaredFields()的描述差异<br/>
 
 * getFields():
-    > Returns an array containing Field objects reflecting all the accessible public fields of the class or interface represented by this Class object.
+    > Returns an array containing Field objects reflecting **all the accessible public fields** of the class or interface represented by this Class object.
 * getDeclaredFields():
 
-    > Returns an array of Field objects reflecting all the fields declared by the class or interface represented by this Class object. This includes public, protected, default (package) access, and private fields, but excludes inherited fields.
+    > Returns an array of Field objects reflecting **all the fields** declared by the class or interface represented by this Class object. 
+    This includes public, protected, default (package) access, and private fields, **but excludes inherited fields**.
 
