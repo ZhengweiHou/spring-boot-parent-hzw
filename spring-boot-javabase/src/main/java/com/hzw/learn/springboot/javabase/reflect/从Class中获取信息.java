@@ -1,18 +1,25 @@
 package com.hzw.learn.springboot.javabase.reflect;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.Parameter;
 import java.util.Arrays;
 
 public class 从Class中获取信息 {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NoSuchMethodException, SecurityException {
 		Class<ClassTest> clazz = ClassTest.class;
 		
+//		Field[] fs = clazz.getFields();
 		Arrays.asList(clazz.getFields()					).forEach(temp->System.out.println("Fields               " + temp));
 		Arrays.asList(clazz.getDeclaredFields()			).forEach(temp->System.out.println("DeclaredFields       " + temp));
 
+//		Constructor<?>[] cs = clazz.getConstructors();
 		Arrays.asList(clazz.getConstructors()			).forEach(temp->System.out.println("Constructors         " + temp));
 		Arrays.asList(clazz.getDeclaredConstructors()	).forEach(temp->System.out.println("DeclaredConstructors " + temp));
 
+//		Method[] ms = clazz.getMethods();
 		Arrays.asList(clazz.getMethods()				).forEach(temp->System.out.println("Methods              " + temp));
 		Arrays.asList(clazz.getDeclaredMethods()		).forEach(temp->System.out.println("DeclaredMethods      " + temp));
 		// 此处getDeclaredMethods()能获取到ClassTest.par_publicMethod()方法，
@@ -47,5 +54,13 @@ public class 从Class中获取信息 {
 		
 		System.out.println(clazz.getName());
 		System.out.println(clazz.getSimpleName());
+		
+		// 方法对象-抽象基类：Executable（Constructor同Method，都是Executable的子类）
+		Constructor<ClassTest> cons = clazz.getConstructor(String.class);
+		int pCount = cons.getParameterCount();	// 方法参数个数
+		Parameter[] ps = cons.getParameters();		// 方法形参数组
+		
+		// 参数对象
+		
 	}
 }

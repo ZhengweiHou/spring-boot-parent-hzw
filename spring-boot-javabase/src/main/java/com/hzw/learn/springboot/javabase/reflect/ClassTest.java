@@ -3,10 +3,6 @@ package com.hzw.learn.springboot.javabase.reflect;
 import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.context.annotation.Bean;
 
 // 注解
 @Deprecated

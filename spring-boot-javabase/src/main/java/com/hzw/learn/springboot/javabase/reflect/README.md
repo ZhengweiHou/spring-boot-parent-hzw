@@ -26,3 +26,23 @@ Class类中的getxxx()和getDeclaredxxx()方法区别：
     > Returns an array of Field objects reflecting **all the fields** declared by the class or interface represented by this Class object. 
     This includes public, protected, default (package) access, and private fields, **but excludes inherited fields**.
 
+## 方法参数反射(Java 8 新增)
+- `Executable`:Java8新增的抽象基类，其有两个子类如下
+    * `Constructor`
+    * `Method`
+    
+Executable提供了如下两个方法获取方法的参数信息：
+> 1) int getParameterCount():获取方法的形参个数；<br/>
+> 2) Parameter[] getParameters():获取方法的所有形参。
+
+Parameter:代表方法或构造器的一个参数。
+> getModifiers()
+
+
+
+
+
+
+
+
+
