@@ -1,6 +1,5 @@
 package com.hzw.learn.springboot.javabase.reflect;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class 反射生成并操作对象 {
