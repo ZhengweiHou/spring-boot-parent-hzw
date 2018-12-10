@@ -59,8 +59,8 @@ Parameter:代表方法或构造器的一个参数。
 ### 创建对象
 1. `Class.newInstance()`调用默认构造器实例对象
 2. `Constructor.newInstance(Object... initargs)`通过构造器对象调用对应构造器实例对象
-> Class<ClassTest> clazz = ClassTest.class;
-> clazz.newInstance();
+> Class<ClassTest> clazz = ClassTest.class;<br/>
+> clazz.newInstance();<br/>
 > clazz.getConstructor(String.class).newInstance("呵呵");
 
 
