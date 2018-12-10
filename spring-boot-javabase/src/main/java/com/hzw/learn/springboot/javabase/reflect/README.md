@@ -14,8 +14,8 @@
 
 ### 反射获取类信息
 
-`Method`方法、`Constructor`构造器、`Field`成员变量<br/>
-Class类中的getxxx()和getDeclaredxxx()方法区别：
+`Method`方法、`Constructor`构造器、`Field`成员变量、`Annotation`注解<br/>
+#### Class类中的getxxx()和getDeclaredxxx()方法区别：
 
 1. getxxx()只获取public内容，getDeclaredxxx()获取所有内容；
 1. getxxx()能获取父类或接口的资源，而Declared类方法获取的内容**不包含**目标类继承过来的内容。
@@ -28,6 +28,12 @@ Class类中的getxxx()和getDeclaredxxx()方法区别：
 
     > Returns an array of Field objects reflecting **all the fields** declared by the class or interface represented by this Class object. 
     This includes public, protected, default (package) access, and private fields, **but excludes inherited fields**.
+
+#### Method、Constructor和Field拥有一个共同父类：AccessibleObject
+权限访问检查-Field为例：<br/>
+`Field.isAccessible()`使用字段时是否进行访问权限检查<br/>
+`Field.setAccessible(Boolean flag)`设置是否进行访问权限检查<br/>
+> **true**为**取消**权限检查;falss为进行权限检查。
 
 ### 方法参数反射(Java 8 新增)
 - `Executable`:Java8新增的抽象基类，其有两个子类如下
@@ -66,8 +72,38 @@ clazz.newInstance();
 clazz.getConstructor(String.class).newInstance("呵呵");
 ```
 ### 方法调用
+反射执行方法API<br/>
+`Object Method.invoke(Object [执行主体], Object... args)`
 
+```
+Method method = clazz.getMethod("publicMethod", String.class);
+// 设置访问时不进行权限检查
+if(!method.isAccessible())
+    method.setAccessible(true);
+// 执行方法
+method.invoke(new ClassTest(), "hzw");
+```
 
+### 访问成员变量
+Field类提供了如下两组方法来访问成员变量值
+
+- getXxx(Object obj):<br/>
+    获取obj对象的该成员变量的值。此处的Xxx对应8种基本类型，如果该成员变量的类型是引用类型，则取消get后面的Xxx。
+- setXxx(Object obj, Xxx val):</br>
+    将obj对象的该成员变量值设置成val，Xxx含义同上。
+
+示例代码
+```
+ClassTest classTest = new ClassTest();
+Field field = clazz.getField("publicStr");
+// 设置访问时不进行权限检查
+if(!field.isAccessible())
+    field.setAccessible(true);
+// 取值
+field.get(classTest);
+// 赋值
+field.set(classTest, "hzw");
+```
 
 
 
