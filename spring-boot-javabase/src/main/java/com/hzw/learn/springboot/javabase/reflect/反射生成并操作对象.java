@@ -22,7 +22,9 @@ public class 反射生成并操作对象 {
 		
 		
 		Field field = clazz.getField("publicStr");
+		// 取值
 		field.get(classTest);
+		// 赋值
 		field.set(classTest, "hzw");
 	}
 	

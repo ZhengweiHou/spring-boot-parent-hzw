@@ -92,7 +92,7 @@ Field类提供了如下两组方法来访问成员变量值
 - setXxx(Object obj, Xxx val):</br>
     将obj对象的该成员变量值设置成val，Xxx含义同上。
 
-示例代码
+示例代码：
 ```
 ClassTest classTest = new ClassTest();
 Field field = clazz.getField("publicStr");
@@ -105,5 +105,6 @@ field.get(classTest);
 field.set(classTest, "hzw");
 ```
 
+### 操作数组
 
 
