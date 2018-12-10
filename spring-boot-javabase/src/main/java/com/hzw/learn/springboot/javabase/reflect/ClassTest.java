@@ -3,6 +3,7 @@ package com.hzw.learn.springboot.javabase.reflect;
 import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.List;
 
 // 注解
 @Deprecated
@@ -20,7 +21,7 @@ implements InterfaceTest
 	// 构造器
 	private ClassTest() {}
 	public ClassTest(String str) {}
-	public ClassTest(String strName, Integer intName) {}
+	public ClassTest(String strName, Integer intName, List<String> list) {}
 	
 	// 方法
 	private   String privateMethod()   {return "this is privateMethod";}

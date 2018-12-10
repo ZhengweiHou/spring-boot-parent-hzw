@@ -1,11 +1,11 @@
 package com.hzw.learn.springboot.javabase.reflect;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
 import java.util.Arrays;
+import java.util.List;
 
 public class 从Class中获取信息 {
 	public static void main(String[] args) throws NoSuchMethodException, SecurityException {
@@ -55,43 +55,39 @@ public class 从Class中获取信息 {
 		System.out.println(clazz.getName());
 		System.out.println(clazz.getSimpleName());
 		
+		///////////////////////////Executable/////////////////////////////////////
 		// 方法对象-抽象基类：Executable（Constructor同Method，都是Executable的子类）
 		Method method = clazz.getMethod("publicMethod",String.class);
 		System.out.println(""
 				+ "    方法名：" + method.getName()
 				+ "    参数个数：" + method.getParameterCount()
 		);
-		Constructor<ClassTest> cons = clazz.getConstructor(String.class,Integer.class);
+		Constructor<ClassTest> cons = clazz.getConstructor(String.class,Integer.class,List.class);
 		System.out.println(""
 				+ "    构造器名：" + cons.getName()
 				+ "    参数个数：" + cons.getParameterCount()
 		);
-		
 		// 方法形参数组
 		Parameter[] ps = cons.getParameters();
 		
 		Arrays.asList(ps).stream().forEach(paramet -> {
-			System.out.println(
-					
-					);
-			paramet.getModifiers();
-			paramet.getName();
-			paramet.getParameterizedType();
-			paramet.getType();
-			paramet.isNamePresent();
-			paramet.isVarArgs();
+			// 获取参数信息
+			System.out.println(""
+				+ "    " + paramet.getModifiers()
+//				+ "    " + Modifier.toString(paramet.getModifiers())
+				+ "    " + paramet.getName()
+				+ "    " + paramet.getParameterizedType()
+				+ "    " + paramet.getType()
+				+ "    " + paramet.isNamePresent()
+				+ "    " + paramet.isVarArgs()
+			);
 		});
 		
-		// 参数对象
-		Parameter parameter = ps[0];
-		parameter.getModifiers();
-		parameter.getName();
-		parameter.getParameterizedType();
-		parameter.getType();
-		parameter.isNamePresent();
-		parameter.isVarArgs();
-		
-		
+//	    方法名：publicMethod    参数个数：1
+//	    构造器名：com.hzw.learn.springboot.javabase.reflect.ClassTest    参数个数：3
+//	    0    arg0    class java.lang.String    class java.lang.String    false    false
+//	    0    arg1    class java.lang.Integer    class java.lang.Integer    false    false
+//	    0    arg2    java.util.List<java.lang.String>    interface java.util.List    false    false
 		
 	}
 }
