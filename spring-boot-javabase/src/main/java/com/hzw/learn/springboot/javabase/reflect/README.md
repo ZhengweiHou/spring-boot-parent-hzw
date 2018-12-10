@@ -4,14 +4,17 @@
 但是程序中通过变量obj并不能直接调用起运行是类型中的相关方法;<br/>
 两个方案：1.强制类型转换 2.**反射**
 
-## 获取Class对象
+## 反射查看类信息
+
+### 获取Class对象
 
 1. Class对象的forName方法：`Class.forName("[全类名]")`
 2. 目标类的class属性：`Student.class`
 3. 目标类对象的getClass()方法：`new Student().getClass()`
 
-## 反射获取类信息
+### 反射获取类信息
 
+`Method`方法、`Constructor`构造器、`Field`成员变量<br/>
 Class类中的getxxx()和getDeclaredxxx()方法区别：
 
 1. getxxx()只获取public内容，getDeclaredxxx()获取所有内容；
@@ -26,7 +29,7 @@ Class类中的getxxx()和getDeclaredxxx()方法区别：
     > Returns an array of Field objects reflecting **all the fields** declared by the class or interface represented by this Class object. 
     This includes public, protected, default (package) access, and private fields, **but excludes inherited fields**.
 
-## 方法参数反射(Java 8 新增)
+### 方法参数反射(Java 8 新增)
 - `Executable`:Java8新增的抽象基类，其有两个子类如下
     * `Constructor`
     * `Method`
@@ -47,6 +50,18 @@ Parameter:代表方法或构造器的一个参数。
 > javac命令编译成的class文件默认不包含方法的形参名信息，调用`isNamePerm()`方法会返回false，调用`getName()`方法也得不到该参数的形参名。
 > 如果希望javac命令编译保留形参信息，那么需要指定命令参数`-parameters`。
 
+
+## 反射操作类
+程序可以，
+通过Method对象来执行方法，
+通过Constructor对象来调用构造器创建实例，
+通过Field对象操作成员变量
+### 创建对象
+1. `Class.newInstance()`调用默认构造器实例对象
+2. `Constructor.newInstance(Object... initargs)`通过构造器对象调用对应构造器实例对象
+> Class<ClassTest> clazz = ClassTest.class;
+> clazz.newInstance();
+> clazz.getConstructor(String.class).newInstance("呵呵");
 
 
 

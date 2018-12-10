@@ -19,8 +19,11 @@ implements InterfaceTest
 	public    String publicStr;
 	
 	// 构造器
-	private ClassTest() {}
-	public ClassTest(String str) {}
+
+	public ClassTest() {System.out.println("无参构造器输出！");}
+	private ClassTest(Integer inte) {}
+	public ClassTest(String str) {System.out.println("构造器输出：" + str);}
+	
 	public ClassTest(String strName, Integer intName, List<String> list) {}
 	
 	// 方法
