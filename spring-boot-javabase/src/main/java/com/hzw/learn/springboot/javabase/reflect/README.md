@@ -43,9 +43,9 @@ Parameter:代表方法或构造器的一个参数。
 > parameter.isNamePresent(); 返回类的class文件中是否包含了方法的形参名信息<br/>
 > parameter.isVarArgs(); 判断该参数是否为可变参数
 
-> 注：
->> javac命令编译成的class文件默认不包含方法的形参名信息，调用`isNamePerm()`方法会返回false，调用`getName()`方法也得不到该参数的形参名。
->> 如果希望javac命令编译保留形参信息，那么需要指定命令参数`-parameters`。
+> **注意：**<br/>
+> javac命令编译成的class文件默认不包含方法的形参名信息，调用`isNamePerm()`方法会返回false，调用`getName()`方法也得不到该参数的形参名。
+> 如果希望javac命令编译保留形参信息，那么需要指定命令参数`-parameters`。
 
 
 

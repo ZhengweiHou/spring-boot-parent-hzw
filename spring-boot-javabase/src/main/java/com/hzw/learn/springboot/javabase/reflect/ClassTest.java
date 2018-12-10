@@ -20,11 +20,12 @@ implements InterfaceTest
 	// 构造器
 	private ClassTest() {}
 	public ClassTest(String str) {}
+	public ClassTest(String strName, Integer intName) {}
 	
 	// 方法
 	private   String privateMethod()   {return "this is privateMethod";}
 	protected String protectedMethod() {return "this is protectedMethod";}
-	public    String publicMethod()    {return "this is publicMethod";}
+	public    String publicMethod(String str)    {return "this is publicMethod";}
 	
 	// 内部类
 	class InnerClass{}
