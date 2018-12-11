@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.javabase.reflect.proxy;
+package com.hzw.learn.springboot.javabase.reflect;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
@@ -6,7 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-public class ProxyTest {
+public class Proxy动态代理简单演示 {
 	public static void main(String[] args) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
 		// 创建InvocationHandler对象
 		InvocationHandler handler = new MyInvocationHandler();

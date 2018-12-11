@@ -172,7 +172,7 @@ interface Person {
 class MyInvocationHandler implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println("动态代理对象名：" + proxy.getClass().getSimpleName());
+        System.out.println("动态代理对象名：" + proxy.getClass().getName());
         System.out.println("执行方法名：" + method.getName());
         System.out.println("执行方法参数：" + args);
         return null;
@@ -180,8 +180,9 @@ class MyInvocationHandler implements InvocationHandler {
 }
 ```
 
+### 动态代理和AOP
 
-
+## 反射和泛型
 
 
 
