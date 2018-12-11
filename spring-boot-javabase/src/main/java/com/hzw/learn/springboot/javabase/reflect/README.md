@@ -263,10 +263,10 @@ class HzwClass{
 ```
 
 **输出内容：**
-is ParameterizedType:
-  true  false  true  false
-原始类型：interface java.util.Map
-泛型信息：
-class java.lang.String  false
+is ParameterizedType:<br/>
+  true  false  true  false<br/>
+原始类型：interface java.util.Map<br/>
+泛型信息：<br/>
+class java.lang.String  false<br/>
 java.util.Map<java.lang.String, java.lang.Integer>  true
- */
+
