@@ -187,6 +187,7 @@ class MyInvocationHandler implements InvocationHandler {
 JDK5以后，Class类增加了泛型功能，以限制Class类，例如，String.class的类型，实际上是Class<String>。
 如果Class对应的类暂时未知，则使用Class<?>。
 使用Class<T>泛型可以避免强制类型转换，如下案例：
+
 **使用泛型改造数组实例化方法**
 ```
 class HzwArray{
