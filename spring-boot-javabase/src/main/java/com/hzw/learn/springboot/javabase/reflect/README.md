@@ -204,6 +204,69 @@ String[] array1 = (String[])Array.newInstance(String.class, 5);
 String[] array2 = HzwArray.newInstance(String.class, 5);
 ```
 
+### Field（属性类）和Parameter（参数类）获取泛型信息
+#### 参数化类型 ParameterizedType
+ParameterizedType是Type的子类，可以通过该类对象获取到类型中的泛型信息
 
+- Type ParameterizedType.getRawType()<br/>
+获取原始类型,返回 Type
+- Type[] ParameterizedType.getActualTypeArguments<br/>
+获取参数化类型的泛型参数数组,返回Type[]
 
+#### 获取泛型类型
+`Type = Field.getGenericType()`<br/>
+获取属性类的类型对象（Type），**当属性类携带泛型时，此方法返回的Type可强转成ParameterizedType**，否则强转会异常。
 
+`Type Parameter.getParameterizedType()`
+获取参数类的类型对象（Type），**当参数类携带泛型时，此方法返回的Type可强转成ParameterizedType**，否则强转会异常。
+
+#### 反射获取泛型信息案例代码
+
+**案例代码：**
+```
+public class Field和Parameter获取泛型信息 {
+    public static void main(String[] args) throws Exception {
+        Field field1 = HzwClass.class.getField("arg1");
+        Field field2 = HzwClass.class.getField("arg2");
+        Parameter param1 = (Parameter) Array.get(HzwClass.class.getMethod("methodTest", Map.class, String.class).getParameters(), 0);
+        Parameter param2 = (Parameter) Array.get(HzwClass.class.getMethod("methodTest", Map.class, String.class).getParameters(), 1);
+        
+        Type ft1 = field1.getGenericType();
+        Type ft2 = field2.getGenericType();
+        Type pt1 = param1.getParameterizedType();
+        Type pt2 = param2.getParameterizedType();
+        
+        System.out.println("is ParameterizedType:\n"
+            + "  " + (ft1 instanceof ParameterizedType) // true
+            + "  " + (ft2 instanceof ParameterizedType) // false
+            + "  " + (pt1 instanceof ParameterizedType) // true
+            + "  " + (pt2 instanceof ParameterizedType) // false
+        );
+        
+        ParameterizedType ppt = (ParameterizedType)pt1;
+        Type rawType = ppt.getRawType();
+        Type[] arguments = ppt.getActualTypeArguments();
+        System.out.println("原始类型：" + rawType);
+        System.out.println("泛型信息：");
+        Arrays.asList(arguments).stream().forEach(type -> {
+            System.out.print(type + "  ");
+            System.out.println(type instanceof ParameterizedType);
+        });
+    }
+}
+
+class HzwClass{
+    public Map<String, String> arg1;
+    public String arg2;
+    public void methodTest(Map<String, Map<String,Integer>> arg1, String arg2) {};
+}
+```
+
+**输出内容：**
+is ParameterizedType:
+  true  false  true  false
+原始类型：interface java.util.Map
+泛型信息：
+class java.lang.String  false
+java.util.Map<java.lang.String, java.lang.Integer>  true
+ */
