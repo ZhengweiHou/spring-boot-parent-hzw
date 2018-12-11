@@ -184,7 +184,9 @@ class MyInvocationHandler implements InvocationHandler {
 
 ## 反射和泛型
 ### 泛型和Class类
-
+JDK5以后，Class类增加了泛型功能，以限制Class类，例如，String.class的类型，实际上是Class<String>。
+如果Class对应的类暂时未知，则使用Class<?>。
+使用Class<T>泛型可以避免强制类型转换，如下案例：
 **使用泛型改造数组实例化方法**
 ```
 class HzwArray{
@@ -193,7 +195,7 @@ class HzwArray{
     }
 }
 ```
-**使用时的区别**
+**使用时可以避免强制类型转换**
 ```
 // 通过反射创建String数组
 String[] array1 = (String[])Array.newInstance(String.class, 5);
