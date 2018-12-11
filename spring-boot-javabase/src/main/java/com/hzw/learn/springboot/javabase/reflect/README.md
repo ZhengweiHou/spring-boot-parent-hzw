@@ -106,5 +106,83 @@ field.set(classTest, "hzw");
 ```
 
 ### 操作数组
+数组操作反射关键类：<br/>
+**java.lang.reflect.Array**
+示例：
+```
+Object arrayTest = Array.newInstance(String.class, 2);
+Array.set(arrayTest, 0, "hhh");
+Array.set(arrayTest, 1, "zzz");
+System.out.println(""
+    + "   0:" + Array.get(arrayTest, 0)
+    + "   1:" + Array.get(arrayTest, 1)
+);
+```
+
+## 动态代理:Proxy 和 InvocationHandler
+### Proxy
+Proxy是所有动态代理类的父类，他可以为程序中一个或多个接口动态的生成实现类。<br/>
+
+1. 创建动态代理类<br/>
+`static Class<?> getProxyClass(ClassLoader loader, Class<?>... inrerfaces)`:<br/>
+创建一个动态代理类所对应的Class对象，该代理类将实现interface所指定的多个接口。第一个ClassLoader参数指定生成动态代理类的类加载器；
+2. 创建动态代理实例<br/>
+`static Object newProxyInstance(ClassLoader loader, Class<?>[] interfaces, InvocationHandler h)`:<br/>
+直接创建一个动态代理对象，该代理对象的实现类实现了interface指定的系列接口，执行代理对象的每个方法时都会被替换执行**InvocationHandler**对象的invoke方法。
+
+### InvocationHandler
+InvocationHandler由代理对象的调用处理程序实现的接口，代理对象执行方法时，会替换成调用InvocationHandler对象的invoke方法。<br/>
+invoke()方法签名：`Object invoke(Object proxy, Method method, Object[] args)`<br/>
+参数解释：
+
+- proxy: 动态代理对象
+- methd: 正在执行的方法
+- args: 正在执行方法的传入的实参
+
+### 简单示例
+```
+public class ProxyTest {
+    public static void main(String[] args) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
+        // 创建InvocationHandler对象
+        InvocationHandler handler = new MyInvocationHandler();
+        // 使用制定的InvocationHandler生成一个动态代理对象
+        // Class<?> proxyClass = Proxy.getProxyClass(Person.class.getClassLoader(), new Class[] {Person.class});
+        // System.out.println(proxyClass.getName());
+        // Constructor<?> ctor = proxyClass.getConstructor(InvocationHandler.class);
+        // Object temp = ctor.newInstance(handler);
+        // 下行为简化写法
+        Object temp = Proxy.newProxyInstance(Person.class.getClassLoader(), new Class[]{Person.class} , handler);
+        // 方法调用方式-反射
+        Method walkMethod = Person.class.getMethod("walk");
+        walkMethod.invoke(temp);
+        Method sayHelloMethod = Person.class.getMethod("sayHello", String.class);
+        sayHelloMethod.invoke(temp,"HZW");
+        // 方法调用方式-代理对象调用
+        Person p = (Person)temp;
+        p.walk();
+        p.sayHello("hzw");
+    }
+}
+
+interface Person {
+    void walk();
+    void sayHello(String name);
+}
+
+class MyInvocationHandler implements InvocationHandler {
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        System.out.println("动态代理对象名：" + proxy.getClass().getSimpleName());
+        System.out.println("执行方法名：" + method.getName());
+        System.out.println("执行方法参数：" + args);
+        return null;
+    }
+}
+```
+
+
+
+
+
 
 
