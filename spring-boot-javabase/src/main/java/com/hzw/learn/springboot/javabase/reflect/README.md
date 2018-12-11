@@ -228,8 +228,10 @@ public class Field和Parameter获取泛型信息 {
     public static void main(String[] args) throws Exception {
         Field field1 = HzwClass.class.getField("arg1");
         Field field2 = HzwClass.class.getField("arg2");
-        Parameter param1 = (Parameter) Array.get(HzwClass.class.getMethod("methodTest", Map.class, String.class).getParameters(), 0);
-        Parameter param2 = (Parameter) Array.get(HzwClass.class.getMethod("methodTest", Map.class, String.class).getParameters(), 1);
+        Parameter param1 = 
+            (Parameter) Array.get(HzwClass.class.getMethod("methodTest", Map.class, String.class).getParameters(), 0);
+        Parameter param2 = 
+            (Parameter) Array.get(HzwClass.class.getMethod("methodTest", Map.class, String.class).getParameters(), 1);
         
         Type ft1 = field1.getGenericType();
         Type ft2 = field2.getGenericType();
@@ -262,7 +264,7 @@ class HzwClass{
 }
 ```
 
-**输出内容：**
+**输出内容：**<br/>
 is ParameterizedType:<br/>
   true  false  true  false<br/>
 原始类型：interface java.util.Map<br/>
