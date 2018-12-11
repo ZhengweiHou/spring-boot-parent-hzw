@@ -67,16 +67,17 @@ public class 从Class中获取信息 {
 				+ "    构造器名：" + cons.getName()
 				+ "    参数个数：" + cons.getParameterCount()
 		);
-		// 方法形参数组
+		// 方法形参对象Parameter
 		Parameter[] ps = cons.getParameters();
 		
 		Arrays.asList(ps).stream().forEach(paramet -> {
+			
 			// 获取参数信息
 			System.out.println(""
 				+ "    " + paramet.getModifiers()
 //				+ "    " + Modifier.toString(paramet.getModifiers())
 				+ "    " + paramet.getName()
-				+ "    " + paramet.getParameterizedType()
+				+ "    " + paramet.getParameterizedType() // 获取携带泛型的类型
 				+ "    " + paramet.getType()
 				+ "    " + paramet.isNamePresent()
 				+ "    " + paramet.isVarArgs()
