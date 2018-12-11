@@ -185,15 +185,16 @@ class MyInvocationHandler implements InvocationHandler {
 ## 反射和泛型
 ### 泛型和Class类
 
-```
 **使用泛型改造数组实例化方法**
+```
 class HzwArray{
     public static <T> T[] newInstance(Class<T> clazz, int length) {
         return (T[]) Array.newInstance(clazz, length);
     }
 }
-
+```
 **使用时的区别**
+```
 // 通过反射创建String数组
 String[] array1 = (String[])Array.newInstance(String.class, 5);
 // 使用泛型，避免使用时的强制类型转换
