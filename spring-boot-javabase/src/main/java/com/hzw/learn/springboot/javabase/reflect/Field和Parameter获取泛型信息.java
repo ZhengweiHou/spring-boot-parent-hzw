@@ -36,7 +36,6 @@ public class Field和Parameter获取泛型信息 {
 			System.out.print(type + "  ");
 			System.out.println(type instanceof ParameterizedType);
 		});
-		
 	}
 	
 /*

@@ -1,0 +1,2 @@
+server:  port: 8081  application:    name: spring-boot-springbootbase-test
+hzwenv:  hzwmaps:    a: A    applicationName: ${server.application.name}    random_str: ${random.value}    random_int: ${random.int}    random_long: ${random.long}    random_int10: ${random.ing(10)}    random_int1-200: ${random.ing[1,100]}
