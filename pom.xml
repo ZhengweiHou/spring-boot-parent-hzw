@@ -36,6 +36,7 @@
     <module>spring-boot-logback</module>
     <module>spring-boot-javabase</module>
     <module>spring-boot-springbootbase</module>
+    <module>spring-boot-mina</module>
   </modules>
   
   <dependencyManagement>
