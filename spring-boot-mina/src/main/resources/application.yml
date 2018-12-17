@@ -1,0 +1,1 @@
+server:  port: 8080spring:   application:    name: spring-boot-mina-hzw
