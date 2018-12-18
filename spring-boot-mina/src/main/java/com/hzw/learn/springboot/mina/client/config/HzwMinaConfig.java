@@ -11,7 +11,11 @@ import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.serialization.ObjectSerializationCodecFactory;
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,13 +23,13 @@ import com.hzw.learn.springboot.mina.client.config.ext.HzwIoHandler;
 import com.hzw.learn.springboot.mina.client.config.ext.HzwSocketConnectionFactory;
 
 @Configuration
+@EnableConfigurationProperties(HzwMinaProperties.class)
 public class HzwMinaConfig {
-	@Value("${hzwmina.socketHostName?:localhost}")
-	String hostName;
-	@Value("${hzwmina.socketPort?:8081}")
-	Integer port;
-	@Value("${hzwmina.connectTimeoutInMillis?:5000}")
-	Long connectTimeoutInMillis;
+	
+	Logger log = LoggerFactory.getLogger("【CONFIG】");
+	
+	@Autowired
+	HzwMinaProperties properties;
 	
 	@Bean
 	public HzwSocketClient socketClient() throws Exception {
@@ -38,9 +42,9 @@ public class HzwMinaConfig {
 	public GenericObjectPool<IoSession> connectionPool() throws Exception {
 		GenericObjectPool<IoSession> connectionPool = 
 				new GenericObjectPool<IoSession>(connectionFactory());
-		connectionPool.setMaxActive(10);
-		connectionPool.setMaxIdle(10);
-		connectionPool.setMinIdle(5);
+		connectionPool.setMaxActive(properties.getMaxActive());
+		connectionPool.setMaxIdle(properties.getMaxIdle());
+		connectionPool.setMinIdle(properties.getMinIdle());
 		return connectionPool;
 	}
 
@@ -62,17 +66,17 @@ public class HzwMinaConfig {
 //		connector.getFilterChain().addAfter(baseName, name, filter);
 //		connector.getFilterChain().addBefore(baseName, name, filter);
 		
-		System.out.println("服务端地址配置：" + hostName + ":" + port);
-		connector.setDefaultRemoteAddress(new InetSocketAddress(hostName, port));
+		log.info("连接：{}：{}", properties.getHostName(), properties.getPort());
+		connector.setDefaultRemoteAddress(new InetSocketAddress(properties.getHostName(), properties.getPort()));
 
 		connector.setHandler(ioHandler());
 //		connector.setHandler(ServerHandler.getInstances());
 
 		// 连接超时时间 单位：毫秒
-		connector.setConnectTimeoutMillis(connectTimeoutInMillis);
+		connector.setConnectTimeoutMillis(properties.getConnectTimeoutInMillis());
 		
 		// 闲置超时时间 单位：s
-		connector.getSessionConfig().setBothIdleTime(2);
+		connector.getSessionConfig().setBothIdleTime(properties.getBothIdleTime());
 		return connector;
 	}
 

@@ -21,7 +21,7 @@ public class MainServer {
     private static MainServer mainServer = null;     
     private SocketAcceptor acceptor = new NioSocketAcceptor();     
     private DefaultIoFilterChainBuilder chain = acceptor.getFilterChain();     
-    private int bindPort = 8081;     
+    private int bindPort = 8500;     
     
     
     public static MainServer getInstances() {     
@@ -38,6 +38,8 @@ public class MainServer {
 //        acceptor.setHandler(new HzwIoHandler());
         try {
         	InetSocketAddress socketAddress = new InetSocketAddress(bindPort);
+
+//        	InetSocketAddress socketAddress = new InetSocketAddress("localhost", bindPort);
         	System.out.println("监听：" + socketAddress.getHostName() + ":" + socketAddress.getPort());
             acceptor.bind(socketAddress);     
         } catch (IOException e) {     

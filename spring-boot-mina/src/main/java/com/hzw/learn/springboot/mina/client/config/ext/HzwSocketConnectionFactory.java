@@ -21,11 +21,11 @@ public class HzwSocketConnectionFactory extends BasePoolableObjectFactory<IoSess
 		
 //		ConnectFuture connect = connector.connect(new InetSocketAddress("localhost", 8081));
 		ConnectFuture connect = connector.connect();
-		System.out.println("111");
+//		System.out.println("111");
 		connect = connect.awaitUninterruptibly();
-		System.out.println("222");
+//		System.out.println("222");
 		IoSession session = connect.getSession();
-		System.out.println("333");
+//		System.out.println("333");
 		return session;
 		
 	}
