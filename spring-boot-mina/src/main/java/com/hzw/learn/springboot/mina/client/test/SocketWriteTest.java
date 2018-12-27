@@ -16,7 +16,7 @@ import com.hzw.learn.springboot.mina.client.config.HzwSocketClient;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = {ClientApplication.class})
 public class SocketWriteTest {
-	Logger log = LoggerFactory.getLogger("【TEST】");
+	Logger log = LoggerFactory.getLogger("TEST");
 	
 	@Autowired
 	HzwSocketClient client;
@@ -28,6 +28,7 @@ public class SocketWriteTest {
 		Scanner scan = new Scanner(System.in);
 		while(true) {
 			String str = scan.nextLine();
+//			int str = scan.nextInt();
 			System.out.println(">>>>>>>>>>>" + str);
 			if("exit".equals(str)) {
 				break;

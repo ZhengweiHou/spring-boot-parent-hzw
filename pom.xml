@@ -37,6 +37,7 @@
     <module>spring-boot-javabase</module>
     <module>spring-boot-springbootbase</module>
     <module>spring-boot-mina</module>
+    <module>spring-boot-jvm</module>
   </modules>
   
   <dependencyManagement>

@@ -26,7 +26,7 @@ import com.hzw.learn.springboot.mina.client.config.ext.HzwSocketConnectionFactor
 @EnableConfigurationProperties(HzwMinaProperties.class)
 public class HzwMinaConfig {
 	
-	Logger log = LoggerFactory.getLogger("【CONFIG】");
+	Logger log = LoggerFactory.getLogger("CONFIG");
 	
 	@Autowired
 	HzwMinaProperties properties;
