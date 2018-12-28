@@ -24,8 +24,8 @@ public class StackAllocation {
 		 User对象的作用域不会逃逸出test方法，当启用逃逸分析，标量替换优化会在栈上分配对象，而不会生成 User对象，减低GC的压力
 		 */
 		User usr = new User(age);
-		int age2 = usr.getAge();
-		return age2;
+//		int age2 = usr.getAge();
+		return usr.getAge();
 	}
 }
 

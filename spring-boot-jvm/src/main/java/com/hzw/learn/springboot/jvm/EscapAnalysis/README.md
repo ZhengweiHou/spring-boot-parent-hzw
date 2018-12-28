@@ -64,6 +64,81 @@
 
 
 
+### 案例演示
+
+- 示例代码
+
+```
+
+public static int test(int age) {
+
+    User usr = new User(age);
+
+    return usr.getAge()
+
+}
+
+```
+
+说明： User对象的作用域不会逃逸出test方法，当启用逃逸分析，标量替换优化会在栈上分配对象，而不会生成 User对象，减低GC的压力
+
+```
+
+// 通过方法调用创建2000000个该方法内对象
+
+for(int i=0 ; i <2000000 ; i++) {
+
+    test(i);
+
+  }
+
+```
+
+- 差异对比
+
+    1. 关闭逃逸分析
+
+        jvm参数：`-Xmx3G -Xmn2G -server -XX:-DoEscapeAnalysis`
+
+        效果：
+
+        ```
+
+        houzw@sirius:~$ jps -v
+
+        26232 StackAllocation -Xmx3G -Xmn2G -XX:+DoEscapeAnalysis -Dfile.encoding=UTF-8
+
+        26204 StackAllocation -Xmx3G -Xmn2G -XX:-DoEscapeAnalysis -Dfile.encoding=UTF-8
+
+        houzw@sirius:~$ jmap -histo 26204 | grep User
+
+       5: 2000000 32000000 com.hzw.learn.springboot.jvm.EscapAnalysis.User
+
+        ```
+
+        **User对象一个不少的分配在堆中**
+
+    2. 开启逃逸分析
+
+        jvm参数：`-Xmx3G -Xmn2G -server -XX:+DoEscapeAnalysis`
+
+        效果：
+
+        ```
+
+        houzw@sirius:~$ jps -v
+
+        26232 StackAllocation -Xmx3G -Xmn2G -XX:+DoEscapeAnalysis -Dfile.encoding=UTF-8
+
+        26204 StackAllocation -Xmx3G -Xmn2G -XX:-DoEscapeAnalysis -Dfile.encoding=UTF-8
+
+        houzw@sirius:~$ jmap -histo 26232 | grep User
+        5: 58974 943584  com.hzw.learn.springboot.jvm.EscapAnalysis.User
+
+        ```
+
+        **逃逸分析开启后，大部分对象被进行标量替换优化了**
+
 ### 其他资料
 
 [浅谈HotSpot逃逸分析](https://www.jianshu.com/p/20bd2e9b1f03) - 简书|占小狼
