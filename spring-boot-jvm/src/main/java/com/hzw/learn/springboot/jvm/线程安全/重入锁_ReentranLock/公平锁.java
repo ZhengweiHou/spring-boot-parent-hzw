@@ -44,12 +44,14 @@ class FairLock implements Runnable {
 		while (true) {
 			try {
 				lock.lock();
-				log.info("获取锁");
+//				lock.lock(); // 拥有锁的线程，多次加锁，可重入，计数器累加
+				log.info("获取锁,计数器:{}",lock.getHoldCount());
 				Thread.sleep(1000l);
 			} catch (InterruptedException e) {;
 			}finally {
 				log.info("解锁");
 				lock.unlock();
+//				lock.unlock(); // 多次加锁，需要多次解锁，将计数器降为0以解锁
 			}
 		}
 	}
