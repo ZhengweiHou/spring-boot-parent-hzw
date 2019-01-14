@@ -101,7 +101,8 @@ public ReentrantLock(boolean fair) { // 构造器
 - 锁绑定多个条件（配合Conditiond使用）???
 
 案例代码：[ReentrantLock绑定多Condition.java](https://github.com/ZhengweiHou/spring-boot-parent-hzw/blob/master/spring-boot-jvm/src/main/java/com/hzw/learn/springboot/jvm/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/%E9%87%8D%E5%85%A5%E9%94%81_ReentranLock/ReentrantLock%E7%BB%91%E5%AE%9A%E5%A4%9ACondition.java)
-    一个ReentrantLock对象可以同时绑定多个Conditond对象    
+
+一个ReentrantLock对象可以同时绑定多个Conditond对象    
     `Condition condition = lock.newCondition()`
 
 [重入锁：ReentrantLock详解](https://blog.csdn.net/Somhu/article/details/78874634) - Somhu|csdn
