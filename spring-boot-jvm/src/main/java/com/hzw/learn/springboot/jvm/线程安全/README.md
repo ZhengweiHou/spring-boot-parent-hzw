@@ -160,8 +160,8 @@ class AutoicTest implements Runnable{
 
 ```
  >测试结果
- >O_race = 195109
- >A_race = 200000
+ O_race = 195109
+ A_race = 200000
 
 使用AtomicInteger代替int后，程序输出了正确的结果，其得益于incrementAndGet()方法的原子性
 Java8该方法的实现如下：
