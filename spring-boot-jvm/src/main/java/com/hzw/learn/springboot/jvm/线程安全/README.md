@@ -130,7 +130,7 @@ JDK1.5之后，Java程序支持使用CAS操作，由sun.misc.Unsafe类的compare
     }
 ```
 案例代码：
-```
+```java
  public static void main(String[] args){
   int COUNT = 20;
   for(int i = 0 ; i < COUNT ; i++) {
