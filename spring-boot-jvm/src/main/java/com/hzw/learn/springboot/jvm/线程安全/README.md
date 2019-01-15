@@ -155,10 +155,9 @@ class AutoicTest implements Runnable{
  public static AtomicInteger race = new AtomicInteger(0);
  @Override
  public void run() {
-  for(int i = 0; i < 10000 ; i++) {     race.incrementAndGet(); // 类似于++race    }
+  for(int i = 0; i < 10000 ; i++) {     race.incrementAndGet();   } // 类似于++race  
  }
 }
-
 ```
  >测试结果<br/>
  O_race = 195109<br/>
