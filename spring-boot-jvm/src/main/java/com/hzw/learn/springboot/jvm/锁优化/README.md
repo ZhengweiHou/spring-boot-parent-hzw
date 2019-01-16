@@ -48,36 +48,16 @@ public String test(String s1, String s2, String s3){
 ### 4. 轻量级锁
 
 ### 5. 偏向锁
+<center>**HotSpot虚拟机对象头**</center>
+<center>
 
+|存储内容|标志位|状态|
+| :- | :--: | :- |
+|对象哈希码、对象分代年龄 | 01 | 未锁定 |
+||1111111111111111111||
 
-### LaTeX 公式
+</center>
 
-可以创建行内公式，例如 $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$。或者块级公式：
-
-$$	x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
-
-### 表格
-| Item      |    Value | Qty  |
-| :-------- | --------:| :--: |
-| Computer  | 1600 USD |  5   |
-| Phone     |   12 USD |  12  |
-| Pipe      |    1 USD | 234  |
-
-### 流程图
-
-
-
-
-```flow
-st=>start: Start
-e=>end
-op=>operation: My Operation
-cond=>condition: Yes or No?
-
-st->op->cond
-cond(yes)->e
-cond(no)->op
-```
 
 
 
