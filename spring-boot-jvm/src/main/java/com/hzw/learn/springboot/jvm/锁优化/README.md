@@ -1,0 +1,83 @@
+## 锁优化
+适应性自旋（Adaptive Spinning）、锁消除（Lock Enmination）、锁粗化（Lock Coarsening）、轻量级锁（Lightweight Locking）、偏向锁（Biased Locking）
+### 1. 自旋锁和自适应自旋
+自旋锁在JDK 1.4.2中引入，默认关闭，在JDK1.6中改为默认开启；
+多核心处理器允许两个及以上线程同时并行执行，当多线程请求锁时，让后请求的线程执行一个忙循环（自旋）以等待锁，而不放弃处理器执行时间，线程不挂起，避免了线程挂起、恢复操作中的用户态向内核态转化带来较多的处理器时间消耗；
+
+####Jvm参数
+
+* 开启自旋
+	`-XX:+UseSpinning`
+* 自旋次数
+	`-XX:PreBlockSpin`
+	自旋次数默认值为10，可以使用该参数修改
+
+####自旋锁不能替代阻塞
+若自旋时间过长，那么自旋的线程会白白浪费大量的处理器时间，因此自旋的时间需要限制，当超过限制次数，那么该线程应当挂起以释放处理器。
+
+####自适应自旋
+JDK1.6引入了自适应自旋锁，自旋的时间限制由上一次该锁上的自旋时间和锁拥有者的状态来决定;
+若该锁当前拥有者成功通过自旋等待获取了锁并正在持锁运行，那么允许当前自旋等待时间能够持续更长时间。但若该锁自旋很少成功，那么后续该锁的获取将省略自旋过程。
+随着程序运行和性能监控信息的完善，虚拟机对锁的状况预测会越来越准确。
+
+### 2. 锁消除
+对一些代码上要求同步的资源，但通过**逃逸分析**确定该资源不存在竞争，虚拟机即时编译器在运行时会对这些同步措施进行消除。
+**注意：**javac编译器会对代码进行优化，没有写同步措施的代码往往编译后会被加入同步逻辑，因此同步代码在java程序中往往比较普遍，锁消除策略对性能提升就很有必要了。
+例如：
+```java
+public String test(String s1, String s2, String s3){
+	return s1+s2+s3;
+}
+```
+编译后
+```java
+public String test(String s1, String s2, String s3){
+	StringBuffer  sb = new StringBuffer();	// 1.5之前
+	// StringBuilder sb = new StringBuilder();	// 1.5之后
+	sb.append(s1);
+	sb.append(s2);
+	sb.append(s3);
+	return sb.toString();
+}
+
+```
+上例中sb对象没有逃逸出方法，当开启逃逸分析后，此处StringBuffer对象sb中的锁就会被安全的消除。
+
+### 3. 锁粗化
+虚拟机探测到一串零碎的操作都对统一个对象加锁，将会把加锁同步的范围扩展（**粗化**）到整个操作串的外部，以减少细粒度的频繁加锁操作。
+### 4. 轻量级锁
+
+### 5. 偏向锁
+
+
+### LaTeX 公式
+
+可以创建行内公式，例如 $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$。或者块级公式：
+
+$$	x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
+
+### 表格
+| Item      |    Value | Qty  |
+| :-------- | --------:| :--: |
+| Computer  | 1600 USD |  5   |
+| Phone     |   12 USD |  12  |
+| Pipe      |    1 USD | 234  |
+
+### 流程图
+
+
+
+
+```flow
+st=>start: Start
+e=>end
+op=>operation: My Operation
+cond=>condition: Yes or No?
+
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
+
+
+
