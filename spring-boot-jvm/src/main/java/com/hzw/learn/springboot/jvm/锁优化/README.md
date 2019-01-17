@@ -70,12 +70,12 @@ public String test(String s1, String s2, String s3){
 #### 加锁
 代码进入同步块时，判断同步对象是否被锁定（标志位是否为01），若未锁定则进行加锁操作：
 
->1.线程栈帧中建立锁记录（Lock Record）空间；
->2.拷贝锁对象的Mark Word到Lock Record中为 Displaced Mark Work；
->3.使用CAS操作将Mark Word更新为指向Lock Record的指针；
->>3.1 若更新成功则当前线程获得该对象锁，更新Mark Word的锁标志为00（轻量级锁标志）
->>3.2 若更新失败，检查Mark Word是否指向当前线程栈帧，
->>>3.2.1 若是则获得锁成功同步块继续执行；
+>1.线程栈帧中建立锁记录（Lock Record）空间；<br/>
+>2.拷贝锁对象的Mark Word到Lock Record中为 Displaced Mark Work；<br/>
+>3.使用CAS操作将Mark Word更新为指向Lock Record的指针；<br/>
+>>3.1 若更新成功则当前线程获得该对象锁，更新Mark Word的锁标志为00（轻量级锁标志）<br/>
+>>3.2 若更新失败，检查Mark Word是否指向当前线程栈帧，<br/>
+>>>3.2.1 若是则获得锁成功同步块继续执行；<br/>
 >>>3.2.2 若不是则说明该锁已被其他线程占用，那轻量级锁需要膨胀为重量级锁，锁标志改为10，Mark Word中存储指向重量级锁（互斥量）的指针，后续等待锁的线程也都要进入阻塞状态。
 #### 解锁
 若Mark Word仍指向向Lock Record，那么使用CAS将Mark Word和Lock Record中的Displaced Mark Word替换，若果成功则整个过程完成，若失败则说明有其他线程尝试过获取该锁，那么在释放锁的同时要唤醒被挂起的线程。
