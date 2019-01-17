@@ -87,14 +87,12 @@ public String test(String s1, String s2, String s3){
 
 偏向锁策略可以提高有同步但无竞争的程序性能，若果程序中大多数锁都是被多个线程访问，那禁用偏向锁反而可以提升性能。
 
-####**偏向锁机制通过虚拟机参数控制：**
+#### 偏向锁机制通过虚拟机参数控制：
 `-XX:+UseBiaseLocking` (开启，1.6默认开启)
 `-XX:-UseBiaseLocking` (关闭)
 
-
-
-<center>**偏向锁、轻量级锁的状态转化及对象MarkWord的关系**
+#### 偏向锁、轻量级锁的状态转化及对象MarkWord的关系
 ![1](https://raw.githubusercontent.com/ZhengweiHou/spring-boot-parent-hzw/master/spring-boot-jvm/src/main/resources/docs/偏向锁、轻量级锁的状态转化及对象MarkWord的关系.png)
-</center>
+
 
 
