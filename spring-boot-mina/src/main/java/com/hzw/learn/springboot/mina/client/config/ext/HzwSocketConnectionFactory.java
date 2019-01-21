@@ -30,8 +30,8 @@ public class HzwSocketConnectionFactory extends BasePoolableObjectFactory<IoSess
 		if(session != null) {
 			session.closeNow();
 		}
-
 		log.info("销毁，sessionId:{}", session == null ? null : session.getId());
+		super.destroyObject(session);
 	}
 
 	@Override

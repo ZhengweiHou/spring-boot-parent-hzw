@@ -32,8 +32,15 @@ public class HzwMinaConfig {
 	HzwMinaProperties properties;
 	
 	@Bean
-	public HzwSocketClient socketClient() throws Exception {
-		HzwSocketClient socketClient = new HzwSocketClient();
+	public HzwSocketClientLong longSocketClient() throws Exception {
+		HzwSocketClientLong socketClient = new HzwSocketClientLong();
+		socketClient.setPool(connectionPool());
+		return socketClient;
+	}
+	
+	@Bean
+	public HzwSocketClientShort shortSocketClient() throws Exception {
+		HzwSocketClientShort socketClient = new HzwSocketClientShort();
 		socketClient.setPool(connectionPool());
 		return socketClient;
 	}

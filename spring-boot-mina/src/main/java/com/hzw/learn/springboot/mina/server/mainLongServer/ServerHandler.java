@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.mina.server;
+package com.hzw.learn.springboot.mina.server.mainLongServer;
 
 import org.apache.mina.core.filterchain.IoFilterAdapter;
 import org.apache.mina.core.service.IoHandler;
