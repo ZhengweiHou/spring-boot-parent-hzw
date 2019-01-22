@@ -2,6 +2,11 @@ package com.hzw.learn.springboot.jvm.线程安全;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Atomicxxxx 原子变量
+ * @author houzw
+ *
+ */
 public class 使用CAS指令封装的非阻塞同步 {
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		int COUNT = 20;
