@@ -20,7 +20,7 @@ public class C1Main {
 //			String str = scan.nextLine();
 			long sLong = scan.nextLong();
 			System.out.println(">>C1>>>>>>>>>" + sLong);
-
+			
 			new Thread(() -> {
 				NioSocketConnector connector = C1.getConnector();
 

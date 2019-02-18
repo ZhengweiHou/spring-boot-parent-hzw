@@ -2,6 +2,7 @@ package com.hzw.learn.springboot.mina.scin1.sc2.c2;
 
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.apache.mina.core.future.CloseFuture;
 import org.apache.mina.core.future.ConnectFuture;
 import org.apache.mina.core.future.WriteFuture;
 import org.apache.mina.core.session.IoSession;
@@ -22,8 +23,27 @@ public class C2Client {
 		log.info("SessionId[{}]发送内容[{}]", session.getId(), message);
 
 		WriteFuture f = session.write(message);
+		
+		if(!session.isClosing()) {
+			try {
+				Thread.sleep(50l);
+			} catch (InterruptedException e) {
+			}
+		}
+		
+		CloseFuture closeFuture = session.getCloseFuture();
+		
+//		if(!closeFuture.isClosed()) {
+//			try {
+//				Thread.sleep(50l);
+//			} catch (InterruptedException e) {
+//			}
+//		}
+		
+		closeFuture.awaitUninterruptibly();
+		
+		
 		session.getCloseFuture().awaitUninterruptibly();
-
 		Object result = session.getAttribute("MESSAGE");
 		log.info("服务端返回：{}", result);
 		return result;
