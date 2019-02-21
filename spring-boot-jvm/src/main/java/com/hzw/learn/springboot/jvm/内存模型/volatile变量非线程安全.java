@@ -24,3 +24,5 @@ public class volatile变量非线程安全 {
 		System.out.println(race);
 	}
 }
+
+
