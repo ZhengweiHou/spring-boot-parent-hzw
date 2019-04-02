@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.hzw.learn.springboot.mina.scin1.sc2.c2.C2Client;
+import com.hzw.learn.springboot.mina.scin1.sc2.c2.C2Client2;
 import com.hzw.learn.springboot.mina.scin1.zother.HzwAbstractIoHandler;
 
 public class S2Handler extends HzwAbstractIoHandler {
@@ -13,7 +14,8 @@ public class S2Handler extends HzwAbstractIoHandler {
 	@Override
 	public void messageReceived(IoSession session, Object message) throws Exception {
 		super.messageReceived(session, message);
-		Object result = new C2Client().write(message);
+//		Object result = new C2Client().write(message);
+		Object result = new C2Client2().write(message);
 //		Object result = new C2Client().writeSyn(message);
 		session.write(result);
 		session.close(false);
@@ -33,5 +35,9 @@ public class S2Handler extends HzwAbstractIoHandler {
 		// 超过一定时间没有响应的时候关闭连接
 		log.warn("对方没有响应，等待超时，关闭连接");
 		session.close(false);
+	}
+	@Override
+	public String inOrOut() {
+		return "server";
 	}
 }

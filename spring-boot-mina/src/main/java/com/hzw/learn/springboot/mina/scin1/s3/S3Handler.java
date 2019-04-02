@@ -15,7 +15,7 @@ public class S3Handler extends HzwAbstractIoHandler {
 		super.messageReceived(session, message);
 		String mstr = (String)message;
 		Long sLong = Long.parseLong(mstr.split("==")[0]);
-		Thread.sleep(sLong);
+//		Thread.sleep(sLong);
 		session.write("Hello boy, 服务端已接收到信息!");
 		session.close(false);
 	}
@@ -34,5 +34,10 @@ public class S3Handler extends HzwAbstractIoHandler {
 		// 超过一定时间没有响应的时候关闭连接
 		log.warn("对方没有响应，等待超时，关闭连接");
 		session.close(false);
+	}
+	
+	@Override
+	public String inOrOut() {
+		return "server";
 	}
 }

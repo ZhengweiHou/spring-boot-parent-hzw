@@ -10,16 +10,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class C2 {
-	Logger log = LoggerFactory.getLogger("C2");
+	static Logger log = LoggerFactory.getLogger("C2");
 	
-	private int bindPort = 8503;
-	private long timeout = 10000;
-	private int idleTime = 2000;
+	private static int bindPort = 8503;
+	private static long timeout = 10000;
+	private static int idleTime = 2000;
 	
 	private static NioSocketConnector connector = null;
 	
-	private C2() {
-		connector = new NioSocketConnector();
+	private C2() {}
+	private static  NioSocketConnector initConnector() {
+		NioSocketConnector connector = new NioSocketConnector();
 		
 		DefaultIoFilterChainBuilder chain = connector.getFilterChain();
 		chain.addLast("C2chain", new ProtocolCodecFilter(new ObjectSerializationCodecFactory()));
@@ -29,12 +30,17 @@ public class C2 {
 		connector.setHandler(new C2Handler());
 		connector.setConnectTimeoutMillis(timeout);
 		connector.getSessionConfig().setBothIdleTime(idleTime);
+		return connector;
 	}
 	
 	public static NioSocketConnector getConnector() {
 		if(connector == null)
-			new C2();
+			connector = initConnector();
 		return connector;
+	}
+	
+	public static NioSocketConnector getConnector2() {
+		return initConnector();
 	}
 	
 }

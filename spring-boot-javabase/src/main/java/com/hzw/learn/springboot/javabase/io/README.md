@@ -13,13 +13,13 @@ Buffer像一个数组，它可以保存多个类型相同的数据。Buffer是�
 	创建一个容量为capacity的XxxBuffer对象;
 	
 #### Buffer中重要概念
-- 容量(capacity)
+- **容量(capacity)**
 	<br/>缓冲区的容量表示该Buffer的最大数据容量。不可能为负值，创建后不能改变。
-- 界限(limit)
+- **界限(limit)**
 	<br/>第一个不应该被读出或者写入的缓冲区位置索引。位于limit后(包括limit位置)的数据不可以被读写。
-- 位置(position)
+- **位置(position)**
 	<br/>下一个可以被读或写的缓冲区位置索引。初始值为0(第一个位置的索引)。
-- 标记(mark)
+- **标记(mark)**
 	<br/>类似于传统IO流中的mark，Buffer可以直接将position定位到mark处。
 	
 > 上述值满足如下关系<br/>
@@ -32,25 +32,16 @@ put()和get()方法，用于向Buffer中放入/取出数据，Buffer支持单个
 - 绝对（Absolute）：直接根据索引处理数据就，position不会被影响；
 
 #### 其他常用方法
-- ```int capacity()```
-	<br/>返回capacity大小;
-- ```int limit()```
-	<br/>返回limit位置;
-- ```int position()```
-	<br/>返回position位置;
-- ```Buffer limit(int newLt)```
-	<br/>重新设置limit值，返回具有新limit的Buffer对象;
-- ```Buffer position(int newPs)```
-	<br/>重新设置position，返回position被修改的Buffer对象;
-- ```Buffer mark()```
-	<br/>设置标记，标记位置为当前position位置;
-- ```boolean hasRemaining()```
-	<br/>position和limit之间是否有可处理元素;
-- ```int remaining()```
-	<br/>position和limit之间元素个数;
-- ```Buffer reset()```
-	<br/>设置position为mark;
-- ```Buffer rewind()```
-	<br/>设置position=0，mark会被取消;
+- ```int capacity()```返回capacity大小;
+- ```int limit()```返回limit位置;
+- ```int position()```返回position位置;
+- ```Buffer limit(int newLt)```重新设置limit值，返回具有新limit的Buffer对象;
+- ```Buffer position(int newPs)```重新设置position，返回position被修改的Buffer对象;
+- ```Buffer mark()```设置标记，标记位置为当前position位置;
+- ```boolean hasRemaining()```position和limit之间是否有可处理元素;
+- ```int remaining()```position和limit之间元素个数;
+- ```Buffer reset()```设置position为mark;
+- ```Buffer rewind()```设置position=0，mark会被取消;
+- ```Buffer flip()```设置limit = position，封印position和capacity之间的区域;
 	
 

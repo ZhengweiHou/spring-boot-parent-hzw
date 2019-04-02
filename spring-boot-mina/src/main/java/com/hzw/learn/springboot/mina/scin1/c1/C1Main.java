@@ -13,12 +13,15 @@ public class C1Main {
 
 	static Logger log = LoggerFactory.getLogger("C1");
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		log.info("启动C1...");
 		Scanner scan = new Scanner(System.in);
 		while (true) {
 //			String str = scan.nextLine();
 			long sLong = scan.nextLong();
+//			long sLong = 100l;
+//			Thread.sleep(200l);
+			
 			System.out.println(">>C1>>>>>>>>>" + sLong);
 			
 			new Thread(() -> {
@@ -28,7 +31,8 @@ public class C1Main {
 				connect = connect.awaitUninterruptibly();
 				IoSession session = connect.getSession();
 
-				String message = sLong + "==C1发送的消息" + System.currentTimeMillis();
+//				String message = sLong + "==C1发送的消息" + System.currentTimeMillis();
+				String message = sLong + "==";
 				
 				log.info("SessionId[{}]发送内容[{}]", session.getId(), message);
 				

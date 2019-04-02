@@ -35,4 +35,9 @@ public class HzwShortTermClientIoHandler extends HzwAbstractIoHandler {
 		session.close(false);
 	}
 	
+	@Override
+	public String inOrOut() {
+		return "short";
+	}
+	
 }

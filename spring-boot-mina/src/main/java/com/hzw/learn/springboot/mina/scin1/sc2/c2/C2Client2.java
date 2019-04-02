@@ -10,23 +10,23 @@ import org.apache.mina.transport.socket.nio.NioSocketConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class C2Client {
+public class C2Client2 {
 	Logger log = LoggerFactory.getLogger("C2");
 
 	public Object write(Object message) throws Exception {
-		NioSocketConnector connector = C2.getConnector();
+		NioSocketConnector connector = C2.getConnector2();
 
 		ConnectFuture connectFuture = connector.connect();
 		connectFuture.awaitUninterruptibly();
 
-		if (connectFuture.isDone()) {
-			if (!connectFuture.isConnected()) { // 若在指定时间内没连接成功，则抛出异常
-				log.info("fail to connect " + connector.getDefaultRemoteAddress());
-				connector.dispose(); // 不关闭的话会运行一段时间后抛出，too many open files异常，导致无法连接
-
-				throw new Exception();
-			}
-		}
+//		if (connectFuture.isDone()) {
+//			if (!connectFuture.isConnected()) { // 若在指定时间内没连接成功，则抛出异常
+//				log.info("fail to connect " + connector.getDefaultRemoteAddress());
+//				connector.dispose(); // 不关闭的话会运行一段时间后抛出，too many open files异常，导致无法连接
+//
+//				throw new Exception();
+//			}
+//		}
 
 		IoSession session = connectFuture.getSession();
 
@@ -41,17 +41,9 @@ public class C2Client {
 			}
 		}
 
-//		CloseFuture closeFuture = session.getCloseFuture();
-//		if(!closeFuture.isClosed()) {
-//			try {
-//				Thread.sleep(50l);
-//			} catch (InterruptedException e) {
-//			}
-//		}
-//		closeFuture.awaitUninterruptibly();
-
 		session.getCloseFuture().awaitUninterruptibly();
 		Object result = session.getAttribute("MESSAGE");
+		connector.dispose();
 		log.info("服务端返回：{}", result);
 		return result;
 	}
