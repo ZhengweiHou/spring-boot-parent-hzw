@@ -29,7 +29,6 @@ public class BufferTest {
 		System.out.println(buffer.limit());
 		System.out.println(buffer.position());
 		
-		nio
 		
 	}
 }
