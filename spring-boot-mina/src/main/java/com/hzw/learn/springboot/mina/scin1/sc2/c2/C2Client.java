@@ -18,15 +18,17 @@ public class C2Client {
 
 		ConnectFuture connectFuture = connector.connect();
 		connectFuture.awaitUninterruptibly();
+		
+		connector.connect();
 
-		if (connectFuture.isDone()) {
-			if (!connectFuture.isConnected()) { // 若在指定时间内没连接成功，则抛出异常
-				log.info("fail to connect " + connector.getDefaultRemoteAddress());
-				connector.dispose(); // 不关闭的话会运行一段时间后抛出，too many open files异常，导致无法连接
-
-				throw new Exception();
-			}
-		}
+//		if (connectFuture.isDone()) {
+//			if (!connectFuture.isConnected()) { // 若在指定时间内没连接成功，则抛出异常
+//				log.info("fail to connect " + connector.getDefaultRemoteAddress());
+//				connector.dispose(); // 不关闭的话会运行一段时间后抛出，too many open files异常，导致无法连接
+//
+//				throw new Exception();
+//			}
+//		}
 
 		IoSession session = connectFuture.getSession();
 
@@ -34,22 +36,13 @@ public class C2Client {
 
 		WriteFuture f = session.write(message);
 
-		if (!session.isClosing()) {
-			try {
-				Thread.sleep(50l);
-			} catch (InterruptedException e) {
-			}
-		}
-
-//		CloseFuture closeFuture = session.getCloseFuture();
-//		if(!closeFuture.isClosed()) {
+//		if (!session.isClosing()) {
 //			try {
-//				Thread.sleep(50l);
+//				Thread.sleep(10l);
 //			} catch (InterruptedException e) {
 //			}
 //		}
-//		closeFuture.awaitUninterruptibly();
-
+//
 		session.getCloseFuture().awaitUninterruptibly();
 		Object result = session.getAttribute("MESSAGE");
 		log.info("服务端返回：{}", result);
@@ -61,8 +54,13 @@ public class C2Client {
 		writeThread.start();
 
 		try {
-			Thread.sleep(2l); // 防止主线程在子线程之前加锁
+			Thread.sleep(1l);
+//			writeThread.lock.lock();
+			while(!writeThread.lock.isLocked()) {
+				Thread.sleep(1l);
+			}
 			writeThread.lock.lock();
+
 			log.info("333333333333333333");
 //			return writeThread.result;
 		} catch (InterruptedException e) {
@@ -78,7 +76,7 @@ public class C2Client {
 	class writeThread extends Thread {
 
 		public ReentrantLock lock = null;
-		public Object result = null;
+		public volatile Object result = null;
 		public Object message = null;
 
 		public writeThread(Object message) {

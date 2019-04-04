@@ -36,7 +36,7 @@ public class C2Client2 {
 
 		if (!session.isClosing()) {
 			try {
-				Thread.sleep(50l);
+				Thread.sleep(10l);
 			} catch (InterruptedException e) {
 			}
 		}

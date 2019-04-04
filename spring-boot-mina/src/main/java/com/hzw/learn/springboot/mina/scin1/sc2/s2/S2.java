@@ -7,6 +7,7 @@ import org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.serialization.ObjectSerializationCodecFactory;
+import org.apache.mina.filter.executor.ExecutorFilter;
 import org.apache.mina.transport.socket.SocketAcceptor;
 import org.apache.mina.transport.socket.SocketSessionConfig;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
@@ -22,6 +23,7 @@ public class S2 {
 	private DefaultIoFilterChainBuilder chain = acceptor.getFilterChain();
 	
 	public S2() {
+		chain.addFirst("S2ExecutorFilter", new ExecutorFilter());	// 作为服务端，使用executor跑子线程执行后续操作
 		chain.addLast("s2Chain", new ProtocolCodecFilter(new ObjectSerializationCodecFactory()));
 		acceptor.setHandler(new S2Handler());
 		SocketSessionConfig config = acceptor.getSessionConfig();

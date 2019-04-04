@@ -5,6 +5,7 @@ import java.net.InetSocketAddress;
 import org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.serialization.ObjectSerializationCodecFactory;
+import org.apache.mina.filter.executor.ExecutorFilter;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ public class C2 {
 		NioSocketConnector connector = new NioSocketConnector();
 		
 		DefaultIoFilterChainBuilder chain = connector.getFilterChain();
+//		chain.addFirst("C2ExecutorFilter", new ExecutorFilter());	
 		chain.addLast("C2chain", new ProtocolCodecFilter(new ObjectSerializationCodecFactory()));
 		InetSocketAddress socketAddress = new InetSocketAddress(bindPort);
 		log.info("连接：" + socketAddress.getHostName() + ":" + socketAddress.getPort());

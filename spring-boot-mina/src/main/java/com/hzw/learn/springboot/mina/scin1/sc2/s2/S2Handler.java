@@ -14,8 +14,8 @@ public class S2Handler extends HzwAbstractIoHandler {
 	@Override
 	public void messageReceived(IoSession session, Object message) throws Exception {
 		super.messageReceived(session, message);
-//		Object result = new C2Client().write(message);
-		Object result = new C2Client2().write(message);
+		Object result = new C2Client().write(message);
+//		Object result = new C2Client2().write(message);
 //		Object result = new C2Client().writeSyn(message);
 		session.write(result);
 		session.close(false);

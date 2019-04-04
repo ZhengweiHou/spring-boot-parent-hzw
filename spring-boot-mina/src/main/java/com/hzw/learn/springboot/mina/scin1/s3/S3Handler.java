@@ -15,7 +15,7 @@ public class S3Handler extends HzwAbstractIoHandler {
 		super.messageReceived(session, message);
 		String mstr = (String)message;
 		Long sLong = Long.parseLong(mstr.split("==")[0]);
-//		Thread.sleep(sLong);
+		Thread.sleep(sLong);
 		session.write("Hello boy, 服务端已接收到信息!");
 		session.close(false);
 	}
