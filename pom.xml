@@ -40,6 +40,7 @@
     <module>spring-boot-mina</module>
     <module>spring-boot-jvm</module>
     <module>spring-boot-netty</module>
+    <module>spring-boot-mq</module>
   </modules>
   
   <dependencyManagement>
