@@ -12,9 +12,13 @@ public class Recv {
 	public static void main(String[] args) throws IOException, TimeoutException {
 		 ConnectionFactory connectionFactory = new ConnectionFactory();
 		 	connectionFactory.setHost("192.168.32.131");
-			connectionFactory.setVirtualHost("hzwVhost");
+			connectionFactory.setVirtualHost("test");
 			connectionFactory.setUsername("admin");
 			connectionFactory.setPassword("admin");
+//		 	connectionFactory.setHost("10.250.1.65");
+//			connectionFactory.setVirtualHost("vhost_hbyh");
+//			connectionFactory.setUsername("admin");
+//			connectionFactory.setPassword("admin");
 	        Connection connection = connectionFactory.newConnection();
 	        Channel channel = connection.createChannel();
 
