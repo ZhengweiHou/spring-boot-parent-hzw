@@ -13,9 +13,9 @@ public class HzwMinaProperties {
 	// 闲置超时时间
 	private int bothIdleTime = 30;
 
-	private int maxActive = 10;
+	private int maxActive = 50;
 	
-	private int maxIdle = 10;
+	private int maxIdle = 5;
 	
 	private int minIdle = 5;
 

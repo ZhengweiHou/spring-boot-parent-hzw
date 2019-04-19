@@ -21,7 +21,8 @@ public class HzwSocketConnectionFactory extends BasePoolableObjectFactory<IoSess
 		ConnectFuture connect = connector.connect();
 		connect = connect.awaitUninterruptibly();
 		IoSession session = connect.getSession();
-		log.info("创建，sessionId:{}", session.getId());
+//		log.info("创建，sessionId:{}", session.getId());
+		this.log(session);
 		return session;
 	}
 
@@ -30,28 +31,37 @@ public class HzwSocketConnectionFactory extends BasePoolableObjectFactory<IoSess
 		if(session != null) {
 			session.closeNow();
 		}
-		log.info("销毁，sessionId:{}", session == null ? null : session.getId());
+//		log.info("销毁，sessionId:{}", session == null ? null : session.getId());
+		this.log(session);
 		super.destroyObject(session);
 	}
 
 	@Override
 	public boolean validateObject(IoSession session) {
-		log.info("验证，sessionId:{}", session.getId());
+//		log.info("验证，sessionId:{}", session.getId());
+		this.log(session);
 		return session.isConnected();
 	}
 
 	@Override
 	public void activateObject(IoSession session) throws Exception {
-		log.info("获取，sessionId:{}", session.getId());
+//		log.info("获取，sessionId:{}", session.getId());
+		this.log(session);
 	}
 
 	@Override
 	public void passivateObject(IoSession session) throws Exception {
-		log.info("passivateObject");
+//		log.info("passivateObject");
+		this.log(session);
 	}
 	
 	
-	
+	private void log(IoSession session) {
+		log.info("{}  sessionId:{}",
+				Thread.currentThread().getStackTrace()[2].getMethodName(),
+				session.getId()
+				);
+	}
 
 
 }

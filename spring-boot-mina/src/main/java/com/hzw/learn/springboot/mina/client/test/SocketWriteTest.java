@@ -26,19 +26,21 @@ public class SocketWriteTest {
 		int n=0;
 
 		Scanner scan = new Scanner(System.in);
+		int count = 0;
+		System.out.println("客户端启动成功");
 		while(true) {
+			System.out.println("输入发送内容：");
 			String str = scan.nextLine();
-			System.out.println(">>长连接池测试>>>>>>>>>" + str);
+			String message = str+"==第" + ++count + "条消息";
 			
 			new Thread(() -> {
 				String result = null;
 				try {
-					result = client.write("Hello Hzw, 这是长连接池客户端发送的消息，请求时间：" + System.currentTimeMillis() + "!");
+					result = client.write(message);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				log.info("服务端返回：{}", result);
+//				log.info("服务端返回：{}", result);
 			}).start();
 		}
 

@@ -39,13 +39,6 @@ public class HzwMinaConfig {
 	}
 	
 	@Bean
-	public HzwSocketClientShort shortSocketClient() throws Exception {
-		HzwSocketClientShort socketClient = new HzwSocketClientShort();
-		socketClient.setPool(connectionPool());
-		return socketClient;
-	}
-	
-	@Bean
 	public GenericObjectPool<IoSession> connectionPool() throws Exception {
 		GenericObjectPool<IoSession> connectionPool = 
 				new GenericObjectPool<IoSession>(connectionFactory());
@@ -73,7 +66,7 @@ public class HzwMinaConfig {
 //		connector.getFilterChain().addAfter(baseName, name, filter);
 //		connector.getFilterChain().addBefore(baseName, name, filter);
 		
-		log.info("连接：{}：{}", properties.getHostName(), properties.getPort());
+		log.info("连接：{}：{}，Timeout：{}，BothIdleTime：{}", properties.getHostName(), properties.getPort(), properties.getConnectTimeoutInMillis(), properties.getBothIdleTime());
 		connector.setDefaultRemoteAddress(new InetSocketAddress(properties.getHostName(), properties.getPort()));
 
 		connector.setHandler(ioHandler());
