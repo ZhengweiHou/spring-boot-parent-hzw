@@ -15,10 +15,10 @@ public class HzwSocketClientLong {
 	public String write(String message) throws Exception {
 		IoSession session = null;
 		session = pool.borrowObject();
-		log.info("获取sessionId:{}", session.getId());
-
-		WriteFuture f = session.write(message + "--客户端SessionId:" + session.getId());
+//		log.info("获取sessionId:{}", session.getId());
 		
+		WriteFuture f = session.write(message + "--客户端SessionId:" + session.getId());
+
 		
 		
 		

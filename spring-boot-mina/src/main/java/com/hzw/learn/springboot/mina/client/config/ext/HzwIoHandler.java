@@ -38,7 +38,8 @@ public class HzwIoHandler extends IoHandlerAdapter {
 	public void sessionIdle(IoSession session, IdleStatus status) throws Exception {
 		this.log(session);
 		log.info("会话闲置：CsessionId:{} IdleStatus:{} idlecount:{} 时间：{}", session.getId(), status.toString(), session.getBothIdleCount(), System.currentTimeMillis()/1000);
-		seadHeartBeat(session);
+//		seadHeartBeat(session);
+		session.setAttribute(HzwSocketConnectionFactory.NEED_VALIDATE,"");
 	}
 
 	@Override
@@ -52,6 +53,7 @@ public class HzwIoHandler extends IoHandlerAdapter {
 	public void messageReceived(IoSession session, Object message) throws Exception {
 		this.log(session);
 		log.info("会话接收到消息：CsessionId:{} 消息:{}", session.getId(), message);
+
 		session.setAttribute("message", message);
 	}
 
@@ -59,6 +61,7 @@ public class HzwIoHandler extends IoHandlerAdapter {
 	public void messageSent(IoSession session, Object message) throws Exception {
 		this.log(session);
 		log.info("会话发送消息：CsessionId:{} 消息:{}", session.getId(), message);
+
 	}
 
 	@Override

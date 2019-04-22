@@ -45,6 +45,7 @@ public class HzwMinaConfig {
 		connectionPool.setMaxActive(properties.getMaxActive());
 		connectionPool.setMaxIdle(properties.getMaxIdle());
 		connectionPool.setMinIdle(properties.getMinIdle());
+		connectionPool.setTestOnBorrow(true);	// 设置：获取对象时进行检查
 		return connectionPool;
 	}
 

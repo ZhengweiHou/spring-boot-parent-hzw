@@ -40,7 +40,7 @@ public class SocketWriteTest {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-//				log.info("服务端返回：{}", result);
+				log.info("=========：{}", result);
 			}).start();
 		}
 
