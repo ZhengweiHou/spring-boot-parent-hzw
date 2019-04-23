@@ -12,6 +12,7 @@ public class CallableImplements implements Callable<Integer> {
 		for (; i < 50; i++) {
 			System.out.println(Thread.currentThread().getName() + ":" + i);
 		}
+		Thread.sleep(2000l);
 		return i;
 	}
 
@@ -20,7 +21,7 @@ public class CallableImplements implements Callable<Integer> {
 		new Thread(task, "有返回值的线程").start();
 
 		try {
-			System.out.println("子线程的返回值：" + task.get());
+			System.out.println("子线程的返回值：" + task.get()); // task.get()会阻塞等待子线程返回数据
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {
