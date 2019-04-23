@@ -39,6 +39,7 @@ public class ClientApplication {
 				String result = null;
 				try {
 					result = client.write(message);
+					System.out.println("================" + result);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

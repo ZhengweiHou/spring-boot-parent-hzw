@@ -26,9 +26,9 @@ public class HzwSocketClientLong {
 		// Handler和当前线程不是同一个线程，这里要等Handler处理完才能继续，可以使用synchronized处理
 		Thread.sleep(50l);
 		
-//		synchronized (session) {
-//			int count = 0;
-//		}
+		synchronized (session) {
+			session.wait();
+		}
 		
 		
 

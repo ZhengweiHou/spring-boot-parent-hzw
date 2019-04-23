@@ -55,6 +55,9 @@ public class HzwIoHandler extends IoHandlerAdapter {
 		log.info("会话接收到消息：CsessionId:{} 消息:{}", session.getId(), message);
 
 		session.setAttribute("message", message);
+		synchronized (session) {
+			session.notify();
+		}
 	}
 
 	@Override

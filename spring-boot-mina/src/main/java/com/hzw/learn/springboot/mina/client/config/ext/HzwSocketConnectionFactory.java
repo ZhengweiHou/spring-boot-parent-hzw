@@ -47,10 +47,13 @@ public class HzwSocketConnectionFactory extends BasePoolableObjectFactory<IoSess
 			return false;
 		}
 		if(session.containsAttribute(NEED_VALIDATE)) {
+			log.info(">{}<连接检查开始",session.getId());
 			try {
 				WriteFuture writeFuture = session.write("3000==链接检查......");
-//				session.get
-//				Thread.sleep(50l);
+				
+				synchronized (session) {
+					session.wait();
+				}
 				Throwable t = writeFuture.getException();
 				if (t != null) {
 					t.printStackTrace();
@@ -62,6 +65,7 @@ public class HzwSocketConnectionFactory extends BasePoolableObjectFactory<IoSess
 			}finally {
 				session.removeAttribute(NEED_VALIDATE);
 			}
+			log.info(">{}<连接检查完成",session.getId());
 		}
 		
 		return true;
