@@ -8,8 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.stereotype.Component;
 
-public class HzwIoHandler extends IoHandlerAdapter {
+@Component
+public class HzwIoHandler_long extends IoHandlerAdapter {
 	
 	private Logger log = LoggerFactory.getLogger("HANDLER");
 	
@@ -39,7 +41,7 @@ public class HzwIoHandler extends IoHandlerAdapter {
 		this.log(session);
 		log.info("会话闲置：CsessionId:{} IdleStatus:{} idlecount:{} 时间：{}", session.getId(), status.toString(), session.getBothIdleCount(), System.currentTimeMillis()/1000);
 //		seadHeartBeat(session);
-		session.setAttribute(HzwSocketConnectionFactory.NEED_VALIDATE,"");
+		session.setAttribute(HzwSocketSessionFactory.NEED_VALIDATE,"");
 	}
 
 	@Override

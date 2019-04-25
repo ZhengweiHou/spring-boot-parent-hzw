@@ -19,7 +19,7 @@ public class C2Client {
 		ConnectFuture connectFuture = connector.connect();
 		connectFuture.awaitUninterruptibly();
 		
-		connector.connect();
+//		connector.connect();
 
 //		if (connectFuture.isDone()) {
 //			if (!connectFuture.isConnected()) { // 若在指定时间内没连接成功，则抛出异常

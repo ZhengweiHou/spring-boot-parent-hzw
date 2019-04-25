@@ -31,7 +31,7 @@ public class ShortServerHandler extends IoHandlerAdapter {
 		@Override
 		public void messageReceived(IoSession session, Object message) throws Exception {
 			log.info("会话接收到消息：SsessionId:" + session.getId() + " 消息:" + message);
-			session.write("Hello boy, 服务端已接收到信息!");
+//			session.write("Hello boy, 服务端已接收到信息!");
 		}
 	 
 		@Override
@@ -58,7 +58,7 @@ public class ShortServerHandler extends IoHandlerAdapter {
 		@Override
 		public void sessionOpened(final IoSession session) throws Exception {
 			log.info("会话已打开：SsessionId:" + session.getId());
-			session.write("Hello boy, 服务端会话已打开!");
+//			session.write("Hello boy, 服务端会话已打开!");
 		}     
 
 		@Override

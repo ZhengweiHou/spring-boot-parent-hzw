@@ -14,13 +14,13 @@ import org.apache.mina.transport.socket.nio.NioSocketConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.hzw.learn.springboot.mina.client.config.ext.HzwIoHandler;
-import com.hzw.learn.springboot.mina.client.config.ext.HzwSocketConnectionFactory;
+import com.hzw.learn.springboot.mina.client.config.ext.HzwIoHandler_long;
+import com.hzw.learn.springboot.mina.client.config.ext.HzwSocketConnectFactory;
+import com.hzw.learn.springboot.mina.client.config.ext.HzwSocketSessionFactory;
 
 @Configuration
 @EnableConfigurationProperties(HzwMinaProperties.class)
@@ -31,6 +31,9 @@ public class HzwMinaConfig {
 	@Autowired
 	HzwMinaProperties properties;
 	
+	@Autowired
+	HzwSocketConnectFactory hzwSocketConnectFactory;
+	
 	@Bean
 	public HzwSocketClientLong longSocketClient() throws Exception {
 		HzwSocketClientLong socketClient = new HzwSocketClientLong();
@@ -38,10 +41,15 @@ public class HzwMinaConfig {
 		return socketClient;
 	}
 	
+//	@Bean
+//	public HzwSocketClientShort shortSocketClient() throws Exception {
+//		return new HzwSocketClientShort();
+//	}
+	
 	@Bean
 	public GenericObjectPool<IoSession> connectionPool() throws Exception {
 		GenericObjectPool<IoSession> connectionPool = 
-				new GenericObjectPool<IoSession>(connectionFactory());
+				new GenericObjectPool<IoSession>(sessionFactory());
 		connectionPool.setMaxActive(properties.getMaxActive());
 		connectionPool.setMaxIdle(properties.getMaxIdle());
 		connectionPool.setMinIdle(properties.getMinIdle());
@@ -50,35 +58,36 @@ public class HzwMinaConfig {
 	}
 
 	@Bean
-	public BasePoolableObjectFactory<IoSession> connectionFactory() {
-		return new HzwSocketConnectionFactory(socketConnector());
+	public BasePoolableObjectFactory<IoSession> sessionFactory() {
+		return new HzwSocketSessionFactory(long_SocketConnector());
 	}
 	
 	@Bean
-	public NioSocketConnector socketConnector() {
-		NioSocketConnector connector = new NioSocketConnector();
-		// 过滤器链
-		DefaultIoFilterChainBuilder chain = connector.getFilterChain();
-//		connector.getFilterChain().addLast("loggingFilter", loggingFilter());
-		chain.addLast("en_de_Code_chain", new ProtocolCodecFilter(     
-                new ObjectSerializationCodecFactory()));
-//		connector.getFilterChain().addFirst(name, filter);
-//		connector.getFilterChain().addLast("xxx", IoFilter);
-//		connector.getFilterChain().addAfter(baseName, name, filter);
-//		connector.getFilterChain().addBefore(baseName, name, filter);
-		
-		log.info("连接：{}：{}，Timeout：{}，BothIdleTime：{}", properties.getHostName(), properties.getPort(), properties.getConnectTimeoutInMillis(), properties.getBothIdleTime());
-		connector.setDefaultRemoteAddress(new InetSocketAddress(properties.getHostName(), properties.getPort()));
-
-		connector.setHandler(ioHandler());
-//		connector.setHandler(ServerHandler.getInstances());
-
-		// 连接超时时间 单位：毫秒
-		connector.setConnectTimeoutMillis(properties.getConnectTimeoutInMillis());
-		
-		// 闲置超时时间 单位：s
-		connector.getSessionConfig().setBothIdleTime(properties.getBothIdleTime());
-		return connector;
+	public NioSocketConnector long_SocketConnector() {
+		return hzwSocketConnectFactory.newLongConnectot();
+//		NioSocketConnector connector = new NioSocketConnector();
+//		// 过滤器链
+//		DefaultIoFilterChainBuilder chain = connector.getFilterChain();
+////		connector.getFilterChain().addLast("loggingFilter", loggingFilter());
+//		chain.addLast("en_de_Code_chain", new ProtocolCodecFilter(     
+//                new ObjectSerializationCodecFactory()));
+////		connector.getFilterChain().addFirst(name, filter);
+////		connector.getFilterChain().addLast("xxx", IoFilter);
+////		connector.getFilterChain().addAfter(baseName, name, filter);
+////		connector.getFilterChain().addBefore(baseName, name, filter);
+//		
+//		log.info("连接：{}：{}，Timeout：{}，BothIdleTime：{}", properties.getHostName(), properties.getPort(), properties.getConnectTimeoutInMillis(), properties.getBothIdleTime());
+//		connector.setDefaultRemoteAddress(new InetSocketAddress(properties.getHostName(), properties.getPort()));
+//
+//		connector.setHandler(ioHandler());
+////		connector.setHandler(ServerHandler.getInstances());
+//
+//		// 连接超时时间 单位：毫秒
+//		connector.setConnectTimeoutMillis(properties.getConnectTimeoutInMillis());
+//		
+//		// 闲置超时时间 单位：s
+//		connector.getSessionConfig().setBothIdleTime(properties.getBothIdleTime());
+//		return connector;
 	}
 
 	@Bean
@@ -86,9 +95,9 @@ public class HzwMinaConfig {
 		return new LoggingFilter();
 	}
 
-	@Bean
-	public IoHandler ioHandler() {
-		return new HzwIoHandler();
-	}
+//	@Bean
+//	public IoHandler ioHandler_long() {
+//		return new HzwIoHandler_long();
+//	}
 
 }

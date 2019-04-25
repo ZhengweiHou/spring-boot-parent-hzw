@@ -8,14 +8,14 @@ import org.apache.mina.transport.socket.nio.NioSocketConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HzwSocketConnectionFactory extends BasePoolableObjectFactory<IoSession> {
+public class HzwSocketSessionFactory extends BasePoolableObjectFactory<IoSession> {
 	Logger log = LoggerFactory.getLogger("POOL");
 	
 	public static final String NEED_VALIDATE = "NEED_VALIDATE";
 
 	private NioSocketConnector connector;
 
-	public HzwSocketConnectionFactory(NioSocketConnector connector) {
+	public HzwSocketSessionFactory(NioSocketConnector connector) {
 		this.connector = connector;
 	}
 	

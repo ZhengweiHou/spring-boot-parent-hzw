@@ -64,7 +64,7 @@ private static ServerHandler samplMinaServerHandler = null;
 	public void sessionOpened(final IoSession session) throws Exception {
 		System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName() + ">>>");
 		System.out.println("会话已打开：SsessionId:" + session.getId());
-		session.write("Hello boy, 服务端会话已打开!");
+//		session.write("Hello boy, 服务端会话已打开!");
 	}     
 
 	@Override
