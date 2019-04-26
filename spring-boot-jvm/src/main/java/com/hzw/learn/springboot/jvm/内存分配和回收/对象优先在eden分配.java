@@ -14,6 +14,7 @@ public class 对象优先在eden分配 {
 	
 	/*对象优先在eden分配
 	 * 
+	 * JVM参数
 	 * -Xloggc:testAllocation_GC.log -XX:+PrintGCDetails -XX:+PrintHeapAtGC 
 	 * -Xms20M -Xmx20M -Xmn10M -XX:SurvivorRatio=8
 	 *       堆大小     新生代大小    survivor:eden=1:8               
@@ -24,9 +25,9 @@ public class 对象优先在eden分配 {
 		List<byte[]> list = new ArrayList<byte[]>();
 		
 		for(;;) {
-			System.out.println("输入要创建空间大小(单位:K):");
+			System.out.println("输入要创建空间大小(单位:M):");
 			int size = scan.nextInt();
-			list.add(new byte[size * _1KB]);
+			list.add(new byte[size * _1MB]);
 		}
 		
 //		list.add(new byte[2 * _1MB]);
