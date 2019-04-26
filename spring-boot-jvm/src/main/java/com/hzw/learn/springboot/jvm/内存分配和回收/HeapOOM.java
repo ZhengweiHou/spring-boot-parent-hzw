@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.jvm;
+package com.hzw.learn.springboot.jvm.内存分配和回收;
 
 import java.util.ArrayList;
 import java.util.List;

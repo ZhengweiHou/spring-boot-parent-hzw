@@ -28,7 +28,6 @@ public class SocketWriteTest {
 	
 	@Test
 	public void writeTest() throws NumberFormatException, InterruptedException {
-		int n=0;
 
 		Scanner scan = new Scanner(System.in);
 		int count = 0;
@@ -54,7 +53,6 @@ public class SocketWriteTest {
 	
 	@Test
 	public void shortWriteTest() throws NumberFormatException, InterruptedException {
-		int n=0;
 
 		Scanner scan = new Scanner(System.in);
 		int count = 0;
