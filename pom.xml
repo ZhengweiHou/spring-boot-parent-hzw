@@ -42,6 +42,7 @@
     <module>spring-boot-jvm</module>
     <module>spring-boot-netty</module>
     <module>spring-boot-mq</module>
+    <module>spring-boot-drools</module>
   </modules>
   
   <dependencyManagement>
