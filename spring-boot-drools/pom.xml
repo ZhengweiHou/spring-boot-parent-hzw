@@ -14,6 +14,7 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<drools.version>7.20.0.Final</drools.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -33,12 +34,54 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.drools/drools-spring -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-spring</artifactId>
 			<version>5.6.0.Final</version>
-			<!-- <version>6.0.0.Beta2</version> -->
+		</dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/org.drools/drools-core -->
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-core</artifactId>
+			<version>${drools.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.drools/drools-compiler -->
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
+			<version>${drools.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.drools/drools-decisiontables -->
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-decisiontables</artifactId>
+			<version>${drools.version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.kie/kie-api -->
+		<dependency>
+            <groupId>org.kie</groupId>
+            <artifactId>kie-api</artifactId>
+            <version>${drools.version}</version>
+        </dependency>
+		
+		
+		<!-- https://mvnrepository.com/artifact/org.drools/knowledge-api -->
+		<!-- <dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>knowledge-api</artifactId>
+			<version>6.5.0.Final</version>
+			<version>6.4.0.Final</version>
+		</dependency> -->
+		
+		<!-- https://mvnrepository.com/artifact/org.kie/kie-internal -->
+		<!-- <dependency>
+		    <groupId>org.kie</groupId>
+		    <artifactId>kie-internal</artifactId>
+   	 		<version>6.4.0.Final</version>
+		    <version>7.20.0.Final</version>
+		</dependency> -->
 
 	</dependencies>
 </project>

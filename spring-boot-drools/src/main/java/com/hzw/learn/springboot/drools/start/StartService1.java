@@ -19,7 +19,7 @@ public class StartService1 implements ApplicationRunner{
 	public void run(ApplicationArguments args) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("startService1..........");
-		route1_Test.runRoute1();
+		route1_Test.testExcel();
 	}
 
 }

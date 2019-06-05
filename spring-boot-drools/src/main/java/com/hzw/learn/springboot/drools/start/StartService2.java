@@ -15,6 +15,7 @@ public class StartService2 implements CommandLineRunner, Ordered{
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("Service start 2 .......");
+		System.exit(0);
 		
 	}
 
