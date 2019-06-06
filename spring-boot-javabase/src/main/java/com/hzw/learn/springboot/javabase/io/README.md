@@ -98,4 +98,59 @@ public void test1() throws IOException {
 #### Channel 继承关系类图
 ![](imgs/20190606-120108.png)
 
+***
+### Selector 多路复用器
+Selector是Java NIO核心组件中的一个，用于检查一个或多个NIO Channel（通道）的状态是否处于可读、可写。如此可以实现单线程管理多个channels,也就是可以管理多个网络链接。
+#### Selector的创建
+```Selector selector = Selector.open();```
+
+#### 注册Channel到Selector
+```
+channel.configureBlocking(false);
+SelectionKey key = channel.register(selector, Selectionkey.OP_READ);
+```
+**Channel必须是非阻塞的。**
+所以FileChannel不适用Selector，因为FileChannel不能切换为非阻塞模式，更准确的来说是因为FileChannel没有继承SelectableChannel。Socket channel可以正常使用。
+
+- ```abstract SelectableChannel configureBlocking(boolean block) ```
+	用于使通道处于阻塞模式或非阻塞模式
+	
+#### register()
+```SelectionKey register(Selector sel, int ops)```
+register() 方法的第二个参数。这是一个“ interest集合 ”，意思是在通过Selector监听Channel时对什么事件感兴趣。可以监听四种不同类型的事件：
+`Connect` 连接就绪
+`Accept` 接收就绪
+`Read` 读就绪 
+`Write`写就绪
+通道触发了一个事件意思是该事件已经就绪。比如某个Channel成功连接到另一个服务器称为“ 连接就绪 ”。一个Server Socket Channel准备好接收新进入的连接称为“ 接收就绪 ”。一个有数据可读的通道可以说是“ 读就绪 ”。等待写数据的通道可以说是“ 写就绪 ”。
+
+这四种事件用SelectionKey的四个常量来表示：
+```
+SelectionKey.OP_CONNECT
+SelectionKey.OP_ACCEPT
+SelectionKey.OP_READ
+SelectionKey.OP_WRITE
+```
+如果你对不止一种事件感兴趣，使用或运算符即可，如下：
+```int interestSet = SelectionKey.OP_READ | SelectionKey.OP_WRITE;```
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 

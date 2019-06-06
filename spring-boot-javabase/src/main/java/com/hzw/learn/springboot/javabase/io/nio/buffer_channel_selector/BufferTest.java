@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.javabase.io.nio.bufferAndChannel;
+package com.hzw.learn.springboot.javabase.io.nio.buffer_channel_selector;
 
 import java.nio.CharBuffer;
 
