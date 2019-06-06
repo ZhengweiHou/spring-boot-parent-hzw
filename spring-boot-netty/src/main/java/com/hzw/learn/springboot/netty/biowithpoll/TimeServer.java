@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.netty.bio;
+package com.hzw.learn.springboot.netty.biowithpoll;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,10 +6,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Date;
-import java.util.Random;
-
-import com.sun.jmx.snmp.Timestamp;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class TimeServer {
 
@@ -22,11 +21,14 @@ public class TimeServer {
 			
 			Socket socket = null;
 			
+			
+			ThreadPoolExecutor executor = new ThreadPoolExecutor(50, 50, 100, TimeUnit.SECONDS,	new ArrayBlockingQueue<Runnable>(5000));
+			
 			while (true) {
 				socket = server.accept();
-				Thread.sleep((long)(Math.random() * 100));
 				
-				new Thread(new TimeServerHandler(socket)).start();
+//				new Thread(new TimeServerHandler(socket)).start();
+				executor.execute(new TimeServerHandler(socket));
 			}
 			
 		} finally {
@@ -55,7 +57,11 @@ class TimeServerHandler implements Runnable {
 		BufferedReader reader = null;
 		PrintWriter writer = null;
 
+		
 		try {
+			
+			Thread.sleep((long)(Math.random() * 1000));
+			
 			reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 			writer = new PrintWriter(this.socket.getOutputStream(), true);
 			
@@ -99,6 +105,8 @@ class TimeServerHandler implements Runnable {
 			
 			this.socket = null;
 			
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 
