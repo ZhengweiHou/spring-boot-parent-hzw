@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: sprint-boot-springbase
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: houzw
+Implementation-Vendor-Id: com.hzw.learn
+Build-Jdk: 1.8.0_172
+Implementation-URL: http://maven.apache.org/sprint-boot-springbase
+Created-By: Maven Integration for Eclipse
+
