@@ -43,7 +43,7 @@
     <module>spring-boot-netty</module>
     <module>spring-boot-mq</module>
     <module>spring-boot-drools</module>
-    <module>sprint-boot-springbase</module>
+    <module>spring-boot-springbase</module>
   </modules>
   
   <dependencyManagement>
