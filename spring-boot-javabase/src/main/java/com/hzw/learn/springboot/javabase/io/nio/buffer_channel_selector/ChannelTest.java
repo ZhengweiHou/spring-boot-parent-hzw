@@ -16,14 +16,18 @@ import java.nio.charset.CharsetDecoder;
 
 public class ChannelTest {
 	public static void main(String[] args) throws IOException {
-//		test1();
-		test2();
+		test1();
+//		test2();
 
 	}
 	
+	/**
+	 * 使用Channel.map()方法直接将Channel中的指定部分内容映射到buffer中
+	 * @throws IOException
+	 */
 	public static void test1() throws IOException {
-		File f = new File("/home/houzw/Documents/temp/test.txt");
-		File fout = new File("/home/houzw/Documents/temp/test.out");
+		File f = new File("src/main/java/com/hzw/learn/springboot/javabase/io/nio/buffer_channel_selector/test.txt");
+		File fout = new File("src/main/java/com/hzw/learn/springboot/javabase/io/nio/buffer_channel_selector/test.out");
 		
 		FileChannel inChannel = new FileInputStream(f).getChannel();
 		MappedByteBuffer buffer = inChannel.map(MapMode.READ_ONLY, 0, inChannel.size());
@@ -39,12 +43,17 @@ public class ChannelTest {
 		System.out.println(charbuffer);
 	}
 	
+	/**
+	 * 使用ByteBuffer从Channel中依次取出数据
+	 * @throws IOException
+	 */
 	public static void test2() throws IOException {
-		File f = new File("/home/houzw/Documents/temp/test.txt");
+		File f = new File("src/main/java/com/hzw/learn/springboot/javabase/io/nio/buffer_channel_selector/test.txt");
+		
 		CharsetDecoder decoder = Charset.forName("GBK").newDecoder();
 	
 		FileChannel inChannel = new FileInputStream(f).getChannel();
-		ByteBuffer buffer = ByteBuffer.allocate(5);
+		ByteBuffer buffer = ByteBuffer.allocate(16);
 		
 		while (inChannel.read(buffer) != -1) {
 			buffer.flip();
