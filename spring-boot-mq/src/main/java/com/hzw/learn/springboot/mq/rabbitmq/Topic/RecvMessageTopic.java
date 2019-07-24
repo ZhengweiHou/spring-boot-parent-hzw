@@ -15,10 +15,10 @@ public class RecvMessageTopic {
 		String EXCHANGE_NAME="hzw.Topic_exchange";
 		
 		if(args.length < 1) {
-			args = new String[] {"#"}; // 接受所有消息
-	//		args = new String[] {"0"};
-	//		args = new String[] {"1"};
-	//		args = new String[] {"2"};
+//			args = new String[] {"#"}; // 接受所有消息
+//			args = new String[] {"0.*"};
+			args = new String[] {"1.*"};
+//			args = new String[] {"*.1"};
 		}
 		
 		 ConnectionFactory connectionFactory = new ConnectionFactory();

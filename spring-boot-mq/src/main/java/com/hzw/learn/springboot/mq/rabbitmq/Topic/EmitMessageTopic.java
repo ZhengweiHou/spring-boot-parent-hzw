@@ -29,11 +29,27 @@ public class EmitMessageTopic {
 		Scanner scan = new Scanner(System.in);
 		while (true) {
 			System.out.println(" [*] input message to send...");
+			
+//			message eg： [routkey]=[message]
 			String message = scan.nextLine();
 			
-			String routingKey = message.length() > 0 ? message.substring(0, 1) : "0";
+//			String routingKey = message.length() > 0 ? message.substring(0, 1) : "0";
 			
-			message = message.length() > 0 ? message : "default message!!";
+			String routingKey = 
+					message.length() > 0 && message.contains("=") 
+					? 
+						(String) message.substring(0, message.indexOf("=")) 
+					: 
+						"0";
+			
+//			message = message.length() > 0 ? message : "default message!!";
+			
+			message = 
+					message.length() > 0 && message.contains("=")
+					? 
+						(String) message.substring(message.indexOf("=")+1,message.length()) 
+					: 
+						"default message!!";
 			
 			
 			channel.basicPublish(
