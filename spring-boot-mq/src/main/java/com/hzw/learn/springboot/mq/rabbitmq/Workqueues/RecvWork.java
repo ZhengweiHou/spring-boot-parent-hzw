@@ -12,7 +12,7 @@ public class RecvWork {
 	public static void main(String[] args) throws IOException, TimeoutException {
 		 ConnectionFactory connectionFactory = new ConnectionFactory();
 		 	connectionFactory.setHost("192.168.32.131");
-			connectionFactory.setVirtualHost("test");
+//			connectionFactory.setVirtualHost("test");
 			connectionFactory.setUsername("admin");
 			connectionFactory.setPassword("admin");
 	        Connection connection = connectionFactory.newConnection();
