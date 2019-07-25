@@ -12,7 +12,7 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
 
-public class EmitMessageRpc {
+public class EmitMessageRpc_exchange {
 	public static void main(String[] args) throws IOException, TimeoutException {
 		
 		String EXCHANGE_NAME="hzw.Rpc_exchange";
@@ -80,6 +80,9 @@ public class EmitMessageRpc {
 	            String call_correlationId = delivery.getProperties().getCorrelationId();
 	            
 	            System.out.println("[+] -back- correlationId:["+call_correlationId+"] Received:[" + callbackMsg + "]");
+	            
+	            channel.basicCancel(consumerTag);
+	            
 	        };	
 	        
 	        String consumerTagFromServer = channel.basicConsume(

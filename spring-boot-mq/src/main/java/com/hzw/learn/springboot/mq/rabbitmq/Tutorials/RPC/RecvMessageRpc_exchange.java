@@ -9,7 +9,7 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
 
-public class RecvMessageRpc {
+public class RecvMessageRpc_exchange {
 	public static void main(String[] args) throws IOException, TimeoutException {
 		
 		String EXCHANGE_NAME="hzw.Rpc_exchange";
@@ -62,11 +62,15 @@ public class RecvMessageRpc {
 	        		// 此处进行业务处理....
 		            String msg = new String(delivery.getBody(), "UTF-8");
 		            
+		            // 模拟处理时间
+		            Thread.sleep(1000l);
 		        	
 		            System.out.println("[x] correlationId:["+correlationId+"] Received:[" + msg + "]");
 		        	
 		        	response = "hello , we received msg, I'm " + Thread.currentThread().getId();
-	        	} finally {
+	        	} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
 	        		channel.basicPublish("", replyToQueueName, replyProps, response.getBytes("UTF-8"));
 	        		
 	        		// ???? 此处开启后一次请求后，channel就会失效，mq上会解除绑定
