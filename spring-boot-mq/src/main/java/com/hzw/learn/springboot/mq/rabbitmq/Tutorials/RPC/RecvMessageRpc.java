@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.mq.rabbitmq.RPC;
+package com.hzw.learn.springboot.mq.rabbitmq.Tutorials.RPC;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -69,7 +69,7 @@ public class RecvMessageRpc {
 	        	} finally {
 	        		channel.basicPublish("", replyToQueueName, replyProps, response.getBytes("UTF-8"));
 	        		
-	        		// ????
+	        		// ???? 此处开启后一次请求后，channel就会失效，mq上会解除绑定
 //	        		channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
 	        	}
 	        	

@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.mq.rabbitmq.Hello;
+package com.hzw.learn.springboot.mq.rabbitmq.Tutorials.Hello;
 
 import java.io.IOException;
 import java.util.Scanner;

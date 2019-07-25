@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.mq.rabbitmq.Topic;
+package com.hzw.learn.springboot.mq.rabbitmq.Tutorials.Routing;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -9,16 +9,16 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
 
-public class RecvMessageTopic {
+public class RecvMessageDirect {
 	public static void main(String[] args) throws IOException, TimeoutException {
 		
-		String EXCHANGE_NAME="hzw.Topic_exchange";
+		String EXCHANGE_NAME="hzw.Direct_exchange";
 		
 		if(args.length < 1) {
-//			args = new String[] {"#"}; // 接受所有消息
-//			args = new String[] {"0.*"};
-			args = new String[] {"1.*"};
-//			args = new String[] {"*.1"};
+			args = new String[] {"0","1","2"};
+//			args = new String[] {"0"};
+	//		args = new String[] {"1"};
+	//		args = new String[] {"2"};
 		}
 		
 		 ConnectionFactory connectionFactory = new ConnectionFactory();
@@ -32,7 +32,8 @@ public class RecvMessageTopic {
 	        
 //	        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
 	        
-	        String queueName = channel.queueDeclare().getQueue();
+//	        String queueName = channel.queueDeclare().getQueue();
+	        String queueName = "a123456";
 	        
 	        String routStr="";
 	        
@@ -45,6 +46,7 @@ public class RecvMessageTopic {
 
 	        DeliverCallback deliverCallback = (consumerTag, delivery) -> {
 	            String message = new String(delivery.getBody(), "UTF-8");
+//	            System.out.println(" [x] [" + queueName + "]Received '" + message + "'");
 	            System.out.println("[x] routingkey:["+delivery.getEnvelope().getRoutingKey()+"] Received:[" + message + "]");
 	        };
 	        

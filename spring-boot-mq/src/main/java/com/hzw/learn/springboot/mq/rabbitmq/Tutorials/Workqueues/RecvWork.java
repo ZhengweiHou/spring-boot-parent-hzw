@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.mq.rabbitmq.Workqueues;
+package com.hzw.learn.springboot.mq.rabbitmq.Tutorials.Workqueues;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;

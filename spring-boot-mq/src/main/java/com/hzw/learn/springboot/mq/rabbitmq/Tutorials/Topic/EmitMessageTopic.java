@@ -1,16 +1,20 @@
-package com.hzw.learn.springboot.mq.rabbitmq.Workqueues;
+package com.hzw.learn.springboot.mq.rabbitmq.Tutorials.Topic;
 
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.TimeoutException;
 
+import com.rabbitmq.client.AMQP.Exchange;
+import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.MessageProperties;
 
-public class SendWork {
+public class EmitMessageTopic {
 	public static void main(String[] args) throws IOException, TimeoutException {
+		
+		String EXCHANGE_NAME="hzw.Topic_exchange";
 		
 		ConnectionFactory connectionFactory = new ConnectionFactory();
 		connectionFactory.setHost("192.168.32.131");
@@ -19,21 +23,41 @@ public class SendWork {
 		connectionFactory.setPassword("admin");
 		Connection connection = connectionFactory.newConnection();
 		Channel channel = connection.createChannel();
-		channel.queueDeclare("hzw.workqueue", false, false, false, null);
-//		创建队列参数说明： 1.队列名 2.是否持久化 3.是否是独占队列 4.是否自动删除 5.其他参数 
+		
+		channel.exchangeDeclare(EXCHANGE_NAME,BuiltinExchangeType.TOPIC);	// ecchangeType = TOPIC
 		
 		Scanner scan = new Scanner(System.in);
 		while (true) {
 			System.out.println(" [*] input message to send...");
+			
+//			message eg： [routkey]=[message]
 			String message = scan.nextLine();
 			
-//			channel.basicPublish("", "hzw.workqueue", null, message.getBytes()); 
+//			String routingKey = message.length() > 0 ? message.substring(0, 1) : "0";
+			
+			String routingKey = 
+					message.length() > 0 && message.contains("=") 
+					? 
+						(String) message.substring(0, message.indexOf("=")) 
+					: 
+						"0";
+			
+//			message = message.length() > 0 ? message : "default message!!";
+			
+			message = 
+					message.length() > 0 && message.contains("=")
+					? 
+						(String) message.substring(message.indexOf("=")+1,message.length()) 
+					: 
+						"default message!!";
+			
+			
 			channel.basicPublish(
-					"", 
-					"hzw.workqueue", 
+					EXCHANGE_NAME, 
+					routingKey, 
 					MessageProperties.PERSISTENT_TEXT_PLAIN, 	//设置消息持久化
 					message.getBytes()); 
-			System.out.println("[x] sent:" + message);
+			System.out.println("[x] rout:["+routingKey+"] sent:" + message);
 		}
 		
 	}
