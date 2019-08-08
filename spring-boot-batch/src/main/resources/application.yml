@@ -4,13 +4,19 @@ server:
    name: spring-boot-batch-demo
 
 spring: 
+  main: 
+    allow-bean-definition-overriding: true
   datasource: 
     type: com.alibaba.druid.pool.DruidDataSource 
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.32.131:3306/springbatch?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://192.168.32.131:3306/HZW_batch?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8
     username: root
     password: root
   batch: 
 #    tablePrefix: 'HZW'
     job:
       enabled: false
+    
+    
+    
+    

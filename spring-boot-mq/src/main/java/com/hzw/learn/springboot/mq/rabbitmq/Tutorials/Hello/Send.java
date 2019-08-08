@@ -14,12 +14,12 @@ public class Send {
 		ConnectionFactory connectionFactory = new ConnectionFactory();
 //		ConnectionFactoryConfigurator factoryConf = new ConnectionFactoryConfigurator();
 		connectionFactory.setHost("192.168.32.131");
-		connectionFactory.setVirtualHost("test");
+//		connectionFactory.setVirtualHost("test");
 		connectionFactory.setUsername("admin");
 		connectionFactory.setPassword("admin");
 		Connection connection = connectionFactory.newConnection();
 		Channel channel = connection.createChannel();
-		channel.queueDeclare("hzwhelloqueue", false, false, false, null); // 创建队列
+		channel.queueDeclare("hzw-hello", false, false, false, null); // 创建队列
 		channel.queueDeclare("hzwhelloqueue1", false, false, false, null);
 		channel.queueDeclare("hzwhelloqueue2", false, false, false, null);
 		
@@ -28,7 +28,7 @@ public class Send {
 			String message = scan.nextLine();
 			message = "time:[" + System.currentTimeMillis() + "]" +message;
 			
-			channel.basicPublish("", "hzwhelloqueue", null, message.getBytes()); // 向指定队列发送消息
+			channel.basicPublish("", "hzw-hello", null, message.getBytes()); // 向指定队列发送消息
 			System.out.println("[x] sent:" + message);
 		}
 		
