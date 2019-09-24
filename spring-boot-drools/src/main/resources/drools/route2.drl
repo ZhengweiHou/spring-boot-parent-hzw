@@ -1,0 +1,32 @@
+package com.allinfinance.cps.service.authorization.verifier
+
+import java.util.Map;
+import java.math.BigDecimal;
+import com.allinfinance.cps.param.def.enums.AuthReason;
+import com.allinfinance.cps.param.def.AuthProduct;
+import com.allinfinance.cps.param.def.MerchantTxnCrtl;
+import com.allinfinance.aic.dictionary.enums.Indicator;
+import com.allinfinance.cps.param.def.enums.CheckType;
+import com.allinfinance.aic.dictionary.enums.AuthTransType;
+import com.allinfinance.cps.param.def.enums.AuthTransTerminal;
+import com.allinfinance.cps.service.authorization.frame.TransInfo;
+import com.allinfinance.cps.infrastructure.shared.model.TmAccountO;
+import org.apache.commons.lang.StringUtils;
+
+import org.slf4j.Logger;global Map<AuthReason, AuthAction> result;
+
+rule "[Csa_001] 校验账户是否包含非待销户账户锁定码"
+	/*
+	*	锁定码中没有包含"C"(L002)
+	*/
+    when
+		TransInfo( checkList contains "Csa_001" )
+		$logger : Logger()	
+		TransInfo( printTraceLog("Csa_001",$logger) )
+		TmAccountO( StringUtils.isBlank(blockCode)) or
+		TmAccountO( StringUtils.isNotBlank(blockCode) , blockCode.indexOf("C") < 0 )
+		$authProduct : AuthProduct()
+    then	
+    	$logger.debug("# drools-rule:[Csa_001]-TT06");
+		result.put( AuthReason.TT06, $authProduct.reasonActions.get(AuthReason.TT06) );
+end

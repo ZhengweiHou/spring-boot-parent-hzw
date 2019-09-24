@@ -7,6 +7,10 @@
 		<result column="NAME" property="name" jdbcType="VARCHAR" />
 	</resultMap>
 	
+	<resultMap id="BaseResultMap2" type="MAP" >
+		<result column="NAME" property="name_hehe" jdbcType="VARCHAR" />
+	</resultMap>
+	
 	<sql id="STUDENT_TABLE_FIELD">ID,STUDENT_ID,NAME</sql>
 	<sql id="STUDENT_INSERT_FIELD">STUDENT_ID,NAME</sql>
 	
@@ -42,6 +46,22 @@
 	</update>
 	
 	<select id="selectAll" resultMap="BaseResultMap" parameterType="com.hzw.learn.springboot.mybatis.model.Student" >
+		select <include refid="STUDENT_TABLE_FIELD" />		
+ 		from student
+		where 1=1 
+		<if test="id != null and id != ''  " >
+			and ID = #{id,jdbcType=INTEGER }
+		</if>
+		<if test="studentId != null and studentId != ''  " >
+			and STUDENT_ID = #{studentId,jdbcType=VARCHAR }
+		</if>
+		<if test="name != null and name != ''  " >
+			and NAME = #{name,jdbcType=VARCHAR }
+		</if>
+
+	</select>	
+	
+	<select id="selectAll2" resultMap="BaseResultMap2" parameterType="com.hzw.learn.springboot.mybatis.model.Student" >
 		select <include refid="STUDENT_TABLE_FIELD" />		
  		from student
 		where 1=1 

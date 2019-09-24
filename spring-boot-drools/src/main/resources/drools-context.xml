@@ -7,6 +7,29 @@
 
 	<drools:kbase id="route1">
 		<drools:resources>
+			<drools:resource source="classpath:drools/route2.drl" type="DRL"/>
+		</drools:resources>
+		<drools:configuration>
+			<drools:mbeans enabled="true" />
+			<drools:event-processing-mode
+				mode="STREAM" />
+		</drools:configuration>
+	</drools:kbase>
+	
+<!-- 	<drools:kbase id="thirdpartyPreProcessRule">
+	 	<drools:resources>
+			<drools:resource source="classpath:drools/route1.xls" type="DTABLE">
+				<drools:decisiontable-conf input-type="XLS" worksheet-name="S1"/>
+			</drools:resource>
+		</drools:resources>
+		<drools:configuration>
+			<drools:mbeans enabled="true" />
+			<drools:event-processing-mode mode="STREAM" />
+		</drools:configuration> 
+	</drools:kbase> -->
+
+	<!-- <drools:kbase id="route2">
+		<drools:resources>
 			<drools:resource source="classpath:drools/route1.xls"
 				type="DTABLE">
 				<drools:decisiontable-conf
@@ -18,7 +41,6 @@
 			<drools:event-processing-mode
 				mode="STREAM" />
 		</drools:configuration>
-	</drools:kbase>
-
+	</drools:kbase> -->
 
 </beans>

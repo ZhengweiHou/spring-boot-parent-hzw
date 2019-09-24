@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.hzw.learn.springboot.mybatis.dao.StudentDao;
 import com.hzw.learn.springboot.mybatis.model.Student;
 import com.hzw.learn.springboot.mybatis.plugins.QueryInterceptor;
+import com.sun.xml.internal.xsom.impl.scd.Iterators.Map;
 
 @Repository("studentDao")
 public class StudentDaoImpl implements StudentDao {
@@ -57,6 +58,14 @@ public class StudentDaoImpl implements StudentDao {
 		logger.info("quetyStudentList sutdent:【{}】", student.toString());
 		String queryAllSqlId = "com.hzw.learn.springboot.mybatis.dao.student.selectAll";
 		List<Student> result = sqlSession.selectList(queryAllSqlId, student);
+		return result;
+	}
+	
+	@Override
+	public List<Map<String, String>> quetyStudentListMap(Student student) {
+		logger.info("quetyStudentList sutdent:【{}】", student.toString());
+		String queryAllSqlId = "com.hzw.learn.springboot.mybatis.dao.student.selectAll2";
+		List<Map<String, String>> result = sqlSession.selectList(queryAllSqlId, student);
 		return result;
 	}
 

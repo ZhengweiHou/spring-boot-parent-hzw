@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 import com.hzw.learn.springboot.drools.demo1.Route1_Test;
 
-@Component
-@Order(value= 1)
+//@Component
+//@Order(value= 1)
 public class StartService1 implements ApplicationRunner{
 	
 	@Autowired

@@ -14,7 +14,8 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<drools.version>7.20.0.Final</drools.version>
+		<!-- <drools.version>7.20.0.Final</drools.version> -->
+		<drools.version>5.5.0.Final</drools.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -34,11 +35,12 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.drools/drools-spring -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-spring</artifactId>
-			<version>5.6.0.Final</version>
-		</dependency> -->
+			<!-- <version>5.5.0.Final</version> -->
+			<version>${drools.version}</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.drools/drools-core -->
 		<dependency>
@@ -63,17 +65,18 @@
 		<dependency>
             <groupId>org.kie</groupId>
             <artifactId>kie-api</artifactId>
-            <version>${drools.version}</version>
+           <!-- <version>${drools.version}</version> -->
+            <version>7.20.0.Final</version>
+            
         </dependency>
 		
 		
 		<!-- https://mvnrepository.com/artifact/org.drools/knowledge-api -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>knowledge-api</artifactId>
-			<version>6.5.0.Final</version>
-			<version>6.4.0.Final</version>
-		</dependency> -->
+			<version>5.5.0.Final</version>
+		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.kie/kie-internal -->
 		<!-- <dependency>
@@ -82,6 +85,16 @@
    	 		<version>6.4.0.Final</version>
 		    <version>7.20.0.Final</version>
 		</dependency> -->
-
+		
+		<dependency>
+		    <groupId>org.drools</groupId>
+    		<artifactId>drools-container</artifactId>
+    		<version>5.5.0.Final</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.drools</groupId>
+    		<artifactId>drools-multiproject</artifactId>
+   	 		<version>5.5.0.Final</version>
+    	</dependency>
 	</dependencies>
 </project>

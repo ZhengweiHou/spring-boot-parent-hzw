@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.hzw.learn.springboot.drools.Message;
 
-@Component
+//@Component
 public class Route1_Test {
 	public void testExcel() throws Exception {
 		System.out.println("---------------begin------------------------");

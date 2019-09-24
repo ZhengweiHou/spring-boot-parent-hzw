@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hzw.learn.springboot.mybatis.dao.StudentDao;
 import com.hzw.learn.springboot.mybatis.model.Student;
+import com.sun.xml.internal.xsom.impl.scd.Iterators.Map;
 
 @Controller
 @RequestMapping("student")
@@ -65,5 +66,12 @@ public class StudentController {
 	public List<Student> getAllStudent() {
 		List<Student> studentList = studentDao.quetyStudentList(new Student());
 		return studentList;
+	}
+	
+	@ResponseBody
+	@RequestMapping("getAll2")
+	public String getAllStudent2() {
+		List<Map<String, String>> studentList = studentDao.quetyStudentListMap(new Student());
+		return studentList.toString();
 	}
 }
