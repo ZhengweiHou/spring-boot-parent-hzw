@@ -6,3 +6,4 @@
 /.iml
 /.factorypath
 /.metadata/
+.attach_pid[1-9]*
