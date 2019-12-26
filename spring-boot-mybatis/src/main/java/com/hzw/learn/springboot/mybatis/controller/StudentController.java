@@ -62,14 +62,14 @@ public class StudentController {
 	}
 
 	@ResponseBody
-	@RequestMapping("getAll")
+	@RequestMapping("getall")
 	public List<Student> getAllStudent() {
 		List<Student> studentList = studentDao.quetyStudentList(new Student());
 		return studentList;
 	}
 	
 	@ResponseBody
-	@RequestMapping("getAll2")
+	@RequestMapping("getall2")
 	public String getAllStudent2() {
 		List<Map<String, String>> studentList = studentDao.quetyStudentListMap(new Student());
 		return studentList.toString();
