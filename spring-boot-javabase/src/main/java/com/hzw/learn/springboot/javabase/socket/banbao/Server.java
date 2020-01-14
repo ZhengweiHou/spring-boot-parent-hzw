@@ -2,11 +2,12 @@ package com.hzw.learn.springboot.javabase.socket.banbao;
 
 
 
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import org.apache.tomcat.util.buf.ByteChunk;
+
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.ByteBuffer;
 
 public class Server {
     // 缓存一个read事件中一个不完整的包，以待下次read事件到来时拼接成完整的包
@@ -35,19 +36,27 @@ public class Server {
 
     private void processMesage(Socket client) throws IOException {
         InputStream ins = client.getInputStream();
-        
-        System.out.println(client.getReceiveBufferSize());
-        
-        byte[] b = new byte[client.getReceiveBufferSize()];
-        
-        int readNumber = ins.read(b);
-        
-        System.out.println(readNumber);
-        
-        String msg = new String(b,"utf-8");
-        
-        
-        System.out.println(msg);
+
+        ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+
+        byte[] b = new byte[client.getReceiveBufferSize()]; // 缓冲字节数组大小设置成当前socket tcp
+
+        int readNumber;
+
+        while (true){
+            readNumber = ins.read(b);
+
+            if(readNumber == -1){  // -1 代表socket连接已断开，在连接断开前会一直尝试从当前socket 流中获取字节流
+                break;
+            }
+
+            byteOut.write(b,0,readNumber);
+        }
+
+        byte[] resultByteArray = byteOut.toByteArray();
+
+        System.out.println(new String(resultByteArray,"utf-8"));
+
         
         
         
