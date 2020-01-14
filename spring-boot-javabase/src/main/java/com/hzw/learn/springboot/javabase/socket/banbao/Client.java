@@ -34,9 +34,10 @@ public class Client {
 			socket.setSoTimeout(5000);
 			
 			OutputStream out = socket.getOutputStream();
-			
+
 			out.write(getMessage(msg));
-			out.write("1234".getBytes("utf-8"));
+
+			out.write("这是第二个包".getBytes("utf-8")); // 模拟分包发送第二个包
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -44,6 +44,7 @@
     <module>spring-boot-mq</module>
     <module>spring-boot-drools</module>
     <module>spring-boot-springbase</module>
+      <module>spring-boot-dubbo</module>
   </modules>
   
   <dependencyManagement>
