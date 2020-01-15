@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.dubbo.zookeeper.hello;
+package com.hzw.learn.springboot.dubbo.zookeeper.hello.provider;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -17,8 +17,8 @@ public class Provider_Annotation {
     }
 
     @Configuration
-    @EnableDubbo(scanBasePackages = "com.hzw.learn.springboot.dubbo.zookeeper.hello")
-    @PropertySource("classpath:/dubbo/zookeeper/hello/dubbo-provider.properties")
+    @EnableDubbo(scanBasePackages = "com.hzw.learn.springboot.dubbo.zookeeper.hello.provider")
+    @PropertySource("classpath:/com/hzw/learn/springboot/dubbo/zookeeper/hello/provider/dubbo-provider.properties")
     static class ProviderConfiguration {
     }
 }

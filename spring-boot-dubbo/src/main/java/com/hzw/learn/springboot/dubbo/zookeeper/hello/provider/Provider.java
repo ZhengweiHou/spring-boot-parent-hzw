@@ -1,8 +1,9 @@
-package com.hzw.learn.springboot.dubbo.zookeeper.hello;
+package com.hzw.learn.springboot.dubbo.zookeeper.hello.provider;
 
 import java.util.concurrent.CountDownLatch;
 
 import org.apache.dubbo.config.ApplicationConfig;
+import org.apache.dubbo.config.ProtocolConfig;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.ServiceConfig;
 
@@ -12,7 +13,12 @@ public class Provider {
     public static void main(String[] args) throws Exception {
         ServiceConfig<Hi> service = new ServiceConfig<>();
         service.setApplication(new ApplicationConfig("first-dubbo-provider"));
-        service.setRegistry(new RegistryConfig("zookeeper://" + zookeeperHost + ":2181"));
+        
+        RegistryConfig registry = new RegistryConfig("zookeeper://" + zookeeperHost + ":2181");
+        ProtocolConfig protocol = new ProtocolConfig("dubbo",20881); // 设置服务注册端口
+        
+        service.setRegistry(registry);
+        service.setProtocol(protocol);
         service.setInterface(Hi.class);
         service.setRef(new HiImpl("张三"));
         service.setVersion("1.0.0");	// 第一个版本的服务
