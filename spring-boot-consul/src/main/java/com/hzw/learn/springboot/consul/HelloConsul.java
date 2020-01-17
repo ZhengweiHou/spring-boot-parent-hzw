@@ -26,7 +26,9 @@ public class HelloConsul {
 
 	@Value("${server.port}")
 	private Integer port;
-
+	
+	@Value("${server.application.name}")
+	private String appname;
 	@Autowired
 	private LoadBalancerClient loadBalancer;
 
@@ -38,6 +40,7 @@ public class HelloConsul {
 		String uri = serviceInstance.getUri().toString();
 		String url = uri + "/helloconsul/server";
 		String result = rest.getForObject(url, String.class);
+		System.out.println("==============");
 
 		return result;
 	}
@@ -48,9 +51,11 @@ public class HelloConsul {
 		return "hello client, there is server";
 	}
 
+//	http://localhost:8081/helloconsul/add?b=1&a=2
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add(@RequestParam Integer a, @RequestParam Integer b) {
-		ServiceInstance instance = client.getLocalServiceInstance();
+//		ServiceInstance instance = client.getLocalServiceInstance();
+		ServiceInstance instance = client.getInstances(appname).get(0);
 		Integer r = a + b;
 		String s = "/add, host:" + instance.getHost() + ", service_id:" + instance.getServiceId() + "; result : " + r
 				+ "; port:" + port;
@@ -68,7 +73,8 @@ public class HelloConsul {
 
 	@RequestMapping(value = "/geturl/{serviceName}", method = RequestMethod.GET)
 	public String getUrl(@PathVariable String serviceName) {
-
-		return loadBalancer.choose(serviceName).getUri().toString();
+		ServiceInstance serviceInstance = loadBalancer.choose(serviceName);
+		
+		return serviceInstance.getUri().toString();
 	}
 }

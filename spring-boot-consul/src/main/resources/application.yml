@@ -11,16 +11,18 @@ spring:
   cloud:
     consul:
 #      host: 127.0.0.1
-      host: 10.252.12.32
+      host: 127.0.0.1
       port: 8500
       discovery:
         enabled: true
         service-name: ${server.application.name}
+        instance-id: ${server.application.name}
         health-check-interval: 10s
         register: true
         tags: foo=bar, baz
-#        health-check-path: /hellospringboot/index
-        hostname: 10.252.12.28
+        health-check-path: /hellospringboot/index
+        hostname: 10.252.21.176
+
 
 env:
   envmaps: 
@@ -28,3 +30,5 @@ env:
     env2: z
     env3: w
     env-a: ${env-a} #获取环境变量env-a
+    
+    

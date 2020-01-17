@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.dubbo.zookeeper.hello.provider;
+package com.hzw.learn.springboot.dubbo.hello.provider;
 
 public class HiImpl implements Hi {
 	

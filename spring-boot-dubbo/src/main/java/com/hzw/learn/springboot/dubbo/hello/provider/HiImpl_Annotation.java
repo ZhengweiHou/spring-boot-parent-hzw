@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.dubbo.zookeeper.hello.provider;
+package com.hzw.learn.springboot.dubbo.hello.provider;
 
 import org.apache.dubbo.config.annotation.Service;
 
