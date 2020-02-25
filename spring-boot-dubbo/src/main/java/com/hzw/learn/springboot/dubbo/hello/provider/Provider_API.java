@@ -25,7 +25,7 @@ public class Provider_API {
     	
         ArrayList<RegistryConfig> registries = new ArrayList<>();
         registries.add(registry_zookeeper);
-        registries.add(registry_consul);
+//        registries.add(registry_consul);	// 添加consul注册中心
         
         // 设置服务要注册的注册中心
 //        service.setRegistry(registry_zookeeper);

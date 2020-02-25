@@ -18,12 +18,12 @@ public class Consumer_API {
     	ApplicationConfig application = new ApplicationConfig("first-dubbo-consumer");
     	
     	RegistryConfig registry_zookeeper = new RegistryConfig("zookeeper://" + zookeeperHost + ":2181");
-//        RegistryConfig registry_consul = new RegistryConfig("consul://" + zookeeperHost + ":8500");
+        RegistryConfig registry_consul = new RegistryConfig("consul://" + zookeeperHost + ":8500");
+    	registry_consul.setCheck(false);
     	
         ArrayList<RegistryConfig> registries = new ArrayList<>();
-//        registries.add(registry_consul);
         registries.add(registry_zookeeper);
-
+//        registries.add(registry_consul);
         
         ReferenceConfig<Hi> reference = new ReferenceConfig<>();
 //        reference.setApplication(application);

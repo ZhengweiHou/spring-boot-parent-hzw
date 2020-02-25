@@ -12,7 +12,7 @@
     <artifactId>spring-boot-dubbo</artifactId>
 
 	<properties>
-	    <dubbo.version>2.7.5</dubbo.version>
+	    <dubbo.version>2.7.3</dubbo.version>
 	</properties>
     
     <dependencies>
