@@ -7,6 +7,7 @@ import java.util.concurrent.CountDownLatch;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
+import org.apache.dubbo.rpc.cluster.loadbalance.RoundRobinLoadBalance;
 
 import com.hzw.learn.springboot.dubbo.hello.provider.Hi;
 
@@ -15,7 +16,9 @@ public class Consumer_API {
     private static String zookeeperHost = System.getProperty("zookeeper.address", "127.0.0.1");
 
     public static void main(String[] args) throws InterruptedException {
-    	ApplicationConfig application = new ApplicationConfig("first-dubbo-consumer");
+    	// ======应用配置======
+    	ApplicationConfig application = new ApplicationConfig("consumer-api");
+    	
     	
     	RegistryConfig registry_zookeeper = new RegistryConfig("zookeeper://" + zookeeperHost + ":2181");
         RegistryConfig registry_consul = new RegistryConfig("consul://" + zookeeperHost + ":8500");
@@ -23,7 +26,7 @@ public class Consumer_API {
     	
         ArrayList<RegistryConfig> registries = new ArrayList<>();
         registries.add(registry_zookeeper);
-//        registries.add(registry_consul);
+        registries.add(registry_consul);
         
         ReferenceConfig<Hi> reference = new ReferenceConfig<>();
 //        reference.setApplication(application);
@@ -54,8 +57,9 @@ public class Consumer_API {
         reference.setInterface(Hi.class);
         reference.setVersion("*");	// version匹配所有版本，调用hi3时会负载分配到匹配到的服务上
         reference.setGroup("*");	// 指定group
-        reference.setLoadbalance("random");
-        Hi hi3 = reference.get();
+        reference.setLoadbalance(RoundRobinLoadBalance.NAME);
+
+    	Hi hi3 = reference.get();
         
         while(true) {
             System.out.println(hi3.sayhi("Consumer_Api"));

@@ -3,10 +3,13 @@ package com.hzw.learn.springboot.dubbo.hello.provider;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
+import org.apache.dubbo.common.status.StatusChecker;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ProtocolConfig;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.ServiceConfig;
+import org.apache.dubbo.rpc.cluster.loadbalance.RandomLoadBalance;
+import org.apache.dubbo.rpc.cluster.loadbalance.RoundRobinLoadBalance;
 
 public class Provider_API {
     private static String zookeeperHost = System.getProperty("zookeeper.address", "127.0.0.1");
@@ -14,38 +17,57 @@ public class Provider_API {
     
 
     public static void main(String[] args) throws Exception {
-    	// 创建一个服务配置
-        ServiceConfig<Hi> service = new ServiceConfig<>();
-        // 设置服务名
-        service.setApplication(new ApplicationConfig("first-dubbo-provider"));
-        // 注册中心配置
-    	RegistryConfig registry_zookeeper = new RegistryConfig("zookeeper://" + zookeeperHost + ":2181");
-        RegistryConfig registry_consul = new RegistryConfig("consul://" + consulHost + ":8500");
-        registry_consul.setCheck(false);
+
+    	// ======应用配置======
+    	ApplicationConfig applicationConfig = new ApplicationConfig("provider_api");
     	
+    	// 在线运维-QOS 端口 dubbo.application.qos.port=33333
+    	applicationConfig.setQosPort(33333); 
+    	// QOS 安全 dubbo.application.qos.accept.foreign.ip=false
+    	applicationConfig.setQosAcceptForeignIp(false); // 拒绝远程主机命令
+    	
+    	// ======注册中心配置======
+    	RegistryConfig registry_zookeeper = new RegistryConfig("zookeeper://" + zookeeperHost + ":2181");
+//        RegistryConfig registry_consul = new RegistryConfig("consul://" + consulHost + ":8500");
+//        registry_consul.setCheck(false);
+    	// 组装一个注册中心集合
         ArrayList<RegistryConfig> registries = new ArrayList<>();
         registries.add(registry_zookeeper);
-//        registries.add(registry_consul);	// 添加consul注册中心
+//        registries.add(registry_consul);	
         
+
+    	// ======协议配置======
+        ProtocolConfig protocol = new ProtocolConfig("dubbo",20880); // 协议配置
+//        protocol.setStatus("spring,registry,server,memory,load,datasource,threadpool");	// 开启状态检查扩展
+        protocol.setTelnet("cd,ps,select,log,ls,clear,count,invoke,exit,help,trace,pwd,shutdown,status");	// 开启telnet扩展
+        
+        
+        // ======注册服务配置======
+    	// 创建一个服务配置
+        ServiceConfig<Hi> service = new ServiceConfig<>();
+        // 设置服务配置
+        service.setApplication(applicationConfig);
         // 设置服务要注册的注册中心
-//        service.setRegistry(registry_zookeeper);
-        service.setRegistries(registries);
-        
-        ProtocolConfig protocol = new ProtocolConfig("dubbo",20881); // 协议配置
+        //service.setRegistry(registry_zookeeper);  // 设置单个注册中心
+        service.setRegistries(registries);	// 设置多个注册中心集合
+        // 设置协议
         service.setProtocol(protocol);
-        
-        
+        // 组别
+        service.setGroup("dubbo_hzw");
         // 设置服务接口
         service.setInterface(Hi.class);
         // 设置服务实现类
         service.setRef(new HiImpl("张三"));
         // 设置服务版本（实际上就是一个标签，可供消费者过滤选择）
-        service.setVersion("3.0.0");	// 第一个版本的服务
-        service.setGroup("dubbo_hzw");
-        
+        service.setVersion("2.0.0");
+        // 负载方式（实现方式？？）
+//        service.setLoadbalance(RandomLoadBalance.NAME);
+        service.setLoadbalance(RoundRobinLoadBalance.NAME);
         // 好了，先配置这样吧，让服务到注册中心报到吧
         service.export();
+        
 
+        
         System.out.println("dubbo service started");
         new CountDownLatch(1).await();
     }

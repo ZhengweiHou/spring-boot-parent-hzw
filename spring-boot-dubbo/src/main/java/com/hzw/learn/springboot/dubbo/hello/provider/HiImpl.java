@@ -12,7 +12,7 @@ public class HiImpl implements Hi {
 
 	@Override
 	public String sayhi(String name) {
-		System.out.println("recive for " + name);
+		System.out.println(name2 + "recive for " + name);
 		return "hi," + name + ",I'm " + name2;
 		
 	}
