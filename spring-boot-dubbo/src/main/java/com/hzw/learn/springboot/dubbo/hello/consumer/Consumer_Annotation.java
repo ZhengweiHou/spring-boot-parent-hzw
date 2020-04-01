@@ -19,6 +19,8 @@ public class Consumer_Annotation {
     public static void main(String[] args) throws InterruptedException {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ConsumerConfiguration.class);
         context.start();
+        
+        
         GreetingServiceConsumer hi = context.getBean(GreetingServiceConsumer.class);
         String hello = hi.sayHi("consume_anno 1");
         System.out.println("result: " + hello);

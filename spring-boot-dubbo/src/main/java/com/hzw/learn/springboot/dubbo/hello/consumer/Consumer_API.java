@@ -55,6 +55,7 @@ public class Consumer_API {
 //      reference.setRegistry(registry_zookeeper);	// 只配置一个注册中心
         reference.setRegistries(registries);		// 配置注册中心列表，多个注册中心
         reference.setInterface(Hi.class);
+        reference.setTag("zzz");
         reference.setVersion("*");	// version匹配所有版本，调用hi3时会负载分配到匹配到的服务上
         reference.setGroup("*");	// 指定group
         reference.setLoadbalance(RoundRobinLoadBalance.NAME);

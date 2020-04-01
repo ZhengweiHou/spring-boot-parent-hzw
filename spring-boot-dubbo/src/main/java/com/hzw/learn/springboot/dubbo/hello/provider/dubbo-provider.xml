@@ -7,6 +7,8 @@
        
     <dubbo:application name="third-dubbo-provider-by-xml"/>
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:metadata-report address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:config-center address="ookeeper://127.0.0.1:2181"/>
     
     <!-- <dubbo:registry address="consul://127.0.0.1:8500"/> -->
     
@@ -16,6 +18,8 @@
     	<constructor-arg value="DubboXML"/>
     </bean>
     
-    <dubbo:service group="dubbo_hzw" interface="com.hzw.learn.springboot.dubbo.hello.provider.Hi" ref="hiService" version="3.0.0"/>
+    <dubbo:service group="dubbo_hzw" interface="com.hzw.learn.springboot.dubbo.hello.provider.Hi" ref="hiService" version="3.0.0">
+    	<!-- <dubbo:method name="sayhi" async="false" ></dubbo:method> -->
+    </dubbo:service>
     
 </beans>

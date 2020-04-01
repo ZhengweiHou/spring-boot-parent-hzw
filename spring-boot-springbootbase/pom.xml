@@ -30,4 +30,27 @@
 		</dependency>
 
   </dependencies>
+  
+   <build>
+        <plugins>
+        
+        	<!-- 指定mvn install 时的程序入口 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.hzw.learn.springboot.springbootbase.Application</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+  </build>
+  
+  
 </project>

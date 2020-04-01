@@ -18,10 +18,14 @@ public class EmitMessageRpc_queue {
 		String QUEUE_NAME="hzw.RPC_queue";
 		
 		ConnectionFactory connectionFactory = new ConnectionFactory();
-		connectionFactory.setHost("192.168.32.131");
-//		connectionFactory.setVirtualHost("test");
-		connectionFactory.setUsername("admin");
-		connectionFactory.setPassword("admin");
+//		connectionFactory.setHost("192.168.32.131");
+////		connectionFactory.setVirtualHost("test");
+//		connectionFactory.setUsername("admin");
+//		connectionFactory.setPassword("admin");
+		connectionFactory.setHost("localhost");
+	connectionFactory.setVirtualHost("/dev");
+	connectionFactory.setUsername("guest");
+	connectionFactory.setPassword("guest");
 		Connection connection = connectionFactory.newConnection();
 		Channel channel = connection.createChannel();
 		

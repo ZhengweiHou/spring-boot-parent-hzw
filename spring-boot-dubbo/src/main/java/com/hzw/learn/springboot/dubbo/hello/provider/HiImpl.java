@@ -17,4 +17,10 @@ public class HiImpl implements Hi {
 		
 	}
 
+	@Override
+	public String async_sayhi(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
