@@ -5,6 +5,7 @@ import java.util.concurrent.CountDownLatch;
 
 import org.apache.dubbo.common.status.StatusChecker;
 import org.apache.dubbo.config.ApplicationConfig;
+import org.apache.dubbo.config.ConfigCenterConfig;
 import org.apache.dubbo.config.MetadataReportConfig;
 import org.apache.dubbo.config.ProtocolConfig;
 import org.apache.dubbo.config.RegistryConfig;
@@ -18,6 +19,10 @@ public class Provider_API {
     
     private static String zookeeperUrl = "zookeeper://" + zookeeperHost + ":2181";
     
+//    private static String group_value="hzw2";
+    private static String group_value="dubbo";
+    
+    
 
     public static void main(String[] args) throws Exception {
 
@@ -25,13 +30,14 @@ public class Provider_API {
     	ApplicationConfig applicationConfig = new ApplicationConfig("provider_api");
     	
     	// 在线运维-QOS 端口 dubbo.application.qos.port=33333
-    	applicationConfig.setQosPort(33333); 
+//    	applicationConfig.setQosPort(33333); 
+    	
     	// QOS 安全 dubbo.application.qos.accept.foreign.ip=false
     	applicationConfig.setQosAcceptForeignIp(false); // 拒绝远程主机命令
     	
     	// ======注册中心配置======
     	RegistryConfig registry_zookeeper = new RegistryConfig(zookeeperUrl);
-    	registry_zookeeper.setGroup("1111"); // 注册中心级别的组别，zk下会创建对应根目录
+    	registry_zookeeper.setGroup(group_value); // 注册中心级别的组别，zk下会创建对应根目录
 //        RegistryConfig registry_consul = new RegistryConfig("consul://" + consulHost + ":8500");
 //        registry_consul.setCheck(false);
     	// 组装一个注册中心集合
@@ -39,15 +45,22 @@ public class Provider_API {
         registries.add(registry_zookeeper);
 //        registries.add(registry_consul);	
         
+        // ======元数据配置======
+        MetadataReportConfig metadata = new MetadataReportConfig();
+        metadata.setAddress(zookeeperUrl);
+        metadata.setGroup(group_value);
+        metadata.getMetaData().put("hhhhhhhhzzzzzzzzwww", "1111111122222");
+        
+        // ======配置中心======
+        ConfigCenterConfig configCenter = new ConfigCenterConfig();
+        configCenter.setAddress(zookeeperUrl);
+        configCenter.setGroup(group_value);
 
     	// ======协议配置======
         ProtocolConfig protocol = new ProtocolConfig("dubbo",20881); // 协议配置
 //        protocol.setStatus("spring,registry,server,memory,load,datasource,threadpool");	// 开启状态检查扩展
         protocol.setTelnet("cd,ps,select,log,ls,clear,count,invoke,exit,help,trace,pwd,shutdown,status");	// 开启telnet扩展
         
-        // ======元数据配置======
-        MetadataReportConfig metadata = new MetadataReportConfig();
-        metadata.setAddress(zookeeperUrl);
         
         // ======注册服务配置======
     	// 创建一个服务配置
@@ -65,6 +78,8 @@ public class Provider_API {
         service.setRegistries(registries);	// 设置多个注册中心集合
         // 设置元数据中心
         service.setMetadataReportConfig(metadata);
+        // 设置配置中心
+        service.setConfigCenter(configCenter);
         // 设置协议
         service.setProtocol(protocol);
         // service级别的组别，不是zk的根目录，要注意
@@ -76,7 +91,7 @@ public class Provider_API {
         service.setRef(new HiImpl("张三"));
         service.setTag("xxx");
         // 设置服务版本（实际上就是一个标签，可供消费者过滤选择）
-        service.setVersion("2.0.0");
+        service.setVersion("1.0.0");
         // 负载方式（实现方式？？）
 //        service.setLoadbalance(RandomLoadBalance.NAME);
         service.setLoadbalance(RoundRobinLoadBalance.NAME);
