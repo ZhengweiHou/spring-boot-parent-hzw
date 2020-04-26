@@ -1,0 +1,72 @@
+pipeline{
+    agent any
+    options{
+        retry(1)
+    }
+    
+    environment {
+        githook_ref = "$githook_ref" // refs/heads/master
+        githook_repository_name = "$githook_repository_name"	// spring-boot-parent-hzw
+        gitl_url = "$gitl_url"	// http://172.27.0.2/gitlabtest/spring-boot-parent-hzw.git
+        gitl_user = "$gitl_user"
+    }
+    
+    stages{
+        stage('HookConfig') { 
+            steps{
+                script{
+                	// 检查hook触发的项目名和该job目标git路径是否匹配
+                    if (!gitl_url.matches(".*/" + githook_repository_name + ".git")){
+                        error "目标项目${githook_repository_name}无法匹配目标地址${gitl_url}"
+                    }
+                    
+                    ref_list = githook_ref.tokenize('/')
+                    ref_type = ref_list[1]	// heads、tags
+                    ref_name = ref_list[2]	// master、v0.1
+                }
+            }
+        }
+        
+        stage('InitConfig'){
+        	steps{
+        		echo "初始化构建参数"
+        	}
+        }
+
+        
+        stage('CodeCheck') {
+            steps{
+                // git branch: "master", credentialsId: 'd87b6196-bae0-4195-88d6-7f85d76f52b1', url: 'http://172.27.0.2/gitlabtest/spring-boot-parent-hzw.git'
+                script{
+                    url="${gitl_url}"
+                    branch="${ref_name}"   // 目标分支也可以是tag号
+                    credentialsId="${gitl_user}"
+                }
+             
+                checkout([
+                    $class: 'GitSCM', 
+                    branches: [[name: "$branch"]], 
+                    doGenerateSubmoduleConfigurations: false, 
+                    extensions: [
+                        [$class: 'CleanBeforeCheckout'], 
+                        [$class: 'RelativeTargetDirectory', relativeTargetDir: 'code'], 
+                        [$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: true, recursiveSubmodules: true, reference: '', timeout: 3, trackingSubmodules: false]
+                    ], 
+                    submoduleCfg: [], 
+                    userRemoteConfigs: [
+                        [credentialsId: "$credentialsId", url: "$url"]
+                    ]
+                ]) 
+            }
+        }
+        
+        stage('Build') {
+            steps{
+            	script{
+	            	pwdl = pwd()
+	            	echo "${pwdl}"
+            	}
+            }
+        }
+    }
+}
