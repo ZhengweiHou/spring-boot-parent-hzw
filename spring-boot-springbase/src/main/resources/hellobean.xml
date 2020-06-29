@@ -26,4 +26,13 @@
 	<alias alias="helloalias1" name="hello1" />
 
 
+	<!--通过下标和name指定构造参数-->
+	<bean id="hello4"
+		  class="com.hzw.learn.springboot.springbase.springbean.hello.HelloImpl"
+		  c:_0="aaa"
+		  c:msg2="bbb"
+	>
+	</bean>
+
+
 </beans>

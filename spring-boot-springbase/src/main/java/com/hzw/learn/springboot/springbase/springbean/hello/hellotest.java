@@ -47,6 +47,9 @@ public class hellotest {
         HelloApi hello3 = beanFactory.getBean("hello3", HelloApi.class);
         hello3.sayHello();
 
+        // 通过下标和name指定构造参数
+        HelloApi hello4 = beanFactory.getBean("hello4", HelloApi.class);
+        hello4.sayHello();
     }
 
 }
