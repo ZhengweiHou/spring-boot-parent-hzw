@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.springbase.springbean.hello;
+package com.hzw.learn.springboot.springbase.springbean;
 
 /**
  * @ClassName HelloImpl

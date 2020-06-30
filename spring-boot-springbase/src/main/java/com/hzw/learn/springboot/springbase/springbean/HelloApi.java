@@ -1,5 +1,5 @@
 package com.hzw.learn.springboot.springbase.springbean;
 
-public class Cons1 {
-
+public interface HelloApi {
+    public void sayHello();
 }

@@ -25,3 +25,5 @@ target/
 *.patch
 *.tmp
 
+.attach_pid*
+.metadata
