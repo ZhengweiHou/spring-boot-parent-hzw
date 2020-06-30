@@ -35,6 +35,10 @@ public class hellotest {
                 new ClassPathXmlApplicationContext(
                         "springbean/springbean.xml");
 
+//        BeanFactory beanFactory =
+//                new ClassPathXmlApplicationContext(
+//                        "com/hzw/learn/springboot/springbase/springbean/springbean2.xml");  // why can not find the xml
+
         // xml 定义bean
         HelloApi hello1 = beanFactory.getBean("hello1", HelloApi.class);
         hello1.sayHello();
