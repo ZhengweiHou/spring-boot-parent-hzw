@@ -22,17 +22,18 @@
         <constructor-arg index="1" value="Mr ni!"/>
     </bean>
 
-    <!-- 别名 -->
-    <alias alias="helloalias1" name="hello1" />
-
-
-    <!--通过下标和name指定构造参数-->
+    <!--c命名空间指定构造参数-->
     <bean id="hello4"
           class="com.hzw.learn.springboot.springbase.springbean.HelloImpl"
           c:_0="下标定位构造参数"
           c:msg2="name定位构造参数"
-    >
-    </bean>
+    />
+
+    <!-- 别名 -->
+    <alias alias="helloalias1" name="hello1" />
+
+
+
 
     <!--
     c:_0			第一个构造器参数
@@ -62,6 +63,7 @@
           scope="prototype"
     >
         <constructor-arg>
+            <!--这里是个内部bean，id定义没有意义，spring会忽略id、nama只有一个唯一的匿名标识，且外部不可见-->
             <bean class="java.lang.String">
                 <constructor-arg>
                     <bean class="java.lang.System" factory-method="currentTimeMillis"/>
