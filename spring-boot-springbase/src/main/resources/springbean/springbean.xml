@@ -56,6 +56,31 @@
         <constructor-arg index="1" value="实例工厂实例化"/>
     </bean>
 
+    <!--稍微扩展一下-->
+    <!--scop:  prototype(多例)、singleton（单例）-->
+    <bean id="hello_prototype" class="com.hzw.learn.springboot.springbase.springbean.HelloImpl"
+          scope="prototype"
+    >
+        <constructor-arg>
+            <bean class="java.lang.String">
+                <constructor-arg>
+                    <bean class="java.lang.System" factory-method="currentTimeMillis"/>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="hello_singleton" class="com.hzw.learn.springboot.springbase.springbean.HelloImpl"
+          scope="singleton"
+    >
+        <constructor-arg>
+            <bean class="java.lang.String">
+                <constructor-arg>
+                    <bean class="java.lang.System" factory-method="currentTimeMillis"/>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
 
 
 </beans>

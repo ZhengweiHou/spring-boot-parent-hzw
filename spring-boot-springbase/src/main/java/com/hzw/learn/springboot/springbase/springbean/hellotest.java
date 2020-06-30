@@ -4,16 +4,11 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
-import javax.xml.crypto.dsig.keyinfo.KeyValue;
-import java.awt.image.Kernel;
+import java.util.Date;
 import java.util.Map;
-import java.util.function.Consumer;
 
 /**
  * @ClassName hellotest
@@ -76,11 +71,27 @@ public class hellotest {
         beans.values().forEach(HelloApi::sayHello);
 
         // beanFaxtory 通过类型获取实例时，有多个时会异常
-        HelloApi bean = beanFactory.getBean(HelloApi.class);
-        bean.sayHello();
+//        HelloApi bean = beanFactory.getBean(HelloApi.class);
+//        bean.sayHello();
 
 
         // 这里留个疑问： 此类中的beanfactory是现场定义出来的，那在后续程序中肯定不能再初始化这个beanfactory，那时怎么获取这个beanfactory对象呢？
+
+
+        // 扩展思考
+        // scop:  prototype(多例)、singleton（单例）
+        System.out.println("==prototype==");
+        HelloApi hello_prototype = beanFactory.getBean("hello_prototype", HelloApi.class);
+        hello_prototype.sayHello();
+        hello_prototype = beanFactory.getBean("hello_prototype", HelloApi.class);
+        hello_prototype.sayHello();
+
+        System.out.println("==singleton==");
+        HelloApi hello_singleton = beanFactory.getBean("hello_singleton", HelloApi.class);
+        hello_singleton.sayHello();
+        hello_singleton = beanFactory.getBean("hello_singleton", HelloApi.class);
+        hello_singleton.sayHello();
+
     }
 
 }
