@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.springbase.springbean;
+package com.hzw.learn.springboot.springbase.IOC;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -7,7 +7,6 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -33,7 +32,7 @@ public class hellotest {
         // 获取配置文件，初始化容器
         BeanFactory beanFactory =
                 new ClassPathXmlApplicationContext(
-                        "springbean/springbean.xml");
+                        "IOC/springbean.xml");
 
 //        BeanFactory beanFactory =
 //                new ClassPathXmlApplicationContext(

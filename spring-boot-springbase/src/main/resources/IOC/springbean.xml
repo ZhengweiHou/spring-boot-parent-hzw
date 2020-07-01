@@ -11,30 +11,23 @@
 
     <!-- Bean装配测试 -->
 
-    <bean id="hello1" class="com.hzw.learn.springboot.springbase.springbean.HelloImpl"/>
+    <bean id="hello1" class="com.hzw.learn.springboot.springbase.IOC.HelloImpl"/>
 
-    <bean id="hello2" class="com.hzw.learn.springboot.springbase.springbean.HelloImpl">
+    <bean id="hello2" class="com.hzw.learn.springboot.springbase.IOC.HelloImpl">
         <constructor-arg value="hello hzw!"/>
     </bean>
 
-    <bean id="hello3" class="com.hzw.learn.springboot.springbase.springbean.HelloImpl">
+    <bean id="hello3" class="com.hzw.learn.springboot.springbase.IOC.HelloImpl">
         <constructor-arg index="0" value="hello"/>
         <constructor-arg index="1" value="Mr ni!"/>
     </bean>
 
     <!--c命名空间指定构造参数-->
     <bean id="hello4"
-          class="com.hzw.learn.springboot.springbase.springbean.HelloImpl"
+          class="com.hzw.learn.springboot.springbase.IOC.HelloImpl"
           c:_0="下标定位构造参数"
           c:msg2="name定位构造参数"
     />
-
-    <!-- 别名 -->
-    <alias alias="helloalias1" name="hello1" />
-
-
-
-
     <!--
     c:_0			第一个构造器参数
     c:constr2		构造器参数名constr2
@@ -42,14 +35,19 @@
     c:_4-ref		构造器第四个参宿，使用ref引用注入
     -->
 
+    <!-- 别名 -->
+    <alias alias="helloalias1" name="hello1" />
+
+
+
     <!--使用静态工厂实例化-->
-    <bean id="hello5" class="com.hzw.learn.springboot.springbase.springbean.HelloStaticFactory"
+    <bean id="hello5" class="com.hzw.learn.springboot.springbase.IOC.HelloStaticFactory"
           factory-method="newInstance">
         <constructor-arg value="我是静态工厂实例化出来的"/>
     </bean>
 
     <!--使用实例工厂实例化-->
-    <bean id="instanceFactoryBean" class="com.hzw.learn.springboot.springbase.springbean.HelloInstanceFactory"/>
+    <bean id="instanceFactoryBean" class="com.hzw.learn.springboot.springbase.IOC.HelloInstanceFactory"/>
     <bean id="hello6"
           factory-bean="instanceFactoryBean"
           factory-method="newInstance">
@@ -59,7 +57,7 @@
 
     <!--稍微扩展一下-->
     <!--scop:  prototype(多例)、singleton（单例）-->
-    <bean id="hello_prototype" class="com.hzw.learn.springboot.springbase.springbean.HelloImpl"
+    <bean id="hello_prototype" class="com.hzw.learn.springboot.springbase.IOC.HelloImpl"
           scope="prototype"
     >
         <constructor-arg>
@@ -72,7 +70,7 @@
         </constructor-arg>
     </bean>
 
-    <bean id="hello_singleton" class="com.hzw.learn.springboot.springbase.springbean.HelloImpl"
+    <bean id="hello_singleton" class="com.hzw.learn.springboot.springbase.IOC.HelloImpl"
           scope="singleton"
     >
         <constructor-arg>
