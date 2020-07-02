@@ -63,6 +63,99 @@
 
 
     <!--=注入集合、数组和字典等=-->
+    <bean id="listSetMapDiTest" class="com.hzw.learn.springboot.springbase.DI.ListSetMapDITestBean">
+        <!--List-->
+        <property name="listValues">
+            <list value-type="java.lang.String" merge="default">   <!--这个merge是什么意思？？  用于父子Bean之间是否合并list条目-->
+                <value>listValue 1</value>
+                <value>listValue 2</value>
+            </list>
+        </property>
+
+        <!--set-->
+        <property name="setValues">
+            <set value-type="java.lang.String" merge="default">
+                <value>setValue 1</value>
+                <value>setValue 2</value>
+            </set>
+        </property>
+
+        <!--map-->
+        <property name="mapValues">
+            <map key-type="java.lang.String" value-type="java.lang.String" merge="default">
+                <entry>
+                    <key>
+                        <value>key1</value>
+                    </key>
+                    <value>value1</value>
+                </entry>
+
+                <entry key="key2" value="value2"/>
+            </map>
+        </property>
+
+        <!--一维数组-->
+        <property name="array1v">
+            <array value-type="java.lang.String" merge="default">
+                <value>1</value>
+                <value>2</value>
+            </array>
+        </property>
+        <!--二维数组-->
+        <property name="array2v">
+            <array>
+                <array>
+                    <value>1-1</value>
+                    <value>1-2</value>
+                </array>
+                <array>
+                    <value>2-1</value>
+                    <value>2-2</value>
+                </array>
+
+            </array>
+        </property>
+
+        <!--properties-->
+        <property name="properties1">
+            <props value-type="int">
+                <prop key="p1-1">p1value1</prop>
+                <prop key="p1-2">p1value2</prop>
+            </props>
+        </property>
+
+        <property name="properties2">
+            <value>
+                p2-1=p2value1
+                p2-2=p2value2
+                p2-3=p2value3
+                p2-4=p2value4
+            </value>
+        </property>
+
+    </bean>
+
+
+    <!-- bean注入测试 -->
+    <bean id="beanDi1name" class="java.lang.String" c:_0="孙悟空"/>
+    <bean id="beanDi1" class="com.hzw.learn.springboot.springbase.DI.HelloDiImpl">
+        <property name="name" ref="beanDi1name"/>
+    </bean>
+
+    <!--    内部bean-->
+    <bean id="beanDi2" class="com.hzw.learn.springboot.springbase.DI.HelloDiImpl">
+        <property name="name">
+            <bean class="java.lang.String" c:_0="沙悟净"/>
+        </property>
+    </bean>
+
+    <!--使用p名称空间-->
+    <bean id="beanDi3" class="com.hzw.learn.springboot.springbase.DI.HelloDiImpl"
+          p:name-ref="beanDi1name"
+          p:age="1000"
+    />
+
+
 
 
 </beans>
