@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.springbase.Autowire;
+package com.hzw.learn.springboot.springbase.DI.DIAutowire;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -19,7 +19,7 @@ public class TestMain {
     ApplicationContext applicationContext = null;
     @Before
     public void init(){
-        applicationContext = new ClassPathXmlApplicationContext("Autowire/springAutowire.xml");
+        applicationContext = new ClassPathXmlApplicationContext("DI/DIAutowire/springAutowire.xml");
     }
 
     @Test
@@ -29,7 +29,7 @@ public class TestMain {
         annotationAutowiredTestBean.sayHello();
 
 
-        XmlAutowireTestBean xmlAutowireTestBean = applicationContext.getBean(XmlAutowireTestBean.class);
+        XmlAutowireTestBean         xmlAutowireTestBean         = applicationContext.getBean(XmlAutowireTestBean.class);
         xmlAutowireTestBean.sayHello();
 
 //        com.hzw.learn.springboot.springbase.Autowire.AnnotationAutowiredTestBean的setAnnotationABean方法执行

@@ -1,6 +1,4 @@
-package com.hzw.learn.springboot.springbase.DI;
-
-import java.beans.ConstructorProperties;
+package com.hzw.learn.springboot.springbase.DI.DIHello;
 
 /**
  * @ClassName HelloDiImpl

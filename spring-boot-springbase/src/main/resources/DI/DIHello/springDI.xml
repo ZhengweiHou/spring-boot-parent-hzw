@@ -12,17 +12,17 @@
 
     <!--====构造器注入====-->
     <!--    通过index、name和type注入构造参数-->
-    <bean id="hellodi1-index" class="com.hzw.learn.springboot.springbase.DI.HelloDiImpl">
+    <bean id="hellodi1-index" class="com.hzw.learn.springboot.springbase.DI.DIHello.HelloDiImpl">
         <constructor-arg index="0" value="15"/>
         <constructor-arg index="1" value="小明"/>
     </bean>
 
-    <bean id="hellodi1-name" class="com.hzw.learn.springboot.springbase.DI.HelloDiImpl">
+    <bean id="hellodi1-name" class="com.hzw.learn.springboot.springbase.DI.DIHello.HelloDiImpl">
         <constructor-arg name="age" value="18"/>
         <constructor-arg name="name" value="小明他哥"/>
     </bean>
 
-    <bean id="hellodi1-type" class="com.hzw.learn.springboot.springbase.DI.HelloDiImpl">
+    <bean id="hellodi1-type" class="com.hzw.learn.springboot.springbase.DI.DIHello.HelloDiImpl">
         <constructor-arg type="java.lang.String" value="小红"/>
         <constructor-arg type="int" value="9"/>
     </bean>
@@ -33,13 +33,13 @@
     <!--====setter注入====-->
     <!--  前提：  1.需要公共无参构造器     2.需要setter方法-->
     <!--=注入常量=-->
-    <bean id="hellodi2_0" class="com.hzw.learn.springboot.springbase.DI.HelloDiImpl">
+    <bean id="hellodi2_0" class="com.hzw.learn.springboot.springbase.DI.DIHello.HelloDiImpl">
         <property name="name" value="张飞"/>
         <property name="age"  value="100"/>
         <property name="goodPerson" value="0"/>
     </bean>
 
-    <bean id="hellodi2_1" class="com.hzw.learn.springboot.springbase.DI.HelloDiImpl">
+    <bean id="hellodi2_1" class="com.hzw.learn.springboot.springbase.DI.DIHello.HelloDiImpl">
         <property name="name" value="趙雲"/>
         <property name="age"  value="101"/>
         <property name="goodPerson">
@@ -53,17 +53,17 @@
     <!--=注入bean id= ??????这有什么用？？-->
     <bean id="name1" class="java.lang.String" c:_0="aaaa"/>
 
-    <bean id="hellodi3_0" class="com.hzw.learn.springboot.springbase.DI.HelloDiImpl">
+    <bean id="hellodi3_0" class="com.hzw.learn.springboot.springbase.DI.DIHello.HelloDiImpl">
         <property name="name"><idref bean="name1"/> </property> <!-- 这里的值是bean的id:"name1"-->
     </bean>
 
-    <bean id="hellodi3_1" class="com.hzw.learn.springboot.springbase.DI.HelloDiImpl">
+    <bean id="hellodi3_1" class="com.hzw.learn.springboot.springbase.DI.DIHello.HelloDiImpl">
         <property name="name"><ref bean="name1"/> </property> <!-- 这里注入的是目标bean，即String:aaaa-->
     </bean>
 
 
     <!--=注入集合、数组和字典等=-->
-    <bean id="listSetMapDiTest" class="com.hzw.learn.springboot.springbase.DI.ListSetMapDITestBean">
+    <bean id="listSetMapDiTest" class="com.hzw.learn.springboot.springbase.DI.DIHello.ListSetMapDITestBean">
         <!--List-->
         <property name="listValues">
             <list value-type="java.lang.String" merge="default">   <!--这个merge是什么意思？？  用于父子Bean之间是否合并list条目-->
@@ -138,19 +138,19 @@
 
     <!-- bean注入测试 -->
     <bean id="beanDi1name" class="java.lang.String" c:_0="孙悟空"/>
-    <bean id="beanDi1" class="com.hzw.learn.springboot.springbase.DI.HelloDiImpl">
+    <bean id="beanDi1" class="com.hzw.learn.springboot.springbase.DI.DIHello.HelloDiImpl">
         <property name="name" ref="beanDi1name"/>
     </bean>
 
     <!--    内部bean-->
-    <bean id="beanDi2" class="com.hzw.learn.springboot.springbase.DI.HelloDiImpl">
+    <bean id="beanDi2" class="com.hzw.learn.springboot.springbase.DI.DIHello.HelloDiImpl">
         <property name="name">
             <bean class="java.lang.String" c:_0="沙悟净"/>
         </property>
     </bean>
 
     <!--使用p名称空间-->
-    <bean id="beanDi3" class="com.hzw.learn.springboot.springbase.DI.HelloDiImpl"
+    <bean id="beanDi3" class="com.hzw.learn.springboot.springbase.DI.DIHello.HelloDiImpl"
           p:name-ref="beanDi1name"
           p:age="1000"
     />

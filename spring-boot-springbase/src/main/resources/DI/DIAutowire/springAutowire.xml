@@ -10,15 +10,17 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
     <!--    扫描注解配置-->
-    <context:component-scan base-package="com.hzw.learn.springboot.springbase.Autowire"/>
-
-    <bean id="aBean"           class="com.hzw.learn.springboot.springbase.Autowire.ABean" p:name="sirius-abean1"/>
-    <bean id="annotationABean" class="com.hzw.learn.springboot.springbase.Autowire.ABean" p:name="sirius-abean2"/>
-    <bean id="aBean1"          class="com.hzw.learn.springboot.springbase.Autowire.ABean" p:name="张三"/>
-    <bean id="aBean2"          class="com.hzw.learn.springboot.springbase.Autowire.ABean" p:name="李四"/>
+    <context:component-scan base-package="com.hzw.learn.springboot.springbase.DI.DIAutowire"/>
 
 
-    <bean id="xmlAWTestBean" class="com.hzw.learn.springboot.springbase.Autowire.XmlAutowireTestBean"
+    <bean id="aBean" class="com.hzw.learn.springboot.springbase.DI.DIAutowire.ABean" p:name="sirius-abean1"/>
+    <bean id="annotationABean" class="com.hzw.learn.springboot.springbase.DI.DIAutowire.ABean" p:name="sirius-abean2"/>
+    <bean id="aBean1" class="com.hzw.learn.springboot.springbase.DI.DIAutowire.ABean" p:name="张三"/>
+    <bean id="aBean2" class="com.hzw.learn.springboot.springbase.DI.DIAutowire.ABean" p:name="李四"/>
+
+
+    <!--autowire   byName、byType、constructor、default、no-->
+    <bean id="xmlAWTestBean" class="com.hzw.learn.springboot.springbase.DI.DIAutowire.XmlAutowireTestBean"
           autowire="byName"/>
 
 </beans>

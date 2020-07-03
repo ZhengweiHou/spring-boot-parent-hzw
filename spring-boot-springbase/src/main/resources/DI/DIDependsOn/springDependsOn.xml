@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans default-lazy-init="false"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+    <context:component-scan base-package="com.hzw.learn.springboot.springbase.DI.DIDependsOn"/>
+
+    <bean id="a" class="com.hzw.learn.springboot.springbase.DI.DIDependsOn.A"
+        depends-on="b"
+    />
+    <bean id="b" class="com.hzw.learn.springboot.springbase.DI.DIDependsOn.B"
+        init-method="pinit" destroy-method="pdestory"
+    />
+<!--    <bean id="c" class="com.hzw.learn.springboot.springbase.DI.DIDependsOn.C"/>-->
+
+<!--    正常顺序 c->a->b， 但depends介入后，顺序为b->a->c-->
+
+
+</beans>
+
+

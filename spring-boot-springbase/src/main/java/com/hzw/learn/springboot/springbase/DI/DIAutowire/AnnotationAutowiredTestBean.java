@@ -1,9 +1,7 @@
-package com.hzw.learn.springboot.springbase.Autowire;
+package com.hzw.learn.springboot.springbase.DI.DIAutowire;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 

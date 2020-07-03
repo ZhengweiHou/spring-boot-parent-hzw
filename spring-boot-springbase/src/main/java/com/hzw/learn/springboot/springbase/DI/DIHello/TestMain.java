@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.springbase.DI;
+package com.hzw.learn.springboot.springbase.DI.DIHello;
 
 import com.google.gson.Gson;
 import org.junit.Before;
@@ -23,7 +23,7 @@ public class TestMain {
     ApplicationContext applicationContext = null;
     @Before
     public void init(){
-        applicationContext = new ClassPathXmlApplicationContext("DI/springDI.xml");
+        applicationContext = new ClassPathXmlApplicationContext("DI/DIHello/springDI.xml");
     }
 
     /*
