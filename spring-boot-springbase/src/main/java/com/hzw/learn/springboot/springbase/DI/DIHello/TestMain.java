@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Proxy;
 import java.util.Arrays;
 
 /**
@@ -85,6 +86,11 @@ public class TestMain {
 
         HelloDIapi beanDi3 = applicationContext.getBean("beanDi3", HelloDIapi.class);
         beanDi3.sayHello();
+
+//        Proxy.newProxyInstance(this.getClass().getClassLoader(),HelloDIapi.class.getInterfaces(),(proxy, method, args) -> {
+//            Object invoke = method.invoke(proxy, args);
+//            return invoke;
+//        });
 
     }
 
