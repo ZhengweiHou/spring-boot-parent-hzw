@@ -2,7 +2,7 @@ package com.hzw.learn.springboot.jvm.Volatile;
 
 /**
  * @ClassName VolatileTest
- * @Description TODO
+ * @Description 内存可见性测试
  * @Author houzw
  * @Date 2020/7/9
  **/

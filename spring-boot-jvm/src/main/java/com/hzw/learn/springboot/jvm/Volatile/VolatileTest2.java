@@ -2,7 +2,7 @@ package com.hzw.learn.springboot.jvm.Volatile;
 
 /**
  * @ClassName VolatileTest2
- * @Description TODO
+ * @Description volatile无法保证原子性 测试
  * @Author houzw
  * @Date 2020/7/9
  **/
@@ -25,7 +25,7 @@ public class VolatileTest2 {
 
         while (Thread.activeCount() > 2){}
 
-        System.out.println(count);
+        System.out.println(count); // 结果是否符合预期
     }
     
     public static void add(){
