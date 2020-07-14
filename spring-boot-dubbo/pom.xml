@@ -47,6 +47,7 @@
 
 
 <!-- ==============dubbo子模块导入 开始    为了学习和调试代码将子模块导入，上面是打包导入============== -->
+
 <!--        注册中心-->
         <dependency>
             <groupId>org.apache.dubbo</groupId>
@@ -86,6 +87,13 @@
 
         <dependency>
             <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-config-spring</artifactId>
+        </dependency>
+
+
+
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo-rpc-dubbo</artifactId>
         </dependency>
 
@@ -99,10 +107,29 @@
             <artifactId>dubbo-serialization-hessian2</artifactId>
         </dependency>
 
-
-
 <!-- ==============dubbo子模块导入 结束============== -->
-	</dependencies>
+
+<!--        dubbo依赖spring 4.3.16.RELEASE-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.3.16.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>4.3.16.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.3.16.RELEASE</version>
+        </dependency>
+
+
+    </dependencies>
 	
 	<build>
         <plugins>

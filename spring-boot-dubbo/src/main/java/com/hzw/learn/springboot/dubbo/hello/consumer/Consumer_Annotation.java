@@ -1,7 +1,5 @@
 package com.hzw.learn.springboot.dubbo.hello.consumer;
 
-import java.util.concurrent.CountDownLatch;
-
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 
@@ -25,9 +23,6 @@ public class Consumer_Annotation {
         String hello = hi.sayHi("consume_anno 1");
         System.out.println("result: " + hello);
         
-        String hello2 = hi.sayHi2("consume_anno 2");
-        System.out.println("result: " + hello2);
-        
         hi.sayHi3("z3");
         
 //        new CountDownLatch(1).await();	// 让进程坚持住，不要死！！让我在zk里看到你
@@ -35,8 +30,9 @@ public class Consumer_Annotation {
 
     @Configuration
     @EnableDubbo(scanBasePackages = "com.hzw.learn.springboot.dubbo.hello.consumer")
-    @PropertySource("classpath:/com/hzw/learn/springboot/dubbo/hello/consumer/dubbo-consumer.properties")
     @ComponentScan(value = {"com.hzw.learn.springboot.dubbo.hello.consumer"})
+//	@PropertySource("classpath:/com/hzw/learn/springboot/dubbo/hello/consumer/dubbo-consumer.properties")
+	@PropertySource("classpath:hello/dubbo-consumer.properties")
     static class ConsumerConfiguration {
 
     }
@@ -48,18 +44,12 @@ class GreetingServiceConsumer{
 	@Reference(version = "2.0.0")	// dubbo注解获取版本为2.0.0的Hi服务
 	private Hi hi;
 	
-	@Reference(version = "1.0.0")
-	private Hi hi2;
-	
+
 	@Reference(version = "*")	// version匹配所有版本，调用hi3时会负载分配到匹配到的服务上
 	private Hi hi3;
 	
 	public String sayHi(String name) {
 		return hi.sayhi(name);
-	}
-	
-	public String sayHi2(String name) {
-		return hi2.sayhi(name);
 	}
 	
 	public void sayHi3(String name) {

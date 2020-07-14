@@ -18,7 +18,8 @@ public class Provider_Annotation {
 
     @Configuration
     @EnableDubbo(scanBasePackages = "com.hzw.learn.springboot.dubbo.hello.provider")
-    @PropertySource("classpath:/com/hzw/learn/springboot/dubbo/hello/provider/dubbo-provider.properties")
+//    @PropertySource("classpath:/com/hzw/learn/springboot/dubbo/hello/provider/dubbo-provider.properties")
+    @PropertySource("classpath:hello/dubbo-provider.properties")
     static class ProviderConfiguration {
     }
 }

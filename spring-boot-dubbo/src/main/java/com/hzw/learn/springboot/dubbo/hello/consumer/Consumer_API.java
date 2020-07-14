@@ -1,15 +1,12 @@
 package com.hzw.learn.springboot.dubbo.hello.consumer;
 
-import java.awt.List;
-import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
-
+import com.hzw.learn.springboot.dubbo.hello.provider.Hi;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.rpc.cluster.loadbalance.RoundRobinLoadBalance;
 
-import com.hzw.learn.springboot.dubbo.hello.provider.Hi;
+import java.util.ArrayList;
 
 
 public class Consumer_API {
@@ -21,12 +18,12 @@ public class Consumer_API {
     	
     	
     	RegistryConfig registry_zookeeper = new RegistryConfig("zookeeper://" + zookeeperHost + ":2181");
-        RegistryConfig registry_consul = new RegistryConfig("consul://" + zookeeperHost + ":8500");
-    	registry_consul.setCheck(false);
+//        RegistryConfig registry_consul = new RegistryConfig("consul://" + zookeeperHost + ":8500");
+//    	registry_consul.setCheck(false);
     	
         ArrayList<RegistryConfig> registries = new ArrayList<>();
         registries.add(registry_zookeeper);
-        registries.add(registry_consul);
+//        registries.add(registry_consul);
         
         ReferenceConfig<Hi> reference = new ReferenceConfig<>();
 //        reference.setApplication(application);
