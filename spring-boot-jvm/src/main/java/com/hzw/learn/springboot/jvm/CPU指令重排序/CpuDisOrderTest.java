@@ -1,7 +1,7 @@
 package com.hzw.learn.springboot.jvm.CPU指令重排序;
 
 /**
- * @ClassName CpuDisOrderTest
+ * @ClassName CpuDisOrderTestment
  * @Description CPU指令重排序演示
  * @Author houzw
  * @Date 2020/7/13
@@ -15,8 +15,8 @@ public class CpuDisOrderTest {
         long currentTime = System.currentTimeMillis();
         for(int i=0;;i++){
 
-            x=0;
-            y=0;
+            x=-1;
+            y=-1;
 //            a=b=0;
             a=0;
             b=0;

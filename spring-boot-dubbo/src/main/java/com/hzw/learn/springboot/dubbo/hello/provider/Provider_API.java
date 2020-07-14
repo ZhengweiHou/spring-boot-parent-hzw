@@ -3,14 +3,12 @@ package com.hzw.learn.springboot.dubbo.hello.provider;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
-import org.apache.dubbo.common.status.StatusChecker;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ConfigCenterConfig;
 import org.apache.dubbo.config.MetadataReportConfig;
 import org.apache.dubbo.config.ProtocolConfig;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.ServiceConfig;
-import org.apache.dubbo.rpc.cluster.loadbalance.RandomLoadBalance;
 import org.apache.dubbo.rpc.cluster.loadbalance.RoundRobinLoadBalance;
 
 public class Provider_API {

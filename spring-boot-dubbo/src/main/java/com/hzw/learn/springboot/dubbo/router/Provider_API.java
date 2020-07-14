@@ -7,9 +7,7 @@ import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.MetadataReportConfig;
 import org.apache.dubbo.config.ProtocolConfig;
 import org.apache.dubbo.config.RegistryConfig;
-import org.apache.dubbo.config.ServiceConfig;
 import org.apache.dubbo.rpc.cluster.loadbalance.RoundRobinLoadBalance;
-import org.springframework.beans.factory.InitializingBean;
 
 import com.hzw.learn.springboot.dubbo.router.api.RouterHiApi;
 import com.hzw.learn.springboot.dubbo.router.api.RouterHiImpl;
