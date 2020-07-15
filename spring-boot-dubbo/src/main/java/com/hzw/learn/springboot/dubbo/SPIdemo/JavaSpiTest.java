@@ -22,10 +22,5 @@ public class JavaSpiTest {
         load.forEach(HelloApi::sayHello);
     }
 
-    public static void main(String[] args) {
-        ServiceLoader<HelloApi> load = ServiceLoader.load(HelloApi.class);
-        System.out.println("Java SPI");
-        load.forEach(HelloApi::sayHello);
-    }
 
 }

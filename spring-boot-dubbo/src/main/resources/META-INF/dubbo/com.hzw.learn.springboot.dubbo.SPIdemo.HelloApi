@@ -1,0 +1,4 @@
+hellohzw = com.hzw.learn.springboot.dubbo.SPIdemo.HelloHzwImpl
+aaa,bbb = com.hzw.learn.springboot.dubbo.SPIdemo.HelloHzwImpl       # name通过，分割指定多个name
+hellosirius = com.hzw.learn.springboot.dubbo.SPIdemo.HelloSiriusImpl
+com.hzw.learn.springboot.dubbo.SPIdemo.HelloSiriusExtensionImpl    # 该类通过Extension注解指定name值

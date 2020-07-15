@@ -9,6 +9,6 @@ package com.hzw.learn.springboot.dubbo.SPIdemo;
 public class HelloHzwImpl implements HelloApi {
     @Override
     public void sayHello() {
-        System.out.println("hello I'm Hzw");
+        System.out.println("hello I'm Hzw:" + this.hashCode());
     }
 }
