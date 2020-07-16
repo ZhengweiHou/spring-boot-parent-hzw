@@ -95,9 +95,8 @@ public class Provider_API {
         service.setLoadbalance(RoundRobinLoadBalance.NAME);
         // 好了，先配置这样吧，让服务到注册中心报到吧
         service.export();
-        
 
-        
+
         System.out.println("dubbo service started");
         new CountDownLatch(1).await();
     }
