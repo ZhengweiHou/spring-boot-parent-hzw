@@ -1,0 +1,2 @@
+redmaker = com.hzw.learn.springboot.dubbo.AdaptiveExtension.handDemo.RedRefillMaker
+bluemaker= com.hzw.learn.springboot.dubbo.AdaptiveExtension.handDemo.BlueRefillMaker
