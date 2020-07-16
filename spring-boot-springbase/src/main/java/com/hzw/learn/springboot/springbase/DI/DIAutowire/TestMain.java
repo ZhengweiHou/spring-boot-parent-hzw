@@ -25,12 +25,12 @@ public class TestMain {
     @Test
     public void helloTest(){
         //        使用注解方式进行autowried注入
-        AnnotationAutowiredTestBean annotationAutowiredTestBean = applicationContext.getBean(AnnotationAutowiredTestBean.class);
-        annotationAutowiredTestBean.sayHello();
-
-
-        XmlAutowireTestBean         xmlAutowireTestBean         = applicationContext.getBean(XmlAutowireTestBean.class);
-        xmlAutowireTestBean.sayHello();
+//        AnnotationAutowiredTestBean annotationAutowiredTestBean = applicationContext.getBean(AnnotationAutowiredTestBean.class);
+//        annotationAutowiredTestBean.sayHello();
+//
+//
+//        XmlAutowireTestBean         xmlAutowireTestBean         = applicationContext.getBean(XmlAutowireTestBean.class);
+//        xmlAutowireTestBean.sayHello();
 
 //        com.hzw.learn.springboot.springbase.Autowire.AnnotationAutowiredTestBean的setAnnotationABean方法执行
 //        com.hzw.learn.springboot.springbase.Autowire.XmlAutowireTestBean的setaBean1方法执行
@@ -39,6 +39,10 @@ public class TestMain {
 //        annotationABean:sirius-abean2
 //        aBean1:张三
 //        aBean2:李四
+
+        ConstructorAutowiredTestBean constructorAutowiredTestBean = applicationContext.getBean(ConstructorAutowiredTestBean.class);
+        System.out.println("======");
+        constructorAutowiredTestBean.sayHello();
 
     }
 

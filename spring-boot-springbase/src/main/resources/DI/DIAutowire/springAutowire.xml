@@ -13,15 +13,17 @@
     <context:component-scan base-package="com.hzw.learn.springboot.springbase.DI.DIAutowire"/>
 
 
-    <bean id="aBean" class="com.hzw.learn.springboot.springbase.DI.DIAutowire.ABean" p:name="sirius-abean1"/>
+    <bean id="aBean"           class="com.hzw.learn.springboot.springbase.DI.DIAutowire.ABean" p:name="sirius-abean1"/>
     <bean id="annotationABean" class="com.hzw.learn.springboot.springbase.DI.DIAutowire.ABean" p:name="sirius-abean2"/>
-    <bean id="aBean1" class="com.hzw.learn.springboot.springbase.DI.DIAutowire.ABean" p:name="张三"/>
-    <bean id="aBean2" class="com.hzw.learn.springboot.springbase.DI.DIAutowire.ABean" p:name="李四"/>
+    <bean id="aBean1"          class="com.hzw.learn.springboot.springbase.DI.DIAutowire.ABean" p:name="张三"/>
+    <bean id="aBean2"          class="com.hzw.learn.springboot.springbase.DI.DIAutowire.ABean" p:name="李四"/>
 
 
     <!--autowire   byName、byType、constructor、default、no-->
     <bean id="xmlAWTestBean" class="com.hzw.learn.springboot.springbase.DI.DIAutowire.XmlAutowireTestBean"
           autowire="byName"/>
+
+    <bean id="constructorAutowiredTestBean" class="com.hzw.learn.springboot.springbase.DI.DIAutowire.ConstructorAutowiredTestBean"/>
 
 </beans>
 
