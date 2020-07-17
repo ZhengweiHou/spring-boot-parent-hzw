@@ -16,7 +16,8 @@ if (arg1 == null) throw new IllegalArgumentException("invocation == null"); Stri
 String extName = url.getMethodParameter(methodName, "a1", "hzw");
 if(extName == null) throw new IllegalStateException("Failed to get extension (com.hzw.learn.springboot.dubbo.AdaptiveExtension.AdaptiveClassCodeGeneratorTest.A1) name from url (" + url.toString() + ") use keys([a1])");
 com.hzw.learn.springboot.dubbo.AdaptiveExtension.AdaptiveClassCodeGeneratorTest.A1 extension = (com.hzw.learn.springboot.dubbo.AdaptiveExtension.AdaptiveClassCodeGeneratorTest.A1)ExtensionLoader.getExtensionLoader(com.hzw.learn.springboot.dubbo.AdaptiveExtension.AdaptiveClassCodeGeneratorTest.A1.class).getExtension(extName);
-extension.sayHello(url, invocation, str1);
+//extension.sayHello(url, invocation, str1);
+extension.sayHello(arg0, arg1, arg2);
 }
 public void sayHello3(org.apache.dubbo.common.URL arg0)  {
 if (arg0 == null) throw new IllegalArgumentException("url == null");

@@ -1,10 +1,6 @@
 package com.hzw.learn.springboot.dubbo.AdaptiveExtension.AdaptiveClassCodeGeneratorTest;
 
-import com.sun.deploy.xdg.BaseDir;
-import org.apache.dubbo.common.URL;
-import org.apache.dubbo.common.extension.Adaptive;
 import org.apache.dubbo.common.extension.AdaptiveClassCodeGenerator;
-import org.apache.dubbo.rpc.Invocation;
 import org.junit.Test;
 
 import java.io.FileWriter;
@@ -20,6 +16,8 @@ public class AdaptiveClassCodeGeneratorTest {
 
     @Test
     public void test() throws IOException {
+        //  issue : https://github.com/apache/dubbo/issues/6490   fix bug by issue https://github.com/apache/dubbo/pull/4339   version:2.7.4 up
+
         String hzw1 = new AdaptiveClassCodeGenerator(A1.class, "hzw").generate();
 
         String hzw2 = new AdaptiveClassCodeGenerator(A2.class, null).generate();
