@@ -9,7 +9,7 @@ public interface A1 {
     void sayHello2(URL url);
 
     @Adaptive
-    void sayHello(URL url, Invocation invocation);
+    void sayHello(URL url, Invocation invocation, String str1);
 
     @Adaptive({"hhh","zzz","www"})
     void sayHello3(URL url);
