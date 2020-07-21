@@ -34,6 +34,7 @@ public class hellotest {
                 new ClassPathXmlApplicationContext(
                         "IOC/springbean.xml");
 
+
 //        BeanFactory beanFactory =
 //                new ClassPathXmlApplicationContext(
 //                        "com/hzw/learn/springboot/springbase/springbean/springbean2.xml");  // why can not find the xml

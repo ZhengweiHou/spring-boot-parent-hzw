@@ -6,10 +6,10 @@ import java.util.Date;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
-import org.apache.dubbo.rpc.cluster.loadbalance.RoundRobinLoadBalance;
 
 import com.hzw.learn.springboot.dubbo.router.api.RouterHiApi;
 import com.hzw.learn.springboot.dubbo.router.common.HzwReferenceConfig;
+import org.apache.dubbo.rpc.cluster.loadbalance.RoundRobinLoadBalance;
 
 
 public class Consumer_API {

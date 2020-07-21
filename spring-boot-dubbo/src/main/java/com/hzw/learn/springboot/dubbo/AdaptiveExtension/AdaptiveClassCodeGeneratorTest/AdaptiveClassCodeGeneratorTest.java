@@ -1,6 +1,7 @@
 package com.hzw.learn.springboot.dubbo.AdaptiveExtension.AdaptiveClassCodeGeneratorTest;
 
 import org.apache.dubbo.common.extension.AdaptiveClassCodeGenerator;
+import org.apache.dubbo.rpc.ProxyFactory;
 import org.junit.Test;
 
 import java.io.FileWriter;
@@ -34,5 +35,25 @@ public class AdaptiveClassCodeGeneratorTest {
 
     }
 
+    @Test
+    public void showAdaptiveForAnyClass() throws IOException {
+
+        Class clazz = ProxyFactory.class;
+        String defaultExeName = "javassist";
+
+        String code = new AdaptiveClassCodeGenerator(clazz,defaultExeName).generate();
+
+        System.out.println(code);
+        
+
+        String baseDir = "src/main/java/com/hzw/learn/springboot/dubbo/AdaptiveExtension/AdaptiveClassCodeGeneratorTest/";
+
+        try(
+                FileWriter fileWriter = new FileWriter(baseDir + clazz.getSimpleName() +"$Adaptive.java");
+        ){
+            fileWriter.write(code);
+        }
+
+    }
 
 }

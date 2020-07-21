@@ -9,6 +9,7 @@ import org.apache.dubbo.config.MetadataReportConfig;
 import org.apache.dubbo.config.ProtocolConfig;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.ServiceConfig;
+import org.apache.dubbo.config.spring.ServiceBean;
 import org.apache.dubbo.rpc.cluster.loadbalance.RoundRobinLoadBalance;
 
 public class Provider_API {
@@ -63,14 +64,15 @@ public class Provider_API {
         // ======注册服务配置======
     	// 创建一个服务配置
         ServiceConfig<Hi> service = new ServiceConfig<>();
-        
+//        ServiceBean<Hi> service = new ServiceBean<>(); // 整合spring，内有spring的监听事件功能？？？
+
         /* ServiceConfig会先从下列三个对象中获取并初始化配置，优先级：ProviderConfig > ModuleConfig > ApplicationConfig
          * 详见{@link org.apache.dubbo.config.ServiceConfig#completeCompoundConfigs()} */
         service.setApplication(applicationConfig); // Registries、Monitor
 //      service.setModule(module);     // Registries、Monitor
 //      service.setProvider(provider); // Application、Module、Registries、Monitor、Protocols、ConfigCenter
-        
-        
+
+
         // 设置服务要注册的注册中心
         //service.setRegistry(registry_zookeeper);  // 设置单个注册中心
         service.setRegistries(registries);	// 设置多个注册中心集合

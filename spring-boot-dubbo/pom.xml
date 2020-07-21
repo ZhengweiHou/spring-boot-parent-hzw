@@ -112,6 +112,11 @@
             <artifactId>dubbo-serialization-hessian2</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-cluster</artifactId>
+        </dependency>
+
 <!-- ==============dubbo子模块导入 结束============== -->
 
 <!--        dubbo依赖spring 4.3.16.RELEASE-->
@@ -146,6 +151,7 @@
             <artifactId>gson</artifactId>
             <version>2.8.6</version>
         </dependency>
+
 
 
     </dependencies>
