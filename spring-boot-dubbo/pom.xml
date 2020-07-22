@@ -117,6 +117,25 @@
             <artifactId>dubbo-cluster</artifactId>
         </dependency>
 
+
+        <!--dubbo rpc-->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-rpc-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-rpc-injvm</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-registry-api</artifactId>
+        </dependency>
+
+
+
 <!-- ==============dubbo子模块导入 结束============== -->
 
 <!--        dubbo依赖spring 4.3.16.RELEASE-->

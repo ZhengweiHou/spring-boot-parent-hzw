@@ -12,6 +12,8 @@ import org.apache.dubbo.config.ServiceConfig;
 import org.apache.dubbo.config.spring.ServiceBean;
 import org.apache.dubbo.rpc.cluster.loadbalance.RoundRobinLoadBalance;
 
+import static org.apache.dubbo.rpc.Constants.SCOPE_REMOTE;
+
 public class Provider_API {
     private static String zookeeperHost = System.getProperty("zookeeper.address", "127.0.0.1"); // 获取-D参数，没有取默认值
     private static String consulHost = System.getProperty("consul.address", "127.0.0.1");
@@ -59,7 +61,7 @@ public class Provider_API {
         ProtocolConfig protocol = new ProtocolConfig("dubbo",20881); // 协议配置
 //        protocol.setStatus("spring,registry,server,memory,load,datasource,threadpool");	// 开启状态检查扩展
         protocol.setTelnet("cd,ps,select,log,ls,clear,count,invoke,exit,help,trace,pwd,shutdown,status");	// 开启telnet扩展
-        
+
         
         // ======注册服务配置======
     	// 创建一个服务配置
@@ -95,6 +97,9 @@ public class Provider_API {
         // 负载方式（实现方式？？）
 //        service.setLoadbalance(RandomLoadBalance.NAME);
         service.setLoadbalance(RoundRobinLoadBalance.NAME);
+
+        // 指定scope，[null,none,remote,injvm] 决定service是否导出到远程和本地，默认值null，表示即导出远程也导出本地
+//        service.setScope(SCOPE_REMOTE); // 指定该service只进行远程导出，不进行本地导出。那本地调用也只能通过远程方式
         // 好了，先配置这样吧，让服务到注册中心报到吧
         service.export();
 
