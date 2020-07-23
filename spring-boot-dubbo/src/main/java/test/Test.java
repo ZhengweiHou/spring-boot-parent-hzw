@@ -1,6 +1,7 @@
 package test;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 
 /**
  * @ClassName Test
@@ -23,4 +24,17 @@ public class Test{
 
 
     }
+
+    public static void main(String[] args) {
+        ArrayList<B> objects = new ArrayList<>();
+        for (int i=0; i < 1*100*100; i++){
+            System.out.println(i);
+            objects.add(new B());
+        }
+
+        while (true){
+
+        }
+    }
+
 }
