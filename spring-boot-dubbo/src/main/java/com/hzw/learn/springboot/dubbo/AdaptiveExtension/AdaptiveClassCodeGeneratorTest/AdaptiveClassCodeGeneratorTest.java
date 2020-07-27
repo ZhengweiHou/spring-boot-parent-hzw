@@ -1,6 +1,7 @@
 package com.hzw.learn.springboot.dubbo.AdaptiveExtension.AdaptiveClassCodeGeneratorTest;
 
 import org.apache.dubbo.common.extension.AdaptiveClassCodeGenerator;
+import org.apache.dubbo.rpc.Protocol;
 import org.apache.dubbo.rpc.ProxyFactory;
 import org.junit.Test;
 
@@ -38,8 +39,12 @@ public class AdaptiveClassCodeGeneratorTest {
     @Test
     public void showAdaptiveForAnyClass() throws IOException {
 
-        Class clazz = ProxyFactory.class;
-        String defaultExeName = "javassist";
+//        Class clazz = ProxyFactory.class;
+//        String defaultExeName = "javassist";
+        Class clazz = Protocol.class;
+        String defaultExeName = "dubbo";
+
+
 
         String code = new AdaptiveClassCodeGenerator(clazz,defaultExeName).generate();
 
