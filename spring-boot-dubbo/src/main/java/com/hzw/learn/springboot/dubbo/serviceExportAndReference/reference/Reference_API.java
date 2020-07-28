@@ -2,6 +2,7 @@ package com.hzw.learn.springboot.dubbo.serviceExportAndReference.reference;
 
 import com.hzw.learn.springboot.dubbo.serviceExportAndReference.api.Hi;
 import org.apache.dubbo.config.ApplicationConfig;
+import org.apache.dubbo.config.ProtocolConfig;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
 
@@ -14,6 +15,9 @@ public class Reference_API {
     	ApplicationConfig application = new ApplicationConfig("consumer-api");
     	
     	RegistryConfig registry_zookeeper = new RegistryConfig("zookeeper://127.0.0.1:2181");
+
+//        registry_zookeeper.setProtocol("http"); // 指定注册协议，没指定则默认是dubbo
+
         ArrayList<RegistryConfig> registries = new ArrayList<>();
         registries.add(registry_zookeeper);
 
