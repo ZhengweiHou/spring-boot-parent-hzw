@@ -27,9 +27,10 @@ public class Test{
 
     public static void main(String[] args) {
         ArrayList<B> objects = new ArrayList<>();
-        for (int i=0; i < 1*100*100; i++){
+        for (int i=0; i < 1*100*100*100; i++){
             System.out.println(i);
-            objects.add(new B());
+//            objects.add(new B());
+            new B();
         }
 
         while (true){

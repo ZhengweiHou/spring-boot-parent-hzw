@@ -30,7 +30,7 @@ public class Reference_API {
         reference.setInit(true);        // true:饿汉模式；false:懒汉模式
 
     	Hi hi3 = reference.get();
-        
+
         while(true) {
             System.out.println(hi3.sayhi("Consumer_Api"));
         	Thread.sleep(1000);
@@ -46,7 +46,7 @@ public class Reference_API {
 //        hi,dubbo3,I'm HiImpl
 //        hi,dubbo3,I'm 张三
 //        hi,dubbo3,I'm HiImpl
-     
+
 //        new CountDownLatch(1).await();	// 让进程坚持住，不要死！！让我在zk里看到你
     }
 }

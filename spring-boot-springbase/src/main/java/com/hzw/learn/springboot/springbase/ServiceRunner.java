@@ -10,7 +10,6 @@ public class ServiceRunner {
 		context = new ClassPathXmlApplicationContext("service-context.xml");
 
 		System.err.println("service running ......");
-        
 //        System.in.read(); // hold on the process
 	}
 }
