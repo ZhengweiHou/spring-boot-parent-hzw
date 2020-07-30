@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.dubbo.serviceExportAndReference.reference;
+package com.hzw.learn.springboot.dubbo.serviceExportAndReferenceAndInvoke.reference;
 
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;

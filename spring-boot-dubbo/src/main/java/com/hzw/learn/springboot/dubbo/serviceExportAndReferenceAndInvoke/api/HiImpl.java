@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.dubbo.serviceExportAndReference.api;
+package com.hzw.learn.springboot.dubbo.serviceExportAndReferenceAndInvoke.api;
 
 public class HiImpl implements Hi {
 	

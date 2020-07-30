@@ -1,6 +1,9 @@
 package test;
 
+import org.apache.dubbo.rpc.proxy.InvokerInvocationHandler;
+
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 /**
@@ -36,6 +39,15 @@ public class Test{
         while (true){
 
         }
+    }
+
+    @org.junit.Test
+    public void test1(){
+//        InvokerInvocationHandler
+        /**
+         * @see InvokerInvocationHandler#invoke(Object, Method, Object[])
+         */
+
     }
 
 }

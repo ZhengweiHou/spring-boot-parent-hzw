@@ -1,16 +1,17 @@
-package com.hzw.learn.springboot.dubbo.serviceExportAndReference.export;
+package com.hzw.learn.springboot.dubbo.serviceExportAndReferenceAndInvoke.export;
 
-import com.hzw.learn.springboot.dubbo.serviceExportAndReference.api.Hi;
-import com.hzw.learn.springboot.dubbo.serviceExportAndReference.api.HiImpl;
+import com.hzw.learn.springboot.dubbo.serviceExportAndReferenceAndInvoke.api.Hi;
+import com.hzw.learn.springboot.dubbo.serviceExportAndReferenceAndInvoke.api.HiImpl;
 import org.apache.dubbo.config.*;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
 public class Export_API {
 
-
-    public static void main(String[] args) throws Exception {
+    @Test
+    public void test1() throws Exception {
 
     	ApplicationConfig applicationConfig = new ApplicationConfig("provider_api");
 
@@ -29,15 +30,24 @@ public class Export_API {
         service.setApplication(applicationConfig);
         service.setRegistries(registries);
         service.setProtocol(protocol);
-        service.setGroup("servicegroup1");
         service.setInterface(Hi.class);
         service.setRef(new HiImpl("Exportor"));
-        service.setVersion("1.0.0");
+//        service.setGroup("servicegroup1");
+//        service.setVersion("1.0.0");
 
         service.export();
 
 
         System.out.println("dubbo service started");
         new CountDownLatch(1).await();
+
+
+
+    }
+
+    @Test
+    public void test2() throws Exception {
+
+
     }
 }
