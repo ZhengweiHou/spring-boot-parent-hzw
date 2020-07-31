@@ -5,6 +5,7 @@ import org.apache.dubbo.common.URL;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
+import org.apache.dubbo.registry.Registry;
 import org.apache.dubbo.registry.integration.RegistryProtocol;
 import org.apache.dubbo.remoting.exchange.ExchangeClient;
 import org.apache.dubbo.rpc.Invoker;
@@ -12,12 +13,14 @@ import org.apache.dubbo.rpc.cluster.Cluster;
 import org.apache.dubbo.rpc.cluster.Directory;
 import org.apache.dubbo.rpc.cluster.directory.StaticDirectory;
 import org.apache.dubbo.rpc.cluster.support.FailoverCluster;
+import org.apache.dubbo.rpc.cluster.support.FailoverClusterInvoker;
 import org.apache.dubbo.rpc.cluster.support.RegistryAwareCluster;
 import org.apache.dubbo.rpc.protocol.AbstractProtocol;
 import org.apache.dubbo.rpc.protocol.dubbo.DubboInvoker;
 import org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol;
 import org.apache.dubbo.rpc.protocol.injvm.InjvmProtocol;
 import org.apache.dubbo.rpc.proxy.javassist.JavassistProxyFactory;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -25,6 +28,7 @@ import java.util.Set;
 
 public class Reference_API {
 
+    @Test
     public void test1() throws InterruptedException {
     	ApplicationConfig application = new ApplicationConfig("consumer-api");
     	
@@ -38,7 +42,7 @@ public class Reference_API {
         ReferenceConfig<Hi> reference = new ReferenceConfig<>();
         reference.setApplication(application);
         reference.setRegistries(registries);
-        reference.setGroup("*");
+//        reference.setGroup("*");
         reference.setInterface(Hi.class);
         reference.setVersion("*");
         reference.setInit(true);        // true:饿汉模式；false:懒汉模式
@@ -46,6 +50,7 @@ public class Reference_API {
 
     	Hi hi3 = reference.get();
 
+//        hi3.sayhi("Consumer_Api");
         while(true) {
             System.out.println(hi3.sayhi("Consumer_Api"));
         	Thread.sleep(1000);
@@ -64,6 +69,7 @@ public class Reference_API {
 //        InjvmProtocol
 //        RegistryAwareCluster
 //        FailoverCluster
+//        FailoverClusterInvoker
 
     }
     /**
@@ -91,19 +97,25 @@ public class Reference_API {
      @see ReferenceConfig#createProxy(Map)    Map:reference参数
         ├─ get {@link org.apache.dubbo.rpc.Invoker} from urls
         │   ├─ injvm
-        │   │ └─ 本地引用  {@link InjvmProtocol#refer(Class, URL)}
+        │   │   └─ 本地引用  {@link InjvmProtocol#refer(Class, URL)}    return AsyncToSyncInvoker wrap Invoker
+                    {@link InjvmProtocol#protocolBindin fasd  gRefer(Class, URL)}      new InjvmInvoker
         │   └─ uninjvm
-        │     ├─ Map + url|registoryUrls ==> urls
-        │     ├─ a.服务直连  {@link DubboProtocol#refer(Class, URL)}    return AsyncToSyncInvoker wrap Invoker
-        │     │ └─ {@link DubboProtocol#protocolBindingRefer(Class, URL)}
-        │     │   └─ {@link DubboInvoker#DubboInvoker(Class, URL, ExchangeClient[], Set)}     new DubboInvoker
-        │     │      ├─ x. url.connections = 0  ExchangeClient[] get by {@link DubboProtocol#getSharedClient(URL, int shareconnections)}  FIXME 获取共享客户端
-        │     │      └─ y. url.connections ！= 0 xchangeClient[] get by {@link DubboProtocol#initClient(URL)}                             FIXME 初始化新客户端
-        │     ├─ b.通过注册中心 {@link RegistryProtocol#refer(Class, URL)}
-        │     ├─ x. have registryUrl     {@link RegistryAwareCluster#join(Directory)}
-        │     └─ y. haven't registryUrl  {@link FailoverCluster#join(Directory)}
+        │       ├─ Map + url|registoryUrls --> urls
+        │       │    === urls --> invokers ===
+        │       ├─ a.服务直连  {@link DubboProtocol#refer(Class, URL)}    return AsyncToSyncInvoker wrap Invoker
+        │       │   └─ {@link DubboProtocol#protocolBindingRefer(Class, URL)}
+        │       │       └─ {@link DubboInvoker#DubboInvoker(Class, URL, ExchangeClient[], Set)}     new DubboInvoker
+        │       │           ├─ x. url.connections = 0  ExchangeClient[] get by {@link DubboProtocol#getSharedClient(URL, int shareconnections)}  FIXME 获取共享客户端
+        │       │           └─ y. url.connections ！= 0 xchangeClient[] get by {@link DubboProtocol#initClient(URL)}                             FIXME 初始化新客户端
+        │       ├─ b.通过注册中心 {@link RegistryProtocol#refer(Class, URL)}      get Registry
+        │       │   └─ {@link RegistryProtocol#doRefer(Cluster, Registry, Class, URL)}
+        │       │       └─ {@link FailoverCluster#join(Directory)}  new RegistryDirectory   FIXME 这里配置了group的话就是MergeableCluster
+        │       │           └─ {@link FailoverClusterInvoker#FailoverClusterInvoker(Directory)} new FailoverClusterInvoker
+        │       │    === invokers -->  invoker===
+        │       ├─ x. have registryUrl     {@link RegistryAwareCluster#join(Directory)}   new StaticDirectory(regUrl,invokers)        return Invoker
+        │       └─ y. haven't registryUrl  {@link FailoverCluster#join(Directory)}        new StaticDirectory(invokers)               return Invoker
         ├─ FIXME 用元数据报告服务（metadataReportService），发布消费者信息
-        └─ {@link org.apache.dubbo.rpc.proxy.javassist.JavassistProxyFactory#getProxy(Invoker)} return
+        └─ {@link org.apache.dubbo.rpc.proxy.javassist.JavassistProxyFactory#getProxy(Invoker)} return Proxy
 
      */
 
