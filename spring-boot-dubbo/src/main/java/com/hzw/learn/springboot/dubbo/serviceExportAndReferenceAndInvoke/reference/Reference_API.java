@@ -9,6 +9,7 @@ import org.apache.dubbo.registry.Registry;
 import org.apache.dubbo.registry.integration.RegistryProtocol;
 import org.apache.dubbo.remoting.exchange.ExchangeClient;
 import org.apache.dubbo.rpc.Invoker;
+import org.apache.dubbo.rpc.Protocol;
 import org.apache.dubbo.rpc.cluster.Cluster;
 import org.apache.dubbo.rpc.cluster.Directory;
 import org.apache.dubbo.rpc.cluster.directory.StaticDirectory;
@@ -70,25 +71,10 @@ public class Reference_API {
 //        RegistryAwareCluster
 //        FailoverCluster
 //        FailoverClusterInvoker
-
+//        InjvmProtocol
+//        Protocol
     }
-    /**
-      服务引入过程
-      @see ReferenceConfig#get()
-      @see ReferenceConfig#init()
-      @see ReferenceConfig#createProxy(Map)    Map:reference参数
-      ├─ injvm
-      └─ uninjvm（继续）
-         ├─ map -> URL 由map为原材料构建出URL
-         ├─ urls -> invokers   (若有多个url会将产出invokers 加入到 {@link Cluster#join(Directory)},Directory: new StaticDirectory(invokers),Cluster:like {@link FailoverCluster#join(Directory)})
-         │  ├─ a. dubbo 协议直连目标服务 {@link DubboProtocol#refer(Class, URL)} realy by parent {@link AbstractProtocol#refer(Class, URL)}
-            │  └─ {@link DubboProtocol#protocolBindingRefer(Class, URL)}
-            │     └─ new {@link DubboInvoker#DubboInvoker(Class, URL, ExchangeClient[], Set)}  ExchangeClient[] get by {@link DubboProtocol#getClients(URL)}
-            │        ├─ x. url.connections = 0  ExchangeClient[] get by {@link DubboProtocol#getSharedClient(URL, int shareconnections)}  FIXME 获取共享客户端
-            │        └─ y. url.connections ！= 0 xchangeClient[] get by {@link DubboProtocol#initClient(URL)}                             FIXME 初始化新客户端
-            └─ b. 通过注册中心 {@link RegistryProtocol#refer(Class, URL)}
 
-     */
 
     /**
      服务引入过程

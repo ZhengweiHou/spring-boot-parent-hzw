@@ -2,6 +2,7 @@ package com.hzw.learn.springboot.dubbo.Wrapper;
 
 import com.hzw.learn.springboot.dubbo.AdaptiveExtension.dubboDemo.RefillMaker;
 import com.hzw.learn.springboot.dubbo.hello.provider.HiImpl;
+import com.hzw.learn.springboot.dubbo.serviceExportAndReferenceAndInvoke.api.Hi;
 import org.apache.dubbo.common.bytecode.Wrapper;
 import org.junit.Test;
 
@@ -24,7 +25,8 @@ public class WrapperCodeTest {
 
 //        Class clazz = HiImpl.class;
 //        Class clazz = RefillMaker.class;
-        Class clazz = String.class;
+//        Class clazz = String.class;
+        Class clazz = Hi.class;
 
 
         String baseDir = "src/main/java/com/hzw/learn/springboot/dubbo/Wrapper/";
