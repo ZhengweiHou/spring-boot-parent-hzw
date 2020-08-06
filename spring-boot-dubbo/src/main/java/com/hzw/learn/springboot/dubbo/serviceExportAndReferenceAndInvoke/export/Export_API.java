@@ -4,6 +4,8 @@ import com.hzw.learn.springboot.dubbo.serviceExportAndReferenceAndInvoke.api.Hi;
 import com.hzw.learn.springboot.dubbo.serviceExportAndReferenceAndInvoke.api.HiImpl;
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.config.*;
+import org.apache.dubbo.config.invoker.DelegateProviderMetaDataInvoker;
+import org.apache.dubbo.registry.integration.RegistryProtocol;
 import org.apache.dubbo.rpc.Invoker;
 import org.apache.dubbo.rpc.protocol.injvm.InjvmProtocol;
 import org.apache.dubbo.rpc.proxy.javassist.JavassistProxyFactory;
@@ -53,6 +55,7 @@ public class Export_API {
     {
 //        InjvmProtocol
 //        JavassistProxyFactory
+//        RegistryProtocol
     }
 
     /**
@@ -65,15 +68,17 @@ public class Export_API {
         @see ServiceConfig#doExportUrlsFor1Protocol(ProtocolConfig, List)  List:registryURLs
             ServiceConfig => map => URL:serviceUrl       FIXME serviceUrl
             -scope=remote    {@link ServiceConfig#exportLocal(URL)}
-                {@link JavassistProxyFactory#getInvoker(Object ref, Class interfaceClass, URL serviceUrl)}      FIXME Invoker
+                {@link JavassistProxyFactory#getInvoker(Object ref, Class interfaceClass, URL serviceUrl)}       FIXME Invoker
                 {@link InjvmProtocol#export(Invoker)}    FIXME Exporter
             -scope=local     ServiceConfig#exportRemote(registryURLs, url)
                 registryUrl 中装入 servieUrl             FIXME registryUrl[export=serviceUrl]
-                {@link JavassistProxyFactory#getInvoker(Object ref, Class interfaceClass, URL registryUrl)}     FIXME Invoker
-
-
-
-
+                {@link JavassistProxyFactory#getInvoker(Object ref, Class interfaceClass, URL registryUrl)}      FIXME Invoker
+                new {@link DelegateProviderMetaDataInvoker#DelegateProviderMetaDataInvoker(Invoker, ServiceConfig)}  FIXME DelegateProviderMetaDataInvoker wrapperInvoker
+                {@link RegistryProtocol#export(Invoker wrapperInvoker)}     FIXME Exporter
+                    {@link RegistryProtocol#getRegistryUrl(Invoker)}        FIXME registryUrl
+                    {@link RegistryProtocol#getProviderUrl(Invoker)}        FIXME providerUrl
+        
+            exporters.add(exporter)
 
      */
 }
