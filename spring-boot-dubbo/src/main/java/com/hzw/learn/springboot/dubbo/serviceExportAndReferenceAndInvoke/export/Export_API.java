@@ -66,17 +66,22 @@ public class Export_API {
         {@link ServiceConfig#loadRegistries(boolean)}    FIXME registryURLs
             RegistryConfigs  =>  URLs:registryURLs
         @see ServiceConfig#doExportUrlsFor1Protocol(ProtocolConfig, List)  List:registryURLs
-            ServiceConfig => map => URL:serviceUrl       FIXME serviceUrl
+            ServiceConfig => map => URL:providerUrl       FIXME providerUrl
             -scope=remote    {@link ServiceConfig#exportLocal(URL)}
                 {@link JavassistProxyFactory#getInvoker(Object ref, Class interfaceClass, URL serviceUrl)}       FIXME Invoker
                 {@link InjvmProtocol#export(Invoker)}    FIXME Exporter
             -scope=local     ServiceConfig#exportRemote(registryURLs, url)
-                registryUrl 中装入 servieUrl             FIXME registryUrl[export=serviceUrl]
+              registryURLs foreach -> registryurl
+                registryUrl 中装入 providerUrl             FIXME registryUrl[export=providerUrl]
                 {@link JavassistProxyFactory#getInvoker(Object ref, Class interfaceClass, URL registryUrl)}      FIXME Invoker
-                new {@link DelegateProviderMetaDataInvoker#DelegateProviderMetaDataInvoker(Invoker, ServiceConfig)}  FIXME DelegateProviderMetaDataInvoker wrapperInvoker
-                {@link RegistryProtocol#export(Invoker wrapperInvoker)}     FIXME Exporter
-                    {@link RegistryProtocol#getRegistryUrl(Invoker)}        FIXME registryUrl
-                    {@link RegistryProtocol#getProviderUrl(Invoker)}        FIXME providerUrl
+                wrapperInvoker = new {@link DelegateProviderMetaDataInvoker#DelegateProviderMetaDataInvoker(Invoker, ServiceConfig)}  FIXME DelegateProviderMetaDataInvoker wrapperInvoker
+                {@link RegistryProtocol#export(Invoker wrapperInvoker:originInvoker)}     FIXME Exporter
+                    registryUrl = {@link RegistryProtocol#getRegistryUrl(Invoker originInvoker)}        FIXME registryUrl
+                    providerUrl = {@link RegistryProtocol#getProviderUrl(Invoker originInvoker)}        FIXME providerUrl
+                    exporter = {@link RegistryProtocol#doLocalExport(Invoker originInvoker, URL providerUrl)}    FIXME **导出服务,启动netty或其他服务端，绑定处理等**
+                    registry = {@link RegistryProtocol#getRegistry(Invoker originInvoker)}
+                    registeredProviderUrl = {@link RegistryProtocol#getRegisteredProviderUrl(URL providerUrl, URL registryUrl)} FIXME 加工出要注册的providerUrl用于后面的注册
+
         
             exporters.add(exporter)
 
