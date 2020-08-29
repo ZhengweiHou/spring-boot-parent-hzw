@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans default-lazy-init="false"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:batch="http://www.springframework.org/schema/batch"
+	   xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+			http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+		"
+>
+
+	<!-- spring的事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager"/>
+
+	<bean id="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean"/>
+
+	<bean id="hReader" class="com.hzw.learn.springboot.batchbase.hello.HReader"/>
+	<bean id="hProdessor" class="com.hzw.learn.springboot.batchbase.hello.HProdessor"/>
+	<bean id="hWriter" class="com.hzw.learn.springboot.batchbase.hello.HWriter"/>
+
+
+	<bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+		<property name="jobRepository" ref="jobRepository" />
+	</bean>
+
+
+	<batch:job id="HZWjob_hello" job-repository="jobRepository">
+<!--		<batch:step id="jobHStep" parent="hStep" />-->
+		<batch:step id="step1">
+			<batch:tasklet>
+				<batch:chunk reader="hReader" processor="hProdessor" writer="hWriter" commit-interval="5"/>
+			</batch:tasklet>
+		</batch:step>
+	</batch:job>
+
+
+
+
+
+
+</beans>

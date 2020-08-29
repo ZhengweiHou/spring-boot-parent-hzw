@@ -42,7 +42,7 @@
     <module>spring-boot-jvm</module>
     <module>spring-boot-netty</module>
     <module>spring-boot-mq</module>
-    <module>spring-boot-drools</module>
+<!--    <module>spring-boot-drools</module> -->
     <module>spring-boot-springbase</module>
       <module>spring-boot-dubbo</module>
     <module>spring-boot-cas</module>
