@@ -15,16 +15,17 @@ public class TestMain_XML {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("hello/hello.xml");
 
         JobLauncher jobLauncher = (JobLauncher) ctx.getBean("jobLauncher");
-        Job job = (Job) ctx.getBean("HZWjob_hello");
+        Job job = (Job) ctx.getBean("helloJob");
         JobRepository jobRepository = (JobRepository) ctx.getBean("jobRepository");
 
+//        JobLauncherTestUtils jobLauncherTestUtils = new JobLauncherTestUtils();
+//        jobLauncherTestUtils.setJobRepository(jobRepository);
+//        jobLauncherTestUtils.setJob(job);
+//        jobLauncherTestUtils.setJobLauncher(jobLauncher);
+//        JobExecution jobExecution = jobLauncherTestUtils.launchJob();
 
-        JobLauncherTestUtils jobLauncherTestUtils = new JobLauncherTestUtils();
-        jobLauncherTestUtils.setJobRepository(jobRepository);
-        jobLauncherTestUtils.setJob(job);
-        jobLauncherTestUtils.setJobLauncher(jobLauncher);
-
-        JobExecution jobExecution = jobLauncherTestUtils.launchJob();
+        JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
+        JobExecution jobExecution = jobLauncher.run(job,jobParametersBuilder.toJobParameters());
 
         ExitStatus es = jobExecution.getExitStatus();
         if (es.getExitCode().equals(ExitStatus.COMPLETED.getExitCode())) {
@@ -33,11 +34,7 @@ public class TestMain_XML {
             System.out.println("任务失败，exitCode=" + es.getExitCode());
         }
 
-//        JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
-//        aa.run(job,jobParametersBuilder.toJobParameters());
-
-
-
-
     }
 }
+
+

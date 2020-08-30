@@ -9,7 +9,7 @@
 		"
 >
 
-	<!-- spring的事务管理器 -->
+	<!-- spring的事务管理器  PlatformTransactionManager接口的实现-->
 	<bean id="transactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager"/>
 
 	<bean id="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean"/>
@@ -24,18 +24,12 @@
 	</bean>
 
 
-	<batch:job id="HZWjob_hello" job-repository="jobRepository">
-<!--		<batch:step id="jobHStep" parent="hStep" />-->
-		<batch:step id="step1">
+	<batch:job id="helloJob" job-repository="jobRepository">
+		<batch:step id="step1" >
 			<batch:tasklet>
 				<batch:chunk reader="hReader" processor="hProdessor" writer="hWriter" commit-interval="5"/>
 			</batch:tasklet>
 		</batch:step>
 	</batch:job>
-
-
-
-
-
 
 </beans>
