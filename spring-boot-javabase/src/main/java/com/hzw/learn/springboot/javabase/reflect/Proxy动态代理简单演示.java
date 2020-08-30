@@ -22,7 +22,8 @@ public class Proxy动态代理简单演示 {
 		walkMethod.invoke(temp);
 		Method sayHelloMethod = Person.class.getMethod("sayHello", String.class);
 		sayHelloMethod.invoke(temp,"HZW");
-		
+
+
 		Person p = (Person)temp;
 		p.walk();
 		p.sayHello("hzw");

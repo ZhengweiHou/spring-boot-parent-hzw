@@ -5,6 +5,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -17,14 +18,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 @FixMethodOrder(MethodSorters.JVM)
 public class TestMain {
     ApplicationContext applicationContext = null;
-    @Before
-    public void init(){
-        applicationContext = new ClassPathXmlApplicationContext("DI/DICircle/springCircle.xml");
-    }
+
+//    @Test
+//    public void helloTest_XML(){
+//        applicationContext = new ClassPathXmlApplicationContext("DI/DICircle/springCircle.xml");
+//    }
 
     @Test
-    public void helloTest(){
-
+    public void helloTest_JAVA(){
+        applicationContext = new AnnotationConfigApplicationContext(SpringCircleConfig.class);
     }
 
 }

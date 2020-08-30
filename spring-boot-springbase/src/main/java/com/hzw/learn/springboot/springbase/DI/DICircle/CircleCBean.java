@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
  * @Author houzw
  * @Date 2020/7/3
  **/
-@Component
+//@Component
 public class CircleCBean implements InitializingBean, DisposableBean {
-    @Autowired
+//    @Autowired
     private CircleABean aBean;
 
     public CircleCBean() {

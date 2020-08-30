@@ -20,7 +20,7 @@ import java.util.Arrays;
  **/
 
 @FixMethodOrder(MethodSorters.JVM)
-public class TestMain {
+public class TestMain_XML {
     ApplicationContext applicationContext = null;
     @Before
     public void init(){

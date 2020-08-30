@@ -60,24 +60,24 @@
 			<artifactId>drools-decisiontables</artifactId>
 			<version>${drools.version}</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.kie/kie-api -->
 		<dependency>
             <groupId>org.kie</groupId>
             <artifactId>kie-api</artifactId>
            <!-- <version>${drools.version}</version> -->
             <version>7.20.0.Final</version>
-            
+
         </dependency>
-		
-		
+
+
 		<!-- https://mvnrepository.com/artifact/org.drools/knowledge-api -->
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>knowledge-api</artifactId>
 			<version>5.5.0.Final</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.kie/kie-internal -->
 		<!-- <dependency>
 		    <groupId>org.kie</groupId>
@@ -85,7 +85,7 @@
    	 		<version>6.4.0.Final</version>
 		    <version>7.20.0.Final</version>
 		</dependency> -->
-		
+
 		<dependency>
 		    <groupId>org.drools</groupId>
     		<artifactId>drools-container</artifactId>

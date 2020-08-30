@@ -12,9 +12,9 @@
     <artifactId>spring-boot-dubbo</artifactId>
 
 	<properties>
-<!--	    <dubbo.version>2.7.3</dubbo.version>-->
+	    <dubbo.version>2.7.3</dubbo.version>
         <!--源码测试分支-->
-        <dubbo.version>2.7.3-hzwtest</dubbo.version>
+<!--        <dubbo.version>2.7.3-hzwtest</dubbo.version>-->
 <!--        <dubbo.version>2.7.6</dubbo.version>-->
 	</properties>
 
