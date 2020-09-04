@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans default-lazy-init="false"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd http://www.alibaba.com/schema/stat http://www.alibaba.com/schema/stat.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd"
+	   xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+>
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/test" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+		<property name="validationQuery" value=""/>
+	</bean>
+
+	<!-- spring的事务管理器  PlatformTransactionManager接口的实现-->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		  p:dataSource-ref="dataSource"
+	/>
+
+	<bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" >
+		<constructor-arg name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean name="hzwService" class="com.hzw.learn.springboot.springbase.Transaction.HzwService"
+		  p:jdbcTemplate-ref="jdbcTemplate"/>
+
+<!--	事务注解@Transactional生效-->
+<!--	<tx:annotation-driven transaction-manager="transactionManager"/>-->
+<!--	TODO aspectj 实现，这里事务是不生效的，不知道为什么-->
+	<tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/>
+<!--	<tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>-->
+
+<!--	<aop:aspectj-autoproxy />-->
+
+</beans>
+
+
