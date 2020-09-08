@@ -1,5 +1,8 @@
 package com.hzw.learn.springboot.springbase.Test;
 
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
@@ -11,8 +14,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotatedBeanDefinitionReader;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
+@FixMethodOrder(MethodSorters.JVM)
 
-public class Test {
+public class Test1 {
+
+    @org.junit.Test
     public static void main(String[] args) {
         BeanDefinitionRegistry beanDefinitionRegistry;
         ApplicationContext applicationContext;

@@ -28,4 +28,7 @@ public class stacktest {
         }   //构造方法执行完，会被GC回收
     }
 
+
+
+
 }
