@@ -11,7 +11,7 @@ import com.rabbitmq.client.DeliverCallback;
 public class Recv {
 	public static void main(String[] args) throws IOException, TimeoutException {
 		 ConnectionFactory connectionFactory = new ConnectionFactory();
-		 	connectionFactory.setHost("192.168.32.131");
+		 	connectionFactory.setHost("127.0.0.1");
 //			connectionFactory.setVirtualHost("test");
 			connectionFactory.setUsername("admin");
 			connectionFactory.setPassword("admin");

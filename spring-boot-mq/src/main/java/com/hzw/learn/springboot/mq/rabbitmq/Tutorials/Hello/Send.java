@@ -13,15 +13,15 @@ public class Send {
 		
 		ConnectionFactory connectionFactory = new ConnectionFactory();
 //		ConnectionFactoryConfigurator factoryConf = new ConnectionFactoryConfigurator();
-		connectionFactory.setHost("192.168.32.131");
+		connectionFactory.setHost("localhost");
 //		connectionFactory.setVirtualHost("test");
 		connectionFactory.setUsername("admin");
 		connectionFactory.setPassword("admin");
 		Connection connection = connectionFactory.newConnection();
 		Channel channel = connection.createChannel();
 		channel.queueDeclare("hzw-hello", false, false, false, null); // 创建队列
-		channel.queueDeclare("hzwhelloqueue1", false, false, false, null);
-		channel.queueDeclare("hzwhelloqueue2", false, false, false, null);
+//		channel.queueDeclare("hzwhelloqueue1", false, false, false, null);
+//		channel.queueDeclare("hzwhelloqueue2", false, false, false, null);
 		
 		Scanner scan = new Scanner(System.in);
 		while (true) {

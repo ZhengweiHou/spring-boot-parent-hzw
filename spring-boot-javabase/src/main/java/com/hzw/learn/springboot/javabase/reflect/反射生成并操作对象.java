@@ -1,5 +1,8 @@
 package com.hzw.learn.springboot.javabase.reflect;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+import org.junit.Test;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -26,6 +29,15 @@ public class 反射生成并操作对象 {
 		field.get(classTest);
 		// 赋值
 		field.set(classTest, "hzw");
+	}
+
+	@Test
+	public void test1(){
+		Object o = new ClassTest();
+
+		System.out.println(o.getClass());
+
+
 	}
 	
 }

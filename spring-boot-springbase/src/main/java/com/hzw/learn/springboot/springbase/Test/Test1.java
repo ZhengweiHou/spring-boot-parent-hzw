@@ -14,12 +14,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotatedBeanDefinitionReader;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 @FixMethodOrder(MethodSorters.JVM)
 
 public class Test1 {
 
-    @org.junit.Test
-    public static void main(String[] args) {
+    @Test
+    public void test1() {
         BeanDefinitionRegistry beanDefinitionRegistry;
         ApplicationContext applicationContext;
         AnnotationConfigApplicationContext annotationConfigApplicationContext;
@@ -35,6 +37,52 @@ public class Test1 {
 
         BeanDefinition beanDefinition;
         AnnotatedBeanDefinition annotatedBeanDefinition;
+    }
+
+    @Test
+    public void test2() throws InterruptedException {
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("Test/Test.xml");
+//        PenBean penBean = (PenBean) applicationContext.getBean("penBean");
+
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                System.out.println("秀才等书童送笔过来...");
+//                while (0 == penBean.pen){}
+//                System.out.println("书童笔送来了，开始作诗...");
+//            }
+//        },"秀才").start();
+
+        PenBean penBean = (PenBean) applicationContext.getBean("penBean");
+        System.out.println("-----" + penBean.pen);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                PenBean penBean = (PenBean) applicationContext.getBean("penBean");
+                penBean.pen++;
+            }
+        },"书童").start();
+
+
+
+        Thread.sleep(1000);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                PenBean penBean = (PenBean) applicationContext.getBean("penBean");
+                System.out.println("=======" + penBean.pen);
+            }
+        },"show pen").start();
 
     }
+
+
+
+
+
+
+
+
 }
