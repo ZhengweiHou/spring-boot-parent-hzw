@@ -11,5 +11,11 @@
 
     <artifactId>hzw-batch-boot</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-batch</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

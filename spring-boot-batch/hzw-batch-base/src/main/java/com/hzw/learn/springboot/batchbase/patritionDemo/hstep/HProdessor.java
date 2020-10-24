@@ -1,14 +1,12 @@
-package com.hzw.learn.springboot.batchbase.hello;
+package com.hzw.learn.springboot.batchbase.patritionDemo.hstep;
 
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.beans.BeanUtils;
 
 public class HProdessor implements ItemProcessor {
     @Override
     public Object process(Object item) throws Exception {
 
-        Integer temp = (Integer) item;
-        item = -temp;
+        String temp = (String) item;
 
 //        if (temp > 500)
 //            throw new RuntimeException("我是一个错误哦！");
