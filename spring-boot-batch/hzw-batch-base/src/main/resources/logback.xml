@@ -12,7 +12,10 @@
 	</appender>
 	
 	<!-- 日志级别定制 -->
-	<logger name="com.hzw.learn.springboot" level="DEBUG" />
+	<logger name="com.hzw.learn.springboot"  level="DEBUG" />
+	<logger name="org.springframework.batch" level="DEBUG" />
+
+
 	
 	<!-- 默认级别  -->
 	<root level="INFO">

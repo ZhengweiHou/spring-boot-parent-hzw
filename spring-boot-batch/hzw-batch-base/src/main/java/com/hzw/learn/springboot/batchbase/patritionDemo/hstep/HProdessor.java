@@ -8,7 +8,7 @@ public class HProdessor implements ItemProcessor {
 
         String temp = (String) item;
 
-//        if (temp > 500)
+//        if (temp.equals("000000004"))
 //            throw new RuntimeException("我是一个错误哦！");
 
         System.out.println(Thread.currentThread().getId()

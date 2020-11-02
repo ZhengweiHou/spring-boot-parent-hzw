@@ -50,7 +50,7 @@ public class HzwPartitionResourceItemReader extends AbstractItemCountingItemStre
 
     @Override
     public void setBeanName(String name) {
-        log.info("setBeanName：{}",name);
+        log.debug("setBeanName：{}",name);
         super.setName(name);        // 调用AbstractItemCountingItemStreamItemReader.setName() 将其ExecutionContextUserSupport属性的name值赋值
     }
 }

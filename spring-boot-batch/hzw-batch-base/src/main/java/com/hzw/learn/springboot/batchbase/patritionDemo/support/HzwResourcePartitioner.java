@@ -74,10 +74,10 @@ public class HzwResourcePartitioner implements Partitioner {
                 // 构造ExecutionContext
                 int skip = (i-1) * parttionSize;
                 ExecutionContext executionContext = new ExecutionContext();
+                executionContext.putString("partFilePath",partitionDirectory.getAbsolutePath() + File.separator + resource.getFilename() + "_" + i);
                 executionContext.putInt("skip", skip);
                 executionContext.putInt("parttionSize", parttionSize);
                 executionContext.putInt("partIndex",i);
-                executionContext.putString("partFilePath",partitionDirectory.getAbsolutePath() + File.separator + resource.getFilename() + "_" + i);
                 result.put("part"+i, executionContext);
 
                 // 创建拆分文件
@@ -91,7 +91,7 @@ public class HzwResourcePartitioner implements Partitioner {
                     // 输出拆分文件内容
                     splitFileOutchannel = new FileOutputStream(splitFile).getChannel();
                     inChannel.transferTo(skip * lineBytesLength, parttionSize * lineBytesLength, splitFileOutchannel);
-                    log.info("output to splitfile:[{}]", splitFile.getAbsolutePath());
+                    log.info("output to splitfile:[{}]", splitFile.getName());
                     splitFileOutchannel.close();
                 } catch (Exception e) {
                     e.printStackTrace();

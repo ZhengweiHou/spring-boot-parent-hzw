@@ -1,6 +1,7 @@
 package com.hzw.learn.springboot.mq.rabbitmq.Tutorials.Hello;
 
 import java.io.IOException;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeoutException;
 
@@ -22,13 +23,20 @@ public class Send {
 		channel.queueDeclare("hzw-hello", false, false, false, null); // 创建队列
 //		channel.queueDeclare("hzwhelloqueue1", false, false, false, null);
 //		channel.queueDeclare("hzwhelloqueue2", false, false, false, null);
+		channel.queueDeclare("hzw-hello1", false, false, false, null); // 创建队列
+		channel.queueDeclare("hzw-hello2", false, false, false, null); // 创建队列
 		
 		Scanner scan = new Scanner(System.in);
 		while (true) {
 			String message = scan.nextLine();
 			message = "time:[" + System.currentTimeMillis() + "]" +message;
-			
-			channel.basicPublish("", "hzw-hello", null, message.getBytes()); // 向指定队列发送消息
+
+			String[] queues = {"hzw-hello", "hzw-hello1", "hzw-hello2"};
+			Random rand = new Random();
+			int num = rand.nextInt(3);
+			channel.basicPublish("", queues[num], null, (message+"."+queues[num]).getBytes()); // 随机发送队列
+
+//			channel.basicPublish("", "hzw-hello", null, message.getBytes()); // 向指定队列发送消息
 			System.out.println("[x] sent:" + message);
 		}
 		

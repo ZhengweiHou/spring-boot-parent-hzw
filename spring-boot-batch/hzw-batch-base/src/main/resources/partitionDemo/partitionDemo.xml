@@ -57,7 +57,7 @@
 
 		<batch:step id="partitionDemoStep1" >
 			<batch:partition partitioner="partition_hzw_file1" step="hstep" >
-				<batch:handler grid-size="3" task-executor="executor"/>  <!-- 指定分片数量  task-executor 指定任务的执行池-->
+				<batch:handler grid-size="2" task-executor="executor"/>  <!-- 指定分片数量  task-executor 指定任务的执行池-->
 			</batch:partition>
 		</batch:step>
 

@@ -1,8 +1,10 @@
 package com.hzw.learn.springboot.batchbase.patritionDemo.hstep;
 
 import com.google.gson.Gson;
+import org.apache.logging.log4j.message.MessageFormatMessage;
 import org.springframework.batch.item.ItemWriter;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 public class HWriter implements ItemWriter {
