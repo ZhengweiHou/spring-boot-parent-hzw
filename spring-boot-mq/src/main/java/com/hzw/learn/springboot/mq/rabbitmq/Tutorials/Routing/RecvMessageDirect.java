@@ -29,7 +29,7 @@ public class RecvMessageDirect {
 			connectionFactory.setPassword("admin");
 	        Connection connection = connectionFactory.newConnection();
 	        Channel channel = connection.createChannel();
-	        
+
 //	        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
 	        
 //	        String queueName = channel.queueDeclare().getQueue();

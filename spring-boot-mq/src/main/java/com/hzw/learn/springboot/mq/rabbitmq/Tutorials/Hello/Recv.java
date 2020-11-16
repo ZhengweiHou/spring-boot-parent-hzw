@@ -29,12 +29,13 @@ public class Recv {
 	        DeliverCallback deliverCallback = (consumerTag, delivery) -> {
 	            String message = new String(delivery.getBody(), "UTF-8");
 //	            System.out.println("xxxxxx");
+				System.out.println(" [x] " + Thread.currentThread().getName() + " Received '" + message + "' --- START");
 	            try {
-					Thread.sleep(1000);
+					Thread.sleep(10000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-	            System.out.println(" [x] " + Thread.currentThread().getName() + " Received '" + message + "'");
+	            System.out.println(" [x] " + Thread.currentThread().getName() + " Received '" + message + "' --- END");
 	        };
 	        channel.basicConsume("hzw-hello", true, deliverCallback, consumerTag -> { });
 			channel.basicConsume("hzw-hello1", true, deliverCallback, consumerTag -> { });

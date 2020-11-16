@@ -16,10 +16,22 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.Random;
+
 @FixMethodOrder(MethodSorters.JVM)
 
 public class Test1 {
+    @Test
+    public void test() {
+        System.out.println(new Random().nextInt(1));
+        int[] a = new int[]{1,2,3};
+        for (int i=0; i<50; i++){
+//            System.out.println(new Random().nextInt(1));
+            System.out.println(a[new Random().nextInt(a.length)]);
+        }
 
+
+    }
     @Test
     public void test1() {
         BeanDefinitionRegistry beanDefinitionRegistry;

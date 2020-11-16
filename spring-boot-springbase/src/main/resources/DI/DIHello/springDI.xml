@@ -51,7 +51,6 @@
     </bean>
 
 
-
     <!--=注入bean id= ??????这有什么用？？-->
     <bean id="name1" class="java.lang.String" c:_0="aaaa"/>
 
