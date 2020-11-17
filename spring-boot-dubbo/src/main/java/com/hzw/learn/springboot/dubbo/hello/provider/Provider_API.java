@@ -62,7 +62,6 @@ public class Provider_API {
 //        protocol.setStatus("spring,registry,server,memory,load,datasource,threadpool");	// 开启状态检查扩展
         protocol.setTelnet("cd,ps,select,log,ls,clear,count,invoke,exit,help,trace,pwd,shutdown,status");	// 开启telnet扩展
 
-        
         // ======注册服务配置======
     	// 创建一个服务配置
         ServiceConfig<Hi> service = new ServiceConfig<>();

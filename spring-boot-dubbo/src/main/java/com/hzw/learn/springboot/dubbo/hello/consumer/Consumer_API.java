@@ -62,7 +62,7 @@ public class Consumer_API {
         
         while(true) {
             System.out.println(hi3.sayhi("Consumer_Api"));
-        	Thread.sleep(1000);
+        	Thread.sleep(2000);
         }
         
 //        System.out.println(hi3.sayhi("dubbo3"));

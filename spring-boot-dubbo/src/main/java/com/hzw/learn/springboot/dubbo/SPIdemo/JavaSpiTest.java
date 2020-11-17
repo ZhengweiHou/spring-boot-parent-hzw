@@ -20,6 +20,11 @@ public class JavaSpiTest {
         ServiceLoader<HelloApi> load = ServiceLoader.load(HelloApi.class);
         System.out.println("Java SPI");
         load.forEach(HelloApi::sayHello);
+
+        System.out.println("==========");
+        for (HelloApi helloApi : load){
+            helloApi.sayHello();
+        }
     }
 
 
