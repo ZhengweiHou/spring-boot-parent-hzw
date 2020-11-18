@@ -1,5 +1,7 @@
-package com.hzw.learn.springboot.dubbo.hello.provider;
+package com.hzw.learn.springboot.dubbo.Filter;
 
+import com.hzw.learn.springboot.dubbo.hello.provider.Hi;
+import com.hzw.learn.springboot.dubbo.hello.provider.HiImpl;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ProtocolConfig;
 import org.apache.dubbo.config.RegistryConfig;
