@@ -9,7 +9,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class Provider_NoRegistry {
 
-    private static Integer serverport = 20881;
+    private static Integer serverport = 20880;
 
     public static void main(String[] args) throws Exception {
 
@@ -28,7 +28,7 @@ public class Provider_NoRegistry {
         service.setInterface(Hi.class);
         service.setRegister(false);
 
-        service.setRef(new HiImpl("梅超疯"));
+        service.setRef(new HiImpl("梅超疯_1"));
 
         service.export();
 

@@ -24,7 +24,7 @@ public class Consumer_NoRegistry {
         
         while(true) {
             System.out.println(hi3.sayhi("李四"));
-        	Thread.sleep(2000);
+        	Thread.sleep(1000);
         }
         
     }

@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.springbase.IOC;
+package com.hzw.learn.springboot.springbase.IOC.hello;
 
 /**
  * @ClassName HelloInstanceFactory

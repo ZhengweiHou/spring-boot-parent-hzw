@@ -9,7 +9,8 @@ import static org.apache.dubbo.common.constants.CommonConstants.CONSUMER;
 public class HFilter implements Filter {
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-        System.out.println(invocation);
+//        System.out.println(invocation);
+        System.out.print("=filter=");
         return invoker.invoke(invocation);
     }
 }

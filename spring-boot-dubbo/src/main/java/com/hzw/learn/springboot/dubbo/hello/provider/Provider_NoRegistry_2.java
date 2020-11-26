@@ -28,7 +28,7 @@ public class Provider_NoRegistry_2 {
         service.setInterface(Hi.class);
         service.setRegister(false);
 
-        service.setRef(new HiImpl("张三疯"));
+        service.setRef(new HiImpl("张三疯_2"));
 
         service.export();
 
