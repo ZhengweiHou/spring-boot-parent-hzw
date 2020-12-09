@@ -12,11 +12,11 @@ public class HzwBeanDefinitionRegistryPostProcessor implements BeanDefinitionReg
     Logger log = LoggerFactory.getLogger(getClass());
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-        log.debug("HzwBeanDefinitionRegistryPostProcessor.postProcessBeanDefinitionRegistry");
+        log.debug("2=HzwBeanDefinitionRegistryPostProcessor.postProcessBeanDefinitionRegistry");
     }
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        log.debug("HzwBeanDefinitionRegistryPostProcessor.postProcessBeanFactory");
+        log.debug("3=HzwBeanDefinitionRegistryPostProcessor.postProcessBeanFactory");
     }
 }

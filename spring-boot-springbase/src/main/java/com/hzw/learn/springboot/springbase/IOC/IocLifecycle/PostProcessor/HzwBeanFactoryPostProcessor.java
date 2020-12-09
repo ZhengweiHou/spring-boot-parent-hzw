@@ -12,6 +12,6 @@ public class HzwBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        log.debug("HzwBeanFactoryPostProcessor.postProcessBeanFactory");
+        log.debug("1=HzwBeanFactoryPostProcessor.postProcessBeanFactory");
     }
 }
