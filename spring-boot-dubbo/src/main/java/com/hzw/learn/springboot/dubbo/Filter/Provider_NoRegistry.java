@@ -11,7 +11,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class Provider_NoRegistry {
 
-    private static Integer serverport = 20883;
+    private static Integer serverport = 20881;
 
     public static void main(String[] args) throws Exception {
 
