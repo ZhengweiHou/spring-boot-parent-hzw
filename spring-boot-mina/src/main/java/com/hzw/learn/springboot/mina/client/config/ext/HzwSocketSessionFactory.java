@@ -49,7 +49,7 @@ public class HzwSocketSessionFactory extends BasePoolableObjectFactory<IoSession
 		
 //		向服务端发送连接检查请求，校验连接是否可用
 		if(session.containsAttribute(NEED_VALIDATE)) {
-			log.info(">{}<连接检查开始",session.getId());
+			log.info("sessionId:{}  连接检查开始...",session.getId());
 			try {
 				WriteFuture writeFuture = session.write("3000==链接检查......");
 				
@@ -67,7 +67,7 @@ public class HzwSocketSessionFactory extends BasePoolableObjectFactory<IoSession
 			}finally {
 				session.removeAttribute(NEED_VALIDATE);
 			}
-			log.info(">{}<连接检查完成",session.getId());
+			log.info("sessionId:{}  连接检查结束",session.getId());
 		}
 		
 		return true;
@@ -87,7 +87,7 @@ public class HzwSocketSessionFactory extends BasePoolableObjectFactory<IoSession
 	
 	
 	private void log(IoSession session) {
-		log.info("{}  sessionId:{}",
+		log.info("* {}  sessionId:{}",
 				Thread.currentThread().getStackTrace()[2].getMethodName(),
 				session.getId()
 				);

@@ -14,13 +14,14 @@ import java.lang.reflect.Proxy;
 public class TestProxy {
 
     @Test
-    public void test1() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, InterruptedException {
+    public void test1() throws InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         /*
             正常思路反射获取目标对象，Spring容器中的对象本质上也是这种方式实例化Bean的（当然Proxy提供了更简便的方法来实例对象）
             1. 加载类
             2. 获取构造器对象
             3. 通过构造器实例化对象
          */
+        Thread.sleep(100000);
 
         // 获取目标代理类
         Class<?> clazz = Proxy.getProxyClass(HelloApi.class.getClassLoader(), new Class[]{HelloApi.class});

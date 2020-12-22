@@ -22,6 +22,7 @@ public class ClientApplication {
 
 		//===================1111111111=========
 		HzwSocketClientLong client = appContext.getBean(HzwSocketClientLong.class);
+		client.showPoolConfig();
 		Scanner scan = new Scanner(System.in);
 		int count = 0;
 		System.out.println("客户端启动成功");

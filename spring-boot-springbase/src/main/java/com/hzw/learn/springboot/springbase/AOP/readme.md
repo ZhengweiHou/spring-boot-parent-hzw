@@ -1,7 +1,10 @@
 ## CGLIB
 > 关键类：
-> - Enhancer
-> - MethodInterceptor
+> - org.springframework.cglib.proxy.Callback
+> - org.springframework.cglib.proxy.CallbackFilter
+> - org.springframework.cglib.proxy.Enhancer
+> - org.springframework.cglib.proxy.MethodInterceptor
+> - org.springframework.cglib.proxy.MethodProxy
 
 生成的动态代理类实际上是目标类的子类（区别proxy的方式）
 
@@ -49,6 +52,59 @@ public class HzwMethodInterceptor implements MethodInterceptor {
     }
 }
 ```
+
+
+### CGLIB多Callback用法
+示例
+```java
+    public void test3() {
+        Enhancer enhancer = new Enhancer();
+        enhancer.setCallbackFilter(new CallbackFilter() { //（1） 设置一个CallbackFilter
+            @Override
+            public int accept(Method method) {
+                // 此处可以通过method来动态确定返回的下标是多少，
+                // 这个数字将指定下面哪个MethodInterceptor对象作为该method的代理
+                // 因此可以为不同的方法指定不同的MethodInterceptor
+                return new Random().nextInt(3); // （1.1） 返回值对应下面Callback数组的下标
+            }
+        });
+        enhancer.setSuperclass(HzwHello.class);
+        enhancer.setCallbacks(new Callback[]{   // （2） 设置一个回调类数组
+                // 数组第一个元素
+                new MethodInterceptor() {
+                    @Override
+                    public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
+                        System.out.println("MethodInterceptro 1");
+                        return null;
+                    }
+                },
+                // 数组第二个元素
+                new MethodInterceptor() {
+                    @Override
+                    public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
+                        System.out.println("MethodInterceptro 2");
+                        return null;
+                    }
+                },
+                // 数组第三个元素
+                new MethodInterceptor() {
+                    @Override
+                    public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
+                        System.out.println("MethodInterceptro 3");
+                        return null;
+                    }
+                }
+        });
+        HzwHello hello = (HzwHello) enhancer.create();
+
+        hello.sayHello();
+    }
+```
+
+上例（1）处设置了一个CallbackFilter类，accept方法返回的数字和下方（2）处设置的Callback[]下标对应。
+在生成代理类的方法时，会先调用CallbackFilter.accept()传入Method参数，获取一个下标，该下标对应的Callback[]
+中的MethodInterceptor元素就 作为目标方法的代理方法
+
 
 ## Proxy
 > 关键类

@@ -39,7 +39,7 @@ public class HzwIoHandler_long extends IoHandlerAdapter {
 	@Override
 	public void sessionIdle(IoSession session, IdleStatus status) throws Exception {
 		this.log(session);
-		log.info("会话闲置：CsessionId:{} IdleStatus:{} idlecount:{} 时间：{}", session.getId(), status.toString(), session.getBothIdleCount(), System.currentTimeMillis()/1000);
+//		log.info("会话闲置：sessionId:{} IdleStatus:{} idlecount:{} 时间：{}", session.getId(), status.toString(), session.getBothIdleCount(), System.currentTimeMillis()/1000);
 //		seadHeartBeat(session);
 		session.setAttribute(HzwSocketSessionFactory.NEED_VALIDATE,"");
 	}
@@ -47,14 +47,14 @@ public class HzwIoHandler_long extends IoHandlerAdapter {
 	@Override
 	public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
 		this.log(session);
-		log.info("会话异常：CsessionId:{} Erromessage：{}", session.getId(), cause.getMessage());
+//		log.info("会话异常：sessionId:{} Erromessage：{}", session.getId(), cause.getMessage());
 		cause.printStackTrace();
 	}
 
 	@Override
 	public void messageReceived(IoSession session, Object message) throws Exception {
 		this.log(session);
-		log.info("会话接收到消息：CsessionId:{} 消息:{}", session.getId(), message);
+//		log.info("会话接收到消息：sessionId:{} 消息:{}", session.getId(), message);
 
 		session.setAttribute("message", message);
 		synchronized (session) {
@@ -65,7 +65,7 @@ public class HzwIoHandler_long extends IoHandlerAdapter {
 	@Override
 	public void messageSent(IoSession session, Object message) throws Exception {
 		this.log(session);
-		log.info("会话发送消息：CsessionId:{} 消息:{}", session.getId(), message);
+		log.info("会话发送消息：sessionId:{} 消息:{}", session.getId(), message);
 
 	}
 
@@ -80,11 +80,12 @@ public class HzwIoHandler_long extends IoHandlerAdapter {
 	}
 	
 	private void seadHeartBeat(IoSession session) {
+		this.log(session);
 		session.write("5000==发送心跳......");
 	}
 	
 	private void log(IoSession session) {
-		log.info("{}  sessionId:{}",
+		log.info("+ {}  sessionId:{}",
 				Thread.currentThread().getStackTrace()[2].getMethodName(),
 				session.getId()
 				);

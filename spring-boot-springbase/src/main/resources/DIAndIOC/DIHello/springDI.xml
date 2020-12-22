@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans default-lazy-init="false"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+    <!--    包扫描-->
+    <context:component-scan base-package="com.hzw.learn.springboot.springbase.DIAndIOC.DIHello"/>
+
+    <!--====构造器注入====-->
+    <!--    通过index、name和type注入构造参数-->
+    <bean id="hellodi1-index" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIHello.HelloDiImpl">
+        <constructor-arg index="0" value="15"/>
+        <constructor-arg index="1" value="小明"/>
+    </bean>
+
+    <bean id="hellodi1-name" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIHello.HelloDiImpl">
+        <constructor-arg name="age" value="18"/>
+        <constructor-arg name="name" value="小明他哥"/>
+    </bean>
+
+    <bean id="hellodi1-type" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIHello.HelloDiImpl">
+        <constructor-arg type="java.lang.String" value="小红"/>
+        <constructor-arg type="int" value="9"/>
+    </bean>
+
+
+    <!--    工厂方式注入大同小异 见IOC里内容-->
+
+    <!--====setter注入====-->
+    <!--  前提：  1.需要公共无参构造器     2.需要setter方法-->
+    <!--=注入常量=-->
+    <bean id="hellodi2_0" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIHello.HelloDiImpl">
+        <property name="name" value="张飞"/>
+        <property name="age"  value="100"/>
+        <property name="goodPerson" value="0"/>
+    </bean>
+
+    <bean id="hellodi2_1" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIHello.HelloDiImpl">
+        <property name="name" value="趙雲"/>
+        <property name="age"  value="101"/>
+        <property name="goodPerson">
+            <!--boolean值，value可以是 true/false、yes/no、on/off、1/0-->
+            <value>yes</value>
+        </property>
+    </bean>
+
+
+    <!--=注入bean id= ??????这有什么用？？-->
+    <bean id="name1" class="java.lang.String" c:_0="aaaa"/>
+
+    <bean id="hellodi3_0" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIHello.HelloDiImpl">
+        <property name="name"><idref bean="name1"/> </property> <!-- 这里的值是bean的id:"name1"-->
+    </bean>
+
+    <bean id="hellodi3_1" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIHello.HelloDiImpl">
+        <property name="name"><ref bean="name1"/> </property> <!-- 这里注入的是目标bean，即String:aaaa-->
+    </bean>
+
+
+    <!--=注入集合、数组和字典等=-->
+    <bean id="listSetMapDiTest" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIHello.ListSetMapDITestBean">
+        <!--List-->
+        <property name="listValues">
+            <list value-type="java.lang.String" merge="default">   <!--这个merge是什么意思？？  用于父子Bean之间是否合并list条目-->
+                <value>listValue 1</value>
+                <value>listValue 2</value>
+            </list>
+        </property>
+
+        <!--set-->
+        <property name="setValues">
+            <set value-type="java.lang.String" merge="default">
+                <value>setValue 1</value>
+                <value>setValue 2</value>
+            </set>
+        </property>
+
+        <!--map-->
+        <property name="mapValues">
+            <map key-type="java.lang.String" value-type="java.lang.String" merge="default">
+                <entry>
+                    <key>
+                        <value>key1</value>
+                    </key>
+                    <value>value1</value>
+                </entry>
+
+                <entry key="key2" value="value2"/>
+            </map>
+        </property>
+
+        <!--一维数组-->
+        <property name="array1v">
+            <array value-type="java.lang.String" merge="default">
+                <value>1</value>
+                <value>2</value>
+            </array>
+        </property>
+        <!--二维数组-->
+        <property name="array2v">
+            <array>
+                <array>
+                    <value>1-1</value>
+                    <value>1-2</value>
+                </array>
+                <array>
+                    <value>2-1</value>
+                    <value>2-2</value>
+                </array>
+
+            </array>
+        </property>
+
+        <!--properties-->
+        <property name="properties1">
+            <props value-type="int">
+                <prop key="p1-1">p1value1</prop>
+                <prop key="p1-2">p1value2</prop>
+            </props>
+        </property>
+
+        <property name="properties2">
+            <value>
+                p2-1=p2value1
+                p2-2=p2value2
+                p2-3=p2value3
+                p2-4=p2value4
+            </value>
+        </property>
+
+    </bean>
+
+
+    <!-- bean注入测试 -->
+    <bean id="beanDi1name" class="java.lang.String" c:_0="孙悟空"/>
+    <bean id="beanDi1" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIHello.HelloDiImpl">
+        <property name="name" ref="beanDi1name"/>
+    </bean>
+
+    <!--    内部bean-->
+    <bean id="beanDi2" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIHello.HelloDiImpl">
+        <property name="name">
+            <bean class="java.lang.String" c:_0="沙悟净"/>
+        </property>
+    </bean>
+
+    <!--使用p名称空间-->
+    <bean id="beanDi3" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIHello.HelloDiImpl"
+          p:name-ref="beanDi1name"
+          p:age="1000"
+    />
+
+
+
+
+</beans>
+
+

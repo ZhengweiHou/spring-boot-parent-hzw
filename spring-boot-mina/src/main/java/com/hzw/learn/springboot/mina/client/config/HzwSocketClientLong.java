@@ -19,9 +19,6 @@ public class HzwSocketClientLong {
 		
 		WriteFuture f = session.write(message + "--客户端SessionId:" + session.getId());
 
-		
-		
-		
 
 		// Handler和当前线程不是同一个线程，这里要等Handler处理完才能继续，可以使用synchronized处理
 		Thread.sleep(50l);
@@ -44,6 +41,10 @@ public class HzwSocketClientLong {
 		// 连接池回收session
 		pool.returnObject(session);
 		return result;
+	}
+
+	public void showPoolConfig(){
+		log.info("MaxActive:{}, MaxIdle:{}, MinIdle:{}",pool.getMaxActive(),pool.getMaxIdle(),pool.getMinIdle());
 	}
 
 	public GenericObjectPool<IoSession> getPool() {

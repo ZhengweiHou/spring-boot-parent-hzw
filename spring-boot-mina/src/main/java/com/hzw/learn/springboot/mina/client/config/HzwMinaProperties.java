@@ -15,7 +15,7 @@ public class HzwMinaProperties {
 
 	private int maxActive = 50;
 	
-	private int maxIdle = 5;
+	private int maxIdle = 10;
 	
 	private int minIdle = 5;
 
