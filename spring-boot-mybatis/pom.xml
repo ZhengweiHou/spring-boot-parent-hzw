@@ -37,6 +37,17 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysqldriv.version}</version>
 		</dependency>
+
+		<!-- apache_dbcp -->
+		<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+
+
 	</dependencies>
 
 
