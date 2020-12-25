@@ -22,7 +22,7 @@ public class IocLifecycleTestMain {
 //        String name = sc.nextLine();
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("DIAndIOC/IocLifecycle/IocLifecycle.xml");
-
+        System.out.println("123123");
     }
 
 //    @Test
