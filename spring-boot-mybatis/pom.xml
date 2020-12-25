@@ -38,14 +38,20 @@
 			<version>${mysqldriv.version}</version>
 		</dependency>
 
+		<!-- ==DataSource== -->
 		<!-- apache_dbcp -->
-		<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-
+		<!-- alibaba_druid -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.1.23</version>
+		</dependency>
+		<!-- ==DataSource== -->
 
 
 	</dependencies>

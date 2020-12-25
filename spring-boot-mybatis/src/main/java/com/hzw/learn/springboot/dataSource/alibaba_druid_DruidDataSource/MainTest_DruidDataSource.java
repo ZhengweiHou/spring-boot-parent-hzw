@@ -1,40 +1,37 @@
-package com.hzw.learn.springboot.dataSource.apache_dbcp_BasicDataSource;
+package com.hzw.learn.springboot.dataSource.alibaba_druid_DruidDataSource;
 
-import com.hzw.learn.springboot.dataSource.apache_dbcp_BasicDataSource.configs.BasicDataSourceConfig;
-import org.apache.commons.dbcp.BasicDataSource;
+import com.alibaba.druid.pool.DruidDataSource;
+import com.hzw.learn.springboot.dataSource.alibaba_druid_DruidDataSource.configs.DruidDataSourceConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.lang.invoke.VolatileCallSite;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
-public class MainTest_BasicDataSource {
+public class MainTest_DruidDataSource {
     public static void main(String[] args) throws SQLException {
-
         int threadNum = 11;
         int threadSleep = 5;
 
-        AnnotationConfigApplicationContext annoApplicationContext
-                = new AnnotationConfigApplicationContext(BasicDataSourceConfig.class);
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(DruidDataSourceConfig.class);
 
-        BasicDataSource basicDataSource = (BasicDataSource) annoApplicationContext.getBean("basicDataSource");
+        DruidDataSource ds = (DruidDataSource) context.getBean("druidDataSource");
 
         for (int i=1; i <= threadNum; i++){
             new Thread(() -> {
                 while (true) {
                     try {
-
-                        Connection connection = basicDataSource.getConnection();
+                        Connection connection = ds.getConnection();
                         PreparedStatement ps = connection.prepareStatement("select * from student");
                         ResultSet rs = ps.executeQuery();
 
                         while (rs.next()) {
                             rs.getString(1);
                         }
-                        System.out.println("123");
+
                         TimeUnit.SECONDS.sleep(threadSleep);
 
                         connection.close();
@@ -47,10 +44,6 @@ public class MainTest_BasicDataSource {
 
             }).start();
         }
-
-
-
-
 
     }
 
