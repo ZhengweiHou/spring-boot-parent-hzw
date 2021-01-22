@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans default-lazy-init="false"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+    <bean id="bBean0" class="com.hzw.learn.springboot.springbase.DIAndIOC.scop.BBean"/>   <!-- 单例的bBean0 -->
+    <!-- 原型模式的aBean，每次get aBean时都是一个新的对象; 但每次注入的bBean0都是单例的同一个对象 -->
+    <bean id="aBean0" scope="prototype" class="com.hzw.learn.springboot.springbase.DIAndIOC.scop.ABean" p:bBean-ref="bBean0"/>
+
+    <bean id="bBean1" scope="prototype" class="com.hzw.learn.springboot.springbase.DIAndIOC.scop.BBean"/>   <!-- 原型模式的bBean0 -->
+    <!-- 原型模式的aBean，每次get aBean时都是一个新的对象; 每次获取aBean注入的bBean1都是不同的对象 -->
+    <bean id="aBean1" scope="prototype" class="com.hzw.learn.springboot.springbase.DIAndIOC.scop.ABean" p:bBean-ref="bBean1"/>
+</beans>
+
+

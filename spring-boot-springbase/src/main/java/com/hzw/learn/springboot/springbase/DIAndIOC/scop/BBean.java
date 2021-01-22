@@ -20,12 +20,12 @@ public class BBean implements InitializingBean, DisposableBean {
 
     @Override
     public void destroy() throws Exception {
-        System.out.println(this.hashCode() + "=" + this.getClass().getSimpleName() + ":destroy!!");
+//        System.out.println(this.hashCode() + "=" + this.getClass().getSimpleName() + ":destroy!!");
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println(this.hashCode() + "=" + this.getClass().getSimpleName() + ":afterPropertiesSet!!");
+//        System.out.println(this.hashCode() + "=" + this.getClass().getSimpleName() + ":afterPropertiesSet!!");
 
     }
 

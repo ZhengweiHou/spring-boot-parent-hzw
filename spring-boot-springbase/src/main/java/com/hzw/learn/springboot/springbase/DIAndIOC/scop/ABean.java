@@ -20,7 +20,7 @@ public class ABean implements InitializingBean, DisposableBean {
     }
 
     public ABean(BBean bBean) {
-        System.out.println(this.getClass().getSimpleName() + " 通过构造器注入" + bBean.getClass().getSimpleName());
+        System.out.println(this.getClass().getSimpleName() + " 通过构造器注入" + bBean.getClass().getSimpleName() + bBean.hashCode());
         this.bBean = bBean;
     }
 
@@ -29,17 +29,17 @@ public class ABean implements InitializingBean, DisposableBean {
     }
 
     public void setbBean(BBean bBean) {
-        System.out.println(this.getClass().getSimpleName() + " 通过setter注入" + bBean.getClass().getSimpleName());
+        System.out.println(this.getClass().getSimpleName() + " 通过setter注入" + bBean.getClass().getSimpleName() + bBean.hashCode());
         this.bBean = bBean;
     }
 
     @Override
     public void destroy() throws Exception {
-        System.out.println(this.hashCode() + "=" + this.getClass().getSimpleName()+ ":destroy!!");
+//        System.out.println(this.hashCode() + "=" + this.getClass().getSimpleName()+ ":destroy!!");
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println(this.hashCode() + "=" + this.getClass().getSimpleName() + ":afterPropertiesSet!!");
+//        System.out.println(this.hashCode() + "=" + this.getClass().getSimpleName() + ":afterPropertiesSet!!");
     }
 }

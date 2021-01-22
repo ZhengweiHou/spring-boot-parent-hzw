@@ -7,6 +7,10 @@ import org.junit.runners.MethodSorters;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @ClassName TestMain
  * @Description TODO
@@ -16,28 +20,50 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @FixMethodOrder(MethodSorters.JVM)
 public class TestMain {
-    ApplicationContext applicationContext = null;
-    @Before
-    public void init(){
-        applicationContext = new ClassPathXmlApplicationContext("DIAndIOC/scop/springScop.xml");
+
+    @Test
+    public void protoTypeTest() throws ParseException {
+        ClassPathXmlApplicationContext app = new ClassPathXmlApplicationContext("DIAndIOC/scop/prototype.xml");
+
+        System.out.println("==========原型模式的aBean注入单例模式的bBean==========");
+        BBean bBean = null;
+        bBean = (BBean) app.getBean("bBean0");
+        System.out.println("" + bBean.hashCode());
+        bBean = (BBean)app.getBean("bBean0");
+        System.out.println("" + bBean.hashCode());
+
+        ABean aBean = (ABean) app.getBean("aBean0");
+        System.out.println("a:" + aBean.hashCode() + " a.b:" + aBean.getbBean().hashCode());
+        aBean = (ABean) app.getBean("aBean0");
+        System.out.println("a:" + aBean.hashCode() + " a.b:" + aBean.getbBean().hashCode());
+
+
+        System.out.println("==========原型模式的aBean注入原型模式的bBean==========");
+        bBean = null;
+        bBean = (BBean) app.getBean("bBean1");
+        System.out.println("" + bBean.hashCode());
+        bBean = (BBean)app.getBean("bBean1");
+        System.out.println("" + bBean.hashCode());
+
+        aBean = (ABean) app.getBean("aBean1");
+        System.out.println("a:" + aBean.hashCode() + " a.b:" + aBean.getbBean().hashCode());
+        aBean = (ABean) app.getBean("aBean1");
+        System.out.println("a:" + aBean.hashCode() + " a.b:" + aBean.getbBean().hashCode());
     }
 
     @Test
     public void helloTest(){
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("DIAndIOC/scop/springScop.xml");
         ABean aBean1 = (ABean) applicationContext.getBean("aBean1");
-        System.out.println(aBean1.getbBean().hashCode());
-        System.out.println(aBean1.getbBean().hashCode());
+        System.out.println("======" + aBean1.getbBean().hashCode());
 
         ABean aBean2 = (ABean) applicationContext.getBean("aBean2");
-        System.out.println(aBean2.getbBean().hashCode());
         System.out.println(aBean2.getbBean().hashCode());
 
         ABean aBean3 = (ABean) applicationContext.getBean("aBean3");
         System.out.println(aBean3.getbBean().hashCode());
-        System.out.println(aBean3.getbBean().hashCode());
 
         ABean aBean4 = (ABean) applicationContext.getBean("aBean4");
-        System.out.println(aBean4.getbBean().hashCode());
         System.out.println(aBean4.getbBean().hashCode());
         aBean4.getbBean().sayHello();
 

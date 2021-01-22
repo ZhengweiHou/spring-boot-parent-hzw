@@ -4,6 +4,8 @@ import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.concurrent.CountDownLatch;
+
 
 @FixMethodOrder(MethodSorters.JVM)
 public class IocLifecycleTestMain {

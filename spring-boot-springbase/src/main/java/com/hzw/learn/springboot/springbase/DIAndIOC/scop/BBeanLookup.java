@@ -19,6 +19,7 @@ public class BBeanLookup {
 //            }
 //        });
 
+        // CGlib
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(BBean.class);
         enhancer.setCallback(new MethodInterceptor() {
