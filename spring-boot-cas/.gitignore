@@ -1,0 +1,10 @@
+/.settings
+/target
+/.classpath
+/.project
+/.idea
+/.factorypath
+/.metadata/
+.attach_pid[1-9]*
+*.iml
+*/*.iml
