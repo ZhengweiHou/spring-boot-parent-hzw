@@ -29,19 +29,16 @@
             <artifactId>cas-server-core</artifactId>
             <version>3.5.1</version>
             <exclusions>
+                <!-- 解决日志死循环。slf4j 扔给log4j，log4j再扔给slf4j，启动时直接堆溢出  -->
                 <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>log4j-over-slf4j</artifactId>
                 </exclusion>
             </exclusions>
-
-<!--            <exclusions>
-                &lt;!&ndash; maven 仓库中没有，切换成阿里库 &ndash;&gt;
-                <exclusion>
-                    <groupId>javax.xml</groupId>
-                    <artifactId>xmldsig</artifactId>
-                </exclusion>
-            </exclusions>-->
+            <!-- 下面的依赖jar包在mvn库中不存在，需要的手动从阿里库中下载该jar传入本地库
+               <groupId>javax.xml</groupId>
+               <artifactId>xmldsig</artifactId>
+             -->
         </dependency>
 
         <dependency>

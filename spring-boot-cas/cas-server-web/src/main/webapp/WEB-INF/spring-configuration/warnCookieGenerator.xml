@@ -29,8 +29,31 @@
 	</description>
 	
 	<bean id="warnCookieGenerator" class="org.jasig.cas.web.support.CookieRetrievingCookieGenerator"
-		p:cookieSecure="true"
 		p:cookieMaxAge="-1"
 		p:cookieName="CASPRIVACY"
-		p:cookiePath="/cas" />
+		  p:cookiePath="/cas" >
+		<!-- 是否启用cookie安全验证（https），默认true -->
+		<property name="cookieSecure" value="false"/>
+	</bean>
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

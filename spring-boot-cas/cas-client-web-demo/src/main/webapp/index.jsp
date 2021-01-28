@@ -55,6 +55,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<p>
   	<a href=hzw.html>hzw</a>
   	<p>
-  	<a href="logout.jsp">退出登录</a>
+  	<a href="http://localhost:8080/cas_server_web_war/logout">退出登录</a>
   </body>
 </html>
