@@ -1366,7 +1366,7 @@ This configuration tested against the sample application that is included with S
 <a name="changes-to-webxml-1"></a>
 ### Changes to web.xml
 
-```xml
+```xml132
 ...
 <context-param>
     <param-name>contextConfigLocation</param-name>
