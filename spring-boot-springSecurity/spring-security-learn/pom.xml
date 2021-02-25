@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hzw.learn</groupId>
-    <artifactId>springboot-security-demo1</artifactId>
+    <artifactId>spring-security-learn</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
