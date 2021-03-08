@@ -12,7 +12,7 @@
     <artifactId>hzw-batch-base</artifactId>
     <properties>
 <!--        <spring.version></spring.version>-->
-        <batch.version>2.1.9.RELEASE</batch.version>
+        <batch.version>4.3.0</batch.version>
 <!--        <batch.version>4.2.4.RELEASE</batch.version>-->
 <!--        <batch-integration.version>1.2.2.RELEASE</batch-integration.version>-->
         <druid.version>1.1.23</druid.version>
