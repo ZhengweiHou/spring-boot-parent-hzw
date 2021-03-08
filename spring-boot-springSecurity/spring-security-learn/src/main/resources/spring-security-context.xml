@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:security="http://www.springframework.org/schema/security"
+        xmlns:SECURITY="http://www.springframework.org/schema/security"
+        xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security-3.1.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context-3.1.xsd"
+>
+
+       <!-- AspectJ 支持的方法安全 ？？？ -->
+       <security:global-method-security pre-post-annotations="enabled" mode="aspectj"/>
+
+       <!-- 免校验的资源 -->
+       <security:http pattern="/**/*.js"  security="none"/>
+       <security:http pattern="/**/*.png" security="none"/>
+       <security:http pattern="/**/*.ico" security="none"/>
+
+
+
+
+
+
+
+
+
+</beans>
