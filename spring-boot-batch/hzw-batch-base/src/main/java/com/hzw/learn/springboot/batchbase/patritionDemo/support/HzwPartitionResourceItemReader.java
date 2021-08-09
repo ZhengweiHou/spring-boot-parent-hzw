@@ -30,7 +30,9 @@ public class HzwPartitionResourceItemReader extends AbstractItemCountingItemStre
 //        if (index < 3)
 //            item =  index++;
 //        return item==null? null:item.toString();
-
+        System.out.println("[read] "
+                + Thread.currentThread().getId()
+                +"========doRead");
         return reader.readLine();
     }
 

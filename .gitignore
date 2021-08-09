@@ -27,3 +27,5 @@ target/
 
 .attach_pid*
 .metadata
+
+.vscode/

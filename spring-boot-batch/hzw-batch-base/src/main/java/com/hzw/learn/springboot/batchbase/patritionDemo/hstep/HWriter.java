@@ -10,7 +10,8 @@ import java.util.List;
 public class HWriter implements ItemWriter {
     @Override
     public void write(List list) throws Exception {
-        System.out.println(Thread.currentThread().getId()
+        System.out.println("[write] "
+                + Thread.currentThread().getId()
                 + ":" + this.getClass().getSimpleName()
                 + " write =>" + new Gson().toJson(list)
         );

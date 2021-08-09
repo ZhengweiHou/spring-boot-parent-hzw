@@ -10,7 +10,8 @@
 
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-		<property name="url" value="jdbc:mysql://localhost:3306/springbatch" />
+<!--		<property name="url" value="jdbc:mysql://localhost:3306/springbatch" />-->
+		<property name="url" value="jdbc:mysql://192.168.32.201:3306/springbatchtest" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 		<property name="validationQuery" value=""/>
@@ -57,7 +58,7 @@
 
 		<batch:step id="partitionDemoStep1" >
 			<batch:partition partitioner="partition_hzw_file1" step="hstep" >
-				<batch:handler grid-size="2" task-executor="executor"/>  <!-- 指定分片数量  task-executor 指定任务的执行池-->
+				<batch:handler grid-size="1" task-executor="executor"/>  <!-- 指定分片数量  task-executor 指定任务的执行池-->
 			</batch:partition>
 		</batch:step>
 

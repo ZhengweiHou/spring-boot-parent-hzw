@@ -11,7 +11,8 @@ public class HProdessor implements ItemProcessor {
 //        if (temp.equals("000000004"))
 //            throw new RuntimeException("我是一个错误哦！");
 
-        System.out.println(Thread.currentThread().getId()
+        System.out.println("[processor] "
+                + Thread.currentThread().getId()
                 + ":" + this.getClass().getSimpleName()
                 + " get " + temp
                 + " return " + item
