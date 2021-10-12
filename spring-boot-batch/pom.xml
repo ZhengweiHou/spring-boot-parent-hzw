@@ -6,8 +6,8 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>hzw-batch-base</module>
-		<module>hzw-batch-boot</module>
-	</modules>
+        <module>hzw-batch-base_by4.2.7.RELEASE</module>
+    </modules>
 	<parent>
 		<groupId>com.hzw.learn</groupId>
 		<artifactId>spring-boot-parent-hzw</artifactId>

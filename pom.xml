@@ -46,6 +46,7 @@
     <module>spring-boot-springbase</module>
       <module>spring-boot-dubbo</module>
     <module>spring-boot-cas</module>
+<!--      <module>spring-boot-sofa</module>-->
   </modules>
   
   <dependencyManagement>

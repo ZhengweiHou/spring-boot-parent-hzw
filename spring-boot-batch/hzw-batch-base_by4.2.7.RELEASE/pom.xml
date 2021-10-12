@@ -9,54 +9,65 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>hzw-batch-base</artifactId>
+    <artifactId>hzw-batch-base_by4.2.7.RELEASE</artifactId>
+
     <properties>
-<!--        <spring.version></spring.version>-->
-        <batch.version>2.1.9.RELEASE</batch.version>
-<!--        <batch.version>4.2.4.RELEASE</batch.version>-->
-<!--        <batch-integration.version>1.2.2.RELEASE</batch-integration.version>-->
-        <druid.version>1.1.23</druid.version>
-        <mysql.version>5.1.6</mysql.version>
-        <jackson-annotations.version>2.12.4</jackson-annotations.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <batch.version>4.2.7.RELEASE</batch.version>
+        <spring.version>5.2.15.RELEASE</spring.version>
+        <druid.version>1.2.6</druid.version>
+        <mysql.version>8.0.15</mysql.version>
+        <slf4j.version>1.7.30</slf4j.version>
+        <commons-io.version>2.11.0</commons-io.version>
+        <junit.version>4.12</junit.version>
     </properties>
 
     <dependencies>
+
+        <!-- ========SPRING start======= -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>3.2.0.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
         </dependency>
+        <!-- ========SPRING end======= -->
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-
-        <!-- ========SPRING BATCH======= -->
+        <!-- ========SPRING BATCH start======= -->
         <!-- https://mvnrepository.com/artifact/org.springframework.batch/spring-batch-core -->
         <dependency>
             <groupId>org.springframework.batch</groupId>
             <artifactId>spring-batch-core</artifactId>
             <version>${batch.version}</version>
+            <exclusions>
+                <!--  spring batch 依赖的较低版本的jackson-databind无法使用，这里手动排除掉再依赖高版本的  -->
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.batch/spring-batch-infrastructure -->
@@ -72,43 +83,26 @@
             <groupId>org.springframework.batch</groupId>
             <artifactId>spring-batch-test</artifactId>
             <version>${batch.version}</version>
-<!--            <scope>test</scope>-->
+            <!--            <scope>test</scope>-->
         </dependency>
+        <!-- ========SPRING BATCH end======= -->
 
-
-        <!-- https://mvnrepository.com/artifact/org.springframework.batch/spring-batch-integration -->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.batch</groupId>-->
-<!--            <artifactId>spring-batch-integration</artifactId>-->
-<!--            <version>${batch-integration.version}</version>-->
-<!--        </dependency>-->
-
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>${jackson-annotations.version}</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.11.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
             <version>2.11.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
@@ -124,14 +118,32 @@
             <version>2.8.6</version>
         </dependency>
 
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
 
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+<!--            <scope>test</scope>-->
+        </dependency>
 
         <!--    =====日志依赖包====    -->
-        <dependency>
+<!--        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
+        </dependency>-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
 
     </dependencies>
+
 
 </project>

@@ -49,6 +49,7 @@ public class HzwSocketSessionFactory extends BasePoolableObjectFactory<IoSession
 		
 //		向服务端发送连接检查请求，校验连接是否可用
 		if(session.containsAttribute(NEED_VALIDATE)) {
+//		if(true) {
 			log.info("sessionId:{}  连接检查开始...",session.getId());
 			try {
 				WriteFuture writeFuture = session.write("3000==链接检查......");
