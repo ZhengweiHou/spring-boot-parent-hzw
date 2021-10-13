@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
+import java.util.Optional;
+
 @Configuration
 public class AppSofa1Config {
     @Autowired
@@ -25,10 +27,13 @@ public class AppSofa1Config {
     @Bean
     public ServerConfig serverConfig(){
         ServerConfig serverConfig = new ServerConfig();
-//        serverConfig.setVirtualHost("localhost");
-//        serverConfig.setVirtualPort(8001);
-        serverConfig.setVirtualHost(env.getProperty("vhost"));
-        serverConfig.setVirtualPort(Integer.valueOf(env.getProperty("vport")));
+        System.out.println("vhost:" + env.getProperty("vhost") + " vport:" + env.getProperty("vport"));
+        Optional.ofNullable(env.getProperty("vhost")).ifPresent(vhost -> serverConfig.setVirtualHost(vhost));
+        Optional.ofNullable(env.getProperty("vport")).ifPresent(vport -> serverConfig.setVirtualPort(Integer.valueOf(vport)));
+        serverConfig.setProtocol("bolt"); // 默认bolt协议
+        // serverConfig.setProtocol("h2c");
+        // serverConfig.setAdaptivePort(true); // 是否自适应端口
+        System.out.println(serverConfig.toString());
         return serverConfig;
     }
 

@@ -1,0 +1,9 @@
+FROM houzw/cenots7_jdk8_202:v1
+
+RUN /bin/bash -c 'localedef -f UTF-8 -i zh_CN zh_CN.UTF-8'
+ENV LANG=zh_CN.UTF8
+
+COPY ./target/*sofa*.jar /apphome/app.jar
+#RUN ln -s /apphome/*sofa*.jar /apphome/app.jar
+
+WORKDIR /apphome

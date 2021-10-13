@@ -29,7 +29,8 @@ public class AppSofa2Config {
     public HelloService helloServiceRefer(){
         ConsumerConfig<HelloService> consumerConfig = new ConsumerConfig<>();
         consumerConfig.setId("helloconsumer_sofa2");
-        consumerConfig.setProtocol("bolt");
+        consumerConfig.setProtocol("bolt"); // 默认bolt协议
+        // consumerConfig.setProtocol("h2c");
         /* 代理的实现方式 可选SPI 如下，默认为javassist：
         jdk=com.alipay.sofa.rpc.proxy.jdk.JDKProxy
         javassist=com.alipay.sofa.rpc.proxy.javassist.JavassistProxy

@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AppSofa2Controller {
-
+    Integer n=0;
     @Autowired
     HelloService helloService;
 
     @RequestMapping("/hello")
     public String hello(){
 
-        return helloService.hello("hello");
+        return helloService.hello("hello:" + ++n);
     }
 }

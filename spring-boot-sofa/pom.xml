@@ -25,7 +25,7 @@
         <dependency>
             <groupId>com.alipay.sofa</groupId>
             <artifactId>sofa-rpc-all</artifactId>
-            <version>5.7.3</version>
+            <version>5.7.10</version>
         </dependency>
 
         <dependency>
@@ -67,7 +67,7 @@
                             <!--                            <addClasspath>true</addClasspath>-->
                             <!--                            <classpathPrefix>hzwlib</classpathPrefix>-->
                             <mainClass>com.hzw.learn.sofa1.AppSofa1</mainClass>
-                            <!--                            <mainClass>com.hzw.learn.sofa2.AppSofa2</mainClass>-->
+<!--                                <mainClass>com.hzw.learn.sofa2.AppSofa2</mainClass>-->
                             <useUniqueVersions>false</useUniqueVersions>
                         </manifest>
                     </archive>
