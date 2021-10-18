@@ -1,6 +1,6 @@
 Configuration:  
-  status: warn  
-  
+  status: warn
+
   Properties: 
     Property: 
       - name: LOG_PATH  

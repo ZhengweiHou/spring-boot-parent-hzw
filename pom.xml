@@ -35,7 +35,7 @@
     <module>spring-boot-mybatis</module>
     <module>spring-boot-consul</module>
     <module>spring-boot-batch</module>
-    <module>spring-boot-logback</module>
+<!--    <module>spring-boot-logback</module>-->
     <module>spring-boot-javabase</module>
     <module>spring-boot-springbootbase</module>
     <module>spring-boot-mina</module>

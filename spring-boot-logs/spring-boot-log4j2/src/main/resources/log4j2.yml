@@ -1,0 +1,68 @@
+Configuration:
+# 日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL
+# status: 这个用于设置log4j2自身内部的信息输出，可以不设置，当设置成trace时，你会看到log4j2内部各种详细输出
+  status: warn
+# monitorInterval：Log4j能够自动检测修改配置 文件和重新配置本身，设置间隔秒数-->
+  monitorInterval: 10
+
+  Properties:
+    Property:
+      - name: LOG_PATH
+        value: ./logs
+      - name: projectName
+        value: hzw-log4j2-test
+
+  Appenders:
+    # 输出控制台的配置
+    Console:
+      name: STDOUT
+      PatternLayout:
+        pattern: "[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%highlight{%-5level}] [%thread] %logger{36} [%file:%line] - %msg%n"
+        # %highlight{xxxx} 高亮显示目标，不同日志级别，颜色不一样
+
+    RollingFile:
+      - name: FILE
+        ignoreExceptions: false
+        fileName: ${LOG_PATH}/${projectName}.log
+        filePattern: "${LOG_PATH}/${projectName}-%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: "[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] %logger{36} [%file:%line] - %msg%n"
+        # Policies:指定滚动日志的策略，就是什么时候进行新建日志文件输出日志
+        Policies:
+          # SizeBasedTriggeringPolicy:基于指定文件大小的滚动策略，size属性用来定义每个日志文件的大小.
+          SizeBasedTriggeringPolicy:
+            size: "1K"
+          # TimeBasedTriggeringPolicy:基于时间的滚动策略，interval属性用来指定多久滚动一次，默认是1 hour。modulate=true用来调整时间：比如现在是早上3am，interval是4，那么第一次滚动是在4am，接着是8am，12am...而不是7am.
+          TimeBasedTriggeringPolicy:
+            modulate: true
+            interval: 1
+        # DefaultRolloverStrategy属性用来指定同一个文件夹下最多有几个日志文件时开始删除最旧的，创建新的(通过max属性),
+        # 如不设置，则默认为最多同一文件夹下7个文件，这里设置了10
+        DefaultRolloverStrategy:
+          max: 10
+          Delete:
+            basePath: ${LOG_PATH}
+            IfFileName:
+              glob: "*.log.*"
+            IfLastModified:
+              age: "7d"
+
+  Loggers:
+    Root:
+      level: TRACE
+      AppenderRef:
+        - ref: STDOUT
+
+#    Logger:
+#      - name: com.hzw.learn.springboot.log4j2
+#        additivity: false
+#        level: DEBUG
+#        AppenderRef:
+#          - ref: STDOUT
+#          - ref: FILE
+#      - name: HZW
+#        additivity: false
+#        level: INFO
+#        AppenderRef:
+#          - ref: STDOUT
+#          - ref: FILE
