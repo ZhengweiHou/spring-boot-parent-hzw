@@ -1,5 +1,6 @@
 package com.hzw.learn.springboot.log4j2;
 
+import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
