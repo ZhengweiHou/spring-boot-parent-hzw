@@ -41,6 +41,10 @@ public class AppSofa2Controller {
     @Autowired
     HelloService helloService;
 
+    @RequestMapping("/test")
+    public void test(){
+        logger.error("oneko");
+    }
     @RequestMapping("/hello")
     public String hello(){
         String rsp = helloService.hello("Consumer[" + jvmProcessID + "]-" + ++times);

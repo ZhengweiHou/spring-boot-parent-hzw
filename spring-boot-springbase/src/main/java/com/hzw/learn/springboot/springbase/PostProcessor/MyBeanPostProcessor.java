@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.springbase.Test;
+package com.hzw.learn.springboot.springbase.PostProcessor;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
