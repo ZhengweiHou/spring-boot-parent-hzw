@@ -1,4 +1,4 @@
-package com.hzw.learn.nacos.config;
+package com.hzw.learn.nacos.nacosconfig.configs;
 
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.ConfigService;
