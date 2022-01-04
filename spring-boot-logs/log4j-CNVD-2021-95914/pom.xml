@@ -12,7 +12,7 @@
 
         <spring-boot.bersion>2.1.13.RELEASE</spring-boot.bersion>
 <!--        <log4j.version>2.16.0</log4j.version>-->
-        <log4j.version>2.14.1</log4j.version>
+        <log4j.version>2.17.1</log4j.version>
 
     </properties>
 
