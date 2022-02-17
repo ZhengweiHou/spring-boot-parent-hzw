@@ -1,4 +1,6 @@
 
+import com.alibaba.nacos.client.config.impl.ClientWorker;
+
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.util.ArrayList;
@@ -9,6 +11,7 @@ public class Test {
 
     static ArrayList al =  new ArrayList<>();
     public static void main(String[] args) throws InterruptedException {
+        ClientWorker
 //        Integer times = new Integer(args[0]);
 //
 //        while (times >0){
