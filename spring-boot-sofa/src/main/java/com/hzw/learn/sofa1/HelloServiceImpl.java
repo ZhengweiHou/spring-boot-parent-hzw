@@ -26,6 +26,11 @@ public class HelloServiceImpl implements HelloService{
         return "Provider[" + jvmProcessID + "]-" + times;
     }
 
+    @Override
+    public String hello2() {
+        return "hello too!!";
+    }
+
     private String showJVMInfo(){
         MemoryMXBean mmb = ManagementFactory.getMemoryMXBean();
         MemoryUsage heapMemoryUsage = mmb.getHeapMemoryUsage();

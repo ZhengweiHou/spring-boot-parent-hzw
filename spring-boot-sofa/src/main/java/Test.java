@@ -11,7 +11,6 @@ public class Test {
 
     static ArrayList al =  new ArrayList<>();
     public static void main(String[] args) throws InterruptedException {
-        ClientWorker
 //        Integer times = new Integer(args[0]);
 //
 //        while (times >0){
