@@ -1,5 +1,6 @@
 package com.hzw.learn.springboot.logback;
 
+import com.hzw.learn.springboot.logback.runerother.OutLogForZZZ;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -19,11 +20,11 @@ public class RunStart implements CommandLineRunner {
 //			e.printStackTrace();
 //		}
 
-		new Thread(new LevelTest1()).start();
+//		new Thread(new LevelTest1()).start();
 //		new Thread(new LevelTest2()).start();
 //		new Thread(new ExceptionTest()).start();
 //		new Thread(new OutLogForHHH()).start();
-//		new Thread(new OutLogForZZZ()).start();
+		new Thread(new OutLogForZZZ()).start();
 //		new Thread(new OutLogForWWW()).start();
 
 	}

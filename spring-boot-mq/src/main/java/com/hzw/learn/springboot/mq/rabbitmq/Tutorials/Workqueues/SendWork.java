@@ -13,7 +13,8 @@ public class SendWork {
 	public static void main(String[] args) throws IOException, TimeoutException {
 		
 		ConnectionFactory connectionFactory = new ConnectionFactory();
-		connectionFactory.setHost("192.168.32.131");
+//		connectionFactory.setHost("192.168.32.131");
+		connectionFactory.setHost("localhost");
 //		connectionFactory.setVirtualHost("test");
 		connectionFactory.setUsername("admin");
 		connectionFactory.setPassword("admin");

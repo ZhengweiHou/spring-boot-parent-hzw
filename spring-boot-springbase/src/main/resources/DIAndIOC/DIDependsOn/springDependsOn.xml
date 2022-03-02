@@ -12,15 +12,23 @@
     <context:component-scan base-package="com.hzw.learn.springboot.springbase.DIAndIOC.DIDependsOn"/>
 
     <bean id="a" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIDependsOn.A"
-        depends-on="b"
+          depends-on="b"
     />
     <bean id="b" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIDependsOn.B"
-        init-method="pinit" destroy-method="pdestory"
+          init-method="pinit" destroy-method="pdestory"
     />
-<!--    <bean id="c" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIDependsOn.C"/>-->
+    <!--    <bean id="c" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIDependsOn.C"/>-->
 
-<!--    正常顺序 c->a->b， 但depends介入后，顺序为b->a->c-->
+    <!--    正常顺序 c->a->b， 但depends介入后，顺序为b->a->c-->
 
+
+    <bean id="d" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIDependsOn.D_FactoryBean">
+        <property name="obj" ref="a1"/>
+    </bean>
+
+    <bean id="a1" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIDependsOn.A"
+          depends-on="d"
+    />
 
 </beans>
 

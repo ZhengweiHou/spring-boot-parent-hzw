@@ -3,7 +3,7 @@
 <configuration>
 
 	<!-- 日志输出路径 -->
-	<property name="LOG_PATH" value="h:/logs" />
+	<property name="LOG_PATH" value="logs" />
 	
 	<property name="projectName" value="my-logback-test"/>
 	

@@ -52,7 +52,7 @@ public class ShiroConfig {
 
     /**
      * CacheManager
-     * TODO 作用？
+     * 缓存控制器，来管理如用户、角色、权限等的缓存的；因为这些数据基本上很少去改变，放到缓存中后可以提高访问的性能
      */
     @Bean(name = "cm_memory")
     public CacheManager memoryConstrainedCacheManager(){

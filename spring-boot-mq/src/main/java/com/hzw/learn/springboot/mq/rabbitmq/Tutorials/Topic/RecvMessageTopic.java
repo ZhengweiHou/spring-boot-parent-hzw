@@ -22,11 +22,12 @@ public class RecvMessageTopic {
 		}
 		
 		 ConnectionFactory connectionFactory = new ConnectionFactory();
-		 	connectionFactory.setHost("192.168.32.131");
-//			connectionFactory.setVirtualHost("test");
+//		 	connectionFactory.setHost("192.168.32.131");
+			connectionFactory.setHost("localhost");
 //			connectionFactory.setVirtualHost("/");
 			connectionFactory.setUsername("admin");
 			connectionFactory.setPassword("admin");
+			connectionFactory.setVirtualHost("test");
 	        Connection connection = connectionFactory.newConnection();
 	        Channel channel = connection.createChannel();
 	        

@@ -24,7 +24,7 @@ public class TestMain {
 
     @Test
     public void helloTest(){
-
+        applicationContext.getBean("d");
     }
 
 }

@@ -90,13 +90,15 @@ public class AppSofa1Config {
         System.out.println("sofa port:" + providerConfig.getServer().get(0).getPort());
     }
 
+    /**
+     * sofa 暴露http协议服务
+     */
     @Bean
     public void httpHelloServiceExport(){
         ProviderConfig<HelloService> providerConfig = new ProviderConfig<>();
         providerConfig.setServer(httpServerConfig());
         providerConfig.setRegistry(registryConfig());
-//        providerConfig.setInterfaceId(HelloService.class.getName());
-        providerConfig.setInterfaceId("hello");
+        providerConfig.setInterfaceId(HelloService.class.getName());
         providerConfig.setRef(helloService());
         System.out.println("==> 导出http服务：" + providerConfig.getInterfaceId());
         providerConfig.export();
