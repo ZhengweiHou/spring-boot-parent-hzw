@@ -71,7 +71,6 @@
         </dependency>
 
 
-
         <!-- ===============监控相关=============== -->
 
 
@@ -95,10 +94,6 @@
     </dependencies>
 
 
-
-
-
-
     <build>
         <plugins>
             <plugin>
@@ -111,14 +106,14 @@
                         </goals>
                     </execution>
                 </executions>
-                <!--                <configuration>-->
-                <!--                    <includes>-->
-                <!--                        <include>-->
-                <!--                            <groupId>nothing</groupId>-->
-                <!--                            <artifactId>nothing</artifactId>-->
-                <!--                        </include>-->
-                <!--                    </includes>-->
-                <!--                </configuration>-->
+                <!--<configuration>
+                    <includes>
+                        <include>
+                            <groupId>nothing</groupId>
+                            <artifactId>nothing</artifactId>
+                        </include>
+                    </includes>
+                </configuration>-->
             </plugin>
 
             <plugin>
@@ -127,32 +122,32 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <!--                            <addClasspath>true</addClasspath>-->
-                            <!--                            <classpathPrefix>hzwlib</classpathPrefix>-->
-                            <mainClass>com.hzw.learn.sofa1.AppSofa1</mainClass>
-<!--                                <mainClass>com.hzw.learn.sofa2.AppSofa2</mainClass>-->
+<!--                            <addClasspath>true</addClasspath>-->
+<!--                            <classpathPrefix>hzwlib</classpathPrefix>-->
+<!--                            <mainClass>com.hzw.learn.sofa1.AppSofa1</mainClass>-->
+                            <mainClass>com.hzw.learn.sofa2.AppSofa2</mainClass>
                             <useUniqueVersions>false</useUniqueVersions>
                         </manifest>
                     </archive>
                 </configuration>
             </plugin>
 
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-dependency-plugin</artifactId>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <id>copy-dependencies</id>-->
-            <!--                        <phase>prepare-package</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>copy-dependencies</goal>-->
-            <!--                        </goals>-->
-            <!--                        <configuration>-->
-            <!--                            <outputDirectory>${project.build.directory}/hzwlib</outputDirectory>-->
-            <!--                        </configuration>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-dependency-plugin</artifactId>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>copy-dependencies</id>-->
+<!--                        <phase>prepare-package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>copy-dependencies</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <outputDirectory>${project.build.directory}/hzwlib</outputDirectory>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
 
         </plugins>
     </build>
