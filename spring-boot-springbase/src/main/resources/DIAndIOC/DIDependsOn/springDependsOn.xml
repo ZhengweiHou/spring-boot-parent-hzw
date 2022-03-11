@@ -22,7 +22,8 @@
     <!--    正常顺序 c->a->b， 但depends介入后，顺序为b->a->c-->
 
 
-    <bean id="d" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIDependsOn.D_FactoryBean">
+    <!-- 若D_FactoryBean是直接实现FactoryBean 则 执行getboject时无法保证obj的注入成功 -->
+    <bean id="d" class="com.hzw.learn.springboot.springbase.DIAndIOC.DIDependsOn.D_FactoryBean" >
         <property name="obj" ref="a1"/>
     </bean>
 
