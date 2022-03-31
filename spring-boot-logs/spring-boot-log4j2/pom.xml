@@ -9,7 +9,7 @@
     <name>spring-boot-log4j2</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-boot.bersion>2.1.13.RELEASE</spring-boot.bersion>
+        <spring-boot.bersion>2.5.12</spring-boot.bersion>
     </properties>
 
     <dependencies>
