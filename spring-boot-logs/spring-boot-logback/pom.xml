@@ -9,7 +9,7 @@
 	<name>spring-boot-logback</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring-boot.version>2.1.4.RELEASE</spring-boot.version>
+		<spring-boot.version>2.5.12</spring-boot.version>
 	</properties>
 	<dependencies>
 		<dependency>
