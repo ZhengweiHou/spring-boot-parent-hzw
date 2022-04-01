@@ -1,11 +1,6 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <parent>
-    <groupId>com.hzw.learn</groupId>
-    <artifactId>spring-boot-parent-hzw</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
   <groupId>com.hzw.learn</groupId>
   <artifactId>spring-boot-cas</artifactId>
   <version>0.0.1-SNAPSHOT</version>
@@ -14,27 +9,59 @@
 
   <modelVersion>4.0.0</modelVersion>
   <packaging>pom</packaging>
-  <modules>
-    <module>spring-boot-cas-server</module>
-    <module>spring-boot-cas-client</module>
-  </modules>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-<build>
-  <pluginManagement>
+
+
+  <build>
+    <finalName>cas-server</finalName>
     <plugins>
+      <!-- 借助 springboot 打包插件重新打包，否则无法直接运行 -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>2.1.7.RELEASE</version>
+        <configuration>
+          <!-- 这里设置真正的启动类 -->
+          <mainClass>org.apereo.cas.web.CasWebApplication</mainClass>
+          <excludes>
+            <!-- 打包时排除自身 -->
+            <exclude>
+              <groupId>org.apereo.cas</groupId>
+              <artifactId>cas-server-webapp-tomcat</artifactId>
+            </exclude>
+          </excludes>
+        </configuration>
+        <executions>
+          <execution>
+            <id>repackage</id>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
-        <version>2.3</version>
+        <configuration>
+          <archiveClasses>false</archiveClasses>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+          <overlays>
+            <!-- 整合 webapp -->
+            <overlay>
+              <groupId>org.apereo.cas</groupId>
+              <artifactId>cas-server-webapp-tomcat</artifactId>
+            </overlay>
+          </overlays>
+        </configuration>
       </plugin>
     </plugins>
-
-  </pluginManagement>
-</build>
+  </build>
 
 
 </project>

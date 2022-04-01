@@ -2,17 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-<!--    <parent>
-        <artifactId>spring-boot-cas</artifactId>
-        <groupId>com.hzw.learn</groupId>
-        <version>0.0.1-SNAPSHOT</version>
-    </parent>-->
 
-    <modelVersion>4.0.0</modelVersion>
-    <name>hzw 传统 cas web 案例</name>
     <groupId>com.hzw.learn</groupId>
     <artifactId>cas-server-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
+    <modelVersion>4.0.0</modelVersion>
+    <name>hzw 传统 cas web 案例</name>
     <packaging>war</packaging>
 
     <dependencies>
@@ -29,7 +25,7 @@
             <artifactId>cas-server-core</artifactId>
             <version>3.5.1</version>
             <exclusions>
-                <!-- 解决日志死循环。slf4j 扔给log4j，log4j再扔给slf4j，启动时直接堆溢出  -->
+                <!-- 解决日志死循环。slf4j的实现时log4j，log4j再被over给了slf4j，启动时直接额堆溢出  -->
                 <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>log4j-over-slf4j</artifactId>
