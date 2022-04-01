@@ -2,73 +2,142 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>spring-boot-cas</artifactId>
-        <groupId>com.hzw.learn</groupId>
-        <version>0.0.1-SNAPSHOT</version>
-    </parent>
+
+    <groupId>com.hzw.learn</groupId>
+    <artifactId>spring-boot-cas-server</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-boot-cas-server</artifactId>
+
+    <packaging>war</packaging>
+
+    <properties>
+        <cas.version>5.3.16</cas.version>
+        <mysql.version>8.0.23</mysql.version>
+
+        <!-- 这个 main-class 不是设置启动类，而是设置 springboot 的加载方式 -->
+        <main-class>org.springframework.boot.loader.WarLauncher</main-class>
+    </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-
+        <!-- 官方 webapp，记得把 overlays 文件夹下的 lib 目录的 jar 包添加到类路径，并设置作用于为 provider -->
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-webapp-tomcat</artifactId>
-            <version>6.0.5</version>
+            <version>${cas.version}</version>
             <type>war</type>
+            <scope>runtime</scope>
         </dependency>
 
-
-
+        <!-- https://mvnrepository.com/artifact/org.apereo.cas/cas-server-core -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core</artifactId>
+            <version>5.3.16</version>
+            <scope>compile</scope>
+        </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+
+<!--        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jdbc</artifactId>
+            <version>${cas.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
+                    <groupId>net.shibboleth.tool</groupId>
+                    <artifactId>xmlsectool</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jdbc-authentication</artifactId>
+            <version>${cas.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>net.shibboleth.tool</groupId>
+                    <artifactId>xmlsectool</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>-->
     </dependencies>
 
-    <!--<build>
+    <build>
+        <finalName>cas-server</finalName>
         <plugins>
+            <!-- 借助 springboot 打包插件重新打包，否则无法直接运行 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.1.7.RELEASE</version>
+                <configuration>
+                    <!-- 这里设置真正的启动类 -->
+                    <mainClass>org.apereo.cas.web.CasWebApplication</mainClass>
+                    <excludes>
+                        <!-- 打包时排除自身 -->
+                        <exclude>
+                            <groupId>org.apereo.cas</groupId>
+                            <artifactId>cas-server-webapp-tomcat</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>repackage</id>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
                 <configuration>
                     <archiveClasses>false</archiveClasses>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <overlays>
+                        <!-- 整合 webapp -->
                         <overlay>
                             <groupId>org.apereo.cas</groupId>
                             <artifactId>cas-server-webapp-tomcat</artifactId>
+                            <excludes>
+                                <exclude>WEB-INF/lib/log4j-*-2.12.1.jar</exclude> <!--排除掉log4j的日志实现，因为log4j的漏洞-->
+                                <exclude>WEB-INF/classes/log4j2.xml</exclude>
+                            </excludes>
                         </overlay>
                     </overlays>
                 </configuration>
             </plugin>
         </plugins>
-    </build>-->
+    </build>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </project>

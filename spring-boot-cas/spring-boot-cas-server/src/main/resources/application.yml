@@ -1,1 +1,1 @@
-spring:  application:    name: spring-boot-springbootbase-testserver:  servlet:    context-path: /  port: 9000  ssl:    enabled: false#    key-alias: tomcat#    key-store: classpath:tomcat.keystore#    key-store-password: hzw
+#spring:#  application:#    name: spring-boot-springbootbase-test#server:#  servlet:#    context-path: /#  port: 9000#  ssl:#    enabled: false##    key-alias: tomcat##    key-store: classpath:tomcat.keystore##    key-store-password: hzw#
