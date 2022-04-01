@@ -1,6 +1,5 @@
 package com.hzw.learn.springboot.mq.rabbitmq.Tutorials.Topic;
 
-import com.google.gson.Gson;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
@@ -65,7 +64,6 @@ public class RecvMessageTopic_BySpringAmqp {
         messageListnerCon.setConsecutiveIdleTrigger(1);
         messageListnerCon.setConsecutiveActiveTrigger(1);   // 判断container为激活状态的触发数量
         messageListnerCon.setStartConsumerMinInterval(100); // 动态channel数量调整的时间间隔，单位毫秒
-
         messageListnerCon.start();
 
 
