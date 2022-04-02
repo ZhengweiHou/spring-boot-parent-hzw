@@ -12,7 +12,7 @@
     <packaging>war</packaging>
 
     <properties>
-        <cas.version>5.3.16</cas.version>
+        <cas.version>6.4.2</cas.version>
         <mysql.version>8.0.23</mysql.version>
 
         <!-- 这个 main-class 不是设置启动类，而是设置 springboot 的加载方式 -->
