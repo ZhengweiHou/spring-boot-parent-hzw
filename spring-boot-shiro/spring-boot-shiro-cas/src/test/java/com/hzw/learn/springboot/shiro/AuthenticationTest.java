@@ -33,7 +33,7 @@ public class AuthenticationTest {
         SecurityUtils.setSecurityManager(securityManager); // 设置SecurityManager环境
         Subject subject = SecurityUtils.getSubject(); // 获取当前主体
 
-        UsernamePasswordToken token = new UsernamePasswordToken("houzw", "1234567");
+        UsernamePasswordToken token = new UsernamePasswordToken("houzw", "123456");
         // 3. 登录
         try {
             subject.login(token); // 登录
