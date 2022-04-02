@@ -21,7 +21,6 @@ import java.security.GeneralSecurityException;
 public class HzwAuthenticationHandler extends AbstractPreAndPostProcessingAuthenticationHandler {
     Logger log = LoggerFactory.getLogger(this.getClass());
 
-
     public HzwAuthenticationHandler(String name, ServicesManager servicesManager, PrincipalFactory principalFactory, Integer order) {
         super(name, servicesManager, principalFactory, order);
     }
