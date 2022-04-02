@@ -29,13 +29,52 @@
             <scope>runtime</scope>
         </dependency>
 
+
         <!-- https://mvnrepository.com/artifact/org.apereo.cas/cas-server-core -->
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-core</artifactId>
-            <version>5.3.16</version>
+            <version>${cas.version}</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-web</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-tickets</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apereo.cas/cas-server-core-authentication-attributes -->
+<!--        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-authentication-attributes</artifactId>
+            <version>${cas.version}</version>
+            <scope>runtime</scope>
+        </dependency>-->
+
+
+        <!-- https://mvnrepository.com/artifact/org.apereo.cas/cas-server-core-authentication-api -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-authentication-api</artifactId>
+            <version>${cas.version}</version>
+            <scope>compile</scope>
+         <!--   <scope>runtime</scope>-->
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apereo.cas/cas-server-core-api-configuration-model -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-api-configuration-model</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.slf4j</groupId>
