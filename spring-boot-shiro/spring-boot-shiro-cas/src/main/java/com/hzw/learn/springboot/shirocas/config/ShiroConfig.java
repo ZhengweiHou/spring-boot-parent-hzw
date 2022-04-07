@@ -2,12 +2,14 @@ package com.hzw.learn.springboot.shirocas.config;
 
 import com.hzw.learn.springboot.shirocas.realm.MyCasRealm;
 import org.apache.shiro.cas.CasFilter;
+import org.apache.shiro.cas.CasRealm;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
@@ -74,9 +76,10 @@ public class ShiroConfig {
     }
 
     @Bean
-    public SecurityManager securityManager(){
+    @DependsOn(value = "casRealm")
+    public SecurityManager securityManager(@Autowired CasRealm casRealm){
         DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
-        securityManager.setRealm(casRealm());
+        securityManager.setRealm(casRealm);
         return securityManager;
     }
 
