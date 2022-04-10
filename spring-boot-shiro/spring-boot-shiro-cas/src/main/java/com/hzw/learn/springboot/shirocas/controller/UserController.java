@@ -3,7 +3,11 @@ package com.hzw.learn.springboot.shirocas.controller;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.WebUtils;
+import org.jasig.cas.client.util.AssertionHolder;
+import org.jasig.cas.client.validation.Assertion;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,11 +36,16 @@ public class UserController {
 		return mav;
 	}
 
-	@RequiresPermissions({"admin"})
+	@RequiresPermissions({"admin"}) // shiro 权限点注解
 	@GetMapping("/admin")
 	public String admin(){
-
 		return "admin page";
+	}
+
+	@GetMapping("/user")
+	public String user(HttpServletRequest request){
+		Object a = SecurityUtils.getSubject().getPrincipal();
+		return "当前登录用户：" + a;
 	}
 
 	@GetMapping("/logouttips")

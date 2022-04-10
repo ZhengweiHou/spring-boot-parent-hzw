@@ -1,6 +1,6 @@
 package com.hzw.learn.springboot.shirocas.config;
 
-import com.hzw.learn.springboot.shirocas.realm.MyCasRealm;
+import com.hzw.learn.springboot.shirocas.shiro.MyCasRealm;
 import org.apache.shiro.cas.CasFilter;
 import org.apache.shiro.cas.CasRealm;
 import org.apache.shiro.mgt.SecurityManager;
