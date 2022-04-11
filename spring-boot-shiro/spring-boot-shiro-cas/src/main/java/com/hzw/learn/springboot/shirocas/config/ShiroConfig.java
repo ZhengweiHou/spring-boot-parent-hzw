@@ -10,9 +10,11 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.core.env.Environment;
 
 import javax.servlet.Filter;
 import java.util.LinkedHashMap;
@@ -20,6 +22,10 @@ import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
+
+    @Autowired
+    private Environment environment;
+    String SERVER_PORT = "";
 
     @Bean
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
@@ -49,7 +55,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
         //service指定了登录成功后的回调地址，回调/cas将被CasFilter拦截，获取服务端返回的Service Ticket进行登录
-        shiroFilterFactoryBean.setLoginUrl("http://localhost:8443/cas/login?service=http://localhost:8081/cas");
+        shiroFilterFactoryBean.setLoginUrl("http://localhost:8443/cas/login?service=http://localhost:"+ SERVER_PORT +"/cas");
         //登录成功后要跳转的链接
         shiroFilterFactoryBean.setSuccessUrl("/hello");
         //未授权跳转页面
@@ -71,7 +77,7 @@ public class ShiroConfig {
         //指定CAS服务端地址
         casRealm.setCasServerUrlPrefix("http://localhost:8443/cas");
         //当前应用的CAS服务URL，用于接收和处理CAS服务端的Ticket
-        casRealm.setCasService("http://localhost:8081/cas");
+        casRealm.setCasService("http://localhost:"+SERVER_PORT+"/cas");
         return casRealm;
     }
 

@@ -8,6 +8,7 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.WebUtils;
 import org.jasig.cas.client.util.AssertionHolder;
 import org.jasig.cas.client.validation.Assertion;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,8 @@ import java.io.IOException;
 //@Controller
 @RestController
 public class UserController {
+	@Value("${server.port}")
+	int SERVER_PORT;
 
 	@GetMapping("/hello")
 	public String hello(){
@@ -56,6 +59,6 @@ public class UserController {
 	@GetMapping("/logout")
 	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		SecurityUtils.getSubject().logout();
-		WebUtils.issueRedirect(request, response, "http://localhost:8443/cas/logout?service=http://localhost:8081/logouttips");
+		WebUtils.issueRedirect(request, response, "http://localhost:8443/cas/logout?service=http://localhost:"+SERVER_PORT+"/logouttips");
 	}
 }
