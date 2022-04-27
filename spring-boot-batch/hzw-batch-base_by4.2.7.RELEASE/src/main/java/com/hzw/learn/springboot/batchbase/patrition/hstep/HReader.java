@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.scope.context.StepSynchronizationManager;
 import org.springframework.batch.item.*;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 public class HReader implements ItemReader {
 
@@ -27,6 +28,8 @@ public class HReader implements ItemReader {
 
 //        log.debug("Header read item={}，readhash={}，aaa={}", item, this.hashCode(), aaa);
         // System.out.println(Thread.currentThread().getId() + ":HReader read item=" + item + "readhash" + this.hashCode() + "   " + aaa);
+        System.out.println("0:txname:" + TransactionSynchronizationManager.getCurrentTransactionName() + " isolationLv:" + TransactionSynchronizationManager.getCurrentTransactionIsolationLevel());
+
         return item==null? null:item.toString();
     }
 

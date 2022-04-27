@@ -8,6 +8,7 @@ import org.springframework.batch.core.scope.context.StepSynchronizationManager;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.support.AbstractItemCountingItemStreamItemReader;
 import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,14 +27,9 @@ public class HzwPartitionResourceItemReader extends AbstractItemCountingItemStre
 
     @Override
     protected Object doRead() throws Exception {
-//        Integer item = null;
-//        if (index < 3)
-//            item =  index++;
-//        return item==null? null:item.toString();
-        System.out.println("[read] "
-                + Thread.currentThread().getId()
-                +"========doRead");
-        return reader.readLine();
+        String item = reader.readLine();
+        System.out.println(HzwStepExecutionListener.stepName.get() +" [read] "+item);
+        return item;
     }
 
     @Override
