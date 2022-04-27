@@ -3,19 +3,19 @@
 	   xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:p="http://www.springframework.org/schema/p"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-		http://www.springframework.org/schema/tx
-		http://www.springframework.org/schema/tx/spring-tx.xsd
-		http://www.alibaba.com/schema/stat
-		http://www.alibaba.com/schema/stat.xsd
-		http://www.springframework.org/schema/task
-		http://www.springframework.org/schema/task/spring-task.xsd
-		http://www.springframework.org/schema/aop
-		http://www.springframework.org/schema/aop/spring-aop.xsd
-		http://www.springframework.org/schema/mvc
-		http://www.springframework.org/schema/mvc/spring-mvc.xsd"
-	   xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	   http://www.springframework.org/schema/tx
+	   http://www.springframework.org/schema/tx/spring-tx.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context-3.1.xsd
+"
+
 >
+
+	<context:component-scan base-package="com.hzw.learn.springboot.springbase.Transaction"/>
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -36,16 +36,26 @@
 		<constructor-arg name="dataSource" ref="dataSource"/>
 	</bean>
 
-	<bean name="hzwService" class="com.hzw.learn.springboot.springbase.Transaction.HzwService"
-		  p:jdbcTemplate-ref="jdbcTemplate"/>
 
 <!--	事务注解@Transactional生效-->
 <!--	<tx:annotation-driven transaction-manager="transactionManager"/>-->
 <!--	TODO aspectj 实现，这里事务是不生效的，不知道为什么-->
-	<tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/>
-<!--	<tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>-->
+	<!--<tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/>-->
+	<tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>
 
 <!--	<aop:aspectj-autoproxy />-->
+
+
+
+
+<!--	<bean name="hzwService" class="com.hzw.learn.springboot.springbase.Transaction.HzwService"
+		  p:jdbcTemplate-ref="jdbcTemplate"/>-->
+
+
+<!--	<bean name="propagationTest1Service" class="com.hzw.learn.springboot.springbase.Transaction.propagation.PropagationTest1Service"
+		  p:jdbcTemplate-ref="jdbcTemplate"/>
+	<bean name="propagationTest2Service" class="com.hzw.learn.springboot.springbase.Transaction.propagation.PropagationTest2Service"
+		  p:jdbcTemplate-ref="jdbcTemplate"/>-->
 
 </beans>
 

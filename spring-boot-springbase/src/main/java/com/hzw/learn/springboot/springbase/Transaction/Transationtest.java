@@ -16,6 +16,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 @FixMethodOrder(MethodSorters.JVM)
 public class Transationtest {
 
+
+
     @Test
     public void helltest(){
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("Transaction/Transaction.xml");
@@ -26,5 +28,7 @@ public class Transationtest {
 //        hzwService.insertHZ_Exception2();
         hzwService.insertHZ_Exception2_but_try();
     }
+
+
 
 }

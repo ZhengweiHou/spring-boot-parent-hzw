@@ -89,7 +89,7 @@ public class ACIDTest {
                     Connection con = openConnection();
                     con.setAutoCommit(false); //关闭自动提交，使下面的查询都处于同一个事务中
 //                    con.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);   // 未提交读模式（可能脏读）
-                    con.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);   // 串行化可以防止幻读，其他模式都可能幻读
+                    con.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);   // 串行化可以防止幻读，其他模式都可能幻读。此时就没法并发了，下面insert的并发会有一个是异常的
                     cd.await();
                     // 查询，不存在时插入逻辑（验证幻读)
                     int id = _query(999, con);

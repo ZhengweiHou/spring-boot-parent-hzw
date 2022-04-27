@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,6 +30,8 @@ public class HzwService {
 
     @Transactional
     public void insertHZ_Exception2_but_try(){
+
+        System.out.println(TransactionSynchronizationManager.getCurrentTransactionName());
         Object[] o1 = {"hzw",18,"haha",new Date()};
         doInsertH(o1);
         try {

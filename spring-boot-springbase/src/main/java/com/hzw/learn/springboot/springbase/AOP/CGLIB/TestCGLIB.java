@@ -75,7 +75,7 @@ public class TestCGLIB {
         /**
          * 这里的hello对象，反编译后：{@link HzwHello$$EnhancerByCGLIB$$dc02cf00}
          **/
-        Thread.sleep(100000);
+//        Thread.sleep(100000);
         hello.sayHello();
     }
 
