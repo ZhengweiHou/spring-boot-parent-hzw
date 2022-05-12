@@ -80,7 +80,7 @@
                 <batch:listener ref="hzwStepExecutionListener"/>
             </batch:listeners>
             <batch:chunk reader="hReader" processor="hProdessor" writer="hWriter"
-                         commit-interval="3"/>  <!-- commit-interval 指定单事务commit数量 -->
+                         commit-interval="5"/>  <!-- commit-interval 指定单事务commit数量 -->
         </batch:tasklet>
     </batch:step>
 
@@ -89,11 +89,13 @@
         <batch:listeners>
             <batch:listener ref="hzwJobExecutionListener"/>
         </batch:listeners>
+
         <batch:step id="partitionDemoStep1">
             <batch:partition partitioner="partition_hzw_file1" step="hstep">
                 <batch:handler grid-size="1" task-executor="executor"/>  <!-- 指定分片数量  task-executor 指定任务的执行池-->
             </batch:partition>
         </batch:step>
+
     </batch:job>
 
 

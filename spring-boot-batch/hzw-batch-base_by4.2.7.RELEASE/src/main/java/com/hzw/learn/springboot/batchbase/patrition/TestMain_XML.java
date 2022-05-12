@@ -27,7 +27,7 @@ public class TestMain_XML {
         JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
 //        jobParametersBuilder.addDate("data",new Date());
         jobParametersBuilder.addLong("index",1L);
-        jobParametersBuilder.addString("tempStr","h");
+//        jobParametersBuilder.addString("tempStr","h");
         JobExecution jobExecution = jobLauncher.run(job,jobParametersBuilder.toJobParameters());
     }
 }

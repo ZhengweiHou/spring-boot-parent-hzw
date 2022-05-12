@@ -35,7 +35,7 @@ public class Sofa2ProviderInfoListener implements ProviderInfoListener {
 
     @Override
     public void addProvider(ProviderGroup providerGroup) {
-        logger.info("addProvider:" + providerGroup.getName());
+        logger.info("==addProvider:" + providerGroup.getName());
         for (ProviderInfo providerInfo : providerGroup.getProviderInfos()) {
             logger.debug(new Gson().toJson(providerInfo));
             ps.put(providerInfo.getHost() + ":" + providerInfo.getPort(), providerInfo);
@@ -47,7 +47,7 @@ public class Sofa2ProviderInfoListener implements ProviderInfoListener {
 
     @Override
     public void removeProvider(ProviderGroup providerGroup) {
-        logger.info("removeProvider:" + providerGroup.getName());
+        logger.info("==removeProvider:" + providerGroup.getName());
         for (ProviderInfo providerInfo : providerGroup.getProviderInfos()) {
             logger.debug(new Gson().toJson(providerInfo));
             ps.remove(providerInfo.getHost() + ":" + providerInfo.getPort());
@@ -59,7 +59,7 @@ public class Sofa2ProviderInfoListener implements ProviderInfoListener {
 
     @Override
     public void updateProviders(ProviderGroup providerGroup) {
-        logger.info("updateProviders:" + providerGroup.getName());
+        logger.info("==updateProviders:" + providerGroup.getName());
         ps.clear();
         for (ProviderInfo providerInfo : providerGroup.getProviderInfos()) {
             logger.debug(new Gson().toJson(providerInfo));
@@ -73,7 +73,7 @@ public class Sofa2ProviderInfoListener implements ProviderInfoListener {
     @Override
     public void updateAllProviders(List<ProviderGroup> providerGroups) {
 
-        logger.info("updateAllProviders:" +
+        logger.info("==updateAllProviders:" +
                 providerGroups.stream().map(pg -> pg.getName()).collect(Collectors.toList()).toString());
         ps.clear();
         for (ProviderGroup providerGroup : providerGroups) {

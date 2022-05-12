@@ -1,24 +1,29 @@
 package com.hzw.learn.sofa2;
 
-import com.alipay.sofa.rpc.client.ProviderGroup;
-import com.alipay.sofa.rpc.config.*;
+import com.alibaba.nacos.api.naming.pojo.ServiceInfo;
+import com.alibaba.nacos.client.naming.core.HostReactor;
+import com.alibaba.nacos.client.naming.core.PushReceiver;
+import com.alipay.sofa.rpc.config.ConsumerConfig;
+import com.alipay.sofa.rpc.config.RegistryConfig;
 import com.alipay.sofa.rpc.core.request.SofaRequest;
 import com.alipay.sofa.rpc.registry.Registry;
 import com.alipay.sofa.rpc.registry.RegistryFactory;
-import com.google.gson.Gson;
 import com.hzw.learn.sofa1.HelloService;
-import com.hzw.learn.sofa1.HelloServiceImpl;
+import org.mockito.Mockito;
+import org.omg.CORBA.ServiceInformationHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 @Configuration
 public class AppSofa2Config {
@@ -92,6 +97,13 @@ public class AppSofa2Config {
         logger.info("creat Sofa2ProviderInfoListener");
         return new Sofa2ProviderInfoListener();
     }
+
+//    @Bean
+//    public PushReceiver pushReceiver(){
+//        return new PushReceiver();
+//    }
+
+
 
 
 
