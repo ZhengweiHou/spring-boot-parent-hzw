@@ -12,7 +12,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <spring-boot.bersion>2.1.13.RELEASE</spring-boot.bersion>
+        <spring-boot.bersion>2.5.12</spring-boot.bersion>
         <lookout.client.version>1.6.1</lookout.client.version>
 
     </properties>
