@@ -103,7 +103,7 @@ public class AppSofa2Controller {
         ConsumerConfig<GenericService> consumer = new ConsumerConfig();
         consumer.setInterfaceId("com.hzw.learn.sofa1.HelloService")
                 .setProtocol("bolt")
-                .setGeneric(true)
+                .setGeneric(true)  // 设置范化调用类型
                 .setProxy("javassist")
                 .setRegistry(registryConfig);
 

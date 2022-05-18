@@ -48,8 +48,8 @@
 
 
 
-<!--	<bean name="hzwService" class="com.hzw.learn.springboot.springbase.Transaction.HzwService"
-		  p:jdbcTemplate-ref="jdbcTemplate"/>-->
+	<bean name="hzwService" class="com.hzw.learn.springboot.springbase.Transaction.HzwService"
+		  p:jdbcTemplate-ref="jdbcTemplate"/>
 
 
 <!--	<bean name="propagationTest1Service" class="com.hzw.learn.springboot.springbase.Transaction.propagation.PropagationTest1Service"
