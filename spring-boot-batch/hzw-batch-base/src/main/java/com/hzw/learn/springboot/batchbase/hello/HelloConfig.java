@@ -82,10 +82,10 @@ public class HelloConfig {
 //                .build();
 //    }
 
-    @Bean
-    public Job testjob(){
-        JobExplorerFactoryBean
-    }
+//    @Bean
+//    public Job testjob(){
+//        JobExplorerFactoryBean
+//    }
 
     @Bean
     public JobRegistry jobRegistry(){

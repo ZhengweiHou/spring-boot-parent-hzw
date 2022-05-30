@@ -41,6 +41,8 @@
           p:dataSource-ref="dataSource"
     />
 
+
+
     <!-- 事务注解处理支持 -->
     <tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>
 
@@ -67,36 +69,69 @@
           p:lineBytesLength="10"
     />
 
-    <!--	<bean id="hReader" class="com.hzw.learn.springboot.batchbase.patrition.hstep.HReader" scope="step"/>-->
-    <bean id="hReader" class="com.hzw.learn.springboot.batchbase.patrition.support.HzwPartitionResourceItemReader"
-          scope="step"/>
+    <bean id="hReader" class="com.hzw.learn.springboot.batchbase.patrition.hstep.HReader" scope="step"/>
+    <bean id="hPartReader" class="com.hzw.learn.springboot.batchbase.patrition.hstep.HzwPartitionResourceItemReader" scope="step"/>
     <bean id="hProdessor" class="com.hzw.learn.springboot.batchbase.patrition.hstep.HProdessor"/>
     <bean id="hWriter" class="com.hzw.learn.springboot.batchbase.patrition.hstep.HWriter"/>
 
+
+    <!-- 定义step模板，用于绑定listener等，后续定义step时指定该parent就可以继承这里的配置 -->
+    <batch:step id="step_template" abstract="true">
+        <batch:listeners>
+            <batch:listener ref="hzwJobAndStepExecutionListener"/>
+            <batch:listener ref="hzwStepExecutionListener"/>
+        </batch:listeners>
+    </batch:step>
 
     <batch:step id="hstep">
         <batch:tasklet>
             <batch:listeners>
                 <batch:listener ref="hzwStepExecutionListener"/>
             </batch:listeners>
-            <batch:chunk reader="hReader" processor="hProdessor" writer="hWriter"
+            <batch:chunk reader="hPartReader" processor="hProdessor" writer="hWriter"
                          commit-interval="5"/>  <!-- commit-interval 指定单事务commit数量 -->
         </batch:tasklet>
     </batch:step>
+
+
 
     <!-- create job -->
     <batch:job id="partitionDemoJob" job-repository="jobRepository">
         <batch:listeners>
             <batch:listener ref="hzwJobExecutionListener"/>
+            <batch:listener ref="hzwJobAndStepExecutionListener"/>
         </batch:listeners>
 
-        <batch:step id="partitionDemoStep1">
+<!--        <batch:step id="partitionStep1" next="split1">-->
+        <batch:step id="partitionStep1">
             <batch:partition partitioner="partition_hzw_file1" step="hstep">
                 <batch:handler grid-size="1" task-executor="executor"/>  <!-- 指定分片数量  task-executor 指定任务的执行池-->
             </batch:partition>
         </batch:step>
 
+      <!--  <batch:split id="split1">
+            <batch:flow>
+                <batch:step id="h_s_step1" parent="step_template">
+                    <batch:tasklet>
+                        <batch:chunk reader="hReader" processor="hProdessor" writer="hWriter"
+                                     commit-interval="5"/>  &lt;!&ndash; commit-interval 指定单事务commit数量 &ndash;&gt;
+                    </batch:tasklet>
+                </batch:step>
+            </batch:flow>
+            <batch:flow>
+                <batch:step id="h_s_step2" parent="step_template">
+                    <batch:tasklet>
+                        <batch:chunk reader="hReader" processor="hProdessor" writer="hWriter"
+                                     commit-interval="5"/>  &lt;!&ndash; commit-interval 指定单事务commit数量 &ndash;&gt;
+                    </batch:tasklet>
+                </batch:step>
+            </batch:flow>
+        </batch:split>-->
+
     </batch:job>
 
+
+    <!-- listener 懒加载测试 -->
+    <bean id="hzwJobExecutionListener" class="com.hzw.learn.springboot.batchbase.patrition.support.listener.HzwStepExecutionListener" lazy-init="true"/>
 
 </beans>

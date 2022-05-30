@@ -5,7 +5,7 @@
 	   xmlns:batch="http://www.springframework.org/schema/batch"
 	   xsi:schemaLocation="
 			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-			http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+			http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-2.1.xsd
 		"
 >
 
@@ -13,6 +13,9 @@
 	<bean id="transactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager"/>
 
 	<bean id="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean"/>
+
+	<bean id="hzwStepExecutionListener" class="com.hzw.learn.springboot.batchbase.support.listener.HzwStepExecutionListener"/>
+<!--	<bean id="hzwStepExecutionListenerBySupport" class="com.hzw.learn.springboot.batchbase.support.listener.HzwStepExecutionListenerBySupport"/>-->
 
 	<bean id="hReader" class="com.hzw.learn.springboot.batchbase.hello.HReader"/>
 	<bean id="hProdessor" class="com.hzw.learn.springboot.batchbase.hello.HProdessor"/>
@@ -23,9 +26,20 @@
 		<property name="jobRepository" ref="jobRepository" />
 	</bean>
 
+	<!-- 定义step模板，用于绑定listener等，后续定义step时指定该parent就可以继承这里的配置 -->
+	<batch:step id="step_template" abstract="true">
+		<batch:listeners>
+			<batch:listener ref="hzwStepExecutionListener"/>
+<!--			<batch:listener ref="hzwStepExecutionListenerBySupport"/>-->
+			<batch:listener>
+				<bean class="com.hzw.learn.springboot.batchbase.support.listener.HzwStepExecutionListenerBySupport"/>
+			</batch:listener>
+		</batch:listeners>
+	</batch:step>
+
 
 	<batch:job id="helloJob" job-repository="jobRepository">
-		<batch:step id="step1" >
+		<batch:step id="step1" parent="step_template">
 			<batch:tasklet>
 				<batch:chunk reader="hReader" processor="hProdessor" writer="hWriter" commit-interval="5"/>
 			</batch:tasklet>

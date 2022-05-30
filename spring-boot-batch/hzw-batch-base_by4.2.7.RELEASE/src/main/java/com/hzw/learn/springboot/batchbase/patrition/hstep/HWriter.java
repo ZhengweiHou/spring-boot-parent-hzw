@@ -1,9 +1,8 @@
 package com.hzw.learn.springboot.batchbase.patrition.hstep;
 
 import com.google.gson.Gson;
-import com.hzw.learn.springboot.batchbase.patrition.support.HzwStepExecutionListener;
+import com.hzw.learn.springboot.batchbase.patrition.support.listener.HzwStepExecutionListener;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.List;
 

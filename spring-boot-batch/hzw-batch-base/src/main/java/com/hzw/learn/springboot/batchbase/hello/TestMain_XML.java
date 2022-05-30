@@ -1,6 +1,5 @@
 package com.hzw.learn.springboot.batchbase.hello;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import org.junit.Test;
 import org.springframework.batch.core.*;
 import org.springframework.batch.core.launch.JobLauncher;
@@ -8,12 +7,8 @@ import org.springframework.batch.core.repository.JobExecutionAlreadyRunningExcep
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.repository.JobRestartException;
-import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.jdbc.core.simple.SimpleJdbcCallOperations;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import org.springframework.jdbc.core.simple.SimpleJdbcOperations;
 
 import java.util.Date;
 

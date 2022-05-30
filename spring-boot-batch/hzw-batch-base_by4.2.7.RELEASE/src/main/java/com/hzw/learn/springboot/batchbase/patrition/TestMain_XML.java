@@ -17,7 +17,7 @@ import java.util.Date;
 
 public class TestMain_XML {
     @Test
-    public void test_hello_mysql() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
+    public void test_hello_mysql() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, InterruptedException {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("partition/partitionDemo.xml");
 
         JobLauncher jobLauncher = (JobLauncher) ctx.getBean("jobLauncher");
@@ -25,11 +25,17 @@ public class TestMain_XML {
         JobRepository jobRepository = (JobRepository) ctx.getBean("jobRepository");
 
         JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
-//        jobParametersBuilder.addDate("data",new Date());
+        jobParametersBuilder.addDate("data",new Date());
         jobParametersBuilder.addLong("index",1L);
 //        jobParametersBuilder.addString("tempStr","h");
         JobExecution jobExecution = jobLauncher.run(job,jobParametersBuilder.toJobParameters());
+
+        for (int i=1; i<100; i++){
+            Thread.sleep(20);
+        }
+
     }
 }
+
 
 

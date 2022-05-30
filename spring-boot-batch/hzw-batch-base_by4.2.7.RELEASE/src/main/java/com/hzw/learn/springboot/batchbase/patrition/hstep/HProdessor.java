@@ -1,14 +1,14 @@
 package com.hzw.learn.springboot.batchbase.patrition.hstep;
 
-import com.hzw.learn.springboot.batchbase.patrition.service.IBatchTestService;
-import com.hzw.learn.springboot.batchbase.patrition.support.Contents;
-import com.hzw.learn.springboot.batchbase.patrition.support.HzwStepExecutionListener;
+import com.hzw.learn.springboot.batchbase.patrition.support.listener.HzwStepExecutionListener;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
+import com.hzw.learn.springboot.batchbase.patrition.service.IBatchTestService;
+import com.hzw.learn.springboot.batchbase.patrition.support.Contents;
 
 public class HProdessor implements ItemProcessor {
+
     @Autowired
     IBatchTestService batchTestService1;
 

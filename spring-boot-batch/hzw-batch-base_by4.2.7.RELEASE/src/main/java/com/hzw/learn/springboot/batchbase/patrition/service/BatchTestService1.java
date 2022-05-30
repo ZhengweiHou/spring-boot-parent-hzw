@@ -1,12 +1,12 @@
 package com.hzw.learn.springboot.batchbase.patrition.service;
 
-import com.hzw.learn.springboot.batchbase.patrition.support.Contents;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
+import com.hzw.learn.springboot.batchbase.patrition.support.Contents;
 
 /**
  * @ClassName BatchTestService1
@@ -21,7 +21,8 @@ public class BatchTestService1 implements IBatchTestService{
     JdbcTemplate jdbcTemplate;
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+//    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public int tx1(String item) {
         jdbcTemplate.update("insert into test (branch, type, item) value (?,?,?)", Contents.BRANCH,"BatchTestService1.tx1",item);
         return 0;

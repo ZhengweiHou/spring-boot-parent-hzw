@@ -1,14 +1,15 @@
-package com.hzw.learn.springboot.batchbase.patrition.support;
+package com.hzw.learn.springboot.batchbase.patrition.hstep;
 
 import com.google.gson.Gson;
+import com.hzw.learn.springboot.batchbase.patrition.support.listener.HzwStepExecutionListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.scope.context.StepSynchronizationManager;
 import org.springframework.batch.item.ExecutionContext;
+import org.springframework.batch.item.ItemStreamException;
 import org.springframework.batch.item.support.AbstractItemCountingItemStreamItemReader;
 import org.springframework.beans.factory.BeanNameAware;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -57,5 +58,10 @@ public class HzwPartitionResourceItemReader extends AbstractItemCountingItemStre
     public void setBeanName(String name) {
         log.debug("setBeanName：{}",name);
         super.setName(name);        // 调用AbstractItemCountingItemStreamItemReader.setName() 将其ExecutionContextUserSupport属性的name值赋值
+    }
+
+    public void update(ExecutionContext executionContext) throws ItemStreamException {
+        super.update(executionContext);
+        System.out.println("update==================");
     }
 }
