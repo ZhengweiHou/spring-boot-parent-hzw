@@ -19,6 +19,7 @@ public class AbstractPropagationTestService {
 
     /* CRUD Base */
     public void _insert1(int id, String name) {
+        System.out.println("INSERT INTO test (id, name) VALUES (" + id + ", '" + name + "');");
         jdbcTemplate.update("INSERT INTO test (id, name) VALUES (" + id + ", '" + name + "');");
     }
 

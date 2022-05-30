@@ -15,3 +15,8 @@ CREATE TABLE Z (
     DATE DATETIME,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB;
+
+CREATE TABLE test (
+    id INT ,
+    name VARCHAR(10)
+) ENGINE=InnoDB;

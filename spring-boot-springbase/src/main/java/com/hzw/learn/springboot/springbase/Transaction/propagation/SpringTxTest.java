@@ -20,12 +20,14 @@ public class SpringTxTest {
 
     IPropagationTestService propagationTest1Service;
     IPropagationTestService propagationTest2Service;
+    PropagationSimpleTestService propagationSimpleTestService;
 
     @Before
     public void init() throws InterruptedException {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("Transaction/Transaction.xml");
         this.propagationTest1Service = (IPropagationTestService) applicationContext.getBean("propagationTest1Service");
         this.propagationTest2Service = (IPropagationTestService) applicationContext.getBean("propagationTest2Service");
+        this.propagationSimpleTestService = (PropagationSimpleTestService) applicationContext.getBean("propagationSimpleTestService");
         Thread.sleep(100);
     }
 
@@ -43,6 +45,12 @@ public class SpringTxTest {
     @Test
     public void test3(){
         int i = propagationTest1Service.tx3();
+    }
+
+    @Test
+    public void test4() throws InterruptedException {
+        propagationSimpleTestService.case1();
+        Thread.sleep(1000);
     }
 
 
