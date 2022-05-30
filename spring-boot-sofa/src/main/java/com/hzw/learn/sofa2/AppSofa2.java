@@ -16,11 +16,11 @@ public class AppSofa2 {
     @Autowired
     private Registry registry;
 
-    @PostConstruct
-    public void init() {
-        Counter counter = registry.counter(registry.createId("http_requests_total").withTag("instant", NetworkUtil.getLocalAddress().getHostName()));
-        counter.inc();
-    }
+//    @PostConstruct
+//    public void init() {
+//        Counter counter = registry.counter(registry.createId("http_requests_total").withTag("instant", NetworkUtil.getLocalAddress().getHostName()));
+//        counter.inc();
+//    }
 
     public static void main(String[] args) {
         SpringApplication.run(AppSofa2.class,args);

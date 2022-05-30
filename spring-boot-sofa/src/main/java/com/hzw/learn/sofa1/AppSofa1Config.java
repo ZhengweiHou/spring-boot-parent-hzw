@@ -41,20 +41,25 @@ public class AppSofa1Config {
         registryConfig.setProtocol("nacos");
 //        registryConfig.setAddress("192.168.32.201:8848/public");
         registryConfig.setAddress(env.getProperty("nacos.host") + "/" + env.getProperty("nacos.namespace"));
-        registryConfig.setHeartbeatPeriod(300);
+//        registryConfig.setAddress("127.0.0.1:8848/test");
+//        registryConfig.setHeartbeatPeriod(300);
         return registryConfig;
     }
 
     @Bean
     public ServerConfig serverConfig(){
         ServerConfig serverConfig = new ServerConfig();
+        serverConfig.setPort(9989);
         System.out.println("vhost:" + env.getProperty("vhost") + " vport:" + env.getProperty("vport"));
         Optional.ofNullable(env.getProperty("vhost")).ifPresent(vhost -> serverConfig.setVirtualHost(vhost));
-        Optional.ofNullable(env.getProperty("vport")).ifPresent(vport -> serverConfig.setVirtualPort(Integer.valueOf(vport)));
+        Optional.ofNullable(env.getProperty("vport")).ifPresent(vport -> {
+            serverConfig.setVirtualPort(Integer.valueOf(vport));
+            serverConfig.setPort(Integer.valueOf(vport));
+        });
         serverConfig.setProtocol("bolt"); // 默认bolt协议
-        serverConfig.setPort(9989);
+
         // serverConfig.setProtocol("h2c");
-         serverConfig.setAdaptivePort(true); // 是否自适应端口
+//         serverConfig.setAdaptivePort(true); // 是否自适应端口
         System.out.println(serverConfig.toString());
         return serverConfig;
     }
@@ -63,7 +68,6 @@ public class AppSofa1Config {
 
 
     @Bean
-    @Scope
     public HelloServiceImpl helloService(){
         return new HelloServiceImpl();
     }
@@ -83,33 +87,39 @@ public class AppSofa1Config {
     /**
      * sofa 暴露http协议服务
      */
-//    @Bean(name = "httpServerConfig")
-//    public ServerConfig httpServerConfig(){
-//        ServerConfig serverConfig = new ServerConfig();
-//        System.out.println("vhost:" + env.getProperty("vhost") + " vport:" + env.getProperty("vport"));
-//        Optional.ofNullable(env.getProperty("vhost")).ifPresent(vhost -> serverConfig.setVirtualHost(vhost));
-//        Optional.ofNullable(env.getProperty("vport")).ifPresent(vport -> serverConfig.setVirtualPort(Integer.valueOf(vport)));
-//        serverConfig.setProtocol(RpcConstants.PROTOCOL_TYPE_HTTP); // 指定http协议
-//        serverConfig.setPort(9988); // server的区分维度为ip+port，不包括协议类型，应此此处的port需要和其他协议的port分开
-//        serverConfig.setAdaptivePort(true); // 是否自适应端口
-//        System.out.println(serverConfig.toString());
-//        return serverConfig;
-//    }
+    @Bean(name = "httpServerConfig")
+    public ServerConfig httpServerConfig(){
+        ServerConfig serverConfig = new ServerConfig();
 
-//    @Bean
-//    public ProviderConfig httpHelloServiceExport(@Autowired @Qualifier("httpServerConfig") ServerConfig httpServerConfig){
-//        ProviderConfig<HelloService> providerConfig = new ProviderConfig<>();
-//        providerConfig.setServer(httpServerConfig);
-//        providerConfig.setRegistry(registryConfig());
-//        providerConfig.setInterfaceId(HelloService.class.getName());
-//        providerConfig.setRef(helloService());
-////        providerConfig.setUniqueId("hhh");
-//        System.out.println("==> 导出http服务：" + providerConfig.getInterfaceId());
-//        providerConfig.export();
-//        System.out.print("sofa port:" + providerConfig.getServer().get(0).getPort());
-//        System.out.println(" eg: curl " + httpServerConfig.getBoundHost() + ":" + httpServerConfig.getPort() + "/com.hzw.learn.sofa1.HelloService/hello2");
-//        return providerConfig;
-//    }
+        serverConfig.setPort(9988); // server的区分维度为ip+port，不包括协议类型，应此此处的port需要和其他协议的port分开
+        serverConfig.setAdaptivePort(true); // 是否自适应端口
+
+        System.out.println("vhost:" + env.getProperty("vhost") + " vport:" + env.getProperty("vport"));
+        Optional.ofNullable(env.getProperty("vhost")).ifPresent(vhost -> serverConfig.setVirtualHost(vhost));
+        Optional.ofNullable(env.getProperty("vport")).ifPresent(vport -> {
+            serverConfig.setVirtualPort(Integer.valueOf(vport) + 10);
+            serverConfig.setPort(Integer.valueOf(vport) + 10);
+            serverConfig.setAdaptivePort(true);
+        });
+        serverConfig.setProtocol(RpcConstants.PROTOCOL_TYPE_HTTP); // 指定http协议
+        System.out.println(serverConfig.toString());
+        return serverConfig;
+    }
+
+    @Bean
+    public ProviderConfig httpHelloServiceExport(@Autowired @Qualifier("httpServerConfig") ServerConfig httpServerConfig){
+        ProviderConfig<HelloService> providerConfig = new ProviderConfig<>();
+        providerConfig.setServer(httpServerConfig);
+        providerConfig.setRegistry(registryConfig());
+        providerConfig.setInterfaceId(HelloService.class.getName());
+        providerConfig.setRef(helloService());
+//        providerConfig.setUniqueId("hhh");
+        System.out.println("==> 导出http服务：" + providerConfig.getInterfaceId());
+        providerConfig.export();
+        System.out.print("sofa port:" + providerConfig.getServer().get(0).getPort());
+        System.out.println(" eg: curl " + httpServerConfig.getBoundHost() + ":" + httpServerConfig.getPort() + "/com.hzw.learn.sofa1.HelloService/hello2");
+        return providerConfig;
+    }
 
 
 

@@ -40,7 +40,7 @@
         <dependency>
             <groupId>com.alibaba.nacos</groupId>
             <artifactId>nacos-client</artifactId>
-            <version>1.4.2</version>
+            <version>1.4.1</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
@@ -79,11 +79,11 @@
             <artifactId>lookout-sofa-boot-starter</artifactId>
             <version>${lookout.client.version}</version>
         </dependency>
-        <dependency>
+ <!--       <dependency>
             <groupId>com.alipay.sofa.lookout</groupId>
             <artifactId>lookout-reg-prometheus</artifactId>
             <version>${lookout.client.version}</version>
-        </dependency>
+        </dependency>-->
         <!-- https://mvnrepository.com/artifact/com.alipay.sofa.lookout/lookout-api -->
         <dependency>
             <groupId>com.alipay.sofa.lookout</groupId>
@@ -132,8 +132,8 @@
                         <manifest>
 <!--                            <addClasspath>true</addClasspath>-->
 <!--                            <classpathPrefix>hzwlib</classpathPrefix>-->
-<!--                            <mainClass>com.hzw.learn.sofa1.AppSofa1</mainClass>-->
-                            <mainClass>com.hzw.learn.sofa2.AppSofa2</mainClass>
+                            <mainClass>com.hzw.learn.sofa1.AppSofa1</mainClass>
+<!--                            <mainClass>com.hzw.learn.sofa2.AppSofa2</mainClass>-->
                             <useUniqueVersions>false</useUniqueVersions>
                         </manifest>
                     </archive>

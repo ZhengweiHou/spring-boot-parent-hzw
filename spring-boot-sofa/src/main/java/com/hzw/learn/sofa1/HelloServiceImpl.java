@@ -22,7 +22,7 @@ public class HelloServiceImpl implements HelloService{
 
         showJVMInfo();
         times++;
-        al.add(new SoftReference(new byte[1 * 1024 * 1024])); // 弱引用占住内存
+//        al.add(new SoftReference(new byte[1 * 1024 * 1024])); // 弱引用占住内存
         return "Provider[" + jvmProcessID + "]-" + times;
     }
 
