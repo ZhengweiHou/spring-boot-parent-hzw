@@ -15,7 +15,7 @@
 
 >
 
-	<context:component-scan base-package="com.hzw.learn.springboot.springbase.Transaction.propagation"/>
+	<context:component-scan base-package="com.hzw.learn.springboot.springbase.Transaction.isolation"/>
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -47,15 +47,6 @@
 
 
 
-
-	<bean name="hzwService" class="com.hzw.learn.springboot.springbase.Transaction.HzwService"
-		  p:jdbcTemplate-ref="jdbcTemplate"/>
-
-
-<!--	<bean name="propagationTest1Service" class="com.hzw.learn.springboot.springbase.Transaction.propagation.PropagationTest1Service"
-		  p:jdbcTemplate-ref="jdbcTemplate"/>
-	<bean name="propagationTest2Service" class="com.hzw.learn.springboot.springbase.Transaction.propagation.PropagationTest2Service"
-		  p:jdbcTemplate-ref="jdbcTemplate"/>-->
 
 </beans>
 

@@ -1,7 +1,6 @@
-package com.hzw.learn.springboot.springbase.Transaction.txbase;
+package com.hzw.learn.springboot.springbase.Transaction.isolation;
 
 import org.junit.Test;
-import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.concurrent.CountDownLatch;
@@ -35,6 +34,7 @@ public class ACIDTest {
     @Test   // 脏读、不可重复读测试
     public void IsolationLevelTest1() throws Exception {
         Connection coninit = openConnection();
+        coninit.setAutoCommit(false);
         _insert(99,"99",coninit);
         coninit.commit();
         Thread.sleep(10);
@@ -111,6 +111,8 @@ public class ACIDTest {
         _delete(999,openConnection()); // 清理
 
     }
+
+
 
 
     public static void _insert(int id, String name, Connection con) {

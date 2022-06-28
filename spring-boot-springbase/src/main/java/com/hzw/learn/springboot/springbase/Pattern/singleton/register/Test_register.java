@@ -15,7 +15,7 @@ public class Test_register {
 
                 //Object obj = register.getBean("java.lang.String");
 //                Object obj = register.getBean("com.hzw.learn.springboot.springbase.Test.PenBean");
-                Object obj = register.getBean(com.hzw.learn.springboot.springbase.Transaction.H.class.getName());
+                Object obj = register.getBean(com.hzw.learn.springboot.springbase.Pattern.singleton.register.H.class.getName());
 
                 System.out.println("" + System.currentTimeMillis() + obj);
             }).start();

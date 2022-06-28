@@ -18,34 +18,51 @@
     </properties>
 
     <dependencies>
-
         <!--全局排除spring-boot-starter-logging内的所有依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-logging</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>*</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+        <!--        <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>*</groupId>
+                            <artifactId>*</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>-->
 
-        <dependency>
+       <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${spring-boot.bersion}</version>
-<!--            <exclusions>
+            <exclusions>
                 &lt;!&ndash; exclude掉spring-boot的默认log配置 &ndash;&gt;
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-logging</artifactId>
                 </exclusion>
-            </exclusions>-->
+            </exclusions>
+        </dependency>-->
+
+        <!-- rocketmq -->
+<!--        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>4.9.1</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
+            <version>2.1.1</version>
         </dependency>
 
 
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -72,10 +89,7 @@
             <version>3.4.2</version>
         </dependency>
 
-
         <!-- ===============监控相关=============== -->
-
-
         <dependency>
             <groupId>com.alipay.sofa.lookout</groupId>
             <artifactId>lookout-sofa-boot-starter</artifactId>
@@ -91,7 +105,7 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>2.23.4</version>
-<!--            <scope>test</scope>-->
+            <!--            <scope>test</scope>-->
         </dependency>
 
     </dependencies>
@@ -125,9 +139,9 @@
                 <configuration>
                     <archive>
                         <manifest>
-<!--                            <addClasspath>true</addClasspath>-->
-<!--                            <classpathPrefix>hzwlib</classpathPrefix>-->
-<!--                            <mainClass>com.hzw.learn.sofa1.AppSofa1</mainClass>-->
+                            <!--                            <addClasspath>true</addClasspath>-->
+                            <!--                            <classpathPrefix>hzwlib</classpathPrefix>-->
+                            <!--                            <mainClass>com.hzw.learn.sofa1.AppSofa1</mainClass>-->
                             <mainClass>com.hzw.learn.sofa2.AppSofa2</mainClass>
                             <useUniqueVersions>false</useUniqueVersions>
                         </manifest>
@@ -135,24 +149,25 @@
                 </configuration>
             </plugin>
 
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-dependency-plugin</artifactId>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>copy-dependencies</id>-->
-<!--                        <phase>prepare-package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>copy-dependencies</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <outputDirectory>${project.build.directory}/hzwlib</outputDirectory>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>org.apache.maven.plugins</groupId>-->
+            <!--                <artifactId>maven-dependency-plugin</artifactId>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>copy-dependencies</id>-->
+            <!--                        <phase>prepare-package</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>copy-dependencies</goal>-->
+            <!--                        </goals>-->
+            <!--                        <configuration>-->
+            <!--                            <outputDirectory>${project.build.directory}/hzwlib</outputDirectory>-->
+            <!--                        </configuration>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
 
         </plugins>
     </build>
 
 </project>
+

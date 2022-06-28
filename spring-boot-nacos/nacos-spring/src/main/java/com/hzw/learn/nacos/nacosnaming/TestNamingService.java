@@ -33,7 +33,7 @@ public class TestNamingService implements ApplicationListener {
     @PostConstruct
     public void postConstructMeth() throws InterruptedException {
         new Thread(() ->{
-//            while (true)
+            while (true)
                 try {
                     hello(1234);
                     Thread.sleep(5*1000);

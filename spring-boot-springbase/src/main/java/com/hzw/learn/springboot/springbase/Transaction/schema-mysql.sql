@@ -18,5 +18,6 @@ CREATE TABLE Z (
 
 CREATE TABLE test (
     id INT ,
-    name VARCHAR(10)
+    name VARCHAR(10),
+    age INT
 ) ENGINE=InnoDB;

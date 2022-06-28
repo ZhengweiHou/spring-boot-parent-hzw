@@ -20,9 +20,13 @@ public class PropagationSimpleTestService extends AbstractPropagationTestService
     @Transactional(propagation = Propagation.REQUIRED)
     public void case1(){
         _insert1(1,"1");
-        try {this.propagationSimpleTestService.tx1();}catch (Exception e){};
-        try {this.propagationSimpleTestService.tx2();;}catch (Exception e){};
-        try {this.propagationSimpleTestService.tx3();;}catch (Exception e){};
+//        try {this.propagationSimpleTestService.tx1();}catch (Exception e){};
+//        try {this.propagationSimpleTestService.tx2();;}catch (Exception e){};
+//        try {this.propagationSimpleTestService.tx3();;}catch (Exception e){};
+        this.propagationSimpleTestService.tx1();
+        this.propagationSimpleTestService.tx2();
+        this.propagationSimpleTestService.tx3();
+
         _insert1(7,"12345678901");
     }
 

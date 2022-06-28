@@ -120,8 +120,6 @@ public class AppSofa2Controller {
 //        geo.putField("[字段2名]",[字段2值]);
 //        String o3 = ref.$genericInvoke("hello",new String[]{"[参数类名]"},new Object[]{geo},String.class);
 
-
-
         return o1 + "###" + o2;
     }
 
