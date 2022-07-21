@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -22,6 +23,7 @@ import org.springframework.context.annotation.Configuration;
  **/
 @Configuration
 @EnableConfigurationProperties(CasConfigurationProperties.class)
+@ComponentScan("com.hzw.learn.springboot.cas.server")
 public class HzwAuthenticationConfiguration implements AuthenticationEventExecutionPlanConfigurer {
 
     Logger log = LoggerFactory.getLogger(this.getClass());
