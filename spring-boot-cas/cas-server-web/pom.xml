@@ -1,81 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <groupId>com.hzw.learn</groupId>
-    <artifactId>cas-server-web</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+	<groupId>com.hzw.learn</groupId>
+	<artifactId>cas-server-web</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 
-    <modelVersion>4.0.0</modelVersion>
-    <name>hzw 传统 cas web 案例</name>
-    <packaging>war</packaging>
+	<modelVersion>4.0.0</modelVersion>
+	<name>hzw 传统 cas web 案例</name>
+	<packaging>war</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.jasig.cas</groupId>
-            <artifactId>cas-server-webapp</artifactId>
-            <version>3.5.1</version>
-            <type>war</type>
-            <scope>runtime</scope>
-        </dependency>
+	<dependencies>
+		<dependency>
+			<groupId>org.jasig.cas</groupId>
+			<artifactId>cas-server-webapp</artifactId>
+			<version>3.5.1</version>
+			<type>war</type>
+			<scope>runtime</scope>
+		</dependency>
 
-        <dependency>
-            <groupId>org.jasig.cas</groupId>
-            <artifactId>cas-server-core</artifactId>
-            <version>3.5.1</version>
-            <exclusions>
-                <!-- 解决日志死循环。slf4j的实现时log4j，log4j再被over给了slf4j，启动时直接额堆溢出  -->
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>log4j-over-slf4j</artifactId>
-                </exclusion>
-            </exclusions>
-            <!-- 下面的依赖jar包在mvn库中不存在，需要的手动从阿里库中下载该jar传入本地库
-               <groupId>javax.xml</groupId>
-               <artifactId>xmldsig</artifactId>
-             -->
-        </dependency>
+		<dependency>
+			<groupId>org.jasig.cas</groupId>
+			<artifactId>cas-server-core</artifactId>
+			<version>3.5.1</version>
+			<exclusions>
+				<!-- 解决日志死循环。slf4j的实现时log4j，log4j再被over给了slf4j，启动时直接额堆溢出 -->
+				<!-- Detected both log4j-over-slf4j.jar AND slf4j-log4j12.jar on the class path, preempting StackOverflowError -->
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>log4j-over-slf4j</artifactId>
+				</exclusion>
+			</exclusions>
+			<!-- 下面的依赖jar包在mvn库中不存在，需要的手动从阿里库中下载该jar传入本地库 <groupId>javax.xml</groupId> 
+				<artifactId>xmldsig</artifactId> -->
+		</dependency>
 
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-        </dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.15</version>
-        </dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.15</version>
+		</dependency>
 
-    </dependencies>
+	</dependencies>
 
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.3</version>
-                <configuration>
-                    <archiveClasses>false</archiveClasses>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <!--
-                    overlay可以把多个项目war合并成为一个项目，并且如果项目存在同名文件，
-                    那么主项目中的文件将覆盖掉其他项目的同名文件。
-                    使用maven 的Overlay配置实现无侵入的改造cas。
-                    -->
-                    <overlays>
-                        <overlay>
-                            <groupId>org.jasig.cas</groupId>
-                            <artifactId>cas-server-webapp</artifactId>
-                        </overlay>
-                    </overlays>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.2</version>
+				<configuration>
+					<archiveClasses>false</archiveClasses>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<!-- overlay可以把多个项目war合并成为一个项目，并且如果项目存在同名文件， 那么主项目中的文件将覆盖掉其他项目的同名文件。 
+						使用maven 的Overlay配置实现无侵入的改造cas。 -->
+					<overlays>
+						<overlay>
+							<groupId>org.jasig.cas</groupId>
+							<artifactId>cas-server-webapp</artifactId>
+							<excludes>
+								<!-- 屏蔽原始war包中的log4j-over-slf4j包，解决日志循环 -->
+								<exclude>WEB-INF/lib/log4j-over-slf4j-1.6.1.jar</exclude>
+							</excludes>
+						</overlay>
+					</overlays>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
+	<repositories>
+		<repository>
+			<id>alimaven</id>
+			<url>https://maven.aliyun.com/repository/public</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>alimaven</id>
+			<url>https://maven.aliyun.com/repository/public</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 </project>
