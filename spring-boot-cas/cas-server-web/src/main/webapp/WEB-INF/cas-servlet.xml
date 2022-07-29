@@ -94,6 +94,7 @@
         <prop key="/authorizationFailure.html">passThroughController</prop>
         <prop key="/403.html">passThroughController</prop>
         <prop key="/status">healthCheckController</prop>
+        <prop key="/getCaptcha">captchaController</prop>
       </props>
     </property>
     <property
@@ -164,6 +165,9 @@
       </list>
     </property>
   </bean>
+
+  <bean id="captchaController" class="com.hzw.learn.casserver.cas.controller.CaptchaController"/>
+
   <bean id="proxyValidateController" class="org.jasig.cas.web.ServiceValidateController"
         p:centralAuthenticationService-ref="centralAuthenticationService"
         p:proxyHandler-ref="proxy20Handler"

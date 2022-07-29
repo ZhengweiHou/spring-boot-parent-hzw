@@ -108,7 +108,7 @@ houzw
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
-	
+
   <servlet-mapping>
     <servlet-name>cas</servlet-name>
     <url-pattern>/login</url-pattern>
@@ -208,6 +208,12 @@ houzw
     <servlet-name>cas</servlet-name>
     <url-pattern>/403.html</url-pattern>
   </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>cas</servlet-name>
+    <url-pattern>/getCaptcha</url-pattern>
+  </servlet-mapping>
+
 
   <session-config>
     <!-- Default to 5 minute session timeouts -->
