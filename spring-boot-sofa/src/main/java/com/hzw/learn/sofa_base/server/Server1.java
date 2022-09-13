@@ -1,18 +1,14 @@
-package com.hzw.learn.sofa2;
+package com.hzw.learn.sofa_base.server;
 
-import com.alipay.lookout.api.Counter;
 import com.alipay.lookout.api.Registry;
-import com.alipay.lookout.common.utils.NetworkUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
 
-import javax.annotation.PostConstruct;
-
 @SpringBootApplication
-@PropertySource("classpath:appSofa2.properties")
-public class AppSofa2 {
+@PropertySource("classpath:sofa_base/servere.properties")
+public class Server1 {
     @Autowired
     private Registry registry;
 
@@ -23,6 +19,8 @@ public class AppSofa2 {
 //    }
 
     public static void main(String[] args) {
-        SpringApplication.run(AppSofa2.class,args);
+        SpringApplication.run(Server1.class,args);
     }
+
+    // java -Dserver.port=8003 -Dserver.port.start=12201 -Dvport=8003 -jar sofa1.jar
 }

@@ -1,8 +1,7 @@
-package com.hzw.learn.sofa2;
+package com.hzw.learn.sofa_base.client;
 
 import com.alipay.sofa.rpc.client.ProviderGroup;
 import com.alipay.sofa.rpc.client.ProviderInfo;
-import com.alipay.sofa.rpc.listener.ProviderInfoListener;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +13,8 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 
-public class Sofa2ProviderInfoListener implements ProviderInfoListener {
-    Logger logger = LoggerFactory.getLogger(Sofa2ProviderInfoListener.class);
+public class HzwProviderInfoListener implements com.alipay.sofa.rpc.listener.ProviderInfoListener {
+    Logger logger = LoggerFactory.getLogger(HzwProviderInfoListener.class);
 
     /**
      * The Ps.

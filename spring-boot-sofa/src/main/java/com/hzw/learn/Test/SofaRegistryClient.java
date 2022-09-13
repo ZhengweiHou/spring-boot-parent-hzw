@@ -1,13 +1,10 @@
 
 package com.hzw.learn.Test;
 
-import com.alipay.sofa.rpc.common.RpcConstants;
 import com.alipay.sofa.rpc.config.ConsumerConfig;
 import com.alipay.sofa.rpc.config.RegistryConfig;
 import com.alipay.sofa.rpc.context.RpcRuntimeContext;
-import com.alipay.sofa.rpc.log.Logger;
-import com.alipay.sofa.rpc.log.LoggerFactory;
-import com.hzw.learn.sofa1.HelloService;
+import com.hzw.learn.ext.HelloService;
 
 /**
  * @ClassName SofaRegistryServer

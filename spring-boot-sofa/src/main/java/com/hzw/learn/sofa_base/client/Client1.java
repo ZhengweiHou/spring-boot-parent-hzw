@@ -1,4 +1,4 @@
-package com.hzw.learn.sofa1;
+package com.hzw.learn.sofa_base.client;
 
 import com.alipay.lookout.api.Registry;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
-@PropertySource("classpath:appSofa1.properties")
-public class  AppSofa1 {
+@PropertySource("classpath:sofa_base/client.properties")
+public class Client1 {
     @Autowired
     private Registry registry;
 
@@ -19,8 +19,6 @@ public class  AppSofa1 {
 //    }
 
     public static void main(String[] args) {
-        SpringApplication.run(AppSofa1.class,args);
+        SpringApplication.run(Client1.class,args);
     }
-
-    // java -Dserver.port=8003 -Dserver.port.start=12201 -Dvport=8003 -jar sofa1.jar
 }

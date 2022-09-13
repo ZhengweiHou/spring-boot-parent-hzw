@@ -1,11 +1,11 @@
-package com.hzw.learn.sofa2;
+package com.hzw.learn.sofa_base.client;
 
 import com.alipay.sofa.rpc.config.ConsumerConfig;
 import com.alipay.sofa.rpc.config.RegistryConfig;
 import com.alipay.sofa.rpc.core.request.SofaRequest;
 import com.alipay.sofa.rpc.registry.Registry;
 import com.alipay.sofa.rpc.registry.RegistryFactory;
-import com.hzw.learn.sofa1.HelloService;
+import com.hzw.learn.ext.HelloService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +18,9 @@ import java.lang.management.RuntimeMXBean;
 import java.util.List;
 
 @Configuration
-public class AppSofa2Config {
+public class Client1Config {
 
-    Logger logger = LoggerFactory.getLogger(AppSofa2Config.class);
+    Logger logger = LoggerFactory.getLogger(Client1Config.class);
 
     @Autowired
     Environment env;
@@ -59,11 +59,12 @@ public class AppSofa2Config {
 //        consumerConfig.setProviderInfoListener(Sofa2ProviderInfoListener());
         consumerConfig.setRegistry(registryConfig());
         consumerConfig.setInterfaceId(HelloService.class.getName());
+        consumerConfig.setProviderInfoListener(Sofa2ProviderInfoListener());
+        consumerConfig.setUniqueId("1");
 
         /** consumer 的粘滞设置，影响调用时的负载，关键处理代码：{@link com.alipay.sofa.rpc.client.AbstractCluster#select(SofaRequest, List)}*/
         consumerConfig.setSticky(false);
         HelloService hello = consumerConfig.refer();
-        consumerConfig.getProviderInfoListener();
         return hello;
 //        return new HelloServiceImpl(); // MOCK
     }
@@ -85,9 +86,9 @@ public class AppSofa2Config {
 
     @Bean
 //    @Scope("prototype")
-    public Sofa2ProviderInfoListener Sofa2ProviderInfoListener(){
-        logger.info("creat Sofa2ProviderInfoListener");
-        return new Sofa2ProviderInfoListener();
+    public HzwProviderInfoListener Sofa2ProviderInfoListener(){
+        logger.info("creat ProviderInfoListener");
+        return new HzwProviderInfoListener();
     }
 
 //    @Bean

@@ -4,8 +4,8 @@ import com.alipay.sofa.rpc.common.RpcConstants;
 import com.alipay.sofa.rpc.config.ProviderConfig;
 import com.alipay.sofa.rpc.config.RegistryConfig;
 import com.alipay.sofa.rpc.config.ServerConfig;
-import com.hzw.learn.sofa1.HelloService;
-import com.hzw.learn.sofa1.HelloServiceImpl;
+import com.hzw.learn.ext.HelloService;
+import com.hzw.learn.sofa_base.server.HelloServiceImpl;
 
 /**
  * @ClassName SofaRegistryServer

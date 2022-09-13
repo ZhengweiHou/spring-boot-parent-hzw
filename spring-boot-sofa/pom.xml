@@ -99,6 +99,13 @@
 <!--            <scope>test</scope>-->
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.20</version>
+        </dependency>
+
+
     </dependencies>
 
 
@@ -132,8 +139,9 @@
                         <manifest>
 <!--                            <addClasspath>true</addClasspath>-->
 <!--                            <classpathPrefix>hzwlib</classpathPrefix>-->
-                            <mainClass>com.hzw.learn.sofa1.AppSofa1</mainClass>
-<!--                            <mainClass>com.hzw.learn.sofa2.AppSofa2</mainClass>-->
+                            <!--<mainClass>com.hzw.learn.sofa_base.server.Server1</mainClass>-->
+                            <mainClass>com.hzw.learn.sofa_consumer2multiprovider.server.Server2</mainClass>
+<!--                            <mainClass>com.hzw.learn.sofa_base.client.Client1</mainClass>-->
                             <useUniqueVersions>false</useUniqueVersions>
                         </manifest>
                     </archive>

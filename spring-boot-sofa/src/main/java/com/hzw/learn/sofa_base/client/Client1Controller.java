@@ -1,20 +1,16 @@
-package com.hzw.learn.sofa2;
+package com.hzw.learn.sofa_base.client;
 
-import com.alipay.hessian.generic.io.GenericObjectSerializer;
-import com.alipay.hessian.generic.model.GenericObject;
 import com.alipay.sofa.rpc.api.GenericService;
 import com.alipay.sofa.rpc.bootstrap.Bootstraps;
-import com.alipay.sofa.rpc.bootstrap.ConsumerBootstrap;
 import com.alipay.sofa.rpc.bootstrap.bolt.BoltConsumerBootstrap;
 import com.alipay.sofa.rpc.common.RpcConstants;
-import com.alipay.sofa.rpc.common.utils.ClassUtils;
 import com.alipay.sofa.rpc.config.*;
 import com.alipay.sofa.rpc.core.exception.RpcErrorType;
 import com.alipay.sofa.rpc.core.exception.SofaRpcException;
 import com.alipay.sofa.rpc.core.request.SofaRequest;
 import com.alipay.sofa.rpc.core.response.SofaResponse;
 import com.alipay.sofa.rpc.invoke.Invoker;
-import com.hzw.learn.sofa1.HelloService;
+import com.hzw.learn.ext.HelloService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
-public class AppSofa2Controller {
+public class Client1Controller {
 
-    Logger logger = LoggerFactory.getLogger(AppSofa2Controller.class);
+    Logger logger = LoggerFactory.getLogger(Client1Controller.class);
 
     static int times=0;
     static ConcurrentHashMap<String,Invoker> invokers = new ConcurrentHashMap<>();
@@ -55,7 +51,7 @@ public class AppSofa2Controller {
     @RequestMapping("/hello2")
     public Object hello2() throws Throwable {
         ConsumerConfig<?> consumer = new ConsumerConfig();
-        consumer.setInterfaceId("com.hzw.learn.sofa1.HelloService")
+        consumer.setInterfaceId("com.hzw.learn.sofa_base.sofa1.HelloService")
                 .setProtocol("bolt")
                 .setProxy("javassist")
                 .setRegistry(registryConfig);
@@ -72,7 +68,7 @@ public class AppSofa2Controller {
         Invoker invoker = invokers.get(serviceNameKey);
 
         SofaRequest sReq = new SofaRequest();
-        sReq.setInterfaceName("com.hzw.learn.sofa1.HelloService");
+        sReq.setInterfaceName("com.hzw.learn.sofa_base.sofa1.HelloService");
         sReq.setMethodName("hello");
         sReq.setMethodArgs(new Object[]{"hello"});
         sReq.setMethodArgSigs(new String[]{"java.lang.String"});
@@ -101,7 +97,7 @@ public class AppSofa2Controller {
     @RequestMapping("/hello3")
     public Object hello3() throws Throwable {
         ConsumerConfig<GenericService> consumer = new ConsumerConfig();
-        consumer.setInterfaceId("com.hzw.learn.sofa1.HelloService")
+        consumer.setInterfaceId("com.hzw.learn.sofa_base.sofa1.HelloService")
                 .setProtocol("bolt")
                 .setGeneric(true)  // 设置范化调用类型
                 .setProxy("javassist")

@@ -1,15 +1,14 @@
-package com.hzw.learn.sofa1;
+package com.hzw.learn.sofa_base.server;
 
+import com.hzw.learn.ext.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryUsage;
-import java.lang.ref.SoftReference;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 
-public class HelloServiceImpl implements HelloService{
+public class HelloServiceImpl implements HelloService {
     static int times=0;
     ArrayList al =  new ArrayList<Byte[]>();
 

@@ -1,4 +1,4 @@
-package com.hzw.learn.sofa1;
+package com.hzw.learn.ext;
 
 public interface HelloService {
     String hello(String mesg);
