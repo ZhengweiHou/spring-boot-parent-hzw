@@ -29,3 +29,5 @@ target/
 .metadata
 
 .vscode/
+
+nohup.out

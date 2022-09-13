@@ -1,6 +1,6 @@
 package com.hzw.learn.springboot.springbase.AOP.PROXY;
 
-import com.hzw.learn.springboot.springbase.AOP.CGLIB.HzwHello$$EnhancerByCGLIB$$b2f16848;
+//import com.hzw.learn.springboot.springbase.AOP.CGLIB.HzwHello$$EnhancerByCGLIB$$b2f16848;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -19,6 +19,7 @@ public class TestProxy {
             正常思路反射获取目标对象，Spring容器中的对象本质上也是这种方式实例化Bean的（当然Proxy提供了更简便的方法来实例对象）
             1. 加载类
             2. 获取构造器对象
+
             3. 通过构造器实例化对象
          */
         Thread.sleep(100000);
