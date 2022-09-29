@@ -81,6 +81,20 @@
 					</overlays>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<port>8080</port>
+					<path>/cas</path>
+<!--					<contextFile>src/main/webapp/META-INF/web.xml</contextFile>-->
+<!--					<contextFile>target/cas-server-web-0.0.1-SNAPSHOT/META-INF/web.xml</contextFile>-->
+					<warFile>target/cas-server-web-0.0.1-SNAPSHOT.war</warFile>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 

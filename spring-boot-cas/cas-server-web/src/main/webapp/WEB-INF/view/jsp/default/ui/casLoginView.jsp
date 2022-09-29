@@ -58,7 +58,7 @@
                     <div class="row fl-controls-left">
                         <label for="captcha" class="fl-label">captcha</label>
                         <form:input cssClass="required" cssErrorClass="error" id="captcha" size="25" tabindex="2" path="captcha"  accesskey="${passwordAccessKey}" htmlEscape="true" autocomplete="off" />
-                        <img onclick="captchaImgChange();" id="captchaImg" src="getCaptcha"/>
+                        <img onclick="captchaImgChange();" id="captchaImg"/>
                     </div>
                     <script>
                         function captchaImgChange() {

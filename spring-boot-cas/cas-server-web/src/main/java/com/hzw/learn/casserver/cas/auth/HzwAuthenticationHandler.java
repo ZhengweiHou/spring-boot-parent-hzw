@@ -23,8 +23,16 @@ public final class HzwAuthenticationHandler extends AbstractPreAndPostProcessing
 
 		Object attribute = request.getSession().getAttribute("captcha");
 		String realCaptcha = attribute == null ? null : attribute.toString().toLowerCase();
-		if (StringUtils.isBlank(requestCaptcha) || !requestCaptcha.toLowerCase().equalsIgnoreCase(realCaptcha)) {
-			throw new BadCredentialsAuthenticationException("验证码错误");
+//		if (StringUtils.isBlank(requestCaptcha) || !requestCaptcha.toLowerCase().equalsIgnoreCase(realCaptcha)) {
+//			throw new BadCredentialsAuthenticationException("验证码错误");
+//		}
+		
+		String username = hzwCredential.getUsername();
+
+		String exceptionStrs = 
+				"warn|error|accountDisabled|mustChangePassword|accountLocked|badHours|badWorkstation|passwordExpired";
+		if(exceptionStrs.contains(username)) {
+			throw new HzwAuthenticationException(username, username, username);
 		}
 
 		return true;		// TODO 用户校验
