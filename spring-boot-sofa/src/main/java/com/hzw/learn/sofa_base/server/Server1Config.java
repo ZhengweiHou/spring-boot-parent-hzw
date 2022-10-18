@@ -1,10 +1,12 @@
 package com.hzw.learn.sofa_base.server;
 
+import com.alipay.sofa.rpc.common.RpcConstants;
 import com.alipay.sofa.rpc.config.ProviderConfig;
 import com.alipay.sofa.rpc.config.RegistryConfig;
 import com.alipay.sofa.rpc.config.ServerConfig;
 import com.hzw.learn.ext.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -77,40 +79,72 @@ public class Server1Config {
     /**
      * sofa 暴露http协议服务
      */
-//    @Bean(name = "httpServerConfig")
-//    public ServerConfig httpServerConfig(){
-//        ServerConfig serverConfig = new ServerConfig();
-//
-//        serverConfig.setPort(9988); // server的区分维度为ip+port，不包括协议类型，应此此处的port需要和其他协议的port分开
-//        serverConfig.setAdaptivePort(true); // 是否自适应端口
-//
-//        System.out.println("vhost:" + env.getProperty("vhost") + " vport:" + env.getProperty("vport"));
-//        Optional.ofNullable(env.getProperty("vhost")).ifPresent(vhost -> serverConfig.setVirtualHost(vhost));
-//        Optional.ofNullable(env.getProperty("vport")).ifPresent(vport -> {
-//            serverConfig.setVirtualPort(Integer.valueOf(vport) + 10);
-//            serverConfig.setPort(Integer.valueOf(vport) + 10);
-//            serverConfig.setAdaptivePort(true);
-//        });
-//        serverConfig.setProtocol(RpcConstants.PROTOCOL_TYPE_HTTP); // 指定http协议
-//        System.out.println(serverConfig.toString());
-//        return serverConfig;
-//    }
-//
-//    @Bean
-//    public ProviderConfig httpHelloServiceExport(@Autowired @Qualifier("httpServerConfig") ServerConfig httpServerConfig){
-//        ProviderConfig<HelloService> providerConfig = new ProviderConfig<>();
-//        providerConfig.setServer(httpServerConfig);
-//        providerConfig.setRegistry(registryConfig());
-//        providerConfig.setInterfaceId(HelloService.class.getName());
-//        providerConfig.setRef(helloService());
-////        providerConfig.setUniqueId("hhh");
-//        System.out.println("==> 导出http服务：" + providerConfig.getInterfaceId());
-//        providerConfig.export();
-//        System.out.print("sofa port:" + providerConfig.getServer().get(0).getPort());
-//        System.out.println(" eg: curl " + httpServerConfig.getBoundHost() + ":" + httpServerConfig.getPort() + "/com.hzw.learn.sofa_base.sofa1.HelloService/hello2");
-//        return providerConfig;
-//    }
+    @Bean(name = "httpServerConfig")
+    public ServerConfig httpServerConfig(){
+        ServerConfig serverConfig = new ServerConfig();
 
+        serverConfig.setPort(9988); // server的区分维度为ip+port，不包括协议类型，应此此处的port需要和其他协议的port分开
+        serverConfig.setAdaptivePort(true); // 是否自适应端口
+
+        System.out.println("vhost:" + env.getProperty("vhost") + " vport:" + env.getProperty("vport"));
+        Optional.ofNullable(env.getProperty("vhost")).ifPresent(vhost -> serverConfig.setVirtualHost(vhost));
+        Optional.ofNullable(env.getProperty("vport")).ifPresent(vport -> {
+            serverConfig.setVirtualPort(Integer.valueOf(vport) + 10);
+            serverConfig.setPort(Integer.valueOf(vport) + 10);
+            serverConfig.setAdaptivePort(true);
+        });
+        serverConfig.setProtocol(RpcConstants.PROTOCOL_TYPE_HTTP); // 指定http协议
+//        serverConfig.setProtocol(RpcConstants.PROTOCOL_TYPE_REST); // 指定http协议
+        System.out.println(serverConfig.toString());
+        return serverConfig;
+    }
+
+    @Bean
+    public ProviderConfig httpHelloServiceExport(@Autowired @Qualifier("httpServerConfig") ServerConfig httpServerConfig){
+        ProviderConfig<HelloService> providerConfig = new ProviderConfig<>();
+        providerConfig.setServer(httpServerConfig);
+        providerConfig.setRegistry(registryConfig());
+        providerConfig.setInterfaceId(HelloService.class.getName());
+        providerConfig.setRef(helloService());
+//        providerConfig.setUniqueId("hhh");
+        System.out.println("==> 导出http服务：" + providerConfig.getInterfaceId());
+        providerConfig.export();
+        System.out.print("sofa port:" + providerConfig.getServer().get(0).getPort());
+        System.out.println(" eg: curl " + httpServerConfig.getBoundHost() + ":" + httpServerConfig.getPort() + "/" + providerConfig.getInterfaceId() + "/hello2");
+        return providerConfig;
+    }
+
+
+    /**
+     * sofa 暴露rest协议服务
+     */
+    @Bean(name = "restServerConfig")
+    public ServerConfig restServerConfig(){
+        ServerConfig serverConfig = new ServerConfig();
+
+        serverConfig.setPort(9989); // server的区分维度为ip+port，不包括协议类型，应此此处的port需要和其他协议的port分开
+        serverConfig.setAdaptivePort(true); // 是否自适应端口
+
+        serverConfig.setProtocol(RpcConstants.PROTOCOL_TYPE_REST); // 指定rest协议
+        System.out.println(serverConfig.toString());
+        return serverConfig;
+    }
+
+    @Bean
+    public ProviderConfig restHelloServiceExport(@Autowired @Qualifier("restServerConfig") ServerConfig restServerConfig){
+        ProviderConfig<HelloService> providerConfig = new ProviderConfig<>();
+        providerConfig.setServer(restServerConfig);
+        providerConfig.setRegistry(registryConfig());
+        providerConfig.setInterfaceId(HelloService.class.getName());
+        providerConfig.setBootstrap("rest");
+        providerConfig.setRef(helloService());
+//        providerConfig.setUniqueId("hhh");
+        System.out.println("==> 导出rest服务：" + providerConfig.getInterfaceId());
+        providerConfig.export();
+        System.out.print("sofa port:" + providerConfig.getServer().get(0).getPort());
+        System.out.println(" eg: curl " + restServerConfig.getBoundHost() + ":" + restServerConfig.getPort() + "/" + providerConfig.getInterfaceId() + "/hello2");
+        return providerConfig;
+    }
 
 
 

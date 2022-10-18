@@ -60,7 +60,7 @@ public class Client1Config {
         consumerConfig.setRegistry(registryConfig());
         consumerConfig.setInterfaceId(HelloService.class.getName());
         consumerConfig.setProviderInfoListener(Sofa2ProviderInfoListener());
-        consumerConfig.setUniqueId("1");
+//        consumerConfig.setUniqueId("1");
 
         /** consumer 的粘滞设置，影响调用时的负载，关键处理代码：{@link com.alipay.sofa.rpc.client.AbstractCluster#select(SofaRequest, List)}*/
         consumerConfig.setSticky(false);

@@ -1,6 +1,7 @@
 package com.hzw.learn.sofa_base.server;
 
 import com.alipay.lookout.api.Registry;
+import com.hzw.learn.ext.HzwRouter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,6 +20,7 @@ public class Server1 {
 //    }
 
     public static void main(String[] args) {
+//        System.out.println(HzwRouter.class.getCanonicalName());
         SpringApplication.run(Server1.class,args);
     }
 

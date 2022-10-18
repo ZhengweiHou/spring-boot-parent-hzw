@@ -20,6 +20,7 @@
        <security:http pattern="/**/*.js"  security="none"/>
        <security:http pattern="/**/*.png" security="none"/>
        <security:http pattern="/**/*.ico" security="none"/>
+       <security:http pattern="/houzw"    security="none"/>
 
        <security:http entry-point-ref="casEntryPoint" use-expressions="true" create-session="always" path-type="ant">
               <security:intercept-url pattern="/**" access="isAuthenticated()"/>
@@ -29,12 +30,14 @@
                              error-if-maximum-exceeded="true"
                              max-sessions="1"/>
               </security:session-management>
-              <security:logout logout-success-url="/j_spring_cas_security_logout"/>
+<!--              <security:logout logout-success-url="/j_spring_cas_security_logout"/>-->
               <security:custom-filter before=  "LOGOUT_FILTER" ref="requestSingleLogoutFilter"/>
               <security:custom-filter before=  "CAS_FILTER"    ref="singleSignOutFilter"/>
               <security:custom-filter position="CAS_FILTER"    ref="casFilter"/>
-<!--              <security:custom-filter position="LAST"        ref=""-->
+              <security:custom-filter position="LAST"        ref="hzwSecurityFilter"/>
        </security:http>
+
+       <bean id="hzwSecurityFilter" class="com.hzw.learn.springboot.cas.client.HzwSecurityFilter"/>
 
        <bean id="casEntryPoint" class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
               <property name="loginUrl" value="http://localhost:8080/cas/login"/>
@@ -74,7 +77,7 @@
        </bean>
 
        <bean id="casTicketValidator" class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
-              <constructor-arg index="0" value="http://localhost:8080/cas_server_web_war"/>
+              <constructor-arg index="0" value="http://localhost:8080/cas"/>
        </bean>
        <bean id="hzwAuthenticationUserDetailsService" class="com.hzw.learn.springboot.cas.client.HzwAuthenticationUserDetailsService"/>
 

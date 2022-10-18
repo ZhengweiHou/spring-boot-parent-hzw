@@ -15,7 +15,7 @@ import java.util.Map;
  **/
 public class AbstractIsolationTestService {
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    public JdbcTemplate jdbcTemplate;
 
     /* CRUD Base */
     public void _insert1(int id, String name) {

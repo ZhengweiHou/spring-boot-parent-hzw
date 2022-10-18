@@ -2,15 +2,8 @@ package com.hzw.learn.sofa_consumer2multiprovider.client;
 
 import com.alipay.sofa.rpc.config.ConsumerConfig;
 import com.alipay.sofa.rpc.config.RegistryConfig;
-import com.hzw.learn.ext.HelloService;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AbstractFactoryBean;
-import org.springframework.beans.factory.support.AbstractBeanFactory;
-import org.springframework.core.ResolvableType;
 
 import java.lang.reflect.Proxy;
 
@@ -30,6 +23,8 @@ public class ConsumerUniqueIdRouteFactory <T> extends AbstractFactoryBean<T> {
     @Autowired
     private RegistryConfig registryConfig;
 
+    private ConsumerConfig<T> baseConsumerConfig;
+
     @Override
     public Class<?> getObjectType() {
         return serviceInterface;
@@ -37,10 +32,18 @@ public class ConsumerUniqueIdRouteFactory <T> extends AbstractFactoryBean<T> {
 
     @Override
     protected T createInstance() throws Exception {
-        ConsumerUniqueIdRouteHandeler cuirHander = new ConsumerUniqueIdRouteHandeler();
+        ConsumerConfig<T> baseConsumerConfig = new ConsumerConfig<T>();
+        baseConsumerConfig.setRegistry(registryConfig);
+        baseConsumerConfig.setInterfaceId(serviceInterface.getName());
+
+        ConsumerUniqueIdRouteHandler cuirHander = new ConsumerUniqueIdRouteHandler();
         cuirHander.setServiceInterface(serviceInterface);
         cuirHander.setRegistryConfig(registryConfig);
         cuirHander.setConsumerRoute(consumerRoute);
+        cuirHander.setBaseConsumerConfig(baseConsumerConfig);
+
+
+
 
         return (T) Proxy.newProxyInstance(
                 serviceInterface.getClassLoader(),

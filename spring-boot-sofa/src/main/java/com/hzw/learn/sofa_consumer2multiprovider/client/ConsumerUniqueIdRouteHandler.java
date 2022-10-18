@@ -19,12 +19,14 @@ import java.util.concurrent.ConcurrentMap;
  * @Date 2022/9/13
  **/
 @Setter
-public class ConsumerUniqueIdRouteHandeler<T> implements InvocationHandler {
+public class ConsumerUniqueIdRouteHandler<T> implements InvocationHandler {
 
     private Class<T> serviceInterface;
     private ConcurrentHashMap<String,T> consumerMap = new ConcurrentHashMap<>();
     private RegistryConfig registryConfig;
     private ConsumerRoute consumerRoute;
+
+    private ConsumerConfig<T> baseConsumerConfig;
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -48,15 +50,22 @@ public class ConsumerUniqueIdRouteHandeler<T> implements InvocationHandler {
         if (consumerMap.get(uniqueId) != null){
             return;
         }
+
         ConsumerConfig<T> uniqueConsumerConfig = new ConsumerConfig<T>();
-        uniqueConsumerConfig.setRegistry(registryConfig);
-        uniqueConsumerConfig.setInterfaceId(serviceInterface.getName());
-        // TODO consumerConfig的其他配置项需提供修改修改入口
-        // uniqueConsumerConfig.setProtocol()
+
+//        BeanUtils.copyProperties(baseConsumerConfig,uniqueConsumerConfig);
+        com.alipay.sofa.rpc.common.utils.BeanUtils.copyProperties(baseConsumerConfig,uniqueConsumerConfig);
+
+//        uniqueConsumerConfig.setRegistry(registryConfig);
+//        uniqueConsumerConfig.setInterfaceId(serviceInterface.getName());
+//        // TODO consumerConfig的其他配置项需提供修改修改入口
+//        // uniqueConsumerConfig.setProtocol()
 
         if (!uniqueId.equals("default")) {
             uniqueConsumerConfig.setUniqueId(uniqueId);
         }
-        consumerMap.put(uniqueId,uniqueConsumerConfig.refer());
+        T consumer = uniqueConsumerConfig.refer();
+
+        consumerMap.put(uniqueId,consumer);
     }
 }
