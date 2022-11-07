@@ -26,4 +26,6 @@
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <bean id="xsslFilter" class="com.hzw.learn.springsecurity.xss.XssFilter"/>
 </beans>

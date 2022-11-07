@@ -3,8 +3,11 @@ package com.hzw.learn.springsecurity.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.HttpServletBean;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,6 +33,18 @@ public class TestController {
 //            <property name="suffix" value=".jsp"/>
 //        </bean>
 //        所以这里viewName只要是hello就定位到/WEB_INF/pages/hello.jsp了
+        mav.setViewName("hello");
+        return mav;
+    }
+
+    // 注入攻击测试，例：http://localhost:8003/test/xssltest?msg=%3CScRiPt%3Ealert(1)%3C/sCrIpT%3E
+    @RequestMapping("xssltest")
+    public ModelAndView xssltest(HttpServletRequest req, HttpServletResponse resp){
+
+        String msg = req.getParameter("msg");
+        System.out.println("msg:" + msg);
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("msg",msg);
         mav.setViewName("hello");
         return mav;
     }
