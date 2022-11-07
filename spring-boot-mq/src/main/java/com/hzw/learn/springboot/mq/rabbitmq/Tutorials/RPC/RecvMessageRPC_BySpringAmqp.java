@@ -1,16 +1,15 @@
-package com.hzw.learn.springboot.mq.rabbitmq.Tutorials.Topic;
+package com.hzw.learn.springboot.mq.rabbitmq.Tutorials.RPC;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-public class RecvMessageTopic_BySpringAmqp {
+public class RecvMessageRPC_BySpringAmqp {
     public static void main(String[] args) throws IOException, TimeoutException {
         String EXCHANGE_NAME = "hzw.Topic_exchange";
 

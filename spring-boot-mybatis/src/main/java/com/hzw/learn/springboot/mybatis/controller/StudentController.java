@@ -1,18 +1,21 @@
 package com.hzw.learn.springboot.mybatis.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hzw.learn.springboot.mybatis.dao.StudentDao;
 import com.hzw.learn.springboot.mybatis.model.Student;
-import com.sun.xml.internal.xsom.impl.scd.Iterators.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("student")
@@ -23,10 +26,14 @@ public class StudentController {
 
 	@ResponseBody
 	@RequestMapping("addRandow")
-	public Student addRandowStudent() {
+	public Student addRandowStudent(HttpServletRequest req) {
+
+		String name = req.getParameter("name");
+
 		String studentId = String.valueOf(UUID.randomUUID().hashCode());
 
-		String name = "RandowStudent" + new Random().nextInt();
+		if (StringUtils.isEmpty(name))
+			name = "RandowStudent" + new Random().nextInt();
 
 		Student student = new Student();
 		student.setStudentId(studentId);
@@ -35,6 +42,7 @@ public class StudentController {
 
 		return result;
 	}
+
 
 	@ResponseBody
 	@RequestMapping("delete/{id}")

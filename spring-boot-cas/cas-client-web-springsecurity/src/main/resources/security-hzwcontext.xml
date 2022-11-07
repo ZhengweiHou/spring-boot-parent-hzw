@@ -16,11 +16,17 @@
        <!-- AspectJ 支持的方法安全 ？？？ -->
        <security:global-method-security pre-post-annotations="enabled" mode="aspectj"/>
 
+
+       <!-- security:http 由AuthenticationConfigBuilder解析 -->
        <!-- 免校验的资源 -->
        <security:http pattern="/**/*.js"  security="none"/>
        <security:http pattern="/**/*.png" security="none"/>
        <security:http pattern="/**/*.ico" security="none"/>
        <security:http pattern="/houzw"    security="none"/>
+
+       <security:authentication-manager alias="authenticationManager">
+              <security:authentication-provider ref="casAuthenticationProvider"/>
+       </security:authentication-manager>
 
        <security:http entry-point-ref="casEntryPoint" use-expressions="true" create-session="always" path-type="ant">
               <security:intercept-url pattern="/**" access="isAuthenticated()"/>
@@ -30,8 +36,10 @@
                              error-if-maximum-exceeded="true"
                              max-sessions="1"/>
               </security:session-management>
-<!--              <security:logout logout-success-url="/j_spring_cas_security_logout"/>-->
-              <security:custom-filter before=  "LOGOUT_FILTER" ref="requestSingleLogoutFilter"/>
+              <!-- 此处就是一个缩写形式，和下行LOGOUT_FILTER配置的是同一个点位 -->
+              <!--<security:logout logout-success-url="/j_spring_cas_security_logout"/>-->
+              <security:custom-filter position="LOGOUT_FILTER" ref="requestLogoutFilter"/>
+              <security:custom-filter after="LOGOUT_FILTER" ref="hzwCasServerSingleLogoutFilter"/>
               <security:custom-filter before=  "CAS_FILTER"    ref="singleSignOutFilter"/>
               <security:custom-filter position="CAS_FILTER"    ref="casFilter"/>
               <security:custom-filter position="LAST"        ref="hzwSecurityFilter"/>
@@ -44,24 +52,26 @@
               <property name="serviceProperties" ref="casServiceProperties"/>
        </bean>
 
-       <bean id="requestSingleLogoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
+       <bean id="requestLogoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
               <constructor-arg value="http://localhost:8080/cas/logout?reloginUrl=http://localhost:8001/client"/>
+<!--              <constructor-arg value="/"/>-->
               <constructor-arg >
                      <bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
               </constructor-arg>
               <property name="filterProcessesUrl" value="/j_spring_cas_security_logout"/>
        </bean>
 
+       <!-- 处理来自casServer的单点登出请求 -->
        <bean id="singleSignOutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter"/>
-
+       <!-- 自定义过滤器，在casserver回调单点登出时添加自定义动作 -->
+       <bean id="hzwCasServerSingleLogoutFilter" class="com.hzw.learn.springboot.cas.client.filter.HzwCasServerSingleLogoutFilter"/>
 
        <!-- casFilter -->
        <bean id="casFilter" class="org.springframework.security.cas.web.CasAuthenticationFilter">
               <property name="authenticationManager" ref="authenticationManager"/>
        </bean>
-       <security:authentication-manager alias="authenticationManager">
-              <security:authentication-provider ref="casAuthenticationProvider"/>
-       </security:authentication-manager>
+
+
 
 
        <bean id="casAuthenticationProvider" class="org.springframework.security.cas.authentication.CasAuthenticationProvider">

@@ -2,6 +2,8 @@ package com.hzw.learn.springboot.mina.client;
 
 import java.util.Scanner;
 
+import com.hzw.learn.springboot.mina.client.config.HzwSocketClientLong;
+import com.hzw.learn.springboot.mina.client.config.ext.HzwIoHandler_long;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -9,17 +11,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
-import com.hzw.learn.springboot.mina.client.config.HzwSocketClientLong;
-import com.hzw.learn.springboot.mina.client.config.HzwSocketClientShort;
-import com.hzw.learn.springboot.mina.client.config.ext.HzwSocketConnectFactory;
-
 @SpringBootApplication
 @ComponentScan(value = { "com.hzw.learn.springboot.mina.client" })
 public class ClientApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext appContext = SpringApplication.run(ClientApplication.class, args);
-
 		//===================1111111111=========
 		HzwSocketClientLong client = appContext.getBean(HzwSocketClientLong.class);
 		client.showPoolConfig();

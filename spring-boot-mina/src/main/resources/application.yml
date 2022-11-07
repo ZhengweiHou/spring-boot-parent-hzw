@@ -1,1 +1,1 @@
-server:  port: 8080spring:   application:    name: spring-boot-mina-hzw    hzwmina:  hostName: localhost#  hostName: 10.252.12.33#  hostName: 192.168.32.101  port: 8500  connectTimeoutInMillis: 30000  bothIdleTime: 10  maxActive: 5  maxIdle: 3  minIdle: 1
+server:  port: 7777spring:   application:    name: spring-boot-mina-hzw    hzwmina:  hostName: localhost#  hostName: 10.252.12.33#  hostName: 192.168.32.101  port: 8500  connectTimeoutInMillis: 30000  bothIdleTime: 10  maxActive: 5  maxIdle: 3  minIdle: 1

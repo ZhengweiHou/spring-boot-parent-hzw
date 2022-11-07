@@ -28,7 +28,13 @@
 	
 	<insert id="insert" parameterType="com.hzw.learn.springboot.mybatis.model.Student" useGeneratedKeys="true" keyProperty="id" >
 		insert into student ( <include refid="STUDENT_INSERT_FIELD" /> )
-		values ( #{studentId,jdbcType=VARCHAR }, #{name,jdbcType=VARCHAR } )
+		values (
+		#{studentId,jdbcType=VARCHAR },
+		#{name}
+<!--		#{name,jdbcType=VARCHAR }-->
+<!--		'%#{name,jdbcType=VARCHAR }%'-->
+		<!--${name}-->   <!-- XSS测试 -->
+		)
 	</insert>
 	
 	<update id="updateNotNullByPrimaryKey" parameterType="com.hzw.learn.springboot.mybatis.model.Student">

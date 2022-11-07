@@ -1,19 +1,20 @@
-package com.hzw.learn.springboot.mq.rabbitmq.Tutorials.Topic;
+package com.hzw.learn.springboot.mq.rabbitmq.Tutorials.RPC;
 
-import com.rabbitmq.client.MessageProperties;
 import com.rabbitmq.client.ShutdownSignalException;
+import org.springframework.amqp.AmqpException;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.Connection;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 import java.util.Scanner;
 
-public class EmitMessageTopic_BySpringAmqp {
+public class EmitMessageRpc_BySpringAmqp {
 	public static void main(String[] args) throws Exception {
 
-		String EXCHANGE_NAME="hzw.Topic_exchange";
+		String QUEUE_NAME="hzw.RPC_byspringamqp_queue";
 
 		CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
 //		connectionFactory.setAddresses("localhost:5672");
@@ -56,7 +57,13 @@ public class EmitMessageTopic_BySpringAmqp {
 							:
 							"default message!!";
 			message+=++count;
-			mqTemplate.convertSendAndReceive(EXCHANGE_NAME,routingKey,message);
+
+			Object responseMsg = mqTemplate.convertSendAndReceive(QUEUE_NAME, (Object) new String(message), new MessagePostProcessor() {
+				@Override
+				public Message postProcessMessage(Message message) throws AmqpException {
+					return message;
+				}
+			});
 //			mqTemplate.convertAndSend(EXCHANGE_NAME,routingKey,message);
 			System.out.println("[x] rout:["+routingKey+"] sent:" + message);
 		}

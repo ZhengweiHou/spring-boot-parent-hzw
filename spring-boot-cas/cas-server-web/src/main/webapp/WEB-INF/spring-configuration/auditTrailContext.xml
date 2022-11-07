@@ -45,6 +45,7 @@
     <constructor-arg index="2">
       <list>
         <ref bean="auditTrailManager" />
+<!--        <ref bean="hzwTrailManager"/>-->
       </list>
     </constructor-arg>
 

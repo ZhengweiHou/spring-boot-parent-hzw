@@ -56,8 +56,10 @@ public class AuditLogInterceptorNew implements Interceptor {
 		List<ParameterMapping> parameterMappings = mappedStatement.getBoundSql(obj).getParameterMappings();
 
 		SqlCommandType commandType = mappedStatement.getSqlCommandType();
-		logger.info("记录审计日志,操作类型[{}],参数类型:[{}],目标sql定义位置[{}],目标sql:[\n{}\n]", commandType,
-				null == obj ? "null" : obj.getClass().getName(), mappedStatement.getSqlSource(),
+		logger.info("记录审计日志,操作类型[{}],参数类型:[{}],目标sql定义位置[{}],目标sql:[\n{}\n]",
+				commandType,
+				null == obj ? "null" : obj.getClass().getName(),
+				mappedStatement.getSqlSource(),
 				mappedStatement.getBoundSql(obj).getSql());
 
 		switch (commandType) {

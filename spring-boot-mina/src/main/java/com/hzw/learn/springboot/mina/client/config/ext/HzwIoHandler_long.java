@@ -12,12 +12,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class HzwIoHandler_long extends IoHandlerAdapter {
-	
+
 	private Logger log = LoggerFactory.getLogger("HANDLER");
-	
+
 	@Autowired
 	private ConfigurableApplicationContext applications;
-	
+
 	@Override
 	public void sessionCreated(IoSession session) throws Exception {
 //		log.info("会话已创建：CsessionId:{} Handler对象的HashCode:{}", session.getId(), this.hashCode());
@@ -73,22 +73,22 @@ public class HzwIoHandler_long extends IoHandlerAdapter {
 	public void inputClosed(IoSession session) throws Exception {
 //		log.info("半双工TCP通道已关闭：CsessionId:{}", session.getId());
 		this.log(session);
-		
+
 		// 连接不可用时从连接池中弃用
-		GenericObjectPool pool = applications.getBean(GenericObjectPool.class);
-		pool.invalidateObject(session); // 该动作会触发连接工厂的destroyObject()方法，可复写该方法来关闭对应session
+//		GenericObjectPool pool = applications.getBean(GenericObjectPool.class);
+//		pool.invalidateObject(session); // 该动作会触发连接工厂的destroyObject()方法，可复写该方法来关闭对应session
 	}
-	
+
 	private void seadHeartBeat(IoSession session) {
 		this.log(session);
 		session.write("5000==发送心跳......");
 	}
-	
+
 	private void log(IoSession session) {
 		log.info("+ {}  sessionId:{}",
 				Thread.currentThread().getStackTrace()[2].getMethodName(),
 				session.getId()
-				);
+		);
 	}
-	
+
 }

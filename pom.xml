@@ -34,7 +34,7 @@
   <modules>
     <module>spring-boot-mybatis</module>
     <module>spring-boot-consul</module>
-    <module>spring-boot-batch</module>
+    <!--    <module>spring-boot-batch</module> -->
 <!--    <module>spring-boot-logback</module>-->
     <module>spring-boot-javabase</module>
     <module>spring-boot-springbootbase</module>
@@ -44,7 +44,7 @@
     <module>spring-boot-mq</module>
 <!--    <module>spring-boot-drools</module> -->
     <module>spring-boot-springbase</module>
-      <module>spring-boot-dubbo</module>
+    <!--      <module>spring-boot-dubbo</module> -->
     <module>spring-boot-cas</module>
 <!--      <module>spring-boot-sofa</module>-->
   </modules>

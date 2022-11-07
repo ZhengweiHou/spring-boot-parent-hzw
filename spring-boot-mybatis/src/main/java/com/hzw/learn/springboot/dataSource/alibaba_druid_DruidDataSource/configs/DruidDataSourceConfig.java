@@ -14,7 +14,8 @@ public class DruidDataSourceConfig {
     public DruidDataSource configDruidDataSource(){
         DruidDataSource ds = new DruidDataSource();
 
-        ds.setDriverClassName("com.mysql.jdbc.Driver");
+//        ds.setDriverClassName("com.mysql.jdbc.Driver");
+        ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
         ds.setUrl("jdbc:mysql://127.0.0.1:3306/hzwlearn");
         ds.setUsername("root");
         ds.setPassword("root");

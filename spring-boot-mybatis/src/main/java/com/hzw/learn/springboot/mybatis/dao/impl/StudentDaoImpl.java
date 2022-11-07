@@ -1,6 +1,7 @@
 package com.hzw.learn.springboot.mybatis.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import com.hzw.learn.springboot.mybatis.dao.StudentDao;
 import com.hzw.learn.springboot.mybatis.model.Student;
 import com.hzw.learn.springboot.mybatis.plugins.QueryInterceptor;
-import com.sun.xml.internal.xsom.impl.scd.Iterators.Map;
 
 @Repository("studentDao")
 public class StudentDaoImpl implements StudentDao {

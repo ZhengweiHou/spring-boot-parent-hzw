@@ -14,7 +14,8 @@ public class BasicDataSourceConfig {
     public BasicDataSource configBasicDataSource(){
         BasicDataSource ds = new BasicDataSource();
 
-        ds.setDriverClassName("com.mysql.jdbc.Driver");
+//        ds.setDriverClassName("com.mysql.jdbc.Driver");
+        ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
         ds.setUrl("jdbc:mysql://127.0.0.1:3306/hzwlearn");
         ds.setUsername("root");
         ds.setPassword("root");

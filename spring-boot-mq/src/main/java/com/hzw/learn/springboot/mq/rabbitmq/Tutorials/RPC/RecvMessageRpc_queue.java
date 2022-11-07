@@ -16,14 +16,14 @@ public class RecvMessageRpc_queue {
 		
 		 ConnectionFactory connectionFactory = new ConnectionFactory();
 //		 	connectionFactory.setHost("192.168.32.131");
-////			connectionFactory.setVirtualHost("test");
-////			connectionFactory.setVirtualHost("/");
-//			connectionFactory.setUsername("admin");
-//			connectionFactory.setPassword("admin");
+			connectionFactory.setVirtualHost("test");
+//			connectionFactory.setVirtualHost("/");
+			connectionFactory.setUsername("admin");
+			connectionFactory.setPassword("admin");
 			connectionFactory.setHost("localhost");
-			connectionFactory.setVirtualHost("/dev");
-			connectionFactory.setUsername("guest");
-			connectionFactory.setPassword("guest");
+//			connectionFactory.setVirtualHost("/dev");
+//			connectionFactory.setUsername("guest");
+//			connectionFactory.setPassword("guest");
 	        Connection connection = connectionFactory.newConnection();
 	        Channel channel = connection.createChannel();
 	        
