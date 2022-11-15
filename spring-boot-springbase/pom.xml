@@ -2,14 +2,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.hzw.learn</groupId>
-        <artifactId>spring-boot-parent-hzw</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-    </parent>
+    <groupId>com.hzw.learn</groupId>
     <artifactId>spring-boot-springbase</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <druid.version>1.1.23</druid.version>
         <mysql.version>5.1.6</mysql.version>
         <springframework.version>5.1.6.RELEASE</springframework.version>
@@ -89,6 +88,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+            <version>4.12</version>
 		</dependency>
 
 
