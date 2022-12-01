@@ -20,7 +20,7 @@ public class SofaRegistryClient {
         RegistryConfig registryConfig = new RegistryConfig()
 //                .setProtocol(RpcConstants.REGISTRY_PROTOCOL_SOFA)
                 .setProtocol("nacos")
-                .setAddress("127.0.0.1:8848");
+                .setAddress("127.0.0.1:8848/test");
 
         ConsumerConfig<HelloService> consumerConfig = new ConsumerConfig<HelloService>()
                 .setInterfaceId(HelloService.class.getName())

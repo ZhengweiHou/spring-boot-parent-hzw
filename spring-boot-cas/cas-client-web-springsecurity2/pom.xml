@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hzw.learn</groupId>
+    <artifactId>cas-client-web-springsecurity2</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>hzw cas 客户端案例2(spring security 集成)</name>
+    <packaging>war</packaging>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-cas</artifactId>
+            <version>3.2.0.RELEASE</version>
+        </dependency>
+<!--        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>3.2.0.RELEASE</version>
+        </dependency>-->
+
+<!--        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>3.2.0.RELEASE</version>
+        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>3.2.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-aspects</artifactId>
+            <version>3.2.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.9.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>3.2.0.RELEASE</version>
+        </dependency>
+              <!--
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>3.2.0.RELEASE</version>
+        </dependency>-->
+<!--        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>3.2.0.RELEASE</version>
+        </dependency>-->
+       <!-- <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>3.2.0.RELEASE</version>
+        </dependency>-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>3.2.0.RELEASE</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+    <plugins>
+    <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+            <port>8002</port>
+            <path>/client</path>
+            <contextFile>src/main/webapp/WEB-INF/web.xml</contextFile>
+<!--            <warFile>target/cas-client-web-springsecurity-0.0.1-SNAPSHOT.war</warFile>-->
+        </configuration>
+    </plugin>
+    </plugins>
+    </build>
+</project>

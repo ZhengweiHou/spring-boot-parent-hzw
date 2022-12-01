@@ -11,13 +11,13 @@ import org.springframework.core.env.Environment;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
+import java.net.InetAddress;
 import java.util.Optional;
 
 @Configuration
 public class Server2Config {
     @Autowired
     Environment env;
-
     @Bean
     public String jvmProcessID() {
         RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();

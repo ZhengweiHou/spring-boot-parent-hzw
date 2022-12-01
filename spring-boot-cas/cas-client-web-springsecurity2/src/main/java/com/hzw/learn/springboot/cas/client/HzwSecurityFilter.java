@@ -1,7 +1,5 @@
 package com.hzw.learn.springboot.cas.client;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
@@ -20,9 +18,6 @@ public class HzwSecurityFilter extends GenericFilterBean {
 
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         System.out.println("====" + this.getClass().getSimpleName());
-
-
-        Authentication h = SecurityContextHolder.getContext().getAuthentication();
         filterChain.doFilter(servletRequest,servletResponse);
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,9 +40,11 @@ public class TestController {
 
     // 注入攻击测试，例：http://localhost:8003/test/xssltest?msg=%3CScRiPt%3Ealert(1)%3C/sCrIpT%3E
     @RequestMapping("xssltest")
-    public ModelAndView xssltest(HttpServletRequest req, HttpServletResponse resp){
+    public ModelAndView xssltest(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
 
         String msg = req.getParameter("msg");
+        String ch = req.getCharacterEncoding();
+        msg = new String(msg.getBytes("ISO-8859-1"),"UTF-8");
         System.out.println("msg:" + msg);
         ModelAndView mav = new ModelAndView();
         mav.addObject("msg",msg);
