@@ -43,6 +43,13 @@
             <version>1.4.1</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-spring-context</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -154,8 +161,8 @@
                         <manifest>
 <!--                            <addClasspath>true</addClasspath>-->
 <!--                            <classpathPrefix>hzwlib</classpathPrefix>-->
-                            <!--<mainClass>com.hzw.learn.sofa_base.server.Server1</mainClass>-->
-                            <mainClass>com.hzw.learn.sofa_consumer2multiprovider.server.Server2</mainClass>
+                            <mainClass>com.hzw.learn.sofa_base.server.Server1</mainClass>
+<!--                            <mainClass>com.hzw.learn.sofa_consumer2multiprovider.server.Server2</mainClass>-->
 <!--                            <mainClass>com.hzw.learn.sofa_base.client.Client1</mainClass>-->
                             <useUniqueVersions>false</useUniqueVersions>
                         </manifest>

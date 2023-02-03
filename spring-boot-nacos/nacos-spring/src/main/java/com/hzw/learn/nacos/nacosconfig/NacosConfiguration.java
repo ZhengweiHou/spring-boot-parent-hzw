@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 // nacos地址可以通过-D方式指定，如：-Dnacos.server-addr=127.0.0.1:8148 -Dnacos.namespace=test
-@EnableNacosConfig(globalProperties = @NacosProperties(serverAddr = "127.0.0.1:8848",namespace = "test"))
+@EnableNacosConfig(globalProperties = @NacosProperties(serverAddr = "127.0.0.1:8148",namespace = "test"))
 @NacosPropertySource(dataId = "test",groupId = "test",autoRefreshed = true)
 public class NacosConfiguration {
 //    @Bean
