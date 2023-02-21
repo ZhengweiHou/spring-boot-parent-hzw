@@ -1,8 +1,5 @@
 package com.hzw.learn.sofa_base.server;
 
-import com.alibaba.nacos.api.annotation.NacosProperties;
-import com.alibaba.nacos.spring.context.annotation.config.EnableNacosConfig;
-import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
 import com.alipay.sofa.rpc.common.RpcConstants;
 import com.alipay.sofa.rpc.config.ProviderConfig;
 import com.alipay.sofa.rpc.config.RegistryConfig;
@@ -19,8 +16,6 @@ import java.lang.management.RuntimeMXBean;
 import java.util.Optional;
 
 @Configuration
-//@EnableNacosConfig(globalProperties = @NacosProperties(serverAddr = "127.0.0.1:8148",namespace = "test"))
-//@NacosPropertySource(dataId = "test",groupId = "test",autoRefreshed = true)
 public class Server1Config {
     @Autowired
     Environment env;

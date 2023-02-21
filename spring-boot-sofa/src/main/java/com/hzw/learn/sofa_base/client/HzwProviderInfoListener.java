@@ -34,9 +34,9 @@ public class HzwProviderInfoListener implements com.alipay.sofa.rpc.listener.Pro
 
     @Override
     public void addProvider(ProviderGroup providerGroup) {
-        logger.info("==addProvider:" + providerGroup.getName());
+        logger.info("==addProvider: group{} size:{}", providerGroup.getName(), providerGroup.getProviderInfos().size());
         for (ProviderInfo providerInfo : providerGroup.getProviderInfos()) {
-            logger.debug(new Gson().toJson(providerInfo));
+            showProviderInfo(providerInfo);
             ps.put(providerInfo.getHost() + ":" + providerInfo.getPort(), providerInfo);
         }
         if (countDownLatch != null) {
@@ -46,9 +46,9 @@ public class HzwProviderInfoListener implements com.alipay.sofa.rpc.listener.Pro
 
     @Override
     public void removeProvider(ProviderGroup providerGroup) {
-        logger.info("==removeProvider:" + providerGroup.getName());
+        logger.info("==removeProvider: group{} size:{}", providerGroup.getName(), providerGroup.getProviderInfos().size());
         for (ProviderInfo providerInfo : providerGroup.getProviderInfos()) {
-            logger.debug(new Gson().toJson(providerInfo));
+            showProviderInfo(providerInfo);
             ps.remove(providerInfo.getHost() + ":" + providerInfo.getPort());
         }
         if (countDownLatch != null) {
@@ -58,10 +58,10 @@ public class HzwProviderInfoListener implements com.alipay.sofa.rpc.listener.Pro
 
     @Override
     public void updateProviders(ProviderGroup providerGroup) {
-        logger.info("==updateProviders:" + providerGroup.getName());
+        logger.info("==updateProviders group{} size:{}", providerGroup.getName(), providerGroup.getProviderInfos().size());
         ps.clear();
         for (ProviderInfo providerInfo : providerGroup.getProviderInfos()) {
-            logger.debug(new Gson().toJson(providerInfo));
+            showProviderInfo(providerInfo);
             ps.put(providerInfo.getHost() + ":" + providerInfo.getPort(), providerInfo);
         }
         if (countDownLatch != null) {
@@ -73,17 +73,28 @@ public class HzwProviderInfoListener implements com.alipay.sofa.rpc.listener.Pro
     public void updateAllProviders(List<ProviderGroup> providerGroups) {
 
         logger.info("==updateAllProviders:" +
-                providerGroups.stream().map(pg -> pg.getName()).collect(Collectors.toList()).toString());
+                providerGroups.stream().map(pg -> pg.getName() + ":" + pg.getProviderInfos().size() + ",").collect(Collectors.toList()).toString());
         ps.clear();
         for (ProviderGroup providerGroup : providerGroups) {
             for (ProviderInfo providerInfo : providerGroup.getProviderInfos()) {
-                logger.debug(new Gson().toJson(providerInfo));
+                showProviderInfo(providerInfo);
                 ps.put(providerInfo.getHost() + ":" + providerInfo.getPort(), providerInfo);
             }
         }
         if (countDownLatch != null) {
             countDownLatch.countDown();
         }
+    }
+
+    private void showProviderInfo(ProviderInfo providerInfo){
+
+//        logger.debug(new Gson().toJson(providerInfo));
+        logger.debug(
+                "{}-{}:{}",
+                providerInfo.getStaticAttrs().get("interface"),
+                providerInfo.getHost(),
+                providerInfo.getPort()
+        );
     }
 
     /**

@@ -18,8 +18,10 @@ public class HelloServiceImpl implements HelloService {
     @Override
     public String hello(String mesg) {
         System.out.println("Provider[" + jvmProcessID + "]接收消息：" + mesg);
-
-        showJVMInfo();
+        if(times % 10 == 0){
+            System.out.println("---------times:" + times + "-------");
+        }
+//        showJVMInfo();
         times++;
 //        al.add(new SoftReference(new byte[1 * 1024 * 1024])); // 弱引用占住内存
         return "Provider[" + jvmProcessID + "]-" + times;
