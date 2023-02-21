@@ -15,7 +15,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <spring-boot.bersion>2.1.13.RELEASE</spring-boot.bersion>
-        <shiro.version>1.8.0</shiro.version>
+        <shiro.version>1.10.0</shiro.version>
     </properties>
 
     <dependencies>
