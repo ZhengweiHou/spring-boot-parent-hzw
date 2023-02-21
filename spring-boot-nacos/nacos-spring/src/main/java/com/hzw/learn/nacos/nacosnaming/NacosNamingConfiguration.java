@@ -7,7 +7,7 @@ import com.alibaba.nacos.spring.context.annotation.discovery.EnableNacosDiscover
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableNacosDiscovery(globalProperties = @NacosProperties(serverAddr = "127.0.0.1:8848",namespace = "test"))
+@EnableNacosDiscovery(globalProperties = @NacosProperties(serverAddr = "127.0.0.1:8148",namespace = "test"))
 public class NacosNamingConfiguration {
 
 }

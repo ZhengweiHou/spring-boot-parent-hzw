@@ -1,6 +1,7 @@
 package com.hzw.learn.nacos.nacosconfig;
 
 import com.alibaba.nacos.api.config.annotation.NacosValue;
+import com.alibaba.nacos.spring.context.event.config.NacosConfigReceivedEvent;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Service;
@@ -13,15 +14,22 @@ import java.util.Date;
 public class ConfigService implements ApplicationListener {
 
 
-    @NacosValue(value = "${aa:xx}", autoRefreshed = true)
-    private String aa;
-    @NacosValue(value = "${bb:xx}", autoRefreshed = true)
-    private String bb;
+    @NacosValue(value = "${a:xx}", autoRefreshed = true)
+    private String a;
+    @NacosValue(value = "${b:xx}", autoRefreshed = true)
+    private String b;
 
     @Override
     public void onApplicationEvent(ApplicationEvent applicationEvent) {
+        if(applicationEvent instanceof NacosConfigReceivedEvent){
+            NacosConfigReceivedEvent even = (NacosConfigReceivedEvent) applicationEvent;
+            System.out.println(
+                    Thread.currentThread().getName()+ ":"
+                            + even.getClass().getSimpleName()
+                            + " dataid:" + even.getDataId()
+                            + " a=" + a + " b=" + b);
 
-        System.out.println(Thread.currentThread().getId() + ":" + applicationEvent.getClass().getSimpleName() + ":" + aa + ":" + bb);
+        }
 
     }
 
@@ -35,7 +43,7 @@ public class ConfigService implements ApplicationListener {
     }
 
     private void showab(){
-        System.out.println("PostConstruct:" + this.aa + ":" + this.bb);
+        System.out.println("PostConstruct:" + this.a + ":" + this.b);
     }
 
 

@@ -50,6 +50,8 @@ public class TestNamingService implements ApplicationListener {
         try {
             // 注册服务
             namingService.registerInstance("houzw","127.0.0.1",port++);
+//            namingService.registerInstance("com.hzw.learn.ext.HelloService:DEFAULT","127.0.0.1",port++);
+
             System.out.println(
                 new Gson().toJson(
                     namingService.getAllInstances("houzw")
