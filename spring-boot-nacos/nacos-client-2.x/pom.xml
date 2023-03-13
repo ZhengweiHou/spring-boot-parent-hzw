@@ -75,7 +75,7 @@
                         <manifest>
                             <!--                            <addClasspath>true</addClasspath>-->
                             <!--                            <classpathPrefix>hzwlib</classpathPrefix>-->
-                            <mainClass>com.hzw.learn.nacos.nacosconfig.AppNacosConfig</mainClass>
+                            <mainClass>com.hzw.learn.nacos.NacosMain</mainClass>
                             <useUniqueVersions>false</useUniqueVersions>
                         </manifest>
                     </archive>

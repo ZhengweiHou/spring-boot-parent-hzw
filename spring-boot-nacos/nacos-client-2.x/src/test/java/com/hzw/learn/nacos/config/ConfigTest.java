@@ -31,6 +31,9 @@ public class ConfigTest {
         Properties properties = new Properties();
         properties.put("serverAddr", serverAddr);
         properties.put("namespace", namespace);
+        // nacos 服务开启权限验证后需要提供用户名和密码
+        properties.put("username","nacos");
+        properties.put("password","nacos");
         configService = NacosFactory.createConfigService(properties);
     }
 

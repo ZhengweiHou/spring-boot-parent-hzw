@@ -31,6 +31,9 @@ public class ConfigTest {
         Properties properties = new Properties();
         properties.put("serverAddr", serverAddr);
         properties.put("namespace", namespace);
+        // nacos 服务开启权限验证后需要提供用户名和密码
+        properties.put("username","nacos");
+        properties.put("password","nacos");
         configService = NacosFactory.createConfigService(properties);
     }
 
@@ -61,7 +64,10 @@ public class ConfigTest {
 
     @Test
     public void publishConfigTest() throws NacosException {
-        boolean isPublishOk = configService.publishConfig(dataId, group, "a: a\nb: b");
+        String content = configService.getConfig(dataId, group, 5000);
+        content.substring(0,content.indexOf("time"));
+        content += "time: " + System.currentTimeMillis();
+        boolean isPublishOk = configService.publishConfig(dataId, group, content);
         System.out.println(isPublishOk);
     }
 
