@@ -13,7 +13,7 @@ public class HelloServiceImpl implements HelloService {
     ArrayList al =  new ArrayList<Byte[]>();
 
     @Autowired
-    private String jvmProcessID;
+    public String jvmProcessID;
 
     @Override
     public String hello(String mesg) {

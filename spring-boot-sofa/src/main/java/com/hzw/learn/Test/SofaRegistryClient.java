@@ -6,6 +6,9 @@ import com.alipay.sofa.rpc.config.RegistryConfig;
 import com.alipay.sofa.rpc.context.RpcRuntimeContext;
 import com.hzw.learn.ext.HelloService;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
+
 /**
  * @ClassName SofaRegistryServer
  * @Description TODO
@@ -15,12 +18,21 @@ import com.hzw.learn.ext.HelloService;
 public class SofaRegistryClient {
     public static void main(String[] args) {
 
-        System.out.println("strarting....");
+//        String nacosaddress = "127.0.0.1:8848/test";
+        String nacosaddress = "127.0.0.1:8148,127.0.0.1:8248,127.0.0.1:8348/test";
+        if (args.length > 0){
+            nacosaddress = args[0];
+        }
+
+        String processId = getProcessId();
+
+        System.out.println("nacosaddress:"+nacosaddress+"  processId:"+processId+"  client strarting....");
 
         RegistryConfig registryConfig = new RegistryConfig()
 //                .setProtocol(RpcConstants.REGISTRY_PROTOCOL_SOFA)
                 .setProtocol("nacos")
-                .setAddress("127.0.0.1:8848/test");
+//                .setAddress("127.0.0.1:8848/test");
+                .setAddress(nacosaddress);
 
         ConsumerConfig<HelloService> consumerConfig = new ConsumerConfig<HelloService>()
                 .setInterfaceId(HelloService.class.getName())
@@ -32,10 +44,11 @@ public class SofaRegistryClient {
 //        LOGGER.warn("started at pid {}", RpcRuntimeContext.PID);
         System.out.println("started at pid " + RpcRuntimeContext.PID);
 
+        int times = 0;
         try {
             while (true) {
                 try {
-                    System.out.println(helloService.hello("world"));
+                    System.out.println(helloService.hello("I'm client:[" + processId +"]="+ ++times));
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -47,6 +60,12 @@ public class SofaRegistryClient {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public static String getProcessId(){
+        RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
+        System.out.println(runtimeMXBean.getName());
+        return runtimeMXBean.getName().split("@")[0];
     }
 
 }
