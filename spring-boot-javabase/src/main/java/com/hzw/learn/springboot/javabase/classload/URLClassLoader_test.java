@@ -1,5 +1,11 @@
 package com.hzw.learn.springboot.javabase.classload;
 
+import com.google.gson.Gson;
+import com.sun.org.apache.bcel.internal.util.ClassLoader;
+import org.junit.Test;
+
+import java.io.File;
+import java.lang.annotation.Annotation;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -26,6 +32,17 @@ public class URLClassLoader_test {
 		
 		// 运行TankRun.jar中的坦克游戏
 		urlLoader.loadClass("MyTankGame1_12.MyTankGameFrame").newInstance();
+	}
+
+	@Test
+	public void test2() throws Exception {
+		URLClassLoader classLoader = new URLClassLoader(
+				new URL[]{new File("/home/houzw/document/git-rep/HOUZW/spring-boot-parent-hzw/spring-boot-sofa/target/spring-boot-sofa-0.0.1-SNAPSHOT.jar").toURI().toURL()}
+		);
+		Class<?> clazz ;
+		clazz = classLoader.loadClass("com.hzw.learn.sofa_base.client.Client1");
+		Annotation[] a = clazz.getAnnotations();
+		Arrays.stream(a).forEach(an -> System.out.println(an.toString()));
 	}
 }
 

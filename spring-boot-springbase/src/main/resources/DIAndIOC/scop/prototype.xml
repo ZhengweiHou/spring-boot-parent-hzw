@@ -15,6 +15,35 @@
     <bean id="bBean1" scope="prototype" class="com.hzw.learn.springboot.springbase.DIAndIOC.scop.BBean"/>   <!-- 原型模式的bBean0 -->
     <!-- 原型模式的aBean，每次get aBean时都是一个新的对象; 每次获取aBean注入的bBean1都是不同的对象 -->
     <bean id="aBean1" scope="prototype" class="com.hzw.learn.springboot.springbase.DIAndIOC.scop.ABean" p:bBean-ref="bBean1"/>
+
+    <bean id="listBeans" class="java.util.ArrayList" scope="prototype"> <!-- 原型模式 -->
+        <constructor-arg>
+            <list>
+                <!-- 此处的bean也将是原型模式 -->
+                <bean class="com.hzw.learn.springboot.springbase.DIAndIOC.scop.ABean" p:bBean-ref="bBean0"/> <!-- 此处的bBean0将保持单例模式 -->
+                <bean class="com.hzw.learn.springboot.springbase.DIAndIOC.scop.BBean"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!-- listBeans_1 和 listBeans_2内部<bean>标签定义的对象,不会是同一个 -->
+    <bean id="listBeans_1" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <bean class="com.hzw.learn.springboot.springbase.DIAndIOC.scop.ABean" p:bBean-ref="bBean0"/>
+                <bean class="com.hzw.learn.springboot.springbase.DIAndIOC.scop.BBean"/>
+            </list>
+        </constructor-arg>
+    </bean>
+    <bean id="listBeans_2" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <bean class="com.hzw.learn.springboot.springbase.DIAndIOC.scop.ABean" p:bBean-ref="bBean0"/>
+                <bean class="com.hzw.learn.springboot.springbase.DIAndIOC.scop.BBean"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
 </beans>
 
 

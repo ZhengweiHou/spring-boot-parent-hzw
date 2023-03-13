@@ -14,8 +14,6 @@ import java.util.Map;
  **/
 public interface IPropagationTestService {
 
-
-
     public int tx1();
     public int tx2();
     public int tx3();

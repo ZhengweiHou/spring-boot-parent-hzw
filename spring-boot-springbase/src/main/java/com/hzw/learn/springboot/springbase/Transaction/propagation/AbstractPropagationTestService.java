@@ -2,6 +2,7 @@ package com.hzw.learn.springboot.springbase.Transaction.propagation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.List;
@@ -19,6 +20,12 @@ public class AbstractPropagationTestService {
 
     /* CRUD Base */
     public void _insert1(int id, String name) {
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+            @Override
+            public void afterCommit() {
+                super.afterCommit();
+            }
+        });
         System.out.println("INSERT INTO test (id, name) VALUES (" + id + ", '" + name + "');");
         jdbcTemplate.update("INSERT INTO test (id, name) VALUES (" + id + ", '" + name + "');");
     }
