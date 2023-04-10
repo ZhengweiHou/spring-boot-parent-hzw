@@ -72,8 +72,9 @@ public class HzwIoHandler_long extends IoHandlerAdapter {
 	@Override
 	public void inputClosed(IoSession session) throws Exception {
 //		log.info("半双工TCP通道已关闭：CsessionId:{}", session.getId());
-		this.log(session);
-
+//		this.log(session);
+//
+//		session.closeOnFlush();
 		// 连接不可用时从连接池中弃用
 //		GenericObjectPool pool = applications.getBean(GenericObjectPool.class);
 //		pool.invalidateObject(session); // 该动作会触发连接工厂的destroyObject()方法，可复写该方法来关闭对应session

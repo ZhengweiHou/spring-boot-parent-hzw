@@ -73,10 +73,13 @@ public class HzwIoHandler_short extends IoHandlerAdapter {
 	public void inputClosed(IoSession session) throws Exception {
 //		log.info("半双工TCP通道已关闭：CsessionId:{}", session.getId());
 		this.log(session);
+		System.out.println("hahah");
+		// 对方关闭了
+//		session.closeNow();
 	}
 	
 	private void log(IoSession session) {
-		log.info("{}  sessionId:{}",
+		log.info("{}  =sessionId:{}",
 				Thread.currentThread().getStackTrace()[2].getMethodName(),
 				session.getId()
 				);

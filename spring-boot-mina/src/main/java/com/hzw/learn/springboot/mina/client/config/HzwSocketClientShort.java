@@ -32,7 +32,7 @@ public class HzwSocketClientShort {
 		String result = (String) session.getAttribute("message");
 		return result;
 	}
-	
+
 	public NioSocketConnector getConnector() {
 		return connector;
 	}

@@ -6,6 +6,7 @@ import java.net.InetSocketAddress;
 import org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.serialization.ObjectSerializationCodecFactory;
+import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.SocketAcceptor;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 import org.slf4j.Logger;
@@ -39,9 +40,11 @@ public class MainLongServer {
         		new ProtocolCodecFilter(     
         				new ObjectSerializationCodecFactory()
         		)
-        );     
+        );
+        chain.addLast("logfilter", new LoggingFilter("xxxhouzw"));
         acceptor.setHandler(ServerHandler.getInstances());
         acceptor.getSessionConfig().setReadBufferSize(2048);
+        acceptor.getSessionConfig().setBothIdleTime(10);
         try {
         	InetSocketAddress socketAddress = new InetSocketAddress(bindPort);
 //        	InetSocketAddress socketAddress = new InetSocketAddress("localhost", bindPort);

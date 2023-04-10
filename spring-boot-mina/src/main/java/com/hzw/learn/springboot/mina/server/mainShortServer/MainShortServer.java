@@ -30,7 +30,7 @@ public class MainShortServer {
 
 	private MainShortServer() {
 //		acceptor = new NioSocketAcceptor();	// 默认连接池默认实现：SimpleIoProcessorPool，池容量默认按CPU逻辑进程数有关
-		acceptor = new NioSocketAcceptor(1); // 手动指定池数量
+		acceptor = new NioSocketAcceptor(5); // 手动指定池数量
 		DefaultIoFilterChainBuilder chain = acceptor.getFilterChain();
 		chain.addLast("myChin", new ProtocolCodecFilter(new ObjectSerializationCodecFactory()));
 		chain.addLast("logfilter", new LoggingFilter("xxxhouzw"));

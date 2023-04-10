@@ -33,11 +33,13 @@ public class ShortServerHandler extends IoHandlerAdapter {
 	public void messageReceived(IoSession session, Object message) throws Exception {
 		log.info("会话接收到消息：SsessionId:" + session.getId() + " 消息:" + message);
 //		throw new RuntimeException("hehe");
-		Thread.sleep(2000);
+//		Thread.sleep(2000);
 
 		log.info("会话接收到消息处理结束");
 		session.write("Hello boy, 服务端已接收到信息!");
-		CloseFuture aa = session.close(false);
+//		CloseFuture aa = session.close(false);
+//		CloseFuture aa = session.close(true);
+		CloseFuture aa = session.closeOnFlush();
 
 	}
 
@@ -59,7 +61,7 @@ public class ShortServerHandler extends IoHandlerAdapter {
 	@Override
 	public void sessionIdle(IoSession session, IdleStatus status) throws Exception {
 		log.info("会话闲置：SsessionId:" + session.getId() + " IdleStatus:" + status.toString());
-		session.closeNow();
+//		session.closeNow();
 	}
 
 	@Override
@@ -70,10 +72,9 @@ public class ShortServerHandler extends IoHandlerAdapter {
 
 	@Override
 	public void inputClosed(IoSession session) throws Exception {
-		log.info("半双工TCP通道已关闭：SsessionId:" + session.getId());
-		Thread.sleep(new Long("3000"));
-		session.closeNow();
-
+//		log.info("半双工TCP通道已关闭：SsessionId:" + session.getId());
+//		Thread.sleep(new Long("3000"));
+		session.closeOnFlush();
 	}
 
 

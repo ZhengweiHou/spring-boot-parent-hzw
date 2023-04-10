@@ -13,16 +13,16 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(value = { "com.hzw.learn.springboot.mina.client" })
-public class ClientApplication {
+public class LongClientApplication {
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext appContext = SpringApplication.run(ClientApplication.class, args);
+		ConfigurableApplicationContext appContext = SpringApplication.run(LongClientApplication.class, args);
 		//===================1111111111=========
 		HzwSocketClientLong client = appContext.getBean(HzwSocketClientLong.class);
 		client.showPoolConfig();
 		Scanner scan = new Scanner(System.in);
 		int count = 0;
-		System.out.println("客户端启动成功");
+		System.out.println("Long客户端启动成功");
 		while(true) {
 			System.out.println("输入发送内容：");
 			String str = scan.nextLine();

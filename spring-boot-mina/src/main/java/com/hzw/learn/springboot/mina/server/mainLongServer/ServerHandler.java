@@ -69,11 +69,11 @@ private static ServerHandler samplMinaServerHandler = null;
 
 	@Override
 	public void inputClosed(IoSession session) throws Exception {
-		System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName() + ">>>");
-//		System.out.println("Handle the closure of an half-duplex TCP channel");
-		System.out.println("半双工TCP通道已关闭：SsessionId:" + session.getId());
-		Thread.sleep(new Long("3000"));
-		session.closeNow();
+//		System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName() + ">>>");
+////		System.out.println("Handle the closure of an half-duplex TCP channel");
+//		System.out.println("半双工TCP通道已关闭：SsessionId:" + session.getId());
+//		Thread.sleep(new Long("3000"));
+//		session.closeNow();
 		
 	}
 
