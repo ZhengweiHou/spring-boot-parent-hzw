@@ -15,6 +15,7 @@ public class Server2 {
 
     public static void main(String[] args) {
 //        System.getProperties().put("default.uniqueId",args[0]);
+//        System.getProperties().put("default.uniqueId","hzw");
         SpringApplication.run(Server2.class,args);
     }
 

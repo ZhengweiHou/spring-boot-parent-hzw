@@ -31,7 +31,6 @@ public class ProduceApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
 		// 事务消息测试
 		testRocketMQTemplateTransaction();
 	}
@@ -40,7 +39,7 @@ public class ProduceApplication implements CommandLineRunner {
 	private void testRocketMQTemplateTransaction() throws MessagingException {
 
 		String[] tags = new String[] {"TagA", "TagB", "TagC", "TagD", "TagE"};
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 5; i++) {
 			try {
 				Message msg = MessageBuilder.withPayload("rocketMQTemplate transactional message " + i).
 						setHeader(RocketMQHeaders.TRANSACTION_ID, "KEY_" + i).build();
@@ -51,7 +50,7 @@ public class ProduceApplication implements CommandLineRunner {
 				System.out.printf("------rocketMQTemplate send Transactional msg body = %s , sendResult=%s %n",
 						msg.getPayload(), sendResult.getSendStatus());
 
-				Thread.sleep(10);
+				Thread.sleep(1000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

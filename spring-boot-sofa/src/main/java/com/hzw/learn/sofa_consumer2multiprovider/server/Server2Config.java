@@ -69,6 +69,7 @@ public class Server2Config {
         providerConfig.setRegistry(registryConfig());
         providerConfig.setInterfaceId(HelloService.class.getName());
         providerConfig.setRef(helloService());
+//        providerConfig.setUniqueId("hhh");
         // TODO 可以通过-Ddefault.uniqueId=xxx 指定全局uniqueId
 //        Optional.ofNullable(env.getProperty("default.uniqueId")).ifPresent(uniqueid ->
 //                providerConfig.setUniqueId(uniqueid)

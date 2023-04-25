@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
  * @Date 2023/3/13
  **/
 @Service
-@RocketMQMessageListener(topic = "hzw_trans_topic", consumerGroup = "hzwTest")
+@RocketMQMessageListener(topic = "hzw_trans_topic", consumerGroup = "${rocketmq.consumer.group}")
 public class HzwRocketMQListener implements RocketMQListener<String> {
     @Override
     public void onMessage(String message) {
-        System.out.printf("------- 接收到事務消息: %s \n", message);
+        System.out.printf("------- 接收到事务消息: %s \n", message);
     }
 }

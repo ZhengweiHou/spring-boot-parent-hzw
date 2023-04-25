@@ -18,7 +18,7 @@ public class ConsumeApplication implements CommandLineRunner {
 	private RocketMQTemplate rocketMQTemplate;
 
 	@Autowired
-	private StringTransactionalConsumer stringTransactionalConsumer;
+	private HzwRocketMQListener hzwRocketMQListener;
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext ctx = SpringApplication.run(ConsumeApplication.class, args);

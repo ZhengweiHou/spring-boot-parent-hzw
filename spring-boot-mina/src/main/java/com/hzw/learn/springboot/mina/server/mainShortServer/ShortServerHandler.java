@@ -72,7 +72,7 @@ public class ShortServerHandler extends IoHandlerAdapter {
 
 	@Override
 	public void inputClosed(IoSession session) throws Exception {
-//		log.info("半双工TCP通道已关闭：SsessionId:" + session.getId());
+		log.info("半双工TCP通道已关闭：SsessionId:" + session.getId());
 //		Thread.sleep(new Long("3000"));
 		session.closeOnFlush();
 	}

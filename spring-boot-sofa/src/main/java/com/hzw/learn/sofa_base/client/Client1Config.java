@@ -64,6 +64,7 @@ public class Client1Config {
 
         /** consumer 的粘滞设置，影响调用时的负载，关键处理代码：{@link com.alipay.sofa.rpc.client.AbstractCluster#select(SofaRequest, List)}*/
         consumerConfig.setSticky(false);
+        consumerConfig.setCheck(false);
         HelloService hello = consumerConfig.refer();
         return hello;
 //        return new HelloServiceImpl(); // MOCK

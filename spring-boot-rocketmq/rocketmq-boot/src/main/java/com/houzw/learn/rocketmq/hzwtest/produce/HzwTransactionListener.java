@@ -29,7 +29,8 @@ public class HzwTransactionListener implements RocketMQLocalTransactionListener 
     public RocketMQLocalTransactionState executeLocalTransaction(Message msg, Object arg) {
         System.out.printf("executeLocalTransaction %s%n", new Gson().toJson(msg.getPayload()));
 
-        return RocketMQLocalTransactionState.UNKNOWN;
+//        return RocketMQLocalTransactionState.UNKNOWN;
+        return RocketMQLocalTransactionState.COMMIT;
     }
 
     @Override

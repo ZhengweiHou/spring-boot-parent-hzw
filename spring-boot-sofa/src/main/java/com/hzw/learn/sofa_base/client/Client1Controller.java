@@ -101,6 +101,7 @@ public class Client1Controller {
                 .setProtocol("bolt")
                 .setGeneric(true)  // 设置范化调用类型
                 .setProxy("javassist")
+                .setCheck(true)
                 .setRegistry(registryConfig);
 
 
