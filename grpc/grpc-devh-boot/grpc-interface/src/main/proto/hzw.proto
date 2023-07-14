@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+// 指定生成的Java代码所属的包名
+option java_package = "com.hzw.grpc";
+// 指定生成的Java代码中的外部类名
+option java_outer_classname = "HzwProto";
+// 指定是否为每个消息和服务生成单独的Java文件
+option java_multiple_files = true;
+// 指定是否生成equals()和hashCode()方法
+option java_generate_equals_and_hash = true;
+// 指定是否在设置字符串字段时检查UTF-8编码的有效性
+option java_string_check_utf8 = true;
+// 指定是否生成支持通用服务的代码
+option java_generic_services = true;
+// 指定是否生成Javadoc文档注释
+//option java_use_javadoc = true;
+
+service Simple {
+  rpc SayHello (HelloRequest) returns (HelloReply);
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloReply {
+  string message = 1;
+}

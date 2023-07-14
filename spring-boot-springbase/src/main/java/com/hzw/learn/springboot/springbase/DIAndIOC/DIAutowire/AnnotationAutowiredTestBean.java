@@ -20,10 +20,10 @@ import java.util.Arrays;
 @Component
 public class AnnotationAutowiredTestBean {
 
-    @Autowired
-    private ABean aBean;
-    private ABean annotationABean;
+    @Autowired         // 变量上使用@Autowired注解，不会调用这里的set方法
+    private ABean aBean; // 注入时 spring 容器会使用属性名从容器中寻找 bean 注入
 
+    private ABean annotationABean;
 
     public void setaBean(ABean aBean) {
         System.out.println("" + this.getClass().getName() + "的setaBean方法执行");

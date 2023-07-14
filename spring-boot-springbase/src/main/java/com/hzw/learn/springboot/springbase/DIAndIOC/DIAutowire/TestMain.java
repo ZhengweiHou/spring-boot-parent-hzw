@@ -19,7 +19,9 @@ public class TestMain {
     ApplicationContext applicationContext = null;
     @Before
     public void init(){
+        System.out.println("===init start===");
         applicationContext = new ClassPathXmlApplicationContext("DIAndIOC/DIAutowire/springAutowire.xml");
+        System.out.println("===init end===");
     }
 
     @Test
@@ -39,10 +41,14 @@ public class TestMain {
 //        annotationABean:sirius-abean2
 //        aBean1:张三
 //        aBean2:李四
-
         ConstructorAutowiredTestBean constructorAutowiredTestBean = applicationContext.getBean(ConstructorAutowiredTestBean.class);
-        System.out.println("======");
         constructorAutowiredTestBean.sayHello();
+
+
+        SonTestBean son = applicationContext.getBean(SonTestBean.class);
+        son.sayHelloParent();
+        son.sayHelloSon();
+
 
     }
 

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_package = "com.hzw.grpc";
+// 生成类包含在该类内部
+option java_outer_classname = "ExampleProto";
+
+service ExampleService {
+  rpc SayHello (HelloRequest) returns (HelloResponse);
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloResponse {
+  string message = 1;
+}
