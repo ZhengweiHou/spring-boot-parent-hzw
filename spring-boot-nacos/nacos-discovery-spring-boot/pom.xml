@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.hzw.learn</groupId>
+  <artifactId>nacos-discovery-spring-boot</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>nacos-discovery-spring-boot</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+    <nacos-discovery-spring-boot.version>0.2.12</nacos-discovery-spring-boot.version>
+    <nacos-discovery-spring-boot-cloud.version>2.1.3.RELEASE</nacos-discovery-spring-boot-cloud.version>
+  </properties>
+
+  <modules>
+    <module>nacos-discovery-server</module>
+  </modules>
+  <dependencies>
+
+  </dependencies>
+  
+  <dependencyManagement>
+  	<dependencies>
+      <dependency>
+        <groupId>com.alibaba.boot</groupId>
+        <artifactId>nacos-discovery-spring-boot-starter</artifactId>
+        <version>${nacos-discovery-spring-boot.version}</version>
+      </dependency>
+<!--      <dependency>-->
+<!--        <groupId>com.alibaba.boot</groupId>-->
+<!--        <artifactId>nacos-discovery-spring-boot-starter</artifactId>-->
+<!--        <version>${nacos-discovery-spring-boot.version}</version>-->
+<!--      </dependency>-->
+
+<!--      <dependency>-->
+<!--        <groupId>com.alibaba.cloud</groupId>-->
+<!--        <artifactId>nacos-discovery-spring-boot-starter</artifactId>-->
+<!--        <version>${nacos-discovery-spring-boot-cloud.version}</version>-->
+<!--      </dependency>-->
+
+    </dependencies>
+  </dependencyManagement>
+</project>
