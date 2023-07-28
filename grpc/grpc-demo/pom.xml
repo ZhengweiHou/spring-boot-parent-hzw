@@ -68,13 +68,13 @@
                 <artifactId>protobuf-maven-plugin</artifactId>
                 <version>${protobuf-plugin.version}</version>
                 <configuration>
-                    <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
                     <pluginId>grpc-java</pluginId>
+                    <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
                     <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
 <!--                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>-->
-                    <outputDirectory>${project.basedir}/src/main/grpc</outputDirectory>
+<!--                    <outputDirectory>${project.basedir}/src/main/grpc</outputDirectory>-->
 <!--                    <outputDirectory>${project.build.sourceDirectory}</outputDirectory>-->
-                    <clearOutputDirectory>false</clearOutputDirectory>
+                    <clearOutputDirectory>true</clearOutputDirectory>
                 </configuration>
                 <executions>
                     <execution>

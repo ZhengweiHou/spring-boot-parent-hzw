@@ -1,5 +1,7 @@
-package com.hzw.grpc;
+package com.hzw.grpc.demo;
 
+import com.hzw.grpc.ExampleProto;
+import com.hzw.grpc.ExampleServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
