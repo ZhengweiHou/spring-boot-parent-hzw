@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+// 指定生成的Java代码所属的包名
+option java_package = "com.hzw.grpc";
+// 指定生成的Java代码中的外部类名
+option java_outer_classname = "AicGrpcCommonServer";
+// 指定是否为每个消息和服务生成单独的Java文件
+option java_multiple_files = true;
+// 指定是否生成equals()和hashCode()方法
+option java_generate_equals_and_hash = true;
+// 指定是否在设置字符串字段时检查UTF-8编码的有效性
+option java_string_check_utf8 = true;
+// 指定是否生成支持通用服务的代码
+option java_generic_services = true;
+// 指定是否生成Javadoc文档注释
+//option java_use_javadoc = true;
+
+// 使用 Any 类型表示 Java Object 类型的参数
+import "google/protobuf/any.proto";
+
+service AicGrpcCommonService {
+  rpc rpcInvoke (GrpcRequest) returns (GrpcResponse);
+}
+
+message GrpcRequest {
+  string interfaceName = 1;
+  string methodName = 2;
+  repeated string methodArgSigs = 3;
+  repeated bytes methodArgs = 4;
+  // 请求扩展信息
+  map<string,google.protobuf.Any> requestProps = 5;
+}
+
+message GrpcResponse{
+//  map<string,google.protobuf.Any> attributr = 1;
+  bool isError = 1;
+  string errorMsg = 2;
+  bytes appResponse = 3;
+  // 请求扩展信息
+  map<string,string> requestProps = 4;
+}
