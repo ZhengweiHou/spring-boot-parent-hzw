@@ -11,6 +11,7 @@ import com.alipay.sofa.rpc.core.request.SofaRequest;
 import com.alipay.sofa.rpc.core.response.SofaResponse;
 import com.alipay.sofa.rpc.invoke.Invoker;
 import com.hzw.learn.ext.HelloService;
+import com.hzw.learn.ext.W;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,15 @@ public class Client1Controller {
         String rsp = helloService.hello("Consumer[" + jvmProcessID + "]-" + ++times);
         System.out.println("Consumer[" + jvmProcessID + "]接收返回消息："+rsp);
         return rsp;
+    }
+
+    @RequestMapping("/hellow")
+    public W hellow(){
+        W w = new W();
+        w.msg = "Consumer[" + jvmProcessID + "]-" + ++times;
+        W wr = helloService.hellow(w);
+        System.out.println("Consumer[" + jvmProcessID + "]接收返回消息："+wr.msg);
+        return wr;
     }
 
     @RequestMapping("/hello2")

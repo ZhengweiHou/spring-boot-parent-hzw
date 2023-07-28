@@ -17,4 +17,7 @@ public interface HelloService {
     @GET
     @Path(value = "/hello2")
     String hello2();
+
+    // 参数是对象
+    W hellow(W w);
 }

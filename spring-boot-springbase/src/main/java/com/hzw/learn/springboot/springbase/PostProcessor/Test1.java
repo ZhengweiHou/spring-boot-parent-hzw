@@ -4,10 +4,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.config.BeanExpressionResolver;
-import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.beans.factory.config.*;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -53,7 +50,7 @@ public class Test1 {
 
     @Test
     public void test2() throws InterruptedException {
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("Test/Test.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("PostProcessor/Test.xml");
 //        PenBean penBean = (PenBean) applicationContext.getBean("penBean");
 
 //        new Thread(new Runnable() {
@@ -91,10 +88,24 @@ public class Test1 {
     }
 
 
+    @Test
+    public void test3() throws InterruptedException {
+        ClassPathXmlApplicationContext con = new ClassPathXmlApplicationContext("PostProcessor/Test.xml");
+        con.getBean("penBean");
+        con.getBean("penBean2");
+        con.getBean("penBean");
+        con.getBean("penBean2");
+        con.getBean("penBean");
+        con.getBean("penBean2");
+
+        con.getBean(PenBean.class);
+    }
 
 
 
 
 
 
-}
+
+
+    }

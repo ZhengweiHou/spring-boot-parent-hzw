@@ -22,7 +22,7 @@ public class TestMain {
 
     @Test
     public void helloTest_XML(){
-        ConfigurableApplicationContext applicationContext = new ClassPathXmlApplicationContext("DI/DICircle/springCircle.xml");
+        ConfigurableApplicationContext applicationContext = new ClassPathXmlApplicationContext("DIAndIOC/DICircle/springCircle.xml");
         applicationContext.registerShutdownHook();
 
     }

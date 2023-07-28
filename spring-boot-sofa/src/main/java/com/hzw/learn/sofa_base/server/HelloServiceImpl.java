@@ -1,6 +1,8 @@
 package com.hzw.learn.sofa_base.server;
 
+import com.hzw.learn.ext.H;
 import com.hzw.learn.ext.HelloService;
+import com.hzw.learn.ext.W;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.management.ManagementFactory;
@@ -30,6 +32,14 @@ public class HelloServiceImpl implements HelloService {
     @Override
     public String hello2() {
         return "hello too!!";
+    }
+
+    @Override
+    public W hellow(W w) {
+        System.out.println("hello w.msg:" + w.msg);
+        W wr = new W();
+        wr.msg="private w";
+        return wr;
     }
 
     private String showJVMInfo(){
