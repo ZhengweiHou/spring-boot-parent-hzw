@@ -1,7 +1,6 @@
-import com.hzw.grpc.HelloRequest;
-import com.hzw.grpc.HelloResponse;
-import com.hzw.grpc.HzwProto;
-import com.hzw.grpc.HzwServiceGrpc;
+import com.hzw.grpc.demo.HelloRequest;
+import com.hzw.grpc.demo.HelloReply;
+import com.hzw.grpc.demo.SimpleGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -19,13 +18,13 @@ public class HzwServiceGrpcTest {
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8082)
                 .usePlaintext()
                 .build();
-        HzwServiceGrpc.HzwServiceBlockingStub blockingStub = HzwServiceGrpc.newBlockingStub(channel);
+        SimpleGrpc.SimpleBlockingStub blockingStub = SimpleGrpc.newBlockingStub(channel);
 
         HelloRequest request = HelloRequest.newBuilder()
                 .setName("Hzw")
                 .build();
 
-        HelloResponse response = blockingStub.sayHello(request);
+        HelloReply response = blockingStub.sayHello(request);
 
         System.out.println("Server response: " + response.getMessage());
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);

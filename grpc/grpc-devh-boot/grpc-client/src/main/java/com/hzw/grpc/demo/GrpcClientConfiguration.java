@@ -15,7 +15,7 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.hzw.grpc;
+package com.hzw.grpc.demo;
 
 import net.devh.boot.grpc.client.interceptor.GrpcGlobalClientInterceptor;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +26,11 @@ public class GrpcClientConfiguration {
     @GrpcGlobalClientInterceptor
     GrpcClientInterceptor logClientInterceptor() {
         return new GrpcClientInterceptor();
+    }
+
+    @GrpcGlobalClientInterceptor
+    GrpcClientMetaInterceptor metaClientInterceptor() {
+        return new GrpcClientMetaInterceptor();
     }
 
 }

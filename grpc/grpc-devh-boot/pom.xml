@@ -13,10 +13,16 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>1.8</java.version>
-    <spring-cloud.version>2021.0.5</spring-cloud.version>
-    <spring-boot.version>2.6.13</spring-boot.version>
-    <springCloudAlibabaNacosVersion>2021.1</springCloudAlibabaNacosVersion>
-    <grpc-springboot-start.version>2.14.0.RELEASE</grpc-springboot-start.version>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+
+    <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
+    <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
+    <springCloudAlibabaNacosVersion>2.1.4.RELEASE</springCloudAlibabaNacosVersion>
+
+    <grpc-springboot-start.version>2.13.1.RELEASE</grpc-springboot-start.version>
+      <grpc.version>1.56.0</grpc.version>
+      <protobuf.version>3.22.3</protobuf.version>
   </properties>
 
   <dependencies>
@@ -40,6 +46,7 @@
         <artifactId>grpc-server-spring-boot-starter</artifactId>
         <version>${grpc-springboot-start.version}</version>
       </dependency>
+
       <dependency>
         <groupId>net.devh</groupId>
         <artifactId>grpc-client-spring-boot-starter</artifactId>
@@ -47,10 +54,32 @@
       </dependency>
 
       <dependency>
+          <groupId>io.grpc</groupId>
+          <artifactId>grpc-bom</artifactId>
+          <version>${grpc.version}</version>
+          <type>pom</type>
+          <scope>import</scope>
+      </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-bom</artifactId>
+            <version>${protobuf.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+
+        <dependency>
+        <groupId>com.google.protobuf</groupId>
+        <artifactId>protobuf-java</artifactId>
+        <version>${protobuf.version}</version>
+      </dependency>
+
+      <dependency>
         <groupId>com.hzw.learn</groupId>
         <artifactId>grpc-interface</artifactId>
         <version>${project.version}</version>
       </dependency>
+
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
@@ -58,6 +87,7 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
@@ -65,11 +95,24 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
       <dependency>
         <groupId>com.alibaba.cloud</groupId>
         <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         <version>${springCloudAlibabaNacosVersion}</version>
       </dependency>
-  	</dependencies>
+        <dependency>
+            <groupId>io.protostuff</groupId>
+            <artifactId>protostuff-core</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>io.protostuff</groupId>-->
+<!--            <artifactId>protostuff-core</artifactId>-->
+<!--            <version></version>-->
+<!--        </dependency>-->
+
+    </dependencies>
   </dependencyManagement>
 </project>

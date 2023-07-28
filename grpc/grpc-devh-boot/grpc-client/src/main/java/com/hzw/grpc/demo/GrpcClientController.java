@@ -15,8 +15,9 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.hzw.grpc;
+package com.hzw.grpc.demo;
 
+import com.google.protobuf.InvalidProtocolBufferException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +35,16 @@ public class GrpcClientController {
     @RequestMapping("/")
     public String printMessage(@RequestParam(defaultValue = "sirius") final String name) {
         return this.grpcClientService.sendMessage(name);
+    }
+
+    @RequestMapping("/2")
+    public String printMessage2(@RequestParam(defaultValue = "sirius") final String name) {
+        return this.grpcClientService.sendMessageFuture(name);
+    }
+
+    @RequestMapping("/3")
+    public String printMessage3(@RequestParam(defaultValue = "sirius") final String name) throws InvalidProtocolBufferException {
+        return this.grpcClientService.s2_sendMessage(name);
     }
 
 }

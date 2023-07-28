@@ -1,1 +1,1 @@
-server:  port: 58081spring:  application:    name: hzw-grpc-server  cloud:    nacos:      discovery:        register-enabled: true        server-addr: localhost:8848grpc:  server:    port: 0
+server:  port: 58081spring:  application:    name: hzw-grpc-server  cloud:    nacos:      discovery:        register-enabled: true        server-addr: localhost:8848        namespace: testgrpc:  server:    port: 0

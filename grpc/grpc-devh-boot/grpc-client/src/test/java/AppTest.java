@@ -1,5 +1,5 @@
-import com.hzw.grpc.GrpcClientApplication;
-import com.hzw.grpc.GrpcClientService;
+import com.hzw.grpc.demo.GrpcClientApplication;
+import com.hzw.grpc.demo.GrpcClientService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
