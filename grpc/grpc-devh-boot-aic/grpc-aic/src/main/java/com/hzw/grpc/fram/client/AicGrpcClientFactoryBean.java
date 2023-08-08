@@ -3,6 +3,7 @@ package com.hzw.grpc.fram.client;
 import com.google.common.collect.Lists;
 import com.hzw.grpc.fram.common.AicGrpcConstant;
 import com.hzw.grpc.fram.proxy.ProxyFactory;
+import com.hzw.grpc.fram.serializer.SerializerFactory;
 import io.grpc.Channel;
 import io.grpc.ClientInterceptor;
 import lombok.Getter;
@@ -31,6 +32,7 @@ public class AicGrpcClientFactoryBean extends AbstractFactoryBean implements App
     private ApplicationContext applicationContext;
     private GrpcChannelFactory channelFactory = null;
 
+    private String serializerType;
     private String channelKey;
     private Class<?> interfaceClass;
     private String stubType;
@@ -51,6 +53,8 @@ public class AicGrpcClientFactoryBean extends AbstractFactoryBean implements App
         ){
             throw new IllegalArgumentException("stubType illegal:" + stubType);
         }
+        // 非法的serializerCode抛出异常
+        SerializerFactory.getSerializerCode(serializerType);
     }
     public AicGrpcClientFactoryBean(Class<?> interfaceClass){
         this(GrpcChannelsProperties.GLOBAL_PROPERTIES_KEY,interfaceClass);
@@ -59,14 +63,15 @@ public class AicGrpcClientFactoryBean extends AbstractFactoryBean implements App
         this(GrpcChannelsProperties.GLOBAL_PROPERTIES_KEY,interfaceClass,applicationContext);
     }
     public AicGrpcClientFactoryBean(String channelKey, Class<?> interfaceClass){
-        this(channelKey,interfaceClass,AicGrpcConstant.AIC_GRPC_STUB_TYPE_FUTURE,null,null,false,null);
+        this(AicGrpcConstant.PROTO_SERIALIZER_TYPE,channelKey,interfaceClass,AicGrpcConstant.AIC_GRPC_STUB_TYPE_FUTURE,null,null,false,null);
     }
 
     public AicGrpcClientFactoryBean(String channelKey, Class<?> interfaceClass, ApplicationContext applicationContext){
-        this(channelKey,interfaceClass,AicGrpcConstant.AIC_GRPC_STUB_TYPE_FUTURE,null,null,false,applicationContext);
+        this(AicGrpcConstant.PROTO_SERIALIZER_TYPE,channelKey,interfaceClass,AicGrpcConstant.AIC_GRPC_STUB_TYPE_FUTURE,null,null,false,applicationContext);
     }
 
-    public AicGrpcClientFactoryBean(String channelKey, Class<?> interfaceClass, String stubType, Class<? extends ClientInterceptor>[] interceptors, String[] interceptorNames, boolean sortInterceptors, ApplicationContext applicationContext) {
+    public AicGrpcClientFactoryBean(String serializerType, String channelKey, Class<?> interfaceClass, String stubType, Class<? extends ClientInterceptor>[] interceptors, String[] interceptorNames, boolean sortInterceptors, ApplicationContext applicationContext) {
+        this.serializerType = serializerType;
         this.channelKey = channelKey;
         this.interfaceClass = interfaceClass;
         this.stubType = stubType;
@@ -104,7 +109,7 @@ public class AicGrpcClientFactoryBean extends AbstractFactoryBean implements App
             throw new IllegalStateException("Failed to create channel: " + channelKey, e);
         }
 
-        Object proxy = ProxyFactory.buildClientProxy(interfaceClass, channel, stubType);
+        Object proxy = ProxyFactory.buildClientProxy(SerializerFactory.getSerializerCode(serializerType), interfaceClass, channel, stubType);
 
         return proxy;
     }

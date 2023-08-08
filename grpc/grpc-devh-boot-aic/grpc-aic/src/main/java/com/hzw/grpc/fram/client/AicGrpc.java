@@ -1,6 +1,7 @@
 package com.hzw.grpc.fram.client;
 
 import com.hzw.grpc.fram.common.AicGrpcConstant;
+import com.hzw.grpc.fram.serializer.SerializerFactory;
 import io.grpc.ClientInterceptor;
 
 import java.lang.annotation.*;
@@ -25,5 +26,7 @@ public @interface AicGrpc {
     boolean sortInterceptors() default false;
 
     String stubType() default AicGrpcConstant.AIC_GRPC_STUB_TYPE_FUTURE;
+
+    String serializer() default AicGrpcConstant.PROTO_SERIALIZER_TYPE;
 
 }

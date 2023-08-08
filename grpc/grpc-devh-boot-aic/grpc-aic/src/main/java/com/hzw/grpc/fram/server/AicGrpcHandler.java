@@ -1,16 +1,15 @@
 package com.hzw.grpc.fram.server;
 
-import com.google.protobuf.ByteString;
-import com.google.protobuf.ProtocolStringList;
 import com.hzw.grpc.AicGrpcCommonServiceGrpc;
 import com.hzw.grpc.GrpcRequest;
 import com.hzw.grpc.GrpcResponse;
-import com.hzw.grpc.fram.common.cache.ReflectCache;
 import com.hzw.grpc.fram.common.utils.ClassTypeUtils;
 import com.hzw.grpc.fram.message.AicGrpcMessageBuilder;
 import com.hzw.grpc.fram.message.AicGrpcRequest;
-import com.hzw.grpc.fram.message.AicGrpcResponse;
-import com.hzw.grpc.fram.message.ProtoStuffSerializer;
+import com.hzw.grpc.fram.message.ByteArrayWrapper;
+import com.hzw.grpc.fram.serializer.ProtoStuffSerializer;
+import com.hzw.grpc.fram.serializer.Serializer;
+import com.hzw.grpc.fram.serializer.SerializerFactory;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.slf4j.Logger;
@@ -44,13 +43,30 @@ public class AicGrpcHandler extends AicGrpcCommonServiceGrpc.AicGrpcCommonServic
     }
 
     private GrpcResponse doInvoke(GrpcRequest grpcRequest) {
-        AicGrpcRequest request = ProtoStuffSerializer.deserialize(grpcRequest.getAicGrpcRequest().toByteArray(), AicGrpcRequest.class);
+        AicGrpcRequest request = SerializerFactory.getSerializer(
+                SerializerFactory.PROTO_SERIALIZER_CODE
+        ).deserialize(grpcRequest.getAicGrpcRequest().toByteArray(), AicGrpcRequest.class);
 
         // grpc 服务端解析request
         String interfaceName = request.getInterfaceName();
         String methodName = request.getMethodName();
         String[] methodArgSigs = request.getMethodArgSigs();
         Class[] methodArgClass = ClassTypeUtils.getClasses(methodArgSigs);
+        // 序列化类型
+        Byte serializerCode = request.getSerializerCode();
+        Object[] methodArgs = request.getMethodArgs();
+
+        if (serializerCode != 0) { // 序列化方式非ProtoStuff
+            // 反序列化实际参数对象
+            Serializer serializer = SerializerFactory.getSerializer(serializerCode);
+            methodArgs = new Object[methodArgSigs.length];
+            for (int i = 0; i < methodArgSigs.length; i++) {
+                methodArgs[i] = serializer.deserialize(
+                        ((ByteArrayWrapper) request.getMethodArgs()[i]).array(),
+                        ClassTypeUtils.getClass(methodArgSigs[i])
+                );
+            }
+        }
 
         // get interface Clazz by interfaceName
         Class interfaceClass = ClassTypeUtils.getClass(interfaceName);
@@ -69,18 +85,18 @@ public class AicGrpcHandler extends AicGrpcCommonServiceGrpc.AicGrpcCommonServic
         // do invoke
         Object appResponse;
         try {
-            appResponse = method.invoke(serviceDef.getRef(), request.getMethodArgs());
+            appResponse = method.invoke(serviceDef.getRef(), methodArgs);
         } catch (IllegalAccessException e) {
-            return AicGrpcMessageBuilder.buildGrpcResponse(e);
-//            return AicGrpcMessageBuilder.buildGrpcErrorResponse(e.getMessage());
+//            return AicGrpcMessageBuilder.buildGrpcResponse(serializerCode, e);
+            return AicGrpcMessageBuilder.buildGrpcErrorResponse(e.getMessage());
         } catch (InvocationTargetException e){
-            return AicGrpcMessageBuilder.buildGrpcResponse(e.getTargetException());
+            return AicGrpcMessageBuilder.buildGrpcResponse(serializerCode, e.getTargetException());
         } catch (Exception e){
             // 其他业务异常透传到客户端
-            return AicGrpcMessageBuilder.buildGrpcResponse(e);
+            return AicGrpcMessageBuilder.buildGrpcResponse(serializerCode, e);
         }
 
-        GrpcResponse response = AicGrpcMessageBuilder.buildGrpcResponse(appResponse);
+        GrpcResponse response = AicGrpcMessageBuilder.buildGrpcResponse(serializerCode, appResponse);
         return response;
     }
 }

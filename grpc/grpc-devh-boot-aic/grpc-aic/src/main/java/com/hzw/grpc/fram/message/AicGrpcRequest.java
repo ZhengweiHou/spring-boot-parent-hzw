@@ -33,6 +33,11 @@ public class AicGrpcRequest {
     private Object[] methodArgs;
 
     /**
+     * SerializerCode of methodArgs
+     */
+    private Byte serializerCode;
+
+    /**
      * Extensional properties of request
      */
     private Map<String, Object> requestProps;
@@ -68,6 +73,9 @@ public class AicGrpcRequest {
         return methodArgSigs;
     }
 
+    public Byte getSerializerCode() {
+        return serializerCode;
+    }
 
     /**
      * Sets method name.
@@ -100,6 +108,9 @@ public class AicGrpcRequest {
         this.methodArgSigs = methodArgSigs;
     }
 
+    public void setSerializerCode(Byte serializerCode) {
+        this.serializerCode = serializerCode;
+    }
     /**
      * Gets request prop.
      *

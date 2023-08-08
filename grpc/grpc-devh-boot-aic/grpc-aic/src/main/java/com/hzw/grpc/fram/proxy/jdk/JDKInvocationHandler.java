@@ -7,7 +7,10 @@ import com.hzw.grpc.GrpcResponse;
 import com.hzw.grpc.fram.exception.AicGrpcRpcException;
 import com.hzw.grpc.fram.message.AicGrpcMessageBuilder;
 import com.hzw.grpc.fram.message.AicGrpcResponse;
-import com.hzw.grpc.fram.message.ProtoStuffSerializer;
+import com.hzw.grpc.fram.message.ByteArrayWrapper;
+import com.hzw.grpc.fram.serializer.ProtoStuffSerializer;
+import com.hzw.grpc.fram.serializer.Serializer;
+import com.hzw.grpc.fram.serializer.SerializerFactory;
 import io.grpc.stub.AbstractStub;
 
 import java.lang.reflect.InvocationHandler;
@@ -28,9 +31,13 @@ public class JDKInvocationHandler implements InvocationHandler {
 
     private final String stubType;
 
-    public JDKInvocationHandler(AbstractStub stub, String stubType) {
+    private final Byte serializerCode;
+
+
+    public JDKInvocationHandler(AbstractStub stub, String stubType, Byte serializerCode) {
         this.stub = stub;
         this.stubType = stubType;
+        this.serializerCode = serializerCode;
     }
 
     @Override
@@ -47,21 +54,29 @@ public class JDKInvocationHandler implements InvocationHandler {
         }
 
         // 1. build aicgrpcrequest
-        GrpcRequest grpcRequest = AicGrpcMessageBuilder.buildGrpcRequest(method.getDeclaringClass(), method, paramTypes, paramValues);
+        GrpcRequest grpcRequest = AicGrpcMessageBuilder.buildGrpcRequest(serializerCode, method.getDeclaringClass(), method, paramTypes, paramValues);
 
         // 2. do invoke
         ListenableFuture<GrpcResponse> future = ((AicGrpcCommonServiceGrpc.AicGrpcCommonServiceFutureStub) stub).rpcInvoke(grpcRequest);
 
         GrpcResponse response = future.get(60, TimeUnit.SECONDS); // 超时处理
 
-        AicGrpcResponse aicGrpcResponse = ProtoStuffSerializer.deserialize(response.getAicGrpcResponse().toByteArray(), AicGrpcResponse.class);
+        AicGrpcResponse aicGrpcResponse = SerializerFactory.getSerializer(SerializerFactory.PROTO_SERIALIZER_CODE)
+                .deserialize(response.getAicGrpcResponse().toByteArray(), AicGrpcResponse.class);
+
         if (aicGrpcResponse.isError()) {
             throw new AicGrpcRpcException(aicGrpcResponse.getErrorMsg());
         }
         Object ret = aicGrpcResponse.getAppResponse();
         if (ret instanceof Throwable) {
             throw (Throwable) ret;
-        } else {
+        } else if (ret instanceof ByteArrayWrapper){
+            Object ret2 = SerializerFactory.getSerializer(serializerCode).deserialize(((ByteArrayWrapper) ret).array(), Object.class);
+            if (ret2 instanceof Throwable) {
+                throw (Throwable) ret2;
+            }
+            return ret2;
+        }else {
             return ret;
         }
     }

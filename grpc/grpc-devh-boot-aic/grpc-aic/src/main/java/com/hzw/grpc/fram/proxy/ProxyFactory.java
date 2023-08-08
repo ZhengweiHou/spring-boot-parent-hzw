@@ -18,7 +18,7 @@ public class ProxyFactory {
     /**
      * 构造代理类实例
      */
-    public static <T> T buildClientProxy(final Class<T> interfaceClazz, final io.grpc.Channel channel, String stubType){
+    public static <T> T buildClientProxy(final Byte serializerCode, final Class<T> interfaceClazz, final io.grpc.Channel channel, String stubType){
         AbstractStub stub = null;
         switch (stubType){
             case AicGrpcConstant.AIC_GRPC_STUB_TYPE_FUTURE:
@@ -35,7 +35,7 @@ public class ProxyFactory {
         }
 
         // 创建接口的动态代理对象
-        JDKInvocationHandler handler = new JDKInvocationHandler(stub, stubType);
+        JDKInvocationHandler handler = new JDKInvocationHandler(stub, stubType, serializerCode);
         Object proxy = Proxy.newProxyInstance(getCurrentClassLoader(), new Class[]{interfaceClazz}, handler);
         return interfaceClazz.cast(proxy);
     }

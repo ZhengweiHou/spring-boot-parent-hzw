@@ -4,9 +4,9 @@ import com.google.protobuf.ByteString;
 import com.hzw.grpc.GrpcRequest;
 import com.hzw.grpc.GrpcResponse;
 import com.hzw.grpc.fram.common.utils.ClassTypeUtils;
+import com.hzw.grpc.fram.serializer.SerializerFactory;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
 
 /**
  * @ClassName AicGrpcMessageBuilder
@@ -24,41 +24,54 @@ public class AicGrpcMessageBuilder {
      * @param args -  方法参数
      * @return aic grpc 远程调用请求
      */
-    public static GrpcRequest buildGrpcRequest(Class<?> clazz, Method method, Class[] argTypes, Object[] args){
+    public static GrpcRequest buildGrpcRequest(Byte serializerCode,Class<?> clazz, Method method, Class[] argTypes, Object[] args){
 
         AicGrpcRequest req = new AicGrpcRequest();
         req.setInterfaceName(clazz.getName());
         req.setMethodName(method.getName());
         req.setMethodArgSigs(ClassTypeUtils.getTypeStrs(argTypes, true));
-        req.setMethodArgs(args == null ? new Object[0] : args);
+        req.setSerializerCode(serializerCode);
 
-        ByteString[] argsBytes;
-
-        if (args == null || args.length == 0){
-            argsBytes = new ByteString[0];
+        if (serializerCode == 0) {
+            req.setMethodArgs(args == null ? new Object[0] : args);
         }else {
-            argsBytes = new ByteString[args.length];
-            for (int i = 0; i < args.length; i++) {
-                argsBytes[i] = ByteString.copyFrom(
-                    ProtoStuffSerializer.serialize(args[0])
-                );
+            // 若是其他序列化方式
+            ByteArrayWrapper[] argsBytes;
+            if (args == null || args.length == 0) {
+                argsBytes = new ByteArrayWrapper[0];
+            } else {
+                argsBytes = new ByteArrayWrapper[args.length];
+                for (int i=0; i<args.length; i++){
+                    argsBytes[i] = new ByteArrayWrapper(SerializerFactory.getSerializer(serializerCode).serialize(args[i]));
+                }
             }
+            req.setMethodArgs(argsBytes);
         }
+
         GrpcRequest.Builder reqBuilder = GrpcRequest.newBuilder();
         reqBuilder.setAicGrpcRequest(
-            ByteString.copyFrom(ProtoStuffSerializer.serialize(req))
+            ByteString.copyFrom(SerializerFactory.getSerializer(
+                    SerializerFactory.PROTO_SERIALIZER_CODE
+            ).serialize(req))
         );
 
         return reqBuilder.build();
     }
 
 
-    public static GrpcResponse buildGrpcResponse(Object arg){
+    public static GrpcResponse buildGrpcResponse(Byte serializerCode,Object arg){
         AicGrpcResponse rep = new AicGrpcResponse();
-        rep.setAppResponse(arg);
+        if(serializerCode == SerializerFactory.PROTO_SERIALIZER_CODE) {
+            rep.setAppResponse(arg);
+        }else {
+            rep.setAppResponse(new ByteArrayWrapper(SerializerFactory.getSerializer(serializerCode).serialize(arg)));
+        }
+
         GrpcResponse response = GrpcResponse.newBuilder()
                 .setAicGrpcResponse(
-                        ByteString.copyFrom(ProtoStuffSerializer.serialize(rep))
+                        ByteString.copyFrom(
+                                SerializerFactory.getSerializer(SerializerFactory.PROTO_SERIALIZER_CODE).serialize(rep)
+                        )
                 )
                 .build();
         return response;
@@ -70,7 +83,11 @@ public class AicGrpcMessageBuilder {
 
         GrpcResponse response = GrpcResponse.newBuilder()
                 .setAicGrpcResponse(
-                        ByteString.copyFrom(ProtoStuffSerializer.serialize(rep))
+                        ByteString.copyFrom(
+                                SerializerFactory.getSerializer(
+                                        SerializerFactory.PROTO_SERIALIZER_CODE
+                                ).serialize(rep)
+                        )
                 )
                 .build();
         return response;

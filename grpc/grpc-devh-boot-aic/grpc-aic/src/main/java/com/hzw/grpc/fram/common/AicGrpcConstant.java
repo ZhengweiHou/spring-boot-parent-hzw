@@ -12,4 +12,6 @@ public class AicGrpcConstant {
     public static final String AIC_GRPC_STUB_TYPE_ASYNC    = "Async";
     public static final String AIC_GRPC_STUB_TYPE_BLOCKING = "Blocking";
     public static final String AIC_GRPC_STUB_TYPE_FUTURE   = "Future";
+
+    public static final String PROTO_SERIALIZER_TYPE = "proto";
 }

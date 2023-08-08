@@ -2,6 +2,7 @@ package com.hzw.grpc.fram.client;
 
 import com.google.common.collect.Lists;
 import com.hzw.grpc.fram.proxy.ProxyFactory;
+import com.hzw.grpc.fram.serializer.SerializerFactory;
 import io.grpc.Channel;
 import io.grpc.ClientInterceptor;
 import net.devh.boot.grpc.client.channelfactory.GrpcChannelFactory;
@@ -64,6 +65,7 @@ public class AicGrpcClientBeanPostProcessor implements BeanPostProcessor {
 
         // 借用spring factory bean
         AicGrpcClientFactoryBean grpcFactory = new AicGrpcClientFactoryBean(
+                annotation.serializer(),
                 annotation.value(),
                 fieldType,
                 annotation.stubType(),
