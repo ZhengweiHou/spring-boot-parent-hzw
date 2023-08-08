@@ -20,6 +20,7 @@ package com.hzw.grpc.demo;
 import com.hzw.grpc.demo.api.HzwApi;
 import com.hzw.grpc.fram.client.AicGrpc;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,11 +31,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GrpcClientController {
 
-    @AicGrpc("ccc")
+    @AicGrpc(value = "ccc",serializer = "jdk")
     private HzwApi hzwApi_inject_by_BPP;
 
     @Autowired
-    private HzwApi hzwApi;
+    @Qualifier("hzwApi")
+    private HzwApi hzwApiProto;
+
+    @Autowired
+    @Qualifier("hzwApiJdk")
+    private HzwApi hzwApiJdk;
 
     @RequestMapping("/1")
     public String printMessage(@RequestParam(defaultValue = "sirius") final String name) {
@@ -49,11 +55,16 @@ public class GrpcClientController {
     @RequestMapping("/2")
     public String printMessage2(@RequestParam(defaultValue = "sirius") final String name) {
         try {
-            return hzwApi.sayHello(name);
+            return hzwApiProto.sayHello(name);
         }catch (Exception e){
             e.printStackTrace();
             return e.getMessage();
         }
+    }
+
+    @RequestMapping("/3")
+    public void printMessage3(@RequestParam(defaultValue = "sirius") final String name) {
+        hzwApiJdk.voidHello(name);
     }
 
 }

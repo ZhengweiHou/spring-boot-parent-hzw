@@ -15,13 +15,19 @@ public class HzwServiceImpl implements HzwApi {
 
     @Override
     public String sayHello(String name) {
-
+        System.out.println(name);
         if (new Random().nextInt(10) < 5) {
             log.info("抛出异常测试");
             getRunException();
         }
         return "hello--- " + name;
     }
+
+    @Override
+    public void voidHello(String name) {
+        System.out.println(name);
+    }
+
     private void getRunException(){
         throw new RuntimeException("hzw 的错误测试");
     }

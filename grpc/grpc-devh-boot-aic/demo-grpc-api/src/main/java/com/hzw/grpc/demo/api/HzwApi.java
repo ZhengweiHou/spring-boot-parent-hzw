@@ -8,4 +8,6 @@ package com.hzw.grpc.demo.api;
  **/
 public interface HzwApi {
     public String sayHello(String name);
+
+    public void voidHello(String name);
 }

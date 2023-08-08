@@ -17,4 +17,11 @@ public class ClientConfiguration {
     public AicGrpcClientFactoryBean hzwApi(){
         return new AicGrpcClientFactoryBean("cps",HzwApi.class);
     }
+
+    @Bean
+    public AicGrpcClientFactoryBean hzwApiJdk(){
+        AicGrpcClientFactoryBean fb = new AicGrpcClientFactoryBean(HzwApi.class);
+        fb.setSerializerType("jdk");
+        return fb;
+    }
 }
