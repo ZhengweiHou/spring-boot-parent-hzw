@@ -74,8 +74,6 @@ public class WrapperUtils {
         WRAPPER_SET.add(Timestamp.class);
         WRAPPER_SET.add(java.sql.Date.class);
 
-        WRAPPER_SET.add(int.class);
-
         WRAPPER_SET.add(Wrapper.class);
 
     }
