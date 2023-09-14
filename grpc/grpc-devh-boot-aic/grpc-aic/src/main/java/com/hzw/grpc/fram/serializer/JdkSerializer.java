@@ -15,6 +15,11 @@ public class JdkSerializer implements Serializer{
     }
 
     @Override
+    public <T> byte[] serialize(Class<T> clazz, T object) {
+        return this.serialize(object);
+    }
+
+    @Override
     public <T> T deserialize(byte[] data, Class<T> clazz) {
         return clazz.cast(SerializationUtils.deserialize(data));
     }

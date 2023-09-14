@@ -7,7 +7,6 @@ import com.hzw.grpc.fram.common.utils.ClassTypeUtils;
 import com.hzw.grpc.fram.message.AicGrpcMessageBuilder;
 import com.hzw.grpc.fram.message.AicGrpcRequest;
 import com.hzw.grpc.fram.message.ByteArrayWrapper;
-import com.hzw.grpc.fram.serializer.ProtoStuffSerializer;
 import com.hzw.grpc.fram.serializer.Serializer;
 import com.hzw.grpc.fram.serializer.SerializerFactory;
 import io.grpc.stub.StreamObserver;
@@ -56,16 +55,14 @@ public class AicGrpcHandler extends AicGrpcCommonServiceGrpc.AicGrpcCommonServic
         Byte serializerCode = request.getSerializerCode();
         Object[] methodArgs = request.getMethodArgs();
 
-        if (serializerCode != 0) { // 序列化方式非ProtoStuff
-            // 反序列化实际参数对象
-            Serializer serializer = SerializerFactory.getSerializer(serializerCode);
-            methodArgs = new Object[methodArgSigs.length];
-            for (int i = 0; i < methodArgSigs.length; i++) {
-                methodArgs[i] = serializer.deserialize(
-                        ((ByteArrayWrapper) request.getMethodArgs()[i]).array(),
-                        ClassTypeUtils.getClass(methodArgSigs[i])
-                );
-            }
+        // 反序列化实际参数对象
+        Serializer serializer = SerializerFactory.getSerializer(serializerCode);
+        methodArgs = new Object[methodArgSigs.length];
+        for (int i = 0; i < methodArgSigs.length; i++) {
+            methodArgs[i] = serializer.deserialize(
+                    ((ByteArrayWrapper) request.getMethodArgs()[i]).array(),
+                    ClassTypeUtils.getClass(methodArgSigs[i])
+            );
         }
 
         // get interface Clazz by interfaceName

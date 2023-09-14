@@ -56,6 +56,19 @@ public class AicGrpcClientFactoryBean extends AbstractFactoryBean implements App
         // 非法的serializerCode抛出异常
         SerializerFactory.getSerializerCode(serializerType);
     }
+
+    public AicGrpcClientFactoryBean(){
+//        this(AicGrpcConstant.PROTO_SERIALIZER_TYPE,GrpcChannelsProperties.GLOBAL_PROPERTIES_KEY,String.class,AicGrpcConstant.AIC_GRPC_STUB_TYPE_FUTURE,null,null,false,null);
+
+//        this(String.class);
+        this.serializerType = AicGrpcConstant.PROTO_SERIALIZER_TYPE;
+        this.channelKey = GrpcChannelsProperties.GLOBAL_PROPERTIES_KEY;
+        this.stubType = AicGrpcConstant.AIC_GRPC_STUB_TYPE_FUTURE;
+
+        this.interceptors = null;
+        this.interceptorNames = null;
+        this.sortInterceptors = false;
+    }
     public AicGrpcClientFactoryBean(Class<?> interfaceClass){
         this(GrpcChannelsProperties.GLOBAL_PROPERTIES_KEY,interfaceClass);
     }

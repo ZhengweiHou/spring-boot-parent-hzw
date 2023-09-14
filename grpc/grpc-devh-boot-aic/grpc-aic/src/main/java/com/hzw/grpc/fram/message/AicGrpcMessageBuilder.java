@@ -18,6 +18,8 @@ public class AicGrpcMessageBuilder {
 
 
     /**
+     *
+     * @param serializerCode - 序列化类型
      * @param clazz - 接口类
      * @param method - 方法
      * @param argTypes - 方法参数类型
@@ -32,21 +34,19 @@ public class AicGrpcMessageBuilder {
         req.setMethodArgSigs(ClassTypeUtils.getTypeStrs(argTypes, true));
         req.setSerializerCode(serializerCode);
 
-        if (serializerCode == 0) {
-            req.setMethodArgs(args == null ? new Object[0] : args);
-        }else {
-            // 若是其他序列化方式
-            ByteArrayWrapper[] argsBytes;
-            if (args == null || args.length == 0) {
-                argsBytes = new ByteArrayWrapper[0];
-            } else {
-                argsBytes = new ByteArrayWrapper[args.length];
-                for (int i=0; i<args.length; i++){
-                    argsBytes[i] = new ByteArrayWrapper(SerializerFactory.getSerializer(serializerCode).serialize(args[i]));
-                }
+        // 请求参数序列化方
+        ByteArrayWrapper[] argsBytes;
+        if (args == null || args.length == 0) {
+            argsBytes = new ByteArrayWrapper[0];
+        } else {
+            argsBytes = new ByteArrayWrapper[args.length];
+            for (int i=0; i<argTypes.length; i++){
+                argsBytes[i] = new ByteArrayWrapper(
+                        SerializerFactory.getSerializer(serializerCode).serialize(argTypes[i],args[i])
+                );
             }
-            req.setMethodArgs(argsBytes);
         }
+        req.setMethodArgs(argsBytes);
 
         GrpcRequest.Builder reqBuilder = GrpcRequest.newBuilder();
         reqBuilder.setAicGrpcRequest(

@@ -9,6 +9,9 @@ package com.hzw.grpc.fram.serializer;
 public interface Serializer {
     public <T> byte[] serialize(T object);
 
+
+    public <T> byte[] serialize(Class<T> clazz,T object);
+
     public <T> T deserialize(byte[] data, Class<T> clazz);
 
 }
