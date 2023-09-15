@@ -22,7 +22,9 @@ public class ProtoStuffSerializer implements Serializer {
 
     // 序列化对象为字节数组
     public <T> byte[] serialize(T object) {
-        if (object == null || WrapperUtils.needWrapper(object)) {
+        if (object == null){
+            return null;
+        }else if (WrapperUtils.needWrapper(object)) {
             Schema<Wrapper> schema = getSchema(Wrapper.class);
             Wrapper warpper = new Wrapper(object);
             return serialize(schema,warpper);
@@ -35,14 +37,18 @@ public class ProtoStuffSerializer implements Serializer {
 
     @Override
     public <T> byte[] serialize(Class<T> clazz, T object) {
-        if (object == null || WrapperUtils.needWrapper(clazz)) {
+        if (WrapperUtils.needWrapper(clazz)) {
             Schema<Wrapper> schema = getSchema(Wrapper.class);
             Wrapper warpper = new Wrapper(object);
             return serialize(schema,warpper);
         } else {
-            Class<T> clazz2 = (Class<T>) object.getClass();
-            Schema<T> schema = getSchema(clazz2);
-            return serialize(schema,object);
+            if (object == null){
+                return null;
+            } else {
+                Class<T> clazz2 = (Class<T>) object.getClass();
+                Schema<T> schema = getSchema(clazz2);
+                return serialize(schema,object);
+            }
         }
     }
 
