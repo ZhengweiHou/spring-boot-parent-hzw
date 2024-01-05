@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by zhanght (allinpdy) -->
+<ns1:schema xmlns="http://www.hzw.com/dataspec/" xmlns:ns1="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.hzw.com/dataspec/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <ns1:element name="REQUESTELE" type="ns1:anyType"/>
+
+    <ns1:simpleType name="C">
+        <ns1:annotation>
+            <ns1:documentation>字符格式</ns1:documentation>
+        </ns1:annotation>
+        <ns1:restriction base="ns1:string"/>
+    </ns1:simpleType>
+
+    <ns1:element name="NAME">
+        <ns1:simpleType>
+            <ns1:restriction base="C">
+                <ns1:minLength value="0"/>
+                <ns1:maxLength value="80"/>
+            </ns1:restriction>
+        </ns1:simpleType>
+    </ns1:element>
+</ns1:schema>

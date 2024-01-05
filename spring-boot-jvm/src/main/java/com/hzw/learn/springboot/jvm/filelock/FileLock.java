@@ -1,4 +1,4 @@
-package com.hzw.learn.springboot.log4j2;
+//package com.hzw.learn.springboot.jvm.filelock;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

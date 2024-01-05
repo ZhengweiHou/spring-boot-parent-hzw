@@ -3,6 +3,7 @@ package com.hzw.grpc.demo.server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @ClassName GrpcServerApplication
@@ -12,6 +13,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  **/
 @EnableDiscoveryClient
 @SpringBootApplication
+@ComponentScan(basePackages = "com.hzw.grpc.demo.server")
 public class GrpcServerApplication {
 
     public static void main(String[] args) {

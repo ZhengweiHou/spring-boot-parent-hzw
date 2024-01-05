@@ -11,7 +11,6 @@ import java.util.UUID;
  * @Date 2023/7/25
  **/
 public class AicGrpcRequest {
-    private static final long serialVersionUID = -9106471041209936049L;
 
     /**
      * Interfase name

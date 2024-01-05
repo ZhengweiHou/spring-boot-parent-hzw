@@ -58,15 +58,33 @@ public class AicGrpcMessageBuilder {
         return reqBuilder.build();
     }
 
+    public static GrpcResponse buildGrpcResponse(Byte serializerCode, Object arg){
+        return buildGrpcResponse(serializerCode,null,arg);
+    }
 
-    public static GrpcResponse buildGrpcResponse(Byte serializerCode,Object arg){
+    public static GrpcResponse buildGrpcResponse(Byte serializerCode, Class appRepType, Object arg) {
         AicGrpcResponse rep = new AicGrpcResponse();
-        if(serializerCode == SerializerFactory.PROTO_SERIALIZER_CODE) {
-            rep.setAppResponse(arg);
-        }else {
-            rep.setAppResponse(new ByteArrayWrapper(SerializerFactory.getSerializer(serializerCode).serialize(arg)));
+
+        if (arg instanceof Throwable) {
+            rep.setErrorMsg("*");
         }
 
+        // 返回对象单独封装序列化
+        ByteArrayWrapper baw = null;
+        if (appRepType != null && !rep.isError()) {
+            baw = new ByteArrayWrapper(SerializerFactory.getSerializer(serializerCode).serialize(appRepType, arg));
+            rep.setReturnSigs(ClassTypeUtils.getTypeStr(appRepType));
+        } else {
+            baw = new ByteArrayWrapper(SerializerFactory.getSerializer(serializerCode).serialize(arg));
+            if (arg == null){
+                rep.setReturnSigs("NULL");
+            }else {
+                rep.setReturnSigs(ClassTypeUtils.getTypeStr(arg.getClass()));
+            }
+        }
+        rep.setAppResponse(baw);
+
+        // 构建grpc服务的真正传输对象
         GrpcResponse response = GrpcResponse.newBuilder()
                 .setAicGrpcResponse(
                         ByteString.copyFrom(

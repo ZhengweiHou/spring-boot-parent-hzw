@@ -1,6 +1,7 @@
 package com.hzw.learn.sofa_consumer2multiprovider.server;
 
 import com.hzw.learn.ext.HelloService;
+import com.hzw.learn.ext.HzwException;
 import com.hzw.learn.ext.W;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -37,6 +38,11 @@ public class HelloServiceImpl implements HelloService {
 
     @Override
     public W hellow(W w) {
+        return null;
+    }
+
+    @Override
+    public String helloException(String msg) throws HzwException {
         return null;
     }
 

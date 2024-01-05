@@ -1,6 +1,7 @@
 package com.hzw.learn.springboot.springbootbase.configtest;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -19,4 +20,11 @@ public class HzwEnv {
 		this.hzwmaps = hzwmaps;
 	}
 
+
+
+	public List<String> hzwlist;
+
+	public void setHzwlist(List<String> hzwlist) {
+		this.hzwlist = hzwlist;
+	}
 }

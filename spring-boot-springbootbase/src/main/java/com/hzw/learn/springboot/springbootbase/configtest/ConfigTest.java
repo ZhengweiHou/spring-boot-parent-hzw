@@ -25,6 +25,11 @@ public class ConfigTest {
 			System.out.println(k + ":" + v);
 		});
 		System.out.println("=================================");
+
+		hzwenv.hzwlist.stream().forEach(value -> {
+			System.out.println(value);
+		});
+		System.out.println("=================================");
 		
 	}
 

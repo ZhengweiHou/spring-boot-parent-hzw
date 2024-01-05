@@ -1,5 +1,8 @@
 package com.hzw.learn.springsecurity.controller;
 
+import com.hzw.learn.springsecurity.dep.HzwPointAnno;
+import com.hzw.learn.springsecurity.dep.SomeTestBeanDep;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +19,18 @@ import java.util.Date;
 @RestController
 @RequestMapping("/test")
 public class TestController {
+
+    @Autowired
+    SomeTestBean someTestBean;
+
+    @Autowired
+    SomeTestBeanDep someTestBeanDep;
+
     @GetMapping("hello")
+    @HzwPointAnno
     public String hello(){
+        System.out.println(someTestBean.toString());
+        someTestBean.test1();
         return "hello security!";
     }
 

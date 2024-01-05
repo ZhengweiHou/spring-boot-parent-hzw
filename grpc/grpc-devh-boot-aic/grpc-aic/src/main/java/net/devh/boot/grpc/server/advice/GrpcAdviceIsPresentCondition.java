@@ -76,15 +76,11 @@ public class GrpcAdviceIsPresentCondition implements ConfigurationCondition {
                 Set<String> annoNames = ((AnnotatedBeanDefinition) df).getMetadata().getAnnotationTypes();
                 for (String annoName : annoNames) {
                     if (annoName.equals(GrpcAdvice.class.getName())) {
-                        System.out.println("==========================true");
                         return true;
                     }
                 }
             }
         }
-//        safeBeanFactory.getBeanNamesForAnnotation(GrpcAdvice.class);
-        System.out.println("==========================false");
         return false;
-
     }
 }

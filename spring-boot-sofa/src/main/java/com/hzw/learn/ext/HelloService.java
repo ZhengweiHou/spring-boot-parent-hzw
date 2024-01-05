@@ -20,4 +20,11 @@ public interface HelloService {
 
     // 参数是对象
     W hellow(W w);
+
+    /**
+     * 测试sofarpc，在服务端抛出异常时的处理
+     * @param msg
+     * @return
+     */
+    String helloException(String msg) throws HzwException;
 }

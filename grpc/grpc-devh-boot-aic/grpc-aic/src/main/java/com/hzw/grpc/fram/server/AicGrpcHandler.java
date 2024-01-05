@@ -14,6 +14,7 @@ import net.devh.boot.grpc.server.service.GrpcService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -28,6 +29,18 @@ public class AicGrpcHandler extends AicGrpcCommonServiceGrpc.AicGrpcCommonServic
     Logger log = LoggerFactory.getLogger(getClass());
 
     private AicGrpcServiceFactory aicGrpcServiceFactory;
+
+    private static Field causeField;
+
+    static {
+        try {
+            causeField = Throwable.class.getDeclaredField("cause");
+            causeField.setAccessible(true);
+        } catch (Exception e) {
+            causeField = null;
+        }
+    }
+
 
     public AicGrpcHandler(AicGrpcServiceFactory aicGrpcServiceFactory) {
         this.aicGrpcServiceFactory = aicGrpcServiceFactory;
@@ -81,19 +94,47 @@ public class AicGrpcHandler extends AicGrpcCommonServiceGrpc.AicGrpcCommonServic
 
         // do invoke
         Object appResponse;
+        GrpcResponse response;
         try {
             appResponse = method.invoke(serviceDef.getRef(), methodArgs);
-        } catch (IllegalAccessException e) {
-//            return AicGrpcMessageBuilder.buildGrpcResponse(serializerCode, e);
-            return AicGrpcMessageBuilder.buildGrpcErrorResponse(e.getMessage());
-        } catch (InvocationTargetException e){
-            return AicGrpcMessageBuilder.buildGrpcResponse(serializerCode, e.getTargetException());
-        } catch (Exception e){
-            // 其他业务异常透传到客户端
-            return AicGrpcMessageBuilder.buildGrpcResponse(serializerCode, e);
+            Class<?> returnType = method.getReturnType();
+            response = AicGrpcMessageBuilder.buildGrpcResponse(serializerCode, returnType, appResponse); // TODO 序列化int类型属于客户端反序列化有问题
+        } catch (IllegalArgumentException e) { // 非法参数，接口和实现类有差异
+            response = AicGrpcMessageBuilder.buildGrpcErrorResponse(e.getMessage());
+        } catch (IllegalAccessException e) {  // 方法不可访问
+            response = AicGrpcMessageBuilder.buildGrpcErrorResponse(e.getMessage());
+        } catch (InvocationTargetException e) { // 业务代码抛出异常
+            cutCause(e.getCause());
+            response = AicGrpcMessageBuilder.buildGrpcResponse(serializerCode, e.getCause());
+        } catch (Exception e) { // 其他异常
+            cutCause(e.getCause());
+            response = AicGrpcMessageBuilder.buildGrpcResponse(serializerCode, e.getCause());
+//            response = AicGrpcMessageBuilder.buildGrpcResponse(serializerCode, e);
         }
 
-        GrpcResponse response = AicGrpcMessageBuilder.buildGrpcResponse(serializerCode, appResponse);
         return response;
+    }
+
+
+    /**
+     * 把业务层抛出的业务异常或者RuntimeException/Error，
+     * 截断Cause，以免客户端因为无法找到cause类而出现反序列化失败.
+     */
+    public void cutCause(Throwable bizException) {
+        if (causeField == null) {
+            return;
+        }
+        Throwable rootCause = bizException;
+        while (null != rootCause.getCause()) {
+            rootCause = rootCause.getCause();
+        }
+        if (rootCause != bizException) {
+            bizException.setStackTrace(rootCause.getStackTrace());
+            try {
+                causeField.set(bizException, bizException); // SELF-CAUSE
+            } catch (Exception e) {
+                log.warn("cutCause error", e);
+            }
+        }
     }
 }

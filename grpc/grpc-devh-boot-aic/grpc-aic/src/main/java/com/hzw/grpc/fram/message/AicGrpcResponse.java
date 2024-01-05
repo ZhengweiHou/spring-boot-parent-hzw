@@ -11,9 +11,6 @@ import java.util.Map;
  **/
 public class AicGrpcResponse {
 
-
-    private static final long         serialVersionUID = -4364536436151723421L;
-
     /**
      * 框架异常
      */
@@ -25,6 +22,11 @@ public class AicGrpcResponse {
     private String                    errorMsg;
 
     /**
+     * 返回对象类型字符串
+     */
+    private String                    returnSig;
+
+    /**
      * 业务返回或者业务异常
      */
     private Object                    appResponse;
@@ -32,7 +34,7 @@ public class AicGrpcResponse {
     /**
      * extensional properties
      */
-    private Map<String, String> responseProps;
+    private Map<String, String>       responseProps;
 
 
     /**
@@ -82,6 +84,23 @@ public class AicGrpcResponse {
         }
         errorMsg = error;
         isError = true;
+    }
+
+    /**
+     * 获取返回对象类型字符串
+     *
+     * @return
+     */
+    public String getReturnSig() {
+        return returnSig;
+    }
+
+    /**
+     * 设置对象类型字符串
+     * @param returnSig
+     */
+    public void setReturnSigs(String returnSig) {
+        this.returnSig = returnSig;
     }
 
     /**
@@ -141,9 +160,9 @@ public class AicGrpcResponse {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(128);
-        sb.append("SofaResponse[");
-        sb.append("sofa-rpc exception=").append(isError).append(", ");
-        sb.append("sofa-rpc errorMsg=").append(errorMsg).append(", ");
+        sb.append("AicGrpcResponse[");
+        sb.append("aic-grpc exception=").append(isError).append(", ");
+        sb.append("aic-grpc errorMsg=").append(errorMsg).append(", ");
         sb.append("appResponse=").append(appResponse).append("]");
         return sb.toString();
     }

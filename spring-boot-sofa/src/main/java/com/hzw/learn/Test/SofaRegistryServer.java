@@ -22,8 +22,8 @@ public class SofaRegistryServer {
 
     public static void main(String[] args) {
 
-//        String nacosaddress = "127.0.0.1:8848/test";
-        String nacosaddress = "127.0.0.1:8148,127.0.0.1:8248,127.0.0.1:8348/test";
+        String nacosaddress = "127.0.0.1:8848/test";
+//        String nacosaddress = "127.0.0.1:8148,127.0.0.1:8248,127.0.0.1:8348/test";
         int serverPort = (int) (10000 + System.currentTimeMillis()%10000);
 
         if (args.length > 0){
@@ -59,6 +59,9 @@ public class SofaRegistryServer {
 //                .setVirtualPort(35929)
                 .setAdaptivePort(true);
 //                .setDaemon(false);
+
+        // 序列化类型
+        serverConfig.setSerialization("java");
 
         HelloServiceImpl helloService = new HelloServiceImpl();
         helloService.jvmProcessID = processId;

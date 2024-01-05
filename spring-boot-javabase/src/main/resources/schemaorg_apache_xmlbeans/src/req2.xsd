@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns1:schema xmlns="http://www.hzw.com/dataspec/" xmlns:ns1="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.hzw.com/dataspec/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<ns1:element name="example">
+    <ns1:complexType>
+        <ns1:sequence>
+            <ns1:element name="name" type="ns1:string"/>
+        </ns1:sequence>
+    </ns1:complexType>
+</ns1:element>
+</ns1:schema>

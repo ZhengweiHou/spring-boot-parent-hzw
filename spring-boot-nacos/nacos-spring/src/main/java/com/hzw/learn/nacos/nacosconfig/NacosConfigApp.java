@@ -1,5 +1,6 @@
 package com.hzw.learn.nacos.nacosconfig;
 
+import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -9,7 +10,7 @@ import java.lang.reflect.Method;
 
 
 //@ComponentScan(basePackages = "com.hzw.learn.nacos.nacosconfig")
-public class AppNacosConfig {
+public class NacosConfigApp {
 
     @PostConstruct
     public void init() {
@@ -20,8 +21,8 @@ public class AppNacosConfig {
         System.out.println((int)Math.ceil(1/3000.0));
 
         context = new ClassPathXmlApplicationContext("appnacosconfig.xml");
-
         System.err.println("service running ......");
+
 //        System.in.read();
         Thread.sleep(1000*1000);
     }

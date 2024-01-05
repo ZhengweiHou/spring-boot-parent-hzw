@@ -30,7 +30,7 @@ public class TestMain_XML {
 //        jobParametersBuilder.addString("tempStr","h");
         JobExecution jobExecution = jobLauncher.run(job,jobParametersBuilder.toJobParameters());
 
-        for (int i=1; i<100; i++){
+        for (int i=1; i<100000; i++){
             Thread.sleep(20);
         }
 

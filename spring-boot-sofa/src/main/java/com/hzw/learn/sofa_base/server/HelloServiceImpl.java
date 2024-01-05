@@ -2,6 +2,7 @@ package com.hzw.learn.sofa_base.server;
 
 import com.hzw.learn.ext.H;
 import com.hzw.learn.ext.HelloService;
+import com.hzw.learn.ext.HzwException;
 import com.hzw.learn.ext.W;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -40,6 +41,15 @@ public class HelloServiceImpl implements HelloService {
         W wr = new W();
         wr.msg="private w";
         return wr;
+    }
+
+    @Override
+    public String helloException(String msg) throws HzwException {
+        System.out.println("hello " + msg);
+        if("error".equals(msg)) {
+            throw new HzwException("hzwException");
+        }
+        return "hello " + msg;
     }
 
     private String showJVMInfo(){

@@ -4,12 +4,17 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.hzw.grpc.AicGrpcCommonServiceGrpc;
 import com.hzw.grpc.GrpcRequest;
 import com.hzw.grpc.GrpcResponse;
+import com.hzw.grpc.fram.common.utils.ClassTypeUtils;
 import com.hzw.grpc.fram.exception.AicGrpcRpcException;
 import com.hzw.grpc.fram.message.AicGrpcMessageBuilder;
 import com.hzw.grpc.fram.message.AicGrpcResponse;
 import com.hzw.grpc.fram.message.ByteArrayWrapper;
 import com.hzw.grpc.fram.serializer.SerializerFactory;
 import io.grpc.stub.AbstractStub;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -22,7 +27,7 @@ import java.util.concurrent.TimeUnit;
  * @Date 2023/7/24
  **/
 public class JDKInvocationHandler implements InvocationHandler {
-
+    Logger log = LoggerFactory.getLogger(getClass());
     // grpc 客户端调用服务端的存根
 //    private final AicGrpcCommonServiceGrpc.AicGrpcCommonServiceStub aicGrpcCommonServiceFutureStub;
     private final AbstractStub stub;
@@ -59,23 +64,43 @@ public class JDKInvocationHandler implements InvocationHandler {
 
         GrpcResponse response = future.get(60, TimeUnit.SECONDS); // 超时处理
 
+        // 3. 返回值处理
         AicGrpcResponse aicGrpcResponse = SerializerFactory.getSerializer(SerializerFactory.PROTO_SERIALIZER_CODE)
                 .deserialize(response.getAicGrpcResponse().toByteArray(), AicGrpcResponse.class);
 
+        Object appResp = aicGrpcResponse.getAppResponse();
+        Object deAppResp = null;
+
         if (aicGrpcResponse.isError()) {
-            throw new AicGrpcRpcException(aicGrpcResponse.getErrorMsg());
-        }
-        Object ret = aicGrpcResponse.getAppResponse();
-        if (ret instanceof Throwable) {
-            throw (Throwable) ret;
-        } else if (ret instanceof ByteArrayWrapper){
-            Object ret2 = SerializerFactory.getSerializer(serializerCode).deserialize(((ByteArrayWrapper) ret).array(), Object.class);
-            if (ret2 instanceof Throwable) {
-                throw (Throwable) ret2;
+            if(ObjectUtils.isEmpty(aicGrpcResponse.getReturnSig()) || "NULL".equals(aicGrpcResponse.getReturnSig())){
+                throw new AicGrpcRpcException(aicGrpcResponse.getErrorMsg());
             }
-            return ret2;
-        }else {
-            return ret;
+            deAppResp = SerializerFactory.getSerializer(serializerCode)
+                    .deserialize(
+                            ((ByteArrayWrapper) appResp).array(),
+                            ClassTypeUtils.getClass(aicGrpcResponse.getReturnSig()));
+            if (deAppResp instanceof Throwable) {
+                throw (Throwable) deAppResp;
+            }else {
+                // 返回显示有异常，但异常信息不是异常对象，目前不知道什么情况会发生这个现象
+                log.warn("AicGrpcResp is error, but appResp is not Throwable");
+                return deAppResp;
+            }
+        }
+
+        if (appResp instanceof ByteArrayWrapper){
+            deAppResp = SerializerFactory.getSerializer(serializerCode).deserialize(((ByteArrayWrapper) appResp).array(), method.getReturnType());
+            if (deAppResp instanceof Throwable) {
+                throw (Throwable) deAppResp;
+            }
+            return deAppResp;
+        }else if (appResp instanceof Throwable) {
+            throw (Throwable) appResp;
+        } else {
+            return appResp;
         }
     }
+
+
+
 }

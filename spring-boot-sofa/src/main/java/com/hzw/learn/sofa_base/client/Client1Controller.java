@@ -11,6 +11,7 @@ import com.alipay.sofa.rpc.core.request.SofaRequest;
 import com.alipay.sofa.rpc.core.response.SofaResponse;
 import com.alipay.sofa.rpc.invoke.Invoker;
 import com.hzw.learn.ext.HelloService;
+import com.hzw.learn.ext.HzwException;
 import com.hzw.learn.ext.W;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -128,6 +129,13 @@ public class Client1Controller {
 //        String o3 = ref.$genericInvoke("hello",new String[]{"[参数类名]"},new Object[]{geo},String.class);
 
         return o1 + "###" + o2;
+    }
+
+    @RequestMapping("/helloException")
+    public void helloException() throws HzwException {
+        String hello = helloService.helloException("hello");
+        System.out.println(hello);
+        String hello2 = helloService.helloException("error");
     }
 
     static String buildServiceName(AbstractInterfaceConfig config, String protocol) {

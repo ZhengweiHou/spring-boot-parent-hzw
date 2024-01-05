@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
  **/
 public class ProtoStuffSerializer implements Serializer {
 
-    private static final Map<Class<?>, Schema<?>> schemaCache = new ConcurrentHashMap<>();
+//    private static final Map<Class<?>, Schema<?>> schemaCache = new ConcurrentHashMap<>();
 
     // 序列化对象为字节数组
     public <T> byte[] serialize(T object) {
@@ -52,11 +52,16 @@ public class ProtoStuffSerializer implements Serializer {
         }
     }
 
-    private <T> byte[] serialize(Schema<T> schema,T object){
-        return GraphIOUtil.toByteArray(
-                object,
-                schema,
-                LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE));
+    public <T> byte[] serialize(Schema<T> schema,T object){
+        LinkedBuffer buffer = LinkedBuffer.allocate(512);
+        try {
+            return GraphIOUtil.toByteArray(
+                    object,
+                    schema,
+                    buffer);
+        } finally {
+            buffer.clear();
+        }
     }
 
     // 反序列化字节数组为对象
@@ -77,12 +82,16 @@ public class ProtoStuffSerializer implements Serializer {
     }
 
     private <T> Schema<T> getSchema(Class<T> clazz) {
-        Schema<T> schema = (Schema<T>) schemaCache.get(clazz);
-        if (schema == null) {
-            schema = RuntimeSchema.createFrom(clazz);
-            schemaCache.put(clazz, schema);
-        }
-        return schema;
+
+        // getSchema方法中是有缓存的
+        return RuntimeSchema.getSchema(clazz);
+
+//        Schema<T> schema = (Schema<T>) schemaCache.get(clazz);
+//        if (schema == null) {
+//            schema = RuntimeSchema.createFrom(clazz);
+//            schemaCache.put(clazz, schema);
+//        }
+//        return schema;
     }
 
 }

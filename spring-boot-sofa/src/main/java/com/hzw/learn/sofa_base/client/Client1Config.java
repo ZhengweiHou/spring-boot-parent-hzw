@@ -46,6 +46,8 @@ public class Client1Config {
         ConsumerConfig<HelloService> consumerConfig = new ConsumerConfig<>();
         consumerConfig.setId("helloconsumer_sofa2");
         consumerConfig.setProtocol("bolt"); // 默认bolt协议
+        consumerConfig.setSerialization("protostuff"); // 默认hessian2
+//        consumerConfig.setSerialization("jdk");
 //        consumerConfig.setLoadBalancer();
         // consumerConfig.setProtocol("h2c");
         /* 代理的实现方式 可选SPI 如下，默认为javassist：
