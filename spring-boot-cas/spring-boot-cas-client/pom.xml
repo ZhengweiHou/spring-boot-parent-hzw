@@ -32,14 +32,14 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-cas</artifactId>
-            <version>4.0.1.RELEASE</version>
+            <version>4.2.13.RELEASE</version>
         </dependency>
 
         <!--  &lt;!&ndash; spring-security-cas START &ndash;&gt;
           <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-cas</artifactId>
-            <version>4.0.1.RELEASE</version>
+            <version>4.2.13.RELEASE</version>
           </dependency>
 
           &lt;!&ndash; 引入配置包，xsd等都在这里面，如spring-security-3.1.xsd &ndash;&gt;
