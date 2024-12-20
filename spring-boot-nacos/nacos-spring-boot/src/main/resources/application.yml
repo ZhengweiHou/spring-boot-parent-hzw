@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: nacos-spring-boot-learn
+
+nacos:
+  config:
+    bootstrap:
+      enable: true
+      log-enable: true
+    autoRefresh: true
+    namespace: nacostestns
+    dataId: nacos-springboot-learn
+    group: DEFAULT_GROUP
+    type: yaml
+    serverAddr: 127.0.0.1:8848
+    username: nacos
+    password: nacos
+
+#logging:
+#  config: classpath:log4j2.yml
+
+spring.key1.hhh[2].z=xxx
+
+

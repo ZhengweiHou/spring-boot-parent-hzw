@@ -49,6 +49,12 @@
 <!--            <version>5.0.3</version>-->
         </dependency>
 
+        <dependency>
+            <groupId>commons-pool</groupId>
+            <artifactId>commons-pool</artifactId>
+            <version>1.6</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -6,6 +6,7 @@ import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.JobParametersInvalidException;
 import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.batch.core.launch.JobOperator;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRepository;
@@ -30,9 +31,9 @@ public class TestMain_XML {
 //        jobParametersBuilder.addString("tempStr","h");
         JobExecution jobExecution = jobLauncher.run(job,jobParametersBuilder.toJobParameters());
 
-        for (int i=1; i<100000; i++){
-            Thread.sleep(20);
-        }
+//        for (int i=1; i<100000; i++){
+//            Thread.sleep(20);
+//        }
 
     }
 }

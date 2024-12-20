@@ -1,11 +1,16 @@
 package com.hzw.learn.springboot.batchbase.patrition.hstep;
 
 import com.hzw.learn.springboot.batchbase.patrition.support.listener.HzwStepExecutionListener;
+import com.hzw.learn.springboot.batchbase.scoperrtest.HzwBean2;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.hzw.learn.springboot.batchbase.patrition.service.IBatchTestService;
 import com.hzw.learn.springboot.batchbase.patrition.support.Contents;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class HProdessor implements ItemProcessor {
 
@@ -15,9 +20,16 @@ public class HProdessor implements ItemProcessor {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    HzwBean2 hzw3;
+
+    @Autowired
+    Map hzwmapping;
+
     @Override
     public Object process(Object item) throws Exception {
 
+        System.out.println("=====hzwbean:" + hzwmapping.size());
         String temp = (String) item;
 
         System.out.println(HzwStepExecutionListener.stepName.get() + " [processor] "

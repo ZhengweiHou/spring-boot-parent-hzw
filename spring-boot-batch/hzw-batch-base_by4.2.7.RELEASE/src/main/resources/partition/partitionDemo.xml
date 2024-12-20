@@ -71,8 +71,8 @@
 
     <bean id="hReader" class="com.hzw.learn.springboot.batchbase.patrition.hstep.HReader" scope="step"/>
     <bean id="hPartReader" class="com.hzw.learn.springboot.batchbase.patrition.hstep.HzwPartitionResourceItemReader" scope="step"/>
-    <bean id="hProdessor" class="com.hzw.learn.springboot.batchbase.patrition.hstep.HProdessor"/>
-    <bean id="hWriter" class="com.hzw.learn.springboot.batchbase.patrition.hstep.HWriter"/>
+    <bean id="hProdessor" class="com.hzw.learn.springboot.batchbase.patrition.hstep.HProdessor" scope="step"/>
+    <bean id="hWriter" class="com.hzw.learn.springboot.batchbase.patrition.hstep.HWriter" scope="step"/>
 
 
     <!-- 定义step模板，用于绑定listener等，后续定义step时指定该parent就可以继承这里的配置 -->
@@ -105,7 +105,7 @@
 <!--        <batch:step id="partitionStep1" next="split1">-->
         <batch:step id="partitionStep1">
             <batch:partition partitioner="partition_hzw_file1" step="hstep">
-                <batch:handler grid-size="1" task-executor="executor"/>  <!-- 指定分片数量  task-executor 指定任务的执行池-->
+                <batch:handler grid-size="2" task-executor="executor"/>  <!-- 指定分片数量  task-executor 指定任务的执行池-->
             </batch:partition>
         </batch:step>
 
@@ -134,4 +134,16 @@
     <!-- listener 懒加载测试 -->
     <bean id="hzwJobExecutionListener" class="com.hzw.learn.springboot.batchbase.patrition.support.listener.HzwStepExecutionListener" lazy-init="true"/>
 
+
+    <bean id="hzwmapping" class="java.util.HashMap" scope="step">
+        <constructor-arg>
+            <map>
+                <entry key="k1" value="v1"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <bean id="hzw3" class="com.hzw.learn.springboot.batchbase.scoperrtest.HzwBean2" scope="prototype">
+        <property name="map1" ref="hzwmapping"/>
+    </bean>
 </beans>

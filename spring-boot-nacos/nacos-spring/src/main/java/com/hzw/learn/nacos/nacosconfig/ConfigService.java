@@ -42,7 +42,7 @@ public class ConfigService implements ApplicationListener<NacosConfigReceivedEve
                 Thread.currentThread().getName()+ ":"
                         + event.getClass().getSimpleName()
                         + " dataid:" + event.getDataId()
-                        + " a=" + a + " b=" + b + " c=" + new Gson().toJson(c));
+                        + " a=" + getA() + " b=" + getB() + " c=" + new Gson().toJson(c));
     }
 
     @PostConstruct
@@ -59,6 +59,28 @@ public class ConfigService implements ApplicationListener<NacosConfigReceivedEve
     }
 
 
+    public String getA() {
+        return a;
+    }
 
+    public String getB() {
+        return b;
+    }
+
+    public List<String> getC() {
+        return c;
+    }
+
+    public void setA(String a) {
+        this.a = a;
+    }
+
+    public void setB(String b) {
+        this.b = b;
+    }
+
+    public void setC(List<String> c) {
+        this.c = c;
+    }
 }
 

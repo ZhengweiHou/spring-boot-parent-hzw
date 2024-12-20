@@ -18,7 +18,8 @@ public class GrpcClientMetaInterceptor implements ClientInterceptor {
             @Override
             public void start(Listener<RespT> responseListener, Metadata headers) {
                 // 在这里添加额外的元数据信息
-                headers.put(Metadata.Key.of("username", Metadata.ASCII_STRING_MARSHALLER), "houzw-interceptro");
+//                headers.put(Metadata.Key.of("username", Metadata.ASCII_STRING_MARSHALLER), "houzw-interceptro");
+                headers.put(Metadata.Key.of("username", Metadata.ASCII_STRING_MARSHALLER), "houzw-zzzzzzzzzzzzzzzzzzzzzz");
                 super.start(responseListener, headers);
             }
         };

@@ -1,0 +1,12 @@
+package com.hzw.learn.drools.demo1;
+dialect "mvel"
+rule "ruletest"
+    when
+        $order: Order(amount > 100)
+    then
+        $order.setDiscount(10);
+        System.out.println("Applied 10% discount for order over 100");
+end
+
+
+

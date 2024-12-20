@@ -17,8 +17,9 @@ public class HzwServiceImpl implements HzwApi {
 
     @Override
     public String sayHello(String name) {
-        System.out.println("str:" + name);
-        return "str:" + name;
+        String ctxusername = ContextHolder.getUsername();
+        System.out.println("str:" + name + " ctxname:" + ctxusername);
+        return "str:" + name + " ctxname:" + ctxusername;
     }
 
     @Override
