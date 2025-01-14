@@ -33,6 +33,7 @@ public class PropagationTest1Service extends AbstractPropagationTestService impl
         showTransaction();
         return propagationTest2Service.tx2();
     }
+
     @Transactional
     public int tx3() {
         showTransaction();

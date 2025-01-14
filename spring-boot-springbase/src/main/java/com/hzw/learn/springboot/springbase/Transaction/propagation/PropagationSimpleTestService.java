@@ -19,6 +19,7 @@ public class PropagationSimpleTestService extends AbstractPropagationTestService
 
     @Transactional(propagation = Propagation.REQUIRED)
     public void case1(){
+        showTransaction();
         _insert1(1,"1");
 //        try {this.propagationSimpleTestService.tx1();}catch (Exception e){};
 //        try {this.propagationSimpleTestService.tx2();;}catch (Exception e){};
@@ -27,23 +28,26 @@ public class PropagationSimpleTestService extends AbstractPropagationTestService
         this.propagationSimpleTestService.tx2();
         this.propagationSimpleTestService.tx3();
 
-        _insert1(7,"12345678901");
+        _insert1(7,"123");
     }
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public void tx1(){
+        showTransaction();
         _insert1(2,"2");
-        _insert1(3,"12345678901"); // 失败
+        _insert1(3,"123"); // 失败
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void tx2(){
+        showTransaction();
         _insert1(4,"4");
-        _insert1(5,"12345678901"); // 失败
+        _insert1(5,"123"); // 失败
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void tx3(){
+        showTransaction();
         _insert1(6,"4");
     }
 

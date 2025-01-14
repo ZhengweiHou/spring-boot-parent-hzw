@@ -39,9 +39,9 @@
 
 <!--	事务注解@Transactional生效-->
 <!--	<tx:annotation-driven transaction-manager="transactionManager"/>-->
-<!--	TODO aspectj 实现，这里事务是不生效的，不知道为什么-->
-	<!--<tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/>-->
-	<tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>
+<!--	aspectj 实现，这里事务生效需要aspectj提前编译织入代码，需要添加aspectj的依赖aspectjrt和aspectjweaver 及 maven插件：aspectj-maven-plugin -->
+	<tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/>
+<!--	<tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>-->
 
 <!--	<aop:aspectj-autoproxy />-->
 
