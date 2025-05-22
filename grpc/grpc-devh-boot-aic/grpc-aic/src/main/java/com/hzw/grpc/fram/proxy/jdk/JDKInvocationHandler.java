@@ -60,7 +60,6 @@ public class JDKInvocationHandler implements InvocationHandler {
         GrpcRequest grpcRequest = AicGrpcMessageBuilder.buildGrpcRequest(serializerCode, method.getDeclaringClass(), method, paramTypes, paramValues);
 
         // 2. do invoke
-        ListenableFuture<GrpcResponse> future = ((AicGrpcCommonServiceGrpc.AicGrpcCommonServiceFutureStub) stub).rpcInvoke(grpcRequest);
 
         GrpcResponse response = future.get(60, TimeUnit.SECONDS); // 超时处理
 

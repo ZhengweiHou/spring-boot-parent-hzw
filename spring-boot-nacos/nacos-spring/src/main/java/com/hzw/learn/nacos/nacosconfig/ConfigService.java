@@ -55,7 +55,7 @@ public class ConfigService implements ApplicationListener<NacosConfigReceivedEve
     }
 
     private void showab(){
-        System.out.println("PostConstruct:" + this.a + ":" + this.b);
+        System.out.println("PostConstruct:" + this.a + ":" + this.b + ":" + new Gson().toJson(c));
     }
 
 

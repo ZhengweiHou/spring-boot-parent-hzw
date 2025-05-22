@@ -8,17 +8,21 @@ nacos:
       enable: true
       log-enable: true
     autoRefresh: true
-    namespace: nacostestns
-    dataId: nacos-springboot-learn
-    group: DEFAULT_GROUP
+    namespace: test
+#    dataId: nacos-springboot-learn
+    dataId: test
+#    dataIds:
+#      - test
+    group: test
     type: yaml
-    serverAddr: 127.0.0.1:8848
+#    serverAddr: 127.0.0.1:8848
+    serverAddr: 127.0.0.1:8813
     username: nacos
     password: nacos
 
 #logging:
 #  config: classpath:log4j2.yml
 
-spring.key1.hhh[2].z=xxx
+#spring.key1.hhh[2].z=xxx
 
 

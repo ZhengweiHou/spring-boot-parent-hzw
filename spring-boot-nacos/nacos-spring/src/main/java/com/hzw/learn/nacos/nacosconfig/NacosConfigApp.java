@@ -4,6 +4,7 @@ import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.env.Environment;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.Method;
@@ -18,12 +19,15 @@ public class NacosConfigApp {
 
     static ApplicationContext context;
     public static void main(String[] args) throws Exception {
-        System.out.println((int)Math.ceil(1/3000.0));
-
         context = new ClassPathXmlApplicationContext("appnacosconfig.xml");
         System.err.println("service running ......");
 
+        Environment env = context.getBean(Environment.class);
+        String a = env.getProperty("a");
+        String c = env.getProperty("c");
+        System.out.println("a=" + a);
+
 //        System.in.read();
-        Thread.sleep(1000*1000);
+//        Thread.sleep(1000*30);
     }
 }

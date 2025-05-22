@@ -48,6 +48,10 @@ public class IsolationSimpleTestService extends AbstractIsolationTestService {
         Thread.sleep(1000);
 
     }
+    public void case2() throws Exception {
+        isolationSimpleTestService._updateForAddAndSelect(1);
+        Thread.sleep(1000);
+    }
 
 
     @Transactional

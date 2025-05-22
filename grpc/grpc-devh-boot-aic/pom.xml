@@ -11,16 +11,16 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.8</java.version>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <java.version>1.8</java.version>
       <maven.compiler.source>1.8</maven.compiler.source>
       <maven.compiler.target>1.8</maven.compiler.target>
 
-    <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
-    <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
-    <springCloudAlibabaNacosVersion>2.1.4.RELEASE</springCloudAlibabaNacosVersion>
+      <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
+      <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
+      <springCloudAlibabaNacosVersion>2.1.4.RELEASE</springCloudAlibabaNacosVersion>
 
-    <grpc-springboot-start.version>2.13.1.RELEASE</grpc-springboot-start.version>
+      <grpc-springboot-start.version>2.13.1.RELEASE</grpc-springboot-start.version>
       <grpc.version>1.56.0</grpc.version>
       <protobuf.version>3.22.3</protobuf.version>
   </properties>

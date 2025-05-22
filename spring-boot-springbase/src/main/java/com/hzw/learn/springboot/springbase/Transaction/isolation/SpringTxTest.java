@@ -32,6 +32,11 @@ public class SpringTxTest {
         isolationSimpleTestService.case1();
     }
 
+    @Test
+    public void test2() throws Exception {
+        isolationSimpleTestService.case2();
+    }
+
 
 
 
