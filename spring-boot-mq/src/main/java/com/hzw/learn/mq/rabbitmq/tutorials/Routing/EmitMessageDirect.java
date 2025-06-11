@@ -1,4 +1,4 @@
-package com.hzw.learn.kafkatest.mq.rabbitmq.Tutorials.Topic;
+package com.hzw.learn.mq.rabbitmq.tutorials.Routing;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -10,48 +10,38 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.MessageProperties;
 
-public class EmitMessageTopic {
+public class EmitMessageDirect {
 	public static void main(String[] args) throws IOException, TimeoutException {
-
-		String EXCHANGE_NAME="hzw.Topic_exchange";
-
+		
+		String EXCHANGE_NAME="hzw.Direct_exchange";
+		
 		ConnectionFactory connectionFactory = new ConnectionFactory();
-//		connectionFactory.setHost("192.168.32.131");
-		connectionFactory.setHost("localhost");
+		connectionFactory.setHost("192.168.32.131");
+//		connectionFactory.setVirtualHost("test");
 		connectionFactory.setUsername("admin");
 		connectionFactory.setPassword("admin");
-		connectionFactory.setVirtualHost("test");
 		Connection connection = connectionFactory.newConnection();
 		Channel channel = connection.createChannel();
-
-		channel.exchangeDeclare(EXCHANGE_NAME,BuiltinExchangeType.TOPIC);	// ecchangeType = TOPIC
-
+		channel.queueDeclare("a123456", false, false, false, null);
+		channel.exchangeDeclare(EXCHANGE_NAME,BuiltinExchangeType.DIRECT);	// ecchangeType = direct
+		
 		Scanner scan = new Scanner(System.in);
 		while (true) {
 			System.out.println(" [*] input message to send...");
-
 			String message = scan.nextLine();
-
-			String routingKey = message.length() > 0 && message.contains("=")
-					?
-						(String) message.substring(0, message.indexOf("="))
-					:
-						"0";
-			message =
-					message.length() > 0 && message.contains("=")
-					?
-						(String) message.substring(message.indexOf("=")+1,message.length())
-					:
-						"default message!!";
-
-
+			
+			String routingKey = message.length() > 0 ? message.substring(0, 1) : "0";
+			
+			message = message.length() > 0 ? message : "default message!!";
+			
+			
 			channel.basicPublish(
-					EXCHANGE_NAME,
-					routingKey,
+					EXCHANGE_NAME, 
+					routingKey, 
 					MessageProperties.PERSISTENT_TEXT_PLAIN, 	//设置消息持久化
-					message.getBytes());
+					message.getBytes()); 
 			System.out.println("[x] rout:["+routingKey+"] sent:" + message);
 		}
-
+		
 	}
 }

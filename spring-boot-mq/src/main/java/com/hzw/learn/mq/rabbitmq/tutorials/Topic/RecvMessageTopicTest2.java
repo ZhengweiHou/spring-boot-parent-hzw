@@ -1,4 +1,4 @@
-package com.hzw.learn.kafkatest.mq.rabbitmq.Tutorials.Topic;
+package com.hzw.learn.mq.rabbitmq.tutorials.Topic;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -8,7 +8,7 @@ import com.rabbitmq.client.DeliverCallback;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-public class RecvMessageTopicTest {
+public class RecvMessageTopicTest2 {
 	public static void main(String[] args) throws IOException, TimeoutException {
 		
 		String EXCHANGE_NAME="hzw.Topic_exchange";
@@ -21,11 +21,12 @@ public class RecvMessageTopicTest {
 			connectionFactory.setVirtualHost("test");
 	        Connection connection = connectionFactory.newConnection();
 	        Channel channel = connection.createChannel();
-	        
 
-	        String queueName = channel.queueDeclare().getQueue();
 
-			channel.queueBind(queueName, EXCHANGE_NAME, "#");
+	     //   String queueName = channel.queueDeclare().getQueue();
+			String queueName = channel.queueDeclare("recv_1111",true,false,false,null).getQueue();
+
+		channel.queueBind(queueName, EXCHANGE_NAME, "#");
 
 
 	        DeliverCallback deliverCallback = (consumerTag, delivery) -> {

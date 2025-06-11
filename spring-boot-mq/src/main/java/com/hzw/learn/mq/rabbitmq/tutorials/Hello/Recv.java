@@ -1,4 +1,4 @@
-package com.hzw.learn.kafkatest.mq.rabbitmq.Tutorials.Hello;
+package com.hzw.learn.mq.rabbitmq.tutorials.Hello;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;

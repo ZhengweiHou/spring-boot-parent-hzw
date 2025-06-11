@@ -1,4 +1,4 @@
-package com.hzw.learn.kafkatest.mq.rabbitmq.Tutorials.Workqueues;
+package com.hzw.learn.mq.rabbitmq.tutorials.Workqueues;
 
 import java.io.IOException;
 import java.util.Scanner;

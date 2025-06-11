@@ -1,4 +1,4 @@
-package com.hzw.learn.kafkatest.mq.rabbitmq.Tutorials.RPC;
+package com.hzw.learn.mq.rabbitmq.tutorials.RPC;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -9,40 +9,36 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
 
-public class RecvMessageRpc_exchange {
+public class RecvMessageRpc_queue {
 	public static void main(String[] args) throws IOException, TimeoutException {
 		
-		String EXCHANGE_NAME="hzw.Rpc_exchange";
-		
-		if(args.length < 1) {
-			args = new String[] {"#"}; // 接受所有消息
-//			args = new String[] {"0"};
-//			args = new String[] {"1.*"};
-//			args = new String[] {"*.1"};
-		}
+		String QUEUE_NAME="hzw.RPC_queue";
 		
 		 ConnectionFactory connectionFactory = new ConnectionFactory();
-		 	connectionFactory.setHost("192.168.32.131");
-//			connectionFactory.setVirtualHost("test");
+//		 	connectionFactory.setHost("192.168.32.131");
+			connectionFactory.setVirtualHost("test");
 //			connectionFactory.setVirtualHost("/");
 			connectionFactory.setUsername("admin");
 			connectionFactory.setPassword("admin");
+			connectionFactory.setHost("localhost");
+//			connectionFactory.setVirtualHost("/dev");
+//			connectionFactory.setUsername("guest");
+//			connectionFactory.setPassword("guest");
 	        Connection connection = connectionFactory.newConnection();
 	        Channel channel = connection.createChannel();
 	        
-//	        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
+	        // 服务提供者负责创建队列
+			channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+			// 清空队列中的内容
+			channel.queuePurge(QUEUE_NAME);
 	        
-	        String queueName = channel.queueDeclare().getQueue();
+			channel.basicQos(1); // maximum number of messages that the server will deliver, 0 if unlimited
 	        
-	        String routStr="";
-	        
-	        for(String routingkey : args) {
-	        	channel.queueBind(queueName, EXCHANGE_NAME, routingkey);
-	        	routStr += routingkey + ",";
-	        }
+	        System.out.println(" [*] queue:["+QUEUE_NAME+"]Waiting for messages...");
 
-	        System.out.println(" [*] rout:["+routStr+"] Waiting for messages...");
-
+	        
+	        
+	        //===================定义回调类======================
 	        DeliverCallback deliverCallback = (consumerTag, delivery) -> {
 	        	
 	        	BasicProperties replyProps = new BasicProperties
@@ -61,10 +57,10 @@ public class RecvMessageRpc_exchange {
 	        	try {
 	        		// 此处进行业务处理....
 		            String msg = new String(delivery.getBody(), "UTF-8");
-		            
+		        	
 		            // 模拟处理时间
 		            Thread.sleep(1000l);
-		        	
+		            
 		            System.out.println("[x] correlationId:["+correlationId+"] Received:[" + msg + "]");
 		        	
 		        	response = "hello , we received msg, I'm " + Thread.currentThread().getId();
@@ -77,11 +73,10 @@ public class RecvMessageRpc_exchange {
 //	        		channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
 	        	}
 	        	
-	        	
 	        };
 	        
 	        channel.basicConsume(
-	        		queueName, 
+	        		QUEUE_NAME, 
 	        		true, 			// 关闭autoAsk
 	        		deliverCallback, 	// 回调操作里再调用了回调队列
 	        		cancelCallback -> { });

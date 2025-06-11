@@ -1,9 +1,6 @@
-package com.hzw.learn.kafkatest.mq.rabbitmq.Tutorials.RPC;
+package com.hzw.learn.mq.rabbitmq.tutorials.Topic;
 
 import com.rabbitmq.client.ShutdownSignalException;
-import org.springframework.amqp.AmqpException;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.Connection;
 import org.springframework.amqp.rabbit.connection.ConnectionListener;
@@ -11,10 +8,10 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 import java.util.Scanner;
 
-public class EmitMessageRpc_BySpringAmqp {
+public class EmitMessageTopic_BySpringAmqp {
 	public static void main(String[] args) throws Exception {
 
-		String QUEUE_NAME="hzw.RPC_byspringamqp_queue";
+		String EXCHANGE_NAME="hzw.Topic_exchange2";
 
 		CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
 //		connectionFactory.setAddresses("localhost:5672");
@@ -38,7 +35,9 @@ public class EmitMessageRpc_BySpringAmqp {
 
 
 		RabbitTemplate mqTemplate = new RabbitTemplate(connectionFactory);
-		RabbitTemplate.class.getConstructor();
+		mqTemplate.setReceiveTimeout(30 * 1000);
+		mqTemplate.setReplyTimeout(30 * 1000);
+
 		Scanner scan = new Scanner(System.in);
 		int count=0;
 		while (true) {
@@ -57,14 +56,7 @@ public class EmitMessageRpc_BySpringAmqp {
 							:
 							"default message!!";
 			message+=++count;
-
-			Object responseMsg = mqTemplate.convertSendAndReceive(QUEUE_NAME, (Object) new String(message), new MessagePostProcessor() {
-				@Override
-				public Message postProcessMessage(Message message) throws AmqpException {
-					return message;
-				}
-			});
-
+			Object aa = mqTemplate.convertSendAndReceive(EXCHANGE_NAME, routingKey, message);
 //			mqTemplate.convertAndSend(EXCHANGE_NAME,routingKey,message);
 			System.out.println("[x] rout:["+routingKey+"] sent:" + message);
 		}

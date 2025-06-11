@@ -1,4 +1,4 @@
-package com.hzw.learn.kafkatest.mq.rabbitmq.Tutorials.Topic;
+package com.hzw.learn.mq.rabbitmq.tutorials.Topic;
 
 import com.rabbitmq.client.*;
 
