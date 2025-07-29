@@ -16,7 +16,7 @@
             </plugin>
         </plugins>
     </build>
-    <artifactId>spring-boot-mq</artifactId>
+    <artifactId>rabbitmq-spring</artifactId>
 
     <dependencies>
 
@@ -30,7 +30,7 @@
         <dependency>
             <groupId>org.springframework.amqp</groupId>
             <artifactId>spring-rabbit</artifactId>
-            <version>2.1.5.RELEASE</version>
+            <version>2.2.18.RELEASE</version>
             <!-- <exclusions>
                  <exclusion>
                      <groupId>com.rabbitmq</groupId>

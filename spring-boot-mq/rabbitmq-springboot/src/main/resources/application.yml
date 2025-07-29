@@ -1,0 +1,25 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: hzw
+    template:
+      reply-timeout: 1000000
+    #   default-receive-queue: "hzw.springbootmq.reply"
+    
+
+# <!-- 标准的建立Queue的参数 -->
+# <rabbit:queue-arguments id="amqpQueueArguments">
+#         <!-- 暂时没有 -->
+# </rabbit:queue-arguments>
+# <rabbit:queue queue-arguments="amqpQueueArguments" id="amqpTemplateReplyQueue"/>        <!-- 固定响应队列 -->
+# <rabbit:template id="amqpTemplate"
+#                                  connection-factory="rabbitConnectionFactory"
+#                                  reply-timeout="#{env['mqRPCTimeout']?:30000}"
+#                                  message-converter="gmpMessageConverter"
+#                                  reply-queue="amqpTemplateReplyQueue"
+#                                  correlation-key="spring_reply_correlation" >
+#         <rabbit:reply-listener concurrency="#{env['mqConcurrency']?:2}"/>
+# </rabbit:template>

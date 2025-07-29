@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.TimeoutException;
 
+import org.junit.Test;
+
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -20,7 +22,7 @@ public class SendWork {
 		connectionFactory.setPassword("admin");
 		Connection connection = connectionFactory.newConnection();
 		Channel channel = connection.createChannel();
-		channel.queueDeclare("hzw.workqueue", false, false, false, null);
+		channel.queueDeclare("hzw.workqueue", true, false, false, null);
 //		创建队列参数说明： 1.队列名 2.是否持久化 3.是否是独占队列 4.是否自动删除 5.其他参数 
 		
 		Scanner scan = new Scanner(System.in);
@@ -38,4 +40,22 @@ public class SendWork {
 		}
 		
 	}
+
+    @Test
+    public void test() throws IOException, TimeoutException {
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+//		connectionFactory.setHost("192.168.32.131");
+		connectionFactory.setHost("localhost");
+//		connectionFactory.setVirtualHost("test");
+		connectionFactory.setUsername("admin");
+		connectionFactory.setPassword("admin");
+		Connection connection = connectionFactory.newConnection();
+		Channel channel = connection.createChannel();
+
+		channel.queueDeclare("hzw.workqueue", false, false, false, null);
+//		创建队列参数说明： 1.队列名 2.是否持久化 3.是否是独占队列 4.是否自动删除 5.其他参数 
+
+		channel.queueDeclare("hzw.workqueue", true, false, false, null);
+
+    }
 }
