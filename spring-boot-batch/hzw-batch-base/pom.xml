@@ -16,7 +16,7 @@
         <mysql.version>5.1.6</mysql.version>
         <jackson-annotations.version>2.12.4</jackson-annotations.version>
 
-        <spring.version>5.2.15.RELEASE</spring.version>
+        <spring.version>5.2.22.RELEASE</spring.version>
         <junit.version>4.12</junit.version>
         <slf4j.version>1.7.30</slf4j.version>
 
